@@ -1,0 +1,3 @@
+[submodule "library/GN"]
+	path = library/GN
+	url = https://github.com/GammanetPL/GN
