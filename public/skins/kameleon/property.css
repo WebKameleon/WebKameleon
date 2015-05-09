@@ -1,0 +1,35 @@
+body {
+	margin:0; border:0; padding:0;  background:#ffffff; font: 10px Verdana;
+}
+
+h2 { display: block; margin: 0; padding: 10px; background-color: #494949; color: #fff; font-size: 11px; font-weight: normal;  }
+
+.litem_1, .litem_2 { padding: 8px; background-color: #fafafa; overflow: hidden;  }
+
+.litem_2 { background-color: #efefef; }
+
+label { display: block; float: left; width: 40%; text-align: right; margin-right: 20px; }
+
+.inputer { overflow: hidden; width: 50%; text-align: left; }
+  
+  .inputer img { vertical-align: middle; }
+  
+form { margin: 0; padding: 0; }
+
+
+.tabelka { width: 100%; }
+
+  .tabelka th { background-color: #707070; color: #fff; font-size: 10px; text-align: left; padding: 9px 6px; }
+  
+  .tabelka .km_icon { text-indent: -600px; float: left; overflow: hidden; margin-right: 10px; }
+  
+  .tabelka .line_1 td, .tabelka .line_0 td, .tabelka .line_2 td { background-color: #fff; padding: 6px; color: #000; font-size: 11px; }
+  
+  .tabelka .line_1 td { background-color: #f5f4f4; }
+  
+  .tabelka .line_2 td { background-color: #ffe6e6; }
+  
+  .tabelka .ftp_raport td { padding:6px; font-size: 11px; background-color: #e4e4e4; border-bottom: 1px solid #fff;  }
+  
+  .tabelka a { color: #000; text-decoration: none; }
+  

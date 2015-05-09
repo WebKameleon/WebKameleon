@@ -1,0 +1,265 @@
+
+/* g³ówne menu */
+/* ----------- */
+
+
+a {
+  color: #ACB651;
+  text-decoration: none;
+}
+
+
+h1{
+margin-top: 0px;
+margin-bottom: 10px;
+color: #F96600;
+}
+h2, h3, h5, h6 {
+margin-top: 0px;
+margin-bottom: 5px;
+color: #0966A8;
+}
+
+
+.body-section{
+  background-color: #A5A092;
+  padding-top:15px;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#A5A092), to(#E9E8E4));
+  background-image: -webkit-linear-gradient(top, #A5A092, 0%, #E9E8E4, 100%);
+  background-image: -moz-linear-gradient(top, #A5A092 0%, #E9E8E4 100%);
+  background-image: linear-gradient(to bottom, #A5A092 0%, #E9E8E4 100%);
+  background-repeat: repeat-y;
+  border-radius: 0px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#A5A092', endColorstr='#E9E8E4', GradientType=0);
+  -webkit-box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0.15), 0 0px 0px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0.15), 0 0px 0px rgba(0, 0, 0, 0.075);
+
+}
+
+.footer_color{
+  background-color: #4F443B;
+  padding:20px 0px;
+  width: 100%;
+}
+
+.navbar {
+  z-index: 5;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#FFFFFF), to(#FFFFFF));
+  background-image: -webkit-linear-gradient(top, #FFFFFF, 0%, #FFFFFF, 100%);
+  background-image: -moz-linear-gradient(top, #FFFFFF 0%, #FFFFFF 100%);
+  background-image: linear-gradient(to bottom, #FFFFFF 0%, #FFFFFF 100%);
+  background-repeat: repeat-x;
+  border-radius: 0px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#FFFFFF', GradientType=0);
+  -webkit-box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0.15), 0 0px 0px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 0px 0 rgba(255, 255, 255, 0.15), 0 0px 0px rgba(0, 0, 0, 0.075);
+  border:0px;
+  background-color: white;
+  white-space:nowrap;
+  margin-bottom: 0px;
+}
+
+.navbar-default {
+  margin-bottom: 0px;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #c0c0c0;
+}
+.navbar-default .navbar-toggle .icon-bar{
+  background-color: #e0e0e0;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #FFFFFF;
+}
+
+.nav li {
+  padding:0px;
+}
+
+.navbar-default .nav > li > a {
+  color: #A5A092;
+  font-size: 1em;
+  padding: 15px 2px;
+  margin:0px 2px;
+  background-color: #F7F5F1;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.navbar-default .nav>li>a:hover, .navbar-default .nav>li>a:focus { 
+  color: #fff;
+  background-color: #A5A092;
+  text-decoration: underline;
+}
+
+.navbar-default .nav > .active > a, .navbar-default .nav > .active > a:hover {
+  color: #fff;
+  background-color: #A5A092;
+  border-bottom: 1px solid #A5A092; 
+}
+
+.navbar-default .nav>.dropdown>a:hover .caret, .navbar-default .nav>.dropdown>a:focus .caret {
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+}
+
+.navbar-default .nav>.dropdown>a .caret{
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+}
+
+
+/* menu rozwijane */
+/*----------------*/
+.dropdown-menu>li>a {
+  color: #023200;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus {
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#CC5353), to(#A32323));
+  background-image: -webkit-linear-gradient(top, #CC5353, 0%, #A32323, 100%);
+  background-image: -moz-linear-gradient(top, #CC5353 0%, #A32323 100%);
+  background-image: linear-gradient(to bottom, #CC5353 0%, #A32323 100%);
+  background-repeat: repeat-x;
+  border-radius: 1px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#CC5353', endColorstr='#A32323', GradientType=0);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
+}
+
+
+/* marketing panel */
+
+.jumbotron {
+  display:none;
+}
+
+
+@media (max-width: 480px) {
+  .navbar-default .nav > li > a {
+    font-size: 1em;
+  }
+}
+@media (max-width: 768px) {
+  body{background-image: none;}
+}
+
+@media (min-width: 768px) {
+  .navbar-default .nav > li > a {
+    font-size: 1em;
+  }
+  .jumbotron {
+   padding: 25px 25px;
+   display:block;
+   background-color: #177900;
+   margin-bottom: 0px;
+  }
+  .jumbotron H1, .jumbotron H2, .jumbotron H3, .jumbotron P {
+    color: #fff;
+  }
+
+}
+
+
+/* left menu */
+.col-sm-3 {
+padding-left: 15px;
+}
+
+.col-sm-3 .nav{
+  width: 100%;
+}
+
+.col-sm-3 .nav  >li>a{
+  color:#FFFFFF;
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
+.col-sm-3 .nav > li {
+  float:none;
+  margin-bottom:3px;
+  background-color: #CAC9C7;
+  border-radius: 4px;
+  border: 1px solid #A5A092;
+}
+
+.col-sm-3 .nav > li.active {
+  background-color: #A5A092;
+  border-radius: 4px;
+}
+
+.col-sm-3 .nav > li > a:hover {
+  background-color: #A5A092;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) {
+  .col-sm-3  ul.nav.nav-justified > li {
+    width: 100%;
+    display:block;
+  }
+  .col-sm-3 .nav-justified>li>a {
+    text-align: left;
+  }
+}
+
+footer {
+  float: right;
+  font-size:10px;
+}
+footer a {
+	color: #fff;
+}
+
+
+
+/* webkameleon  */
+
+.kmw_article, .bxslider-wrapper, .ad-gallery {
+  color: #572A4E;
+}
+
+.hidden-xs .kmw_article {
+  color: #000;
+}
+
+.kmw_article_photo  {
+  margin-bottom: 10px;
+}
+
+.kmw_gmap {
+  width:100%;
+  height:250px;
+  max-width: none;
+}
+
+/* google search box and results */
+
+#cse-search-form, #cse-search-form *, #cse, #cse * {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+#cse-search-form {
+  margin-top:20px;
+}
+
+input.gsc-input {
+  font-size: 14px;
+}
+
+.cse .gsc-control-cse, .gsc-control-cse {
+  padding: 0px;
+  font-size: 1em;
+}
+
+.gsc-table-result, .gsc-thumbnail-inside, .gsc-url-top {
+  padding-left: 0px;
+}

@@ -1,0 +1,23 @@
+.edit_box_left,
+.edit_box_right {
+    width : 50%;
+    float : left;
+}
+
+#gcal_form ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+}
+
+ul.gcal_calendars_list li {
+    float         : left;
+    clear         : both;
+    margin-bottom : 5px;
+    width         : 400px;
+    line-height   : 24px;
+}
+
+ul.gcal_calendars_list li > * {
+    vertical-align : middle;
+}

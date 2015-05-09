@@ -1,0 +1,262 @@
+{include:_menu.header.html}
+
+
+
+<div class="container-fluid">
+	<div class="row wk-margin-top-15">
+		<div class="col-sm-8">
+		</div>
+		<div class="col-sm-4">
+			<a id="link_save" href="#" class="menu-btn-group btn btn-primary">{translate.Save link}</a>
+			{if:link.return_url}
+			<a href="{link.return_url}" class="menu-btn-group btn btn-default">{translate.Return}</a>
+			{endif:link.return_url}
+			{if:!link.return_url}
+			<a href="javascript:window.history.back()" class="menu-btn-group btn btn-default">{translate.Return}</a>
+			{endif:!link.return_url}		
+		</div>
+	</div>
+
+<!--
+<div class="km_fbtn">
+    <a id="link_save" href="#" class="km_fbtn_action">{translate.Save link}</a>
+    {if:link.return_url}
+    <a href="{link.return_url}" class="km_fbtn_normal">{translate.Return}</a>
+    {endif:link.return_url}
+    {if:!link.return_url}
+    <a href="javascript:window.history.back()" class="km_fbtn_normal">{translate.Return}</a>
+    {endif:!link.return_url}
+</div>
+-->
+
+<ul class="km_zakladki">
+    <li><a rel="basic">{translate.Basic informations}</a></li>
+    <li><a rel="advanced">{translate.Advanced}</a></li>
+    {if:d_xml}
+    <li><a rel="in_user">{translate.User variables}</a></li>
+    {endif:d_xml}
+</ul>
+
+<form id="link_form" method="post">
+    <div class="km_zakladka km_zakladka_basic">
+        {if:config.weblink.show.alt}
+        <div class="edit_box">
+            <div class="label">{translate.Main title}</div>
+            <div class="value">
+                <input type="text" name="link[alt]" value="{link.alt}" size="60" />
+            </div>
+        </div>
+        {endif:config.weblink.show.alt}
+
+        {if:config.weblink.show.img}
+        <div class="edit_box">
+            <div class="label">{translate.Main image}</div>
+            <div class="value">
+                <input type="text" name="link[img]" value="{link.img}" size="50" files="1" />
+            </div>
+        </div>
+        {endif:config.weblink.show.img}
+
+        {if:config.weblink.show.page_target}
+        <div class="edit_box">
+            <div class="label">{translate.Hyperlink to}</div>
+            <div class="value">
+                <input type="text" name="link[page_target]" value="{link.page_target}" size="4" jstree="0" />
+            </div>
+        </div>
+        {endif:config.weblink.show.page_target}
+
+        {if:config.weblink.show.submenu_id}
+        <div class="edit_box">
+            <div class="label">{translate.Submenu}</div>
+            <div class="value">
+                <select id="link_submenu_id" name="link[submenu_id]">
+                    <option value="">{translate.Select menu}</option>
+					<option value="-1">{translate.New menu}</option>
+                    {loop:menu_list}
+                    <option value="{menu_id}" {if:link.submenu_id=$menu_id}selected{endif:link.submenu_id=$menu_id}>{menu_id}. {name}</option>
+                    {endloop:menu_list}
+                </select>
+                <a id="edit_submenu" class="km_icon km_iconi_arr_right" href="#" title="{translate.Edit submenu}">{translate.Edit submenu}</a>
+            </div>
+        </div>
+        {endif:config.weblink.show.submenu_id}		
+
+        {if:config.weblink.show.class}{if:config.style}
+        <div class="edit_box">
+            <div class="label">{translate.Class name}</div>
+            <div class="value">
+                <select class="k_select" name="link[class]">
+                    <option value="">{translate.Choose}</option>
+                    {loop:config.style}
+                    <option {if:link.class=$class}selected=""{endif:link.class=$class} value="{class}">{name}</option>
+                    {endloop:config.style}
+                </select>
+            </div>
+        </div>
+        {endif:config.style}{endif:config.weblink.show.class}
+
+        {if:config.weblink.show.description}
+        <div class="edit_box">
+            <div class="label">{translate.Description}</div>
+            <div class="value">
+                <textarea name="link[description]" cols="80" rows="10">{link.description}</textarea>
+            </div>
+        </div>
+        {endif:config.weblink.show.description}		
+		
+    </div>
+
+    <div class="km_zakladka km_zakladka_advanced">	
+        {if:config.weblink.show.alt_title}
+       
+        <div class="edit_box">
+            <div class="label">{translate.Text} A</div>
+            <div class="value">
+                <input type="text" name="link[titlea]" value="{link.titlea}" size="60" />
+            </div>
+        </div>
+        
+        <div class="edit_box">
+            <div class="label">{translate.Text} B</div>
+            <div class="value">
+                <input type="text" name="link[titleb]" value="{link.titleb}" size="60" />
+            </div>
+        </div>
+        
+        <div class="edit_box">
+            <div class="label">{translate.Text} C</div>
+            <div class="value">
+                <input type="text" name="link[titlec]" value="{link.titlec}" size="60" />
+            </div>
+        </div>        
+        
+        {endif:config.weblink.show.alt_title}
+
+        {if:config.weblink.show.imga}
+        <div class="edit_box">
+            <div class="label">{translate.Image} A</div>
+            <div class="value">
+                <input type="text" name="link[imga]" value="{link.imga}" size="50" files="1" />
+            </div>
+        </div>
+        
+        <div class="edit_box">
+            <div class="label">{translate.Image} B</div>
+            <div class="value">
+                <input type="text" name="link[imgb]" value="{link.imgb}" size="50" files="1" />
+            </div>
+        </div>
+        
+        <div class="edit_box">
+            <div class="label">{translate.Image} C</div>
+            <div class="value">
+                <input type="text" name="link[imgc]" value="{link.imgc}" size="50" files="1" />
+            </div>
+        </div>        
+        {endif:config.weblink.show.imga}
+
+        {if:config.weblink.show.ufile_target}
+        <div class="edit_box">
+            <div class="label">{translate.File}</div>
+            <div class="value">
+                <input type="text" name="link[ufile_target]" value="{link.ufile_target}" size="50" files="2" />
+            </div>
+        </div>
+        {endif:config.weblink.show.ufile_target}
+
+        {if:config.weblink.show.type}
+        <!--
+        <div class="edit_box">
+            <div class="label">{translate.Menu type}</div>
+            <div class="value">
+                <select class="k_select" name="link[type]">
+                    {loop:config.weblink.type}
+                    <option value="{__loop__}" {if:link.type=$__loop__}selected{endif:link.type=$__loop__}>{name}</option>
+                    {endloop:config.weblink.type}
+                </select>
+            </div>
+        </div>
+        -->
+        {endif:config.weblink.show.type}
+
+		
+        {if:config.weblink.show.href}
+        <div class="edit_box">
+            <div class="label">{translate.External page href}</div>
+            <div class="value">
+                <input type="text" name="link[href]" value="{link.href}" size="60" />
+            </div>
+        </div>
+        {endif:config.weblink.show.href}	
+
+        {if:config.weblink.show.target}
+        <div class="edit_box">
+            <div class="label">{translate.Target}</div>
+            <div class="value">
+                <select class="k_select" name="link[target]">
+                    <option value="">{translate.Choose}</option>
+                    <option {if:link.target=_blank}selected=""{endif:link.target=_blank} value="_blank">blank</option>
+					<option {if:link.target=_self}selected=""{endif:link.target=_self} value="_self">self</option>
+					<option {if:link.target=_parent}selected=""{endif:link.target=_parent} value="_parent">parent</option>
+					<option {if:link.target=_top}selected=""{endif:link.target=_top} value="_top">top</option>
+                </select>				
+				<!-- <input type="text" name="link[target]" value="{link.target}" size="30" /> -->
+            </div>
+        </div>
+        {endif:config.weblink.show.target}
+
+        {if:config.weblink.show.variables}
+        <div class="edit_box">
+            <div class="label">{translate.Additional variables}</div>
+            <div class="value">
+                <input type="text" name="link[variables]" value="{link.variables}" size="60" />
+            </div>
+        </div>
+        {endif:config.weblink.show.variables}
+
+        {if:link.alt_title}
+		<!-- deprecated \-->
+		<div class="edit_box">
+            <div class="label">{translate.Alt text}</div>
+            <div class="value">
+                <input type="text" name="link[alt_title]" value="{link.alt_title}" size="60" />
+            </div>
+        </div>
+		{endif:link.alt_title}
+		
+    </div>
+
+    {if:d_xml}
+    <div class="km_zakladka km_zakladka_in_user">
+        {loop:d_xml}
+        <div class="edit_box" id="liopt_in_{name}">
+            <div class="label">{label}:</div>
+            <div class="value">{html}</div>
+        </div>
+        {endloop:d_xml}
+    </div>
+    {endif:d_xml}
+
+</form>
+
+</div>
+
+
+<script type="text/javascript">
+jQueryKam(function ($) {
+    $("#link_save").on("click", function () {
+        $("#link_form").submit();
+        return false;
+    });
+
+    $("#link_submenu_id").on("change", function (e) {
+//        $("#edit_submenu").toggle(!!this.value);
+    }).trigger("change");
+
+    $("#edit_submenu").on("click", function (e) {
+        document.location = KAM_ROOT + "menu/get/" + $("#link_submenu_id").val();
+        return false;
+    });
+});
+</script>

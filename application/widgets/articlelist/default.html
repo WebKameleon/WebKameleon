@@ -1,0 +1,40 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:articlelistWidget}
+
+{if:nav}<div class="kmw_articlelist_nav" rel="{nav_limit}">
+<ul>{loop:nav}
+<li><a rel="{loop}">{loop}</a></li>
+{endloop:nav}</ul>
+</div>{endif:nav}
+
+{loop:articles}
+<noindex>
+<!--googleoff: all-->
+<div class="kmw_articlelist">
+    {if:bgimg}
+    <a class="kmw_articlelist_photo" href="{uimages}/{bgimg}" fancybox="1"><img src="{thumbsUrl}/{bgimg}"/></a>
+    {endif:bgimg}
+    <div class="kmw_articlelist_content">
+        {if:title}<h3><a href="{more_link}#{title}">{title}</a></h3>{endif:title}
+	
+	{if:nd_custom_date}<p class="kmw_articlelist_date"><i>{nd_custom_date|kameleon.date}{if:nd_custom_date_end} - {nd_custom_date_end|kameleon.date}{endif:nd_custom_date_end}</i></p>{endif:nd_custom_date}
+        <div class="kmw_articlelist_text">{plain}</div>
+	
+	
+	{if:attachment}<div class="kmw_articlelist_att {attachment_class}"><a href="{ufiles}/{attachment}">{translates.Download} &raquo;</a></div>{endif:attachment}
+	
+        <a href="{more_link}#{title}" class="kmw_articlelist_more">{if:moretxt}{moretxt}{endif:moretxt}{if:!moretxt}{translates.More} &raquo;{endif:!moretxt}</a>
+    </div>
+</div>
+<!--googleon: all-->
+</noindex>
+{endloop:articles}
+
+{if:nav}<div class="kmw_articlelist_nav" rel="{nav_limit}">
+<ul>{loop:nav}
+<li><a rel="{loop}">{loop}</a></li>
+{endloop:nav}</ul>
+</div>{endif:nav}
+
+{endwith:articlelistWidget}
+{plain}

@@ -1,0 +1,24 @@
+<div {if:class} class="{class}"{endif:class}{tokens.webtd_style} id="webtd_sid_{pri}">
+{if:title}
+{tokens.box_title}
+{endif:title}
+<div class="txt">{plain}{if:menu_id}
+<div class="sitemenu_c"><ul class="sitemenu">
+{loop:menu}
+    <li {if:class}class="{class}"{endif:class}>
+        <a href="{href}">{alt}</a>
+    </li>
+{endloop:menu}
+</ul></div>
+{endif:menu_id}{tokens.html}</div>
+<div class="option">
+{if:more}
+<div class="more">{if:more}<a href="{more_link}">{translate.More} &raquo;</a>{endif:more}</div>
+{endif:more}
+<a class="print" href="javascript:drukuj({pri})" title="Drukuj artykuł">Drukuj artykuł</a><div class="who">{if:autor_update}{autor_update|kameleon.fullname}{endif:autor_update}{if:!autor_update}{autor|kameleon.fullname}{endif:!autor_update},
+{if:nd_create}
+{if:nd_update}{translate.Updated}: {nd_update|kameleon.datetime}{endif:nd_update}
+{if:!nd_update}{translate.Created}: {nd_create|kameleon.datetime}{endif:!nd_update}
+{endif:nd_create}</div>
+</div>
+</div>

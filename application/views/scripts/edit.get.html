@@ -1,0 +1,483 @@
+{if:articleWidget}
+<link type="text/css" rel="stylesheet" href="{root}images/widgets/article/editor.css">
+<script type="text/javascript" src="{root}images/widgets/article/editor.js"></script>
+{endif:articleWidget}
+<form id="td_form" method="post">
+<input type="hidden" name="td[page_id]" value="{td.page_id}" />
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="title km_tip" tip="2">
+            <div class="webtd_notitle">[ {translate.No title} ]</div>
+            <input class="webtd_title" type="text" name="td[title]" value="{td.title}" />
+        </div>
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li>
+                    <a>{translate.Menu edit}</a>
+                    <ul>
+                        <li>
+                            <a id="km_ddmenu_text_format">{translate.Text format}</a>
+                            <ul>
+                                <li><a id="km_ddmenu_format_h1">{translate.Header} 1</a></li>
+                                <li><a id="km_ddmenu_format_h2">{translate.Header} 2</a></li>
+                                <li><a id="km_ddmenu_format_h3">{translate.Header} 3</a></li>
+                                <li><a id="km_ddmenu_format_h4">{translate.Header} 4</a></li>
+                                <li><a id="km_ddmenu_format_h5">{translate.Header} 5</a></li>
+                                <li><a id="km_ddmenu_format_h6">{translate.Header} 6</a></li>
+                                <li><a id="km_ddmenu_format_p">{translate.Normal text}</a></li>
+                                <li><a id="km_ddmenu_format_pre">{translate.Formatted text}</a></li>
+                            </ul>
+                        </li>
+                        <li class="sf-sep"></li>
+                        <li><a id="km_ddmenu_cut" class="cke_command">{translate.Cut}</a></li>
+                        <li><a id="km_ddmenu_copy" class="cke_command">{translate.Copy}</a></li>
+                        <li><a id="km_ddmenu_paste" class="cke_command">{translate.Paste}</a></li>
+                        <li><a id="km_ddmenu_pastetext" class="cke_command">{translate.Paste as plain text}</a></li>
+                        <li><a id="km_ddmenu_pastefromword" class="cke_command">{translate.Paste from Word}</a></li>
+                        <li><a id="km_ddmenu_selectall" class="cke_command">{translate.Select all}</a></li>
+                        <li><a id="km_ddmenu_newpage" class="cke_command">{translate.Clear all}</a></li>
+                        <li class="sf-sep"></li>
+                        <li><a id="km_ddmenu_subscript" class="cke_command">{translate.Subscript}</a></li>
+                        <li><a id="km_ddmenu_superscript" class="cke_command">{translate.Superscript}</a></li>
+                        <li class="sf-sep"></li>
+                        <li><a id="km_ddmenu_find" class="cke_command">{translate.Find}</a></li>
+                        <li><a id="km_ddmenu_replace" class="cke_command">{translate.Replace}</a></li>
+                        <li class="sf-sep"></li>
+                        <li><a id="km_ddmenu_source" class="cke_command">{translate.Document source}</a></li>
+                        <li><a id="km_ddmenu_options">{translate.Options} / {translate.Edit}</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a>{translate.Menu insert}</a>
+                    <ul>
+                        <li><a id="km_ddmenu_image" class="cke_command">{translate.Image}</a></li>
+                        <li><a id="km_ddmenu_table" class="cke_command">{translate.Table}</a></li>
+                        <li><a id="km_ddmenu_horizontalrule" class="cke_command">{translate.Horizontal line}</a></li>
+                        <li><a id="km_ddmenu_templates" class="cke_command">{translate.Layout template}</a></li>
+                        <li>
+                            <a id="km_ddmenu_formularz">{translate.Form}</a>
+                            <ul>
+                                <li><a id="km_ddmenu_form" class="cke_command">{translate.Form field}</a></li>
+                                <li><a id="km_ddmenu_checkbox" class="cke_command">{translate.Checkbox field}</a></li>
+                                <li><a id="km_ddmenu_radio" class="cke_command">{translate.Radio field}</a></li>
+                                <li><a id="km_ddmenu_textfield" class="cke_command">{translate.Text field}</a></li>
+                                <li><a id="km_ddmenu_textarea" class="cke_command">{translate.Textarea field}</a></li>
+                                <li><a id="km_ddmenu_select" class="cke_command">{translate.Select field}</a></li>
+                                <li><a id="km_ddmenu_button" class="cke_command">{translate.Button}</a></li>
+                                <li><a id="km_ddmenu_imagebutton" class="cke_command">{translate.Image button}</a></li>
+                                <li><a id="km_ddmenu_hiddenfield" class="cke_command">{translate.Hidden field}</a></li>
+                            </ul>
+                        </li>
+                        <li><a id="km_ddmenu_anchor" class="cke_command">{translate.Anchor}</a></li>
+                        <li><a id="km_ddmenu_mask" class="cke_command">{translate.Mask}</a></li>
+                        <li><a id="km_ddmenu_flash" class="cke_command">{translate.Flash}</a></li>
+                        <li><a id="km_ddmenu_specialchar" class="cke_command">{translate.Special character}</a></li>
+                        <li><a id="km_ddmenu_iframe" class="cke_command">{translate.Iframe}</a></li>
+                        <li class="sf-sep"></li>
+                        <li><a id="km_ddmenu_link" class="cke_command">{translate.Link}</a></li>
+                        <li><a id="km_ddmenu_unlink" class="cke_command">{translate.Unlink}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {include:_editor.buttons.html}
+    <div class="km_clean"></div>
+</div>
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        $(".sf-menu").on("show", function (e) {
+            $(this).find("> li:not(.km_menu_help) > ul li").not(":has(#km_ddmenu_options)")[$("#km_options").is(":visible") ? "addClass" : "removeClass"]("sf-disable");
+        });
+    });
+</script>
+
+{include:_editor.html}
+
+<div id="km_options">
+    <ul class="km_zakladki">
+        <li><a rel="additional_content">{translate.Additional content}</a></li>
+        <li><a rel="appearance_settings">{translate.Appearance settings}</a></li>
+        <li><a rel="block_position">{translate.Block position}</a></li>
+        <li><a rel="additional_params">{translate.Additional params}</a></li>
+        <li><a rel="save_and_restore_html">{translate.Save and restore html}</a></li>
+        {if:d_xml}<li><a rel="user_variables">{translate.User variables}</a></li>{endif:d_xml}
+        <li><a rel="module_validity">{translate.Module validity}</a></li>
+        {if:menu}<li><a rel="menu">{translate.Menu}</a></li>{endif:menu}
+    </ul>
+
+    <div class="km_zakladka km_zakladka_additional_content">
+        {if:config.webtd.show.menu}
+        <div class="edit_box">
+            <div class="label">{translate.Menu}</div>
+            <div class="value">
+                <select name="td[menu_id]">
+                    <option value="">{translate.Select menu}</option>
+                    {loop:menu_list}
+                    <option value="{menu_id}" {if:td.menu_id=$menu_id}selected{endif:td.menu_id=$menu_id}>{menu_id}. {name}</option>
+                    {endloop:menu_list}
+                    <option value="-1" >{translate.New menu}</option>
+                </select>
+            </div>
+        </div>
+        {endif:config.webtd.show.menu}
+
+        {if:config.webtd.show.html}
+        <div class="edit_box">
+            <div class="label">{translate.Attach file}</div>
+            <div class="value">
+                <input type="text" name="td[html]" value="{td.html}" size="60" files="5" />
+            </div>
+        </div>
+        {endif:config.webtd.show.html}
+
+        {if:config.security.allow_td_module_execute}
+        {if:config.webtd.show.staticinclude}
+        <div class="edit_box">
+            <div class="label">{translate.Attach file during publication}</div>
+            <div class="value">
+                <input type="hidden" name="td[staticinclude]" value="0" />
+                <input type="checkbox" name="td[staticinclude]" value="1" {if:td.staticinclude}checked{endif:td.staticinclude}/>
+            </div>
+        </div>
+        {endif:config.webtd.show.staticinclude}
+        {endif:config.security.allow_td_module_execute}
+        <div class="edit_box">
+            <div class="label">{translate.Content analyzer + VAR replacement}</div>
+            <div class="value">
+                <input type="hidden" name="td[obtd][1]" value="0" />
+                <input type="checkbox" name="td[obtd][1]" value="1" {if:td.obtd.1}checked{endif:td.obtd.1} />
+                start&nbsp;
+                <input type="hidden" name="td[obtd][2]" value="0" />
+                <input type="checkbox" name="td[obtd][2]" value="2" {if:td.obtd.2}checked{endif:td.obtd.2} />
+                stop
+            </div>
+        </div>
+        
+        {if:td.widget=article}
+        
+        {if:config.webtd.show.itemtype}
+        <div class="edit_box">
+            <div class="label">{translate.Schema itemtype}</div>
+            <div class="value">
+                <select name="td[itemtype]">
+                    <option value="" >{translate.Choose}</option>
+                    <option value="Article"{if:td.itemtype=Article} selected{endif:td.itemtype=Article}>{translate.Article}</option>
+                    <option value="Event"{if:td.itemtype=Event} selected{endif:td.itemtype=Event}>{translate.Event}</option>
+                    <option value="MedicalEntity"{if:td.itemtype=MedicalEntity} selected{endif:td.itemtype=MedicalEntity}>{translate.Medical}</option>
+                    <option value="Restaurant"{if:td.itemtype=Restaurant} selected{endif:td.itemtype=Restaurant}>{translate.Restaurant}</option>
+                    <option value="Product"{if:td.itemtype=Product} selected{endif:td.itemtype=Product}>{translate.Product}</option>
+                    <option value="Person"{if:td.itemtype=Person} selected{endif:td.itemtype=Person}>{translate.Person}</option>
+                    <option value="SoftwareApplication"{if:td.itemtype=SoftwareApplication} selected{endif:td.itemtype=SoftwareApplication}>{translate.Software Application}</option>
+                    <option value="LocalBusiness"{if:td.itemtype=LocalBusiness} selected{endif:td.itemtype=LocalBusiness}>{translate.Local Business}</option>
+                </select>
+            </div>
+        </div>
+        {endif:config.webtd.show.itemtype}        
+        
+        
+
+        <div class="edit_box">
+            <div class="label">{translate.Trailer}</div>
+            <div class="value">
+                <textarea  name="td[trailer]" style="width:50%; height:100px">{td.trailer}</textarea>
+            </div>
+        </div>
+        
+        {if:config.webtd.show.attachment}
+        <div class="edit_box">
+            <div class="label">{translate.Attach static file}</div>
+            <div class="value">
+                <input type="text" name="td[attachment]" value="{td.attachment}" size="60" files="2" />
+            </div>
+        </div>
+        {endif:config.webtd.show.attachment}        
+        
+        
+        {endif:td.widget=article}
+         
+        
+        
+        
+        
+
+    </div>
+
+    <div class="km_zakladka km_zakladka_appearance_settings">
+        {if:config.webtd.show.bgimg}
+        <div class="edit_box">
+            <div class="label">{translate.Background image}</div>
+            <div class="value">
+                <input type="text" name="td[bgimg]" value="{td.bgimg}" size="60" files="1" id="bgimg" />
+            </div>
+        </div>
+        {endif:config.webtd.show.bgimg}
+
+        {if:config.webtd.show.width}
+        <div class="edit_box">
+            <div class="label">{translate.Width}</div>
+            <div class="value">
+                <input type="text" name="td[width]" value="{td.width}" />
+            </div>
+        </div>
+        {endif:config.webtd.show.width}
+
+        {if:config.webtd.show.align}
+        <div class="edit_box">
+            <div class="label">{translate.Horizontal align}</div>
+            <div class="value">
+                <select name="td[align]">
+                    <option value="">{translate.Choose}</option>
+                    {loop:config.webtd.align}
+                    <option value="{__loop__}" {if:td.align=$__loop__}selected{endif:td.align=$__loop__}>{loop|tokens.trans}</option>
+                    {endloop:config.webtd.align}
+                </select>
+            </div>
+        </div>
+        {endif:config.webtd.show.align}
+
+        {if:config.webtd.show.valign}
+        <div class="edit_box">
+            <div class="label">{translate.Vertical align}</div>
+            <div class="value">
+                <select name="td[valign]">
+                    <option value="">{translate.Choose}</option>
+                    {loop:config.webtd.valign}
+                    <option value="{__loop__}" {if:td.valign=$__loop__}selected{endif:td.valign=$__loop__}>{loop|tokens.trans}</option>
+                    {endloop:config.webtd.valign}
+                </select>
+            </div>
+        </div>
+        {endif:config.webtd.show.valign}
+
+        {if:config.webtd.show.class}{if:config.style}
+        <div class="edit_box">
+            <div class="label">{translate.Class name}</div>
+            <div class="value">
+                <select name="td[class]">
+                    <option value="">{translate.Choose}</option>
+                    {loop:config.style}
+                    <option {if:td.class=$class}selected=""{endif:td.class=$class} value="{class}">{name}</option>
+                    {endloop:config.style}
+                </select>
+            </div>
+        </div>
+        {endif:config.style}{endif:config.webtd.show.class}
+    </div>
+
+    <div class="km_zakladka km_zakladka_block_position">
+        {if:config.webtd.show.type}
+        <div class="edit_box">
+            <div class="label">{translate.Page layout}</div>
+            <div class="value">
+                <select name="td[type]">
+                    {loop:config.webtd.type}{if:name}
+                    <option value="{__loop__}" {if:td.type=$__loop__}selected{endif:td.type=$__loop__}>{name|tokens.trans}</option>
+                    {endif:name}{endloop:config.webtd.type}
+                </select>
+            </div>
+        </div>
+        {endif:config.webtd.show.type}
+
+        {if:config.webtd.show.level}
+        <div class="edit_box">
+            <div class="label">{translate.Level}</div>
+            <div class="value">
+                <select name="td[level]">
+                    <option value="0">{translate.Choose}</option>
+                    {loop:levels}
+                    <option value="{__loop__}" {if:td.level=$__loop__}selected{endif:td.level=$__loop__}>{loop}</option>
+                    {endloop:levels}
+                </select>
+            </div>
+        </div>
+        {endif:config.webtd.show.level}
+
+        {if:config.webtd.show.repeat}
+        <div class="edit_box">
+            <div class="label">{translate.Repeat}</div>
+            <div class="value">
+                <input type="radio" name="td[contents_repeat]" id="block_repeat_no" {if:!td.contents_repeat}checked{endif:!td.contents_repeat} value="0"/><label for="block_repeat_no">{translate.No repeat}</label>
+                <input type="radio" name="td[contents_repeat]" id="block_repeat_top" {if:td.contents_repeat=-1}checked{endif:td.contents_repeat=-1} value="-1"/><label for="block_repeat_top">{translate.Repeat at the top}</label>
+                <input type="radio" name="td[contents_repeat]" id="block_repeat_bot" {if:td.contents_repeat=1}checked{endif:td.contents_repeat=1} value="1"/><label for="block_repeat_bot">{translate.Repeat at the bottom}</label>
+            </div>
+        </div>
+        {endif:config.webtd.show.repeat}
+
+
+        {if:config.webtd.show.img}
+        <div class="edit_box">
+            <div class="label">{translate.Title image}</div>
+            <div class="value">
+                <input type="text" name="td[img]" value="{td.img}" size="60" files="1" />
+            </div>
+        </div>
+        {endif:config.webtd.show.img}
+
+        
+        {if:td.widget=article}
+        {if:config.webtd.show.cat}
+        <div class="edit_box">
+            <div class="label">{translate.Category}</div>
+            <div class="value" style="display: block; float: left">
+                {loop:cats}
+                <input type="hidden" name="cat[{category}]" value="0" />
+                <input type="checkbox" name="cat[{category}]" value="1" {if:checked}checked{endif:checked}/>
+                {category} <br />
+                {endloop:cats}
+                <input type="checkbox" id="cat_new" name="cat[__new__]" value="1" /> <input onchange="document.getElementById('cat_new').checked=this.value.trim().length>0?true:false" name="cat[__new__]" size="32" type="text" placeholder="{translate.Type the name of a new category}"/>
+            </div>
+        </div>
+        {endif:config.webtd.show.cat}
+        {endif:td.widget=article}
+    </div>
+
+    <div class="km_zakladka km_zakladka_additional_params">
+        {if:config.webtd.show.more}
+        <div class="edit_box">
+            <div class="label">{translate.More}</div>
+            <div class="value">
+                <input type="text" name="td[more]" value="{td.more}" jstree="{page_id}" />
+            </div>
+        </div>
+        
+        {if:td.more}
+        <div class="edit_box">
+            <div class="label">{translate.More text}</div>
+            <div class="value">
+                <input type="text" name="td[moretxt]" value="{td.moretxt}" size="60" />
+            </div>
+        </div>
+        {endif:td.more}
+        {endif:config.webtd.show.more}
+
+        {if:config.webtd.show.next}
+        <div class="edit_box">
+            <div class="label">{translate.Next page}</div>
+            <div class="value">
+                <input type="text" name="td[next]" value="{td.next}" jstree="{page_id}" />
+            </div>
+        </div>
+        {endif:config.webtd.show.next}
+
+        {if:config.webtd.show.size}
+        <div class="edit_box">
+            <div class="label">{translate.Size}</div>
+            <div class="value">
+                <input type="text" name="td[size]" value="{td.size}" />
+            </div>
+        </div>
+        {endif:config.webtd.show.size}
+
+        {if:config.webtd.show.cos}
+        <div class="edit_box">
+            <div class="label">{translate.Special identifier}</div>
+            <div class="value">
+                <input type="text" name="td[cos]" value="{td.cos}" />
+            </div>
+        </div>
+        {endif:config.webtd.show.cos}
+
+        {if:config.webtd.show.costxt}
+        <div class="edit_box">
+            <div class="label">{translate.Text identifier}</div>
+            <div class="value">
+                <input type="text" name="td[costxt]" value="{td.costxt}" />
+            </div>
+        </div>
+        {endif:config.webtd.show.costxt}
+    </div>
+
+    <div class="km_zakladka km_zakladka_save_and_restore_html">
+        <div class="edit_box">
+            <div class="label">{translate.Save HTML to repository}</div>
+            <div class="value">
+                <input type="checkbox" name="td[save_plain]" />
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.Restore HTML from file}</div>
+            <div class="value">
+                <input type="text" name="td[restore_plain]" size="60" files="6" />
+            </div>
+        </div>
+    </div>
+
+    {if:d_xml}
+    <div class="km_zakladka km_zakladka_user_variables">
+        {loop:d_xml}
+        <div class="edit_box">
+            <div class="label">{label}</div>
+            <div class="value">{html}</div>
+        </div>
+        {endloop:d_xml}
+    </div>
+    {endif:d_xml}
+
+    <div class="km_zakladka km_zakladka_module_validity">
+        <div class="edit_box">
+            <div class="label">{translate.From}</div>
+            <div class="value">
+                <input type="text" name="td[valid_from]" value="{td.nd_valid_from|kameleon.datetime}" datetimepicker="1" />
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.To}</div>
+            <div class="value">
+                <input type="text" name="td[valid_to]" value="{td.nd_valid_to|kameleon.datetime}" datetimepicker="1" />
+            </div>
+        </div>
+        
+        
+        <div class="edit_box">
+            <div class="label">{translate.Custom date}</div>
+            <div class="value">
+                <input type="text" name="td[custom_date]" value="{td.nd_custom_date|kameleon.datetime}" datetimepicker="1" />
+            </div>
+        </div>
+        
+        <div class="edit_box">
+            <div class="label">{translate.Custom date end}</div>
+            <div class="value">
+                <input type="text" name="td[custom_date_end]" value="{td.nd_custom_date_end|kameleon.datetime}" datetimepicker="1" />
+            </div>
+        </div>         
+    </div>
+
+</div>
+</form>
+
+<script type="text/javascript">
+    function SaveChanges() {
+        jQueryKam("#wyswig").html(
+                CKEDITOR.instances.wysiwyg.getData()
+        );
+        
+        jQueryKam.get(KAM_ROOT+'ajax/tip_done/4',function(data){
+            jQueryKam("#td_form").submit();
+        });
+    }
+
+    jQueryKam(function ($) {
+        $("#km_ddmenu_options").click(function (e) {
+            $("#km_wysiwyg, #km_options").toggle();
+        });
+
+        $("#km_ddmenu_image").on("click", function (e) {
+            KamFiles(1, function (files, dialog) {
+                var URL = files[0].url.replace(KAM_ROOT, "");
+
+                var img = CKEDITOR.instances.wysiwyg.document.createElement("img");
+                img.setAttribute("src", URL);
+                CKEDITOR.instances.wysiwyg.insertElement(img);
+
+                dialog.dialog("close");
+            }, true);
+            return false;
+        });
+    });
+
+</script>

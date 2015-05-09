@@ -1,0 +1,173 @@
+#payment_content {
+    padding : 10px 20px;
+}
+
+#payment_content > h1 {
+    color : #d54937;
+}
+
+#payment_content table {
+    width : 100%;
+}
+
+#payment_content table td {
+vertical-align: top;
+}
+
+#payment_content table td.server_info {
+    width : 300px;
+}
+
+#payment_content table td.server_info span.left {
+    display : block;
+}
+
+#payment_content table td.server_info img {
+    display : block;
+    margin  : 5px 0;
+}
+
+#payment_content table td.payment_info {
+
+}
+
+#payment_content table td.payment_info p.info {
+    font-size : 20px;
+}
+
+#payment_content table td.payment_info p.info strong {
+    font-size : 26px;
+}
+
+#payment_content table td.payment_info p.small {
+    font-size : 16px;
+    color     : #bbb;
+}
+
+#payment_content table td.payment_options {
+    padding-top : 50px;
+    text-align  : center;
+}
+
+#payment_content table td.payment_options > div {
+    display     : inline-block;
+    text-align  : center;
+    margin-left : 20px;
+}
+
+#payment_content table td.payment_options > div:first-child {
+    margin-left : 0;
+}
+
+#payment_content table td.payment_options > div p {
+    color : #bbb;
+}
+
+#payment_content table.bank_transfer_info {
+    margin-top : 40px;
+}
+
+#payment_content table.bank_transfer_info td {
+    font-size : 20px;
+}
+
+#payment_content table.bank_transfer_info td.empty {
+    height : 60px;
+}
+
+#payment_content table.bank_transfer_info td.left {
+    width : 300px;
+}
+
+#payment_content table.bank_transfer_info td.right {
+    font-size : 24px;
+}
+
+#payment_content table.bank_transfer_info td.recipient {
+    padding-top : 20px;
+    line-height : 30px;
+}
+
+#payment_content table td.payment_done {
+
+}
+
+#payment_content table td.payment_done strong {
+    color: #d54937;
+}
+
+/* PAYMENT BY KAROL*/
+#payment_content h1 {
+	text-align:center;
+	font-size:24px;
+	text-transform:uppercase;
+	border-bottom:1px solid #dedede;
+	padding-bottom:15px;
+}
+
+#payment_content .preview {
+	text-aling:center;
+	margin:0 auto;
+	width:240px;
+	font-size:14px;
+}
+
+#payment_content .col-md-12 {
+	margin-bottom:25px;
+}
+
+#payment_content .col-md-12 {
+	text-align:center;
+	padding-left:0px;
+	padding-right:0px;
+}
+
+#payment_content .col-md-6.first {
+	border-right:1px solid #dedede;
+}
+
+#payment_content .col-md-12 h2 {
+	font-size:16px;
+	height:25px;
+	line-height:25px;
+	background-color:#dedede;
+	font-weight:bold;
+	text-transform:uppercase;
+	padding-top:0px;
+	margin-top:0px;
+}
+
+#payment_content p.info {
+	font-size:24px;
+	padding:15px 0 15px 0;
+}
+
+#payment_content p.small.license {
+	color:#666666;
+	font-style:italic;
+}
+
+.payment {
+	padding-top:20px;
+}
+
+.payment a {
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border-radius: 5px 5px 5px 5px;
+	padding:15px;
+	width:250px;
+	text-transform:uppercase;
+}
+
+.payment a span {
+	font-size:20px;
+	margin-left:10px;
+	float:left;
+}
+
+.payment p {
+	font-style:italic;
+	color:#999999;
+	padding-bottom:15px;
+	padding-top:5px;
+	}

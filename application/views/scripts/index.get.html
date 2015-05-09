@@ -1,0 +1,53 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/index.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+{include:_header.html}
+
+
+{if:page_id}
+{include:_toolbar.html}
+
+
+<script type="text/javascript">
+    var aaa;
+    
+    function aaa_go()
+    {
+        var amp=aaa.href.indexOf('?');
+        location.href=aaa.href+(amp>0?'&':'?')+'a='+Math.random();
+    }
+    
+    function a_go(a)
+    {
+		if (a.hash=='#empty') {
+			alert ('{translate.Choose language version}');
+			return true;
+		}
+		else {
+			aaa=a;
+			setTimeout(aaa_go,200);
+			km_preloader_show();
+			return false;
+		}
+    }
+    
+</script>
+<div id="no-page" class="blank">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+     <div class="col-md-4"><img class="img-responsive" src="{root}skins/{skin}/img/unknown.png" alt="{translate.No page}"></div>
+     <div class="col-md-8">
+      <h1 class="no-page">{translate.No page}</h1>
+	  <a class="btn btn-lg btn-danger km_prompt_title" href="{root}index/get/{page_id}?add=1&ref_menu={ref_menu}&referer={referer}">{translate.Add page}</a> 
+	  <a id="return-btn" class="btn btn-lg btn-default" href="?setLang={referlang}" title="{translate.Return}">{translate.Return}</a>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+{endif:page_id}
+
+{if:!page_id}
+{include:index.create.html}
+{endif:!page_id}

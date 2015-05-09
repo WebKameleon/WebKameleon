@@ -1,0 +1,9 @@
+{if:menu_id}
+<div class="sitemenu_c"><ul class="sitemenu">
+{loop:menu}
+    <li {if:class}class="{class}"{endif:class}>
+        <a href="{href}">{alt}</a>
+    </li>
+{endloop:menu}
+</ul></div>
+{endif:menu_id}

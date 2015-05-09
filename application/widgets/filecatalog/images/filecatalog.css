@@ -1,0 +1,77 @@
+.kmw_filecatalog {
+
+}
+
+ul.kmw_filecatalog {
+    list-style: none !important;
+    padding: 0px !important;
+    margin: 0px !important;
+}
+
+
+ul.kmw_filecatalog li a {
+    color: #555;
+    text-decoration: none;
+    display: inline-block;
+    padding: 5px 15px 5px 15px;
+    text-transform: none;
+    width: 91%;
+}
+
+ul.kmw_filecatalog li a:hover {
+    color: #131313;
+    text-decoration: none;
+    background: #f1f1f1;
+}
+
+ul.kmw_filecatalog li input {
+    margin-right: 15px;
+    float: left;
+    margin-left: 15px;
+    margin-top: 3px;
+}
+
+ul.kmw_filecatalog li a:before {
+    background: url('sprite-files.png');
+    background-repeat: no-repeat;
+   width:16px;
+    height: 16px;
+    display: inline-block;
+    content: '';
+    margin-right: 10px;
+}
+
+ul.kmw_filecatalog li.directory {
+    cursor: pointer;
+}
+
+ul.kmw_filecatalog li.directory:hover {
+    text-decoration: underline;
+}
+
+ul.kmw_filecatalog li.directory:before {
+    background: url('sprite-files.png');
+    background-repeat: no-repeat;
+    background-position: 0 -104px;
+    width:16px;
+    height: 16px;
+    display: inline-block;
+    content: '';
+    margin-right: 10px;
+}
+
+ul.kmw_filecatalog li.bmp a:before{ background-position: 0 0; } 
+ul.kmw_filecatalog li.msword a:before { background-position: 0 -26px; } 
+ul.kmw_filecatalog li.xls a:before{ background-position: 0 -52px; } 
+ul.kmw_filecatalog li.inode-x-empty a:before{ background-position: 0 -78px; } 
+ul.kmw_filecatalog li.gif a:before{ background-position: 0 -130px; } 
+ul.kmw_filecatalog li.htm a:before{ background-position: 0 -156px; } 
+ul.kmw_filecatalog li.jpeg a:before{ background-position: 0 -182px; } 
+ul.kmw_filecatalog li.mpeg a:before{ background-position: 0 -208px; } 
+ul.kmw_filecatalog li.mp3 a:before{ background-position: 0 -234px; } 
+ul.kmw_filecatalog li.pdf a:before{ background-position: 0 -260px; } 
+ul.kmw_filecatalog li.png a:before{ background-position: 0 -286px; } 
+ul.kmw_filecatalog li.ppt a:before{ background-position: 0 -312px; } 
+ul.kmw_filecatalog li.rtf a:before{ background-position: 0 -338px; } 
+ul.kmw_filecatalog li.zip a:before{ background-position: 0 -364px; } 
+

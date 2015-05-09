@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Webkameleon cms - responsive website creator",
+    "description": "responsive website creator"
+  },
+  "appDesc": {
+    "message": "Design and create your website. No technical skills required", 
+    "description":"Start your own business. Grow Your website that works across PC computers, tablets and phones. It is everything you need to design and build a uniqe website."
+  },
+  "appShortName" : {
+    "message": "webkameleon",
+    "description": "responsive website creator"    
+  }
+}

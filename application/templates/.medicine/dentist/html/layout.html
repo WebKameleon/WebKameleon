@@ -1,0 +1,102 @@
+<!DOCTYPE html><html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset={charset}" />
+	<title>{page.title}</title>
+	
+	{if:page.og_desc}
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="{page.title}"/> 
+	<meta property="og:site_name" content="{server.http_url}" />
+	<meta property="og:description" content="{page.og_desc}" />
+	{if:page.og_image}<meta property="og:image" content="{uimages}/{page.og_image}" />{endif:page.og_image}
+	{endif:page.og_desc}
+	
+	
+	<meta name="classification" content="global,all" />
+	<meta name="robots" content="all,index,follow" />	
+
+	<meta name="generator" content="{generator}" />
+	
+	{if:page.description}<meta name="description" content="{page.description}" />{endif:page.description}	
+	{if:page.keywords}<meta name="keywords" content="{page.keywords}" />{endif:page.keywords}	
+	
+	
+	<meta http-equiv="Content-Language" content="{page.lang}" />
+	<link type="text/css" rel="stylesheet" href="{template_images}/style.css" />
+	<link href="{template_images}/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+	<link href="{template_images}/print.css" rel="stylesheet" type="text/css" media="print"/>	
+	
+
+	<meta name="WebKameleonId" content="server={page.server}; page={page.id}; ver={page.ver}; lang={page.lang}; ftp={now|kameleon.datetime}" />
+	
+	<style type="text/css">
+		{if:page.background}body { background:url('{uimages}/{page.background}');{endif:page.background}
+		{if:page.bgcolor}body {background-color:#{page.bgcolor}} {endif:page.bgcolor}
+	</style>
+	
+
+</head>
+<body{if:page.class} class="{page.class}"{endif:page.class}>
+
+
+{with:header}
+
+<div class="body_header" id="sidebar">
+	{tokens|logo:logo}
+	{level1}
+</div>
+
+{endwith:header}
+
+{with:body}
+<div class="body_middle" id="content">
+
+	{if:level1}
+	<div class="top{if:editmode=2} ktop{endif:editmode=2}">
+		{level1}
+	</div>
+	{endif:level1}
+	<div class="introtext">
+		<div class="intros">
+			{level2}
+		</div>
+	</div>
+	
+	
+	<div class="article">
+		<div class="up"></div>
+		
+		<div class="body">{level3}</div>
+		
+		<div class="clean"></div>
+		<div class="down"></div>
+	</div>
+</div>
+{endwith:body}
+
+{with:footer}
+
+
+<div class="body_footer">
+	<div class="left">
+	{level1}
+	</div>
+	<div class="right">
+		<a href="http://www.webkameleon.com" target="_blank">CMS</a> Web Kameleon  <a href="http://www.gammanet.pl" target="_blank">{translate.Design}</a> Gammanet Sp. z o.o.
+	</div>
+</div>
+
+
+
+
+{endwith:footer}
+
+{if:page.og_desc}
+<div itemscope="" itemtype="http://schema.org/LocalBusiness" class="hidden">
+	<div itemprop="name">{page.title}</div>
+	<div itemprop="description">{page.og_desc}</div>
+	{if:page.og_image}<img itemprop="image" src="{uimages}/{page.og_image}" />{endif:page.og_image}
+</div>
+{endif:page.og_desc}
+</body>
+</html>

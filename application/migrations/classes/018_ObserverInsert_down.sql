@@ -1,0 +1,1 @@
+DELETE FROM observer WHERE event='share_server' AND pri=10;

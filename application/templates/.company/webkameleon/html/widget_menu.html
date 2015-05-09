@@ -1,0 +1,123 @@
+{if:menu}
+
+{if:level=100}
+    <ul id="nav">
+    {loop:menu}
+	<li class="{if:active}current{endif:active}">
+	    <a href="{if:mode}{href}{endif:mode}{if:!mode}#{endif:!mode}" {if:alt_title} title="{alt_title}"{endif:alt_title} {if:target} target="{target}"{endif:target}>
+	    {if:img}<img src="{uimages}/{img}" alt="{alt}" class="img" />{if:imga}<img src="{uimages}/{imga}" alt="{alt}" class="imga"/>{endif:imga}{endif:img}
+	    {if:!img}{alt}{endif:!img}
+	    </a>
+		    {if:submenu_id}
+		    {include:submenu.html}
+		    {endif:submenu_id}
+	</li>
+    {endloop:menu}
+    </ul>
+
+    {define:level_found=1}
+{endif:level=100}
+
+{if:level=101}
+    <div class="top-links">
+    {loop:menu}
+	<a href="{href}"{if:target} target="{target}"{endif:target}>{alt}</a>{if:!last_child} | {endif:!last_child}
+    {endloop:menu}
+    </div>
+    {define:level_found=1}
+{endif:level=101}
+
+{if:level=102}
+    <div class="socailfollow">
+    {loop:menu}
+	<a href="{href}" title="{alt}" class="{class}"{if:target} target="{target}"{endif:target}><i class="icomoon-{class}"></i></a>
+    {endloop:menu}
+    </div>
+    {define:level_found=1}
+{endif:level=102}
+
+
+{if:level=3}
+    
+    {loop:menu}
+	<figure class="six columns alpha{if:active} current{endif:active}">
+	    <a href="{href}" {if:alt_title} title="{alt_title}"{endif:alt_title} {if:target} target="{target}"{endif:target}>
+		{if:img}<img src="{uimages}/{img}" alt="{alt}" />{if:imga}<img src="{uimages}/{imga}" alt="{alt}"/>{endif:imga}{endif:img}
+		{if:!img}{alt}{endif:!img}
+	    </a>
+	    <figcaption><h4><a href="{href}">{alt}</a></h4>
+		    <p>{alt_title} - <a href="{href}"{if:target} target="{target}"{endif:target}>{description}</a></p>
+	    </figcaption>
+	</figure>
+    {endloop:menu}
+    
+    {define:level_found=1}
+{endif:level=3}
+
+
+
+{if:level=5}
+    {if:title}<h5>{title}</h5>{endif:title}
+    {if:!title}{if:name}<h5><strong>{name}</strong></h5>{endif:name}{endif:!title}
+    
+    <div class="listbox1"><ul>
+    {loop:menu}
+	<li class="{if:active}current{endif:active}">
+	    <a href="{href}" {if:alt_title} title="{alt_title}"{endif:alt_title} {if:target} target="{target}"{endif:target}>
+	    {if:img}<img src="{uimages}/{img}" alt="{alt}" class="img" />{if:imga}<img src="{uimages}/{imga}" alt="{alt}" class="imga"/>{endif:imga}{endif:img}
+	    {if:!img}{alt}{endif:!img}
+	    </a>
+	</li>
+    {endloop:menu}
+    </ul></div>
+    <hr class="vertical-space1"/>
+    {define:level_found=1}
+{endif:level=5}
+
+
+
+{if:level=200}
+    {if:title}<h4 class="subtitle">{title}</h4>{endif:title}
+    {if:!title}{if:name}<h4 class="subtitle">{name}</h4>{endif:name}{endif:!title}    
+    <div class="socailfollow">
+    {loop:menu}
+	<a href="{href}" title="{alt}" class="{class}"{if:target} target="{target}"{endif:target}><i class="icomoon-{class}"></i></a>
+    {endloop:menu}
+    </div>
+    {define:level_found=1}
+{endif:level=200}
+
+
+
+{if:!level_found}
+        {if:title}<h4 class="subtitle">{title}</h4>{endif:title}
+	{if:!title}{if:name}<h4 class="subtitle">{name}</h4>{endif:name}{endif:!title}
+        {plain}
+	
+	{if:class=tagcloud}
+	<div class="{class}">
+	{loop:menu}
+	    <a href="{href}"{if:target} target="{target}"{endif:target}>{alt}</a>
+	{endloop:menu}
+	{endif:class=tagcloud}
+	{if:!class=tagcloud}
+	<div class="listbox1">
+	<ul>
+	{loop:menu}
+	    <li class="{if:active}current{endif:active}">
+		<a href="{href}" {if:alt_title} title="{alt_title}"{endif:alt_title} {if:target} target="{target}"{endif:target}>
+		{if:img}<img src="{uimages}/{img}" alt="{alt}" class="img" />{if:imga}<img src="{uimages}/{imga}" alt="{alt}" class="imga"/>{endif:imga}{endif:img}
+		{if:!img}{alt}{endif:!img}
+		</a>
+	    </li>
+	{endloop:menu}
+	</ul>
+	{endif:!class=tagcloud}
+	
+	
+	</div>
+        <br class="clear"/>
+{endif:!level_found}
+
+
+{endif:menu}

@@ -1,0 +1,99 @@
+{with:gtranslateWidget}
+
+
+
+<form id="gtranslate_form" method="post">
+    {include:_widget.header.html}
+    <h1>{translate.Google translate}</h1>
+
+    <div class="edit_box">
+        <div class="label">{translate.Translation languages}</div>
+        <div class="value">
+            {loop:all_languages}
+            {if:__index__|tokens.modulo_twenty=1}<ul>{endif:__index__|tokens.modulo_twenty=1}
+            <li>
+                <input id="gtranslate_input_{code}" type="checkbox" name="gtranslate[languages][{code}]" value="1" {if:checked}checked{endif:checked} />
+                <label for="gtranslate_input_{code}"><span class="flag flag-{code}"></span> {name}</label>
+            </li>
+            {if:__index__|tokens.modulo_twenty=0}</ul>{endif:__index__|tokens.modulo_twenty=0}
+            {endloop:all_languages}
+        </div>
+    </div>
+
+    <!--<div class="edit_box">
+        <div class="label">{translate.Display mode}</div>
+        <div class="value">
+            <input type="radio" name="gtranslate[display_mode]" id="display_mode_inline" value="inline" />
+            <label for="display_mode_inline">{translate.Inline}</label>
+
+            <input type="radio" name="gtranslate[display_mode]" id="display_mode_tabbed" value="tabbed" />
+            <label for="display_mode_tabbed">{translate.Tabbed}</label>
+
+            <input type="radio" name="gtranslate[display_mode]" id="display_mode_auto" value="auto" />
+            <label for="display_mode_auto">{translate.Automatic}</label>
+        </div>
+    </div>-->
+
+    <div class="edit_box display_mode display_mode_inline display_options">
+        <div class="label">{translate.Layout}</div>
+        <div class="value">
+            <input type="radio" name="gtranslate[display_mode_inline]" id="display_mode_inline_vertical" value="0" />
+            <label for="display_mode_inline_vertical">{translate.Vertical}</label>
+
+            <input type="radio" name="gtranslate[display_mode_inline]" id="display_mode_inline_horizontal" value="1" />
+            <label for="display_mode_inline_horizontal">{translate.Horizontal}</label>
+
+            <input type="radio" name="gtranslate[display_mode_inline]" id="display_mode_inline_dropdown" value="2" />
+            <label for="display_mode_inline_dropdown">{translate.Dropdown}</label>
+        </div>
+    </div>
+
+    <!--<div class="edit_box display_mode display_mode_tabbed display_options">
+        <div class="label"></div>
+        <div class="value">
+            <input type="radio" name="gtranslate[display_mode_tabbed]" id="display_mode_tabbed_LR" value="3" />
+            <label for="display_mode_tabbed_LR">{translate.Lower right}</label>
+
+            <input type="radio" name="gtranslate[display_mode_tabbed]" id="display_mode_tabbed_LL" value="4" />
+            <label for="display_mode_tabbed_LL">{translate.Lower left}</label>
+
+            <input type="radio" name="gtranslate[display_mode_tabbed]" id="display_mode_tabbed_UR" value="2" />
+            <label for="display_mode_tabbed_UR">{translate.Upper right}</label>
+
+            <input type="radio" name="gtranslate[display_mode_tabbed]" id="display_mode_tabbed_UL" value="1" />
+            <label for="display_mode_tabbed_UL">{translate.Upper leftt}</label>
+        </div>
+    </div>-->
+
+    <div class="edit_box display_options">
+        <div class="label">{translate.Advanced}</div>
+        <div class="value">
+            <input type="checkbox" name="gtranslate[auto_display]" id="auto_display" value="1" {if:data.auto_display}checked{endif:data.auto_display} />
+            <label for="auto_display">{translate.Automatically display translation banner to users speaking languages other than the language of your page}</label>
+
+            <input type="checkbox" name="gtranslate[multi_languages]" id="multi_languages" value="1" {if:data.multi_languages}checked{endif:data.multi_languages} />
+            <label for="multi_languages">{translate.Your page contains content in multiple languages}</label>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#gtranslate_form").submit();
+        return false;
+    }
+
+    jQueryKam(function ($) {
+
+        $("input[name='gtranslate[display_mode]']").on("click", function (e) {
+            $(".display_mode").hide().filter(".display_mode_" + this.value).show();
+        });
+
+        $("input[name='gtranslate[display_mode]'][value='{data.display_mode}']").attr("checked", true).trigger("click");
+        $("input[name='gtranslate[display_mode_inline]'][value='{data.display_mode_inline}']").attr("checked", true);
+        $("input[name='gtranslate[display_mode_tabbed]'][value='{data.display_mode_tabbed}']").attr("checked", true);
+
+    });
+</script>
+{endwith:gtranslateWidget}

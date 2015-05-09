@@ -1,0 +1,36 @@
+
+<div class="box{if:class} {class}{endif:class}{if:pri=1} first_child{endif:pri=1}" {if:bgimg}style="background-image:url('{uimages}/{bgimg}')"{endif:bgimg}>
+    {if:title}{tokens.box_title}{endif:title}
+    {if:plain}<div class="text">{plain}</div>{endif:plain}
+    
+    {if:more}<a class="more" href="{more_link}"><img border="0" src="{template_images}/bnt_wiecej.png" border="0" alt="{translate.More}" /></a>{endif:more}
+</div>
+
+{if:menu}
+<div class="menu"><ul>
+{loop:menu}
+    <li{if:class} class="{class}"{endif:class}{if:alt_title} title="{alt_title}"{endif:alt_title}>
+        {if:img}<a id="imga_{sid}" href="{if:imga}{uimages}/{imga}{endif:imga}{if:!imga}{href}{endif:!imga}" class="fotos"><img src="{uimages}/{img}"/></a>{endif:img}
+        <a href="{href}" class="names">{alt}</a>
+        {if:description}
+        <div class="infos">
+            {description|nl2br}
+            <a class="btn_szczegoly" href="{href}">{translate.Details}</a>
+        </div>
+        {endif:description}
+    </li>
+    {if:imga}
+    {tokens.loadjquerykam}
+    <script type="text/javascript">
+        jQueryKam("#imga_{sid}").on('click',function(e) {
+            qr = new Image();
+            qr.src=this.href;
+            jQueryKam.fancybox.open(qr);
+            return false;            
+        });
+
+    </script>
+    {endif:imga}
+{endloop:menu}
+</ul></div>
+{endif:menu}

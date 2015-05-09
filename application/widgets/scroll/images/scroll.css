@@ -1,0 +1,44 @@
+.jcarousel ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+    width      : 750px;
+}
+
+.jcarousel li {
+    float  : left;
+    width  : 250px;
+    height : 140px;
+}
+
+.jcarousel-navi {
+    position : relative;
+    z-index  : 1000000;
+}
+
+.jcarousel-navi span {
+    margin-right        : 6px;
+    width               : 20px;
+    height              : 33px;
+    background-repeat   : no-repeat;
+    background-position : top left;
+    display             : block;
+    cursor              : pointer;
+    position            : absolute;
+    overflow            : hidden;
+    text-indent         : 300px;
+    font-size           : 0;
+    line-height         : 0;
+}
+
+.jcarousel-navi-prev {
+    background-image : url(navi_left_promo.png);
+    left             : 0;
+    top              : 50px;
+}
+
+.jcarousel-navi-next {
+    background-image : url(navi_right_promo.png);
+    right            : 0;
+    top              : 50px;
+}

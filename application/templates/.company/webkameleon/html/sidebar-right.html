@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="{lang}">
+<!--<![endif]-->
+<head>
+{include:head.html}
+</head>
+
+<body{if:page.class} class="{page.class}"{endif:page.class}>
+
+<!-- Primary Page Layout
+	================================================== -->
+<div id="wrap" class="colorskin-0">
+	
+{include:header.html}
+  
+  
+{with:body}
+  
+  <section id="headline">
+    <div class="container">
+      <h3>{page.title}</h3>
+    </div>
+  </section>
+  
+  <section class="container page-content" >
+    <hr class="vertical-space2">
+    <section class="eleven columns">
+	{level3}
+    </section>
+    
+    <aside class="four columns offset-by-one sidebar">
+	{level4}
+    </aside>
+    <!-- end-sidebar-->
+    <hr class="vertical-space2">
+  </section>
+  
+{endwith:body}
+
+{include:footer.html}
+
+<span id="scroll-top"><a class="scrollup"><i class="icomoon-arrow-up"></i></a></span> </div>
+<!-- end-wrap -->
+<!-- End Document
+================================================== -->
+<script type="text/javascript" src="{template_dir}/js/mexin-custom.js" ></script>
+<script type="text/javascript" src="{template_dir}/js/doubletaptogo.js" ></script>
+</body>
+</html>

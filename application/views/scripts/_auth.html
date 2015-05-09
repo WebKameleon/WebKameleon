@@ -1,0 +1,51 @@
+
+ <div class="col-md-12">
+
+ <div class="row">
+ <div class="km_loginb">{auth.email} <i class="caret"></i></div>
+ 
+
+  <div class="km_profileb"><i class="km_profileb_up_arrow"></i>
+   <div class="km_profileb_up">
+    <div class="km_profileb_info">
+     {if:auth.picture}<img src="{auth.picture}"/>{endif:auth.picture}
+     <span class="km_profileb_login">{auth.name}</span>
+     <span class="km_profileb_email">{auth.email}</span>
+     <ul>
+      <li><a href="{root}user/profile?return_url={_SERVER.REQUEST_URI|base64_encode}" class="km_profileb_logout">{translate.Profile}</a></li>
+      <li><a href="{root}scopes{if:page.id}?setreferpage={page.id}{endif:page.id}" class="km_profileb_logout">{translate.Security}</a></li>                        
+      <li><a href="{root}logout" class="km_profileb_logout">{translate.Logout}</a></li>
+     </ul>
+    </div>
+   </div>
+  </div>
+    
+     {if:controller_name=index}
+     {if:controller_action=get}
+
+   <div class="km_others">
+    <ul>
+    {if:others.system}
+     <li style="background-color:{others.color}" title="{translate.Currently using Webkameleon}" class="km_others_system">{others.system}</li>
+    {endif:others.system}
+    {loop:others.people}
+     <li style="background-color:{color}" title="{fullname}">
+     {if:!photo}
+      {fullname|substr:0,1|strtoupper}
+     {endif:!photo}
+     {if:iphoto}
+      <img src="{photo}"/>
+     {endif:photo}
+     </li>
+    {endloop:others.people}
+	</ul>
+   </div>         
+
+     {endif:controller_action=get}
+     {endif:controller_name=index}
+
+
+</div>      
+ </div>
+    
+    

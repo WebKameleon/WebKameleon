@@ -1,0 +1,40 @@
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    <ul>
+                        <li><a href="{root}wizard" id="km_ddmenu_wizard">{translate.My services}</a></li>
+                        <li><a href="{root}tree/explorer?node={page.id}" id="km_ddmenu_explorer">{translate.Explorer}</a></li>
+                        <li><a href="{root}menu/get?setreferpage={page.id}" id="km_ddmenu_menus">{translate.Menu}</a></li>
+                        {if:server.ftp}
+                        <li><a href="{root}ftp/get?setreferpage={page.id}" id="km_ddmenu_publikacja">{translate.FTP}</a></li>
+                        {endif:server.ftp}
+                        <li><a href="{root}trash?setreferpage={page.id}" id="km_ddmenu_trash">{translate.Trash}</a></li>
+                    </ul>
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    <div class="km_clean"></div>
+</div>
+{include:tree.get.html}

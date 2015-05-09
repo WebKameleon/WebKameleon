@@ -1,0 +1,35 @@
+#opacity_slider {
+    width       : 200px;
+    display     : inline-block;
+    margin-left : 10px;
+}
+.bxslider-wrapper .bx-viewport{
+    background : transparent;
+}
+.bxslider-wrapper .bx-clone {
+    display : none;
+}
+
+.bxslider-wrapper .bx-wrapper {
+    margin : 0 auto;
+}
+
+.bxslider-wrapper .bx-wrapper ul {
+    margin  : 0;
+    padding : 0;
+}
+
+.bxslider-wrapper .bx-wrapper .bx-pager {
+    padding : 10px;
+    width   : auto;
+}
+
+.bxslider-wrapper .bx-wrapper .bx-pager .bx-pager-link.active {
+    background : #FFF;
+}
+
+.bxslider-wrapper .bx-wrapper .bx-viewport {
+    box-shadow : none;
+    border     : 0;
+    left       : 0;
+}

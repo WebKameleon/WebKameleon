@@ -1,0 +1,105 @@
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                 </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="container-fluid">
+<form class="form-horizontal" role="form" method="post" id="profile_form">
+
+<div class="row wk-container wk-padding-top-15">
+	<div class="col-md-10"> 
+	<h3>{translate.My profile}</h3>
+	</div>
+	<div class="col-md-2"> 
+		<div style="float:right;">
+		<a class="btn btn-default" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+		<a class="btn btn-primary" href="#" id="profile_save">{translate.Save}</a>
+		</div>
+	</div>
+</div>
+
+<div class="row wk-container">
+	<div class="col-md-12">
+  <div class="form-group">
+    <label class="col-sm-4 control-label">{translate.Language}</label>
+    <div class="col-sm-8">
+		<select name="profile[lang]">
+		{loop:languages}
+			<option value="{__loop__}" {if:__loop__=$ulang}selected{endif:__loop__=$ulang}>{loop}</option>
+		{endloop:languages}
+		</select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label">{translate.Redirect to last edited service after login}</label>
+    <div class="col-sm-8">
+        <input type="hidden" name="profile[after_login_redirect]" value="0" />
+        <input type="checkbox" name="profile[after_login_redirect]" value="1" {if:user.after_login_redirect}checked{endif:user.after_login_redirect} />
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label class="col-sm-4 control-label">{translate.Remove my account and all websites created}</label>
+    <div class="col-sm-8">
+        <a class="btn btn-default" href="{root}user/remove" id="remove_account">{translate.Remove my account}</a>
+    </div>
+  </div>  
+  
+</div>
+</div>
+</form>
+</div>
+
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        $("#profile_save").on("click", function (e) {
+            $('#profile_form').submit();
+            return false;
+        });
+
+	$("#remove_account").on("click", function (e) {
+	    var a=this;
+            KamConfirm('{translate.This operation can not be undone, are you sure you want to remove your account}?',function (){
+		location.href=a.href;
+	    });
+            return false;
+        });
+
+
+    });
+    
+    
+
+</script>
+
+

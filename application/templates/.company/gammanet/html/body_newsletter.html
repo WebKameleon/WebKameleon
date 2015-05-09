@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={charset}">
+<style type="text/css">
+body {margin:0;font-size:12px; background-color:#fff; font-family:Verdana; text-align:left}
+.std { font-size:0}
+a { text-decoration: none; color:#333}
+p {margin:0;}
+img { margin:0; padding:0}
+ul {margin:15px;}
+</style>
+</head>
+	<body bgcolor="#fff" style="background-color:#fff">
+{with:header}
+{endwith:header}
+{with:body}
+{tokens.newsletter_management}
+<table border="0" cellspacing="0" cellpadding="0"  align="center" width="700px" style="font-family:Verdana;" bgcolor="#efefef">
+    <tbody>
+        <tr>
+        	<td align="center" style="font-size:0">{level1}</td>
+        </tr>
+        <tr>
+        	<td align="center" style="font-size:0">
+            	<table border="0" cellspacing="0" cellpadding="0" align="center">
+                	<tr>
+						<td>{level2}</td>
+                        <td>{level3}</td>
+                        <td>{level4}</td>
+                       	<td>{level6}</td>
+                      	<td>{level7}</td>
+			           	<td>{level8}</td>
+                  	</tr>
+                </table>
+            </td>
+         <tr>
+           	<td align="center" style="font-size:0">{level5}</td>
+		</tr>
+    </tbody>
+</table>
+{endwith:body}
+	</body>
+</html>

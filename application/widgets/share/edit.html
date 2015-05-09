@@ -1,0 +1,56 @@
+{with:shareWidget}
+
+
+
+<form id="share_form" method="post">
+    {include:_widget.header.html}
+    <h1>{title}</h1>
+
+    <div class="edit_box">
+        <div class="label">{translate.Social media}</div>
+        <div class="value">
+            <ul>
+            {loop:media}
+            <li>
+                <input id="share_input_{__loop__}" type="checkbox" name="share[media][{__loop__}]" value="1" {if:checked}checked{endif:checked} />
+                <label for="share_input_{__loop__}"><span class="share-{__loop__}"></span> {name}</label>
+            </li>
+            {endloop:media}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="edit_box display_options">
+        <div class="label" style="height: 200px">{translate.Appearance settings}</div>
+        <div class="value">
+            <input type="radio" name="share[class]" id="class_default" value="default" {if:data.class=default}checked{endif:data.class=default} {if:!data.class}checked{endif:!data.class} />
+            <label for="class_default">{translate.Default}</label>
+            <br/>
+            <input type="radio" name="share[class]" id="class_bw" value="bw" {if:data.class=bw}checked{endif:data.class=bw} />
+            <label for="class_bw">{translate.Black & white}</label>
+            <br/>
+            <input type="radio" name="share[class]" id="class_wb" value="wb" {if:data.class=wb}checked{endif:data.class=wb} />
+            <label for="class_wb">{translate.White & black}</label>
+            <br/>
+            <input type="radio" name="share[class]" id="class_w" value="w" {if:data.class=w}checked{endif:data.class=w} />
+            <label for="class_w">{translate.White}</label>
+            <br/>
+            <input type="radio" name="share[class]" id="class_b" value="b" {if:data.class=b}checked{endif:data.class=b} />
+            <label for="class_b">{translate.Black}</label>
+            <br/>            
+        </div>
+        
+        
+    </div>
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#share_form").submit();
+        return false;
+    }
+
+</script>
+{endwith:shareWidget}

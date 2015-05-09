@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="{lang}"> <!--<![endif]-->
+
+ <head>
+  <meta charset="utf-8">
+ {include:head.html}
+ </head>
+
+<body{if:page.class} class="{page.class}"{endif:page.class}>
+
+ {with:header}
+ {include:header.html}
+ {endwith:header}
+
+ <!----- main content ----->
+ {with:body}
+  <div class="row">
+   <div class="container">
+   <section id="main" class="col-md-12">{level1}</section>
+   
+   <div class="clearfix"></div>
+  
+   <section id="main-bottom-can1" class="col-md-4">{level2}</section>
+   <section id="main-bottom-can2" class="col-md-4">{level3}</section>
+   <section id="main-bottom-can3" class="col-md-4">{level4}</section>
+  </div>
+ </div>
+ {endwith:body}
+ <!----- /main content ----->
+
+{with:footer}
+{include:footer.html}
+{endwith:footer}
+
+<span id="scroll-top"><a class="scrollup"><i class="icomoon-arrow-up"></i></a></span>
+
+</body>
+</html>

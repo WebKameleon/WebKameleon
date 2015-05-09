@@ -1,0 +1,79 @@
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="km_fbtn">
+    <a class="km_fbtn_action" href="#" id="sftp_save">{translate.Save}</a>
+    <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+</div>
+
+
+<div class="ftp_sftp">
+
+<form method="post" id="sftp_form">
+    <input type="hidden" value="0" name="sftp"/> 
+    <h1>{translate.SFTP Access}</h1>
+    
+    <p><input type="checkbox" value="1" name="sftp" {if:server.media_pass}checked{endif:server.media_pass}/> {translate.SFTP Access enabled}</p>
+    <p><b>{translate.Server}:</b> {config.ftp.sftp.server}</p>
+    <p><b>{translate.Server port}:</b> {config.ftp.sftp.port}</p>
+    <p><b>{translate.User}:</b> {server.nazwa}</p>
+
+    <p>
+	<b>{translate.Password}:</b>
+	{if:!server.media_pass}{translate.will be generated after enabling SFTP}{endif:!server.media_pass}
+	{if:server.media_pass}
+	    {if:password}{password}{endif:password}
+	    {if:!password}
+		<span title="{translate.Password is encrypted}">****</span>
+		[<input type="checkbox" value="1" name="regenerate"/> {translate.Regenerate}]
+	    {endif:!password}
+	{endif:server.media_pass}
+    </p>
+    
+</form>
+
+</div>
+
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        $("#sftp_save").on("click", function (e) {
+
+    
+            jQueryKam('#sftp_form').submit();
+            return false;
+        });
+    });
+    
+    
+
+</script>

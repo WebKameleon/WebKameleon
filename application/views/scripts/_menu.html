@@ -1,0 +1,85 @@
+{if:page_not_found}
+	{define:page-not-found=wk-display-none}
+	{define:page-disabled=wk-disabled}
+{endif:page_not_found}
+<div class="container-fluid wk-container wk-bg-grey">
+	<div class="row"> <!-- dropdown menu -->
+		<div class="col-md-12">
+			<div class="km_ddmenu hidden-xs hidden-sm">
+				<ul class="sf-menu">
+					<li class="notranslate{if:readonly} sf-disable{endif:readonly} {page-not-found}"><a>{translate.Page}</a>
+						<ul>
+							<li class="sf-disable"><a id="km_ddmenu_editpage">{translate.Edit mode}</a></li>
+							<li><a href="{root}index/add/{page.id}" id="km_ddmenu_addpage" class="km_prompt_title">{translate.New page}</a></li>
+							<li><a href="{root}index/edit/{page.id}" id="km_ddmenu_wlasciwosci">{translate.Page setup}</a></li>
+	<!--
+							<li><a class="km_icon_easy km_iconi_{if:page.hidden}in{endif:page.hidden}visible_sm" onclick="km_page_visible('{page.sid}')">{if:page.hidden}{translate.Page invisible}{endif:page.hidden}{if:!page.hidden}{translate.Page visible}{endif:!page.hidden}</a></li>
+							<li><a class="km_icon_easy km_iconi_tree_sm{if:page.nositemap}_off{endif:page.nositemap}" onclick="km_page_sitemap('{page.sid}')" title="{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}">{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}</a></li>
+
+							<li><a class="" onclick="km_page_visible('{page.sid}')">{if:page.hidden}{translate.Page invisible}{endif:page.hidden}{if:!page.hidden}{translate.Page visible}{endif:!page.hidden}</a></li>
+							<li><a class="" onclick="km_page_sitemap('{page.sid}')" title="{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}">{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}</a></li>
+	-->
+							{if:page.id}
+							<li><a id="km_ddmenu_delpage" href="{root}index/remove/{page.id}" onclick="return confirmDelete()">{translate.Delete}</a></li>
+							{endif:page.id}
+							{if:!page.id}
+							<li class="sf-disable"><a id="km_ddmenu_delpage" href="#">{translate.Delete}</a></li>
+							{endif:!page.id}
+						</ul>
+					</li>
+
+					<li class="notranslate {page-not-found}">
+						<a>{translate.View}</a>
+						<ul>
+							<li><a href="{root}index/get/{page.id}?seteditmode=0" id="km_ddmenu_podglad">{translate.Show preview mode}</a></li>
+							<li><a href="{root}index/get/{page.id}?switcheditmode=1" id="km_ddmenu_naglowek">{translate.Header/footer change}</a></li>
+							<li><a id="km_ddmenu_linijka">{translate.Rooler}</a></li>
+						</ul>
+					</li>
+
+					<li class="notranslate{if:readonly} sf-disable{endif:readonly} {page-not-found}">
+						<a>{translate.Insert}</a>
+		
+						<ul class="sf-no-icons">
+							{with:config}{loop:widgets_menu}
+							<li>
+								{if:!scope}
+								<a {if:!children}rel="{__loop__}" class="km_insert_type"{endif:!children}>{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a>
+								{endif:!scope}
+								
+								{if:scope}
+								<a href="{root}scopes/{scope}?setreferpage={page.id}" class="km_insert_scope" onclick="return true">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a>
+								{endif:scope}								
+								
+								{if:children}
+								<ul class="sf-no-icons">{loop:children}
+									{if:!scope}
+									<li><a rel="{__loop__}" class="km_insert_type">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a></li>
+									{endif:!scope}
+									{if:scope}
+									<li><a href="{root}scopes/{scope}?setreferpage={page.id}" class="km_insert_scope" onclick="return true">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a></li>
+									{endif:scope}										
+									
+									{endloop:children}</ul>
+								{endif:children}
+							</li>
+							{endloop:widgets_menu}{endwith:config}
+						</ul>
+					</li>
+
+					<!--
+					<li class="sf-disable">
+						<a>{translate.Layout}</a>
+					</li>
+					-->
+					
+					<li class="notranslate">
+						<a>{translate.Tools}</a>
+						{include:_menu.tools.html}
+					</li>
+					{include:_menu.help.html}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,196 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/wizard.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="{root}js/wizard.js"></script>
+<script type="text/javascript" src="{root}bootstrap/js/bootstrap.min.js"></script>
+
+
+{include:_header.html}
+
+{with:wizard}
+
+<div class="container-fluid wrapper">
+
+<div class="row bg-grey">
+<!----- sidebar ----->
+ <div id="km_wizard_family" class="col-md-2">
+ <a href="{root}wizard" class="btn btn-success btn-lg" style="margin-left:15px; margin-top:15px;"><i class="glyphicon glyphicon-globe "></i> {translate.Return}</a>
+  <h2>{translate.Choose template}</h2>
+   <ul>
+    {loop:families}
+    <li rel="{__loop__}">{loop}</li>
+    {endloop:families}
+    <li rel="drive" class="google_drive"><i class="glyphicon glyphicon-cloud"></i> {translate.Google Drive}</li>
+   </ul>
+ </div>
+<!----- /sidebar ----->	
+<!--{debug.scopes}-->
+<!----- content ----->
+<form method="post" id="km_wizard_form1" class="km_wizard_form_create1">
+ <input type="hidden" name="wizard[template]" />
+  
+   <div class="col-md-10 bg-white">
+	<div class="row">
+     <div class="col-md-12">
+	  <div id="km_wizard_list">  
+	   <ul>
+	    <div id="carousel-wizard" class="carousel fade">
+	  
+        <!----- navigation top ----->
+		<div class="col-md-12 nav-top">
+			<a href="#carousel-wizard" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+			<a href="#carousel-wizard" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+		</div>
+		<!----- /navigation top ----->
+	  
+	    <div class="carousel-inner">
+                
+          {loop:templates}
+				<li carousel="{family}">
+				    <div class="row">
+					    <!----- template title/name ----->
+					    <div class="col-md-12 template-name">{__loop__|tokens.template_name}</div>
+						<!----- /template title/name ----->
+					</div>
+				
+					<div class="row">
+				         <div class="col-md-6">
+					          <img class="img-responsive" src="{root}thumb/{__loop__|base64_encode}/preview" title="{translate.Author}: {__loop__|tokens.template_author}"/>
+					     </div>
+					
+					     <div class="col-md-6">
+					     <!----- description ----->
+					          <ul class="template-description">
+								   <!----- btns ----->
+							        <li class="launch-btn">
+                                                                    <input rel="{__loop__}" type="button" id="km_wizard_choose" class="btn btn-lg btn-danger" value="{translate.Choose}" />    
+								    <a class="btn btn-lg btn-primary" href="{__loop__|tokens.template_url}" title="{translate.Preview}" target="_blank" onclick="ga('send','event','wizard/preview','{__loop__}'); jQueryKam.get('{root}ajax/template_activity/base64:{__loop__|base64_encode}?type=P')">{translate.Preview}</a>
+								</li>
+								   <div class="clearfix"></div>
+								   <!----- /btns ----->
+								   
+							       <!----- desc ----->
+							       <li class="description"><span>{translate.Description}</span> <p>{desc}</p></li>
+								   <!----- /desc ----->
+								   
+								   <!----- price ----->
+							       <li class="price"><span>{translate.Template license}</span> <a>{if:price}{price} {currency}{endif:price}{if:!price}{translate.Free}{endif:!price}</a></li>
+								   <!----- /price ----->
+								   
+								   <!----- autor ----->
+								   <li class="author"><span>{translate.Author}</span> <p>{author}</p></li>
+								   <!----- /autor ----->
+							       
+								   <!----- categories ----->
+							       <!--<li class="categories"><span>{translate.Categories}</span> <p>{family}</p></li>-->
+								   <!----- /categories ----->
+								   
+								   <!----- tags ----->
+							       <li class="tags"><span>{translate.Tags}</span> <p>{loop:tags}<a>{loop}</a>{endloop:tags}</p></li>
+								   <!----- /tags ----->
+								   
+							  </ul>
+					     <!----- /description ----->
+					     </div>
+				    </div>
+				
+				</li>
+				
+				{endloop:templates}
+       </div> <!-- carousel-inner -->
+	
+
+		<!----- thumbnails ----->
+		<div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs">
+			<div class="col-md-12 thumbnail-section-name">{translate.See also}:</div>
+			<ul id="thumb-list" class="list-inline">
+				{loop:templates}
+				<li carousel-thumb="{family}" data-target="#carousel-wizard" data-slide-to="{__index__|-:1}">
+					<img class="img-responsive" onclick="ga('send','event','wizard/template','{__loop__}'); jQueryKam.get('{root}ajax/template_activity/base64:{__loop__|base64_encode}'); wizardScrollTop()" src="{root}thumb/{__loop__|base64_encode}" title="{__loop__|tokens.template_name} ({translate.Author}: {__loop__|tokens.template_author})"/>
+				</li>
+				{endloop:templates}
+			</ul>
+		</div>    
+		<!----- /thumbnails ----->
+		</div> <!-- id=carousel-wizard -->
+
+		    {if:drive|is_array}
+			<li rel="my_template" family="drive" class="wk-drive">
+			<div class="table-responsive">
+			 <table class="table table-hover">
+			  
+			  <thead>
+               <tr>
+                <th>{translate.Title}</th>
+                <th class="hidden-xs">{translate.Author}</th>
+                <th class="hidden-xs">{translate.Last modified}</th>
+                <th>&nbsp;</th>
+               </tr>
+              </thead>
+			  
+			  <tbody>
+			  {loop:drive}
+               <tr>
+                <td>{title}</td>
+                <td class="hidden-xs">{author}</td>
+                <td class="hidden-xs">{date|strtotime|kameleon.datetime}</td>
+                <td><input rel="drive:{__loop__}" type="submit" id="km_wizard_choose" class="btn btn-sm btn-primary pull-right" value="{translate.Choose}" /></td>
+               </tr>
+               
+			  {endloop:drive}
+              </tbody>
+			 </table>
+			</div>
+                        
+                        
+			</li>
+                {if:!drive}                
+                <li rel="my_template" family="drive" class="wk-drive-msg">    
+                    {translate.You have neither created any website at Google Drive nor anybody has shared with you}.
+                    {translate.After you create a website, you can export it to Google Drive}.
+                </li>                                
+                {endif:!drive}                
+
+                {endif:drive|is_array}
+                {if:!drive|is_array}
+                <li rel="my_template" family="drive" class="wk-drive-msg">
+                
+                    <div class="container">
+                     <div class="row">
+                      <div class="col-md-2"></div>
+                      <div class="col-md-8 scopes-single">	
+                       <ul class="scopes">
+                            <!--{debug.scopes}-->
+                            <!----- google drive ----->
+                        <li class="km_scopes_drive">
+                                    <div class="row">
+                                     <div class="col-md-12">
+                                      <div class="col-md-3"><img src="http://www.google.com/images/icons/product/drive-128.png" class="img-responsive" alt="Google Drive" /></div>
+                                      <div class="col-md-9"><h2 class="scope-title">{translate.Google Drive}</h2><p>{translate.scope_drive_description}</p></div>
+                                     </div>
+                                    </div>
+                        </li>
+                            <div class="col-md-3 pull-right">
+                             <ul class="scopes-buttons">
+                              {if:hasAccess}<li><a href="{root}auth/get_token/drive?return_url={_SERVER.REQUEST_URI|.:#drive|base64_encode}" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>{endif:hasAccess}  
+                              {if:!hasAccess}<li><a href="{root}auth/get_token/drive?return_url={_SERVER.REQUEST_URI|.:#drive|base64_encode}" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!hasAccess}
+                             </ul>
+                            </div>
+                        <!----- /google drive ----->
+                            
+                       </ul>
+                      </div>
+                      <div class="col-md-2"></div>
+                     </div>
+                    </div>
+
+                </li>                
+                {endif:!drive|is_array}
+				</ul>
+			 </div>
+		</div>
+  </div>
+ <div class="clearfix"></div>
+</form>
+<!----- /content ----->
+</div>
+{endwith:wizard}

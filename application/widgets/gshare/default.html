@@ -1,0 +1,19 @@
+{if:title}<h2 class="widget_h">{title}</h2>{endif:title}
+{with:gshareWidget}
+{if:data.url}
+<a href="#" onclick="javascript:window.open('https://plus.google.com/share?url={data.url}','', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+    <img src="https://www.gstatic.com/images/icons/gplus-{icon_size}.png" alt="Share on Google+"/>
+</a>
+{endif:data.url}
+{if:!data.url}
+<a href="#" onclick="javascript:window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.location.href),'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+    <img src="https://www.gstatic.com/images/icons/gplus-{icon_size}.png" alt="Share on Google+"/>
+</a>
+<div style="display: none">
+    <div itemprop='name'>{page.title}</div>
+    <div itemprop='description'>{page.og_desc}</div>
+    <img itemprop="image" src="{uimages}/{page.og_image}" />
+</div>
+{endif:!data.url}
+{endwith:gshareWidget}
+{plain}

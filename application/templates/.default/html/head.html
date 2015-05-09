@@ -1,0 +1,41 @@
+    
+    <title>{page.title}</title>
+    {if:page.description}<meta name="description" content="{page.description}" />{endif:page.description}	
+    {if:page.keywords}<meta name="keywords" content="{page.keywords}" />{endif:page.keywords}
+    
+    <meta name="author" content="webkameleon.com">
+    
+    {if:page.og_desc}
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{page.title}"/> 
+    <meta property="og:site_name" content="{server.http_url}" />
+    <meta property="og:description" content="{page.og_desc}" />
+    {if:page.og_image}<meta property="og:image" content="{uimages}/{page.og_image}" />{endif:page.og_image}
+    {endif:page.og_desc}
+    
+    <meta name="Robots" content="all" />
+    <meta name="generator" content="{generator}" />
+    <meta name="webkameleonId" content="server={page.server}; page={page.id}; ver={page.ver}; lang={page.lang}; ftp={page.nd_ftp|kameleon.datetime}" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!----- fonts ----->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <!----- /fonts ----->
+    
+    <!----- css ----->
+    <link rel="stylesheet" href="{template_dir}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{template_dir}/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{template_dir}/css/blank.css">
+    <link rel="stylesheet" href="{template_dir}/css/style.css">
+    <!----- /css ----->
+	
+    <!----- modernizer ----->
+    <script src="{template_dir}/js/modernizer.js"></script>
+    <!----- /modernizer ----->
+
+	<!----- favicon ----->
+    <link rel="shortcut icon" href="{template_dir}/images/favicon.ico">
+    <!----- /favicon ----->
+
+

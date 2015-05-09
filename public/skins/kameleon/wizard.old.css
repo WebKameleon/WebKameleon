@@ -1,0 +1,468 @@
+body {
+    font-family         : Arial, Helvetica, sans-serif;
+    margin              : 0;
+    padding             : 0;
+    font-size           : 12px;
+    background-repeat   : repeat-x;
+    background-position : 0 102px;
+    background-image    : url('img/wizard_bg.png');
+}
+
+#km_createServer {
+    position : relative;
+}
+
+#km_createServerConter {
+    height           : 400px;
+    overflow         : auto;
+    background-color : #FFF
+}
+
+.km_createServer_ul {
+    list-style : none;
+    overflow   : hidden;
+    margin     : 15px 0;
+    padding    : 0;
+}
+
+.km_createServer_ul li {
+    float  : left;
+    margin : 0 16px 20px 0;
+    border : 2px solid #fff;
+}
+
+.km_createServer_ul li.active {
+    border : 2px solid #d74937;
+}
+
+.km_createServer_ul li img {
+    cursor : pointer;
+}
+
+.km_createServer_ul li label {
+    display : inline-block;
+}
+
+#km_createServer_family {
+    list-style       : none;
+    height           : 399px;
+    width            : 190px;
+    top              : 0;
+    left             : 0;
+    background-color : #ededed;
+    position         : absolute;
+}
+
+#km_createServer_family li {
+    padding       : 10px 10px 10px 20px;
+    border-bottom : 1px solid #fff;
+    cursor        : pointer;
+}
+
+#km_createServer_familygroup {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+    width      : 798px;
+    position   : absolute;
+    overflow   : auto;
+    height     : 400px;
+    top        : 0;
+    right      : 0;
+}
+
+.km_family_active {
+    background-color : #ddd;
+}
+
+.km_createServer_family_li {
+    display : none;
+    margin  : 0;
+    padding : 0;
+}
+
+.km_createServerConterInput {
+    width    : 100%;
+    height   : 40px;
+    position : absolute;
+    bottom   : 0;
+    left     : 0;
+    overflow : hidden
+}
+
+.km_createServerConterInput .addName {
+    float       : left;
+    width       : 390px;
+    margin-left : 20px;
+}
+
+.km_createServerConterInput .addName input {
+    width   : 270px;
+    border  : 1px solid #CCC;
+    padding : 5px
+}
+
+.km_createServerConterInput .addError {
+    float    : right;
+    width    : 380px;
+    overflow : hidden;
+}
+
+.km_createServerConterInput .addError span {
+    background-image    : url('img/icon_delete2.png');
+    background-repeat   : no-repeat;
+    background-position : 0 5px;
+    color               : #d90000;
+    padding             : 5px 0 5px 25px;
+    display             : block
+}
+
+.km_editnameServerConterInput {
+    padding  : 15px 10px 0 15px;
+    overflow : hidden
+}
+
+.km_editnameServerConterInput .addName {
+    float : left;
+    width : 390px
+}
+
+.km_editnameServerConterInput .addName input {
+    width   : 270px;
+    border  : 1px solid #CCC;
+    padding : 5px
+}
+
+.km_editnameServerConterInput .addError {
+    float    : right;
+    width    : 380px;
+    overflow : hidden;
+}
+
+.km_editnameServerConterInput .addError span {
+    background-image    : url('img/icon_delete2.png');
+    background-repeat   : no-repeat;
+    background-position : 0 5px;
+    color               : #d90000;
+    padding             : 5px 0 5px 25px;
+    display             : block
+}
+
+/*.ui-widget-content { background:none; background-color:#fff}*/
+.ui-widget-header {
+    background  : none;
+    border      : 0;
+    color       : #000;
+    font-size   : 18px;
+    font-weight : normal
+}
+
+.ui-dialog-buttonset button {
+    border           : 1px solid #dc4a38;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+    padding          : 5px 20px;
+    background-color : #d74937 !important;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+}
+
+.ui-dialog-buttonset button:hover {
+    background-color : #d74937;
+}
+
+#edit_name_dialog {
+    border           : 1px solid #3079ED;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+    padding          : 5px 20px;
+    background-color : #4D90FE !important;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+}
+
+#edit_name_dialog:hover {
+    background-color : #4D90FE;
+}
+
+.ui-dialog-buttonset #cancel {
+    background-color : #f4f4f4 !important;
+    border           : 1px solid #d8d8d8;
+    color            : #444444
+}
+
+.ui-dialog-buttonset #cancel:hover {
+    background-color : #d8d8d8 !important
+}
+
+.ui-widget-header .ui-icon {
+    border              : 0;
+    width               : 21px;
+    height              : 20px;
+    background-image    : url('img/i_close.png');
+    background-position : top left;
+    background-repeat   : no-repeat
+}
+
+.km_body_karuzela {
+    margin                     : 30px auto;
+    background                 : url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") repeat-x scroll 50% top #EEEEEE;
+    border                     : 1px solid #DDDDDD;
+    color                      : #333333;
+    border-top-left-radius     : 4px;
+    border-top-right-radius    : 4px;
+    border-bottom-left-radius  : 4px;
+    border-bottom-right-radius : 4px;
+    width                      : 880px
+}
+
+.km_body_karuzela .karuzela_header {
+    padding     : 7px 18px 20px 18px;
+    color       : #000;
+    font-size   : 18px;
+    font-weight : normal
+}
+
+.km_body_karuzela .km_karuzela {
+    overflow : hidden;
+    margin   : 0 50px
+}
+
+.km_body_karuzela .slide_navi {
+    position : relative;
+    z-index  : 1000000;
+}
+
+.km_body_karuzela .slide_navi span {
+    width               : 40px;
+    height              : 66px;
+    background-repeat   : no-repeat;
+    background-position : top left;
+    display             : block;
+    cursor              : pointer;
+    position            : absolute;
+    overflow            : hidden;
+    text-indent         : 300px;
+    font-size           : 0;
+    line-height         : 0;
+}
+
+.km_body_karuzela .slide_navi .poprzednie {
+    background-image : url('img/navi_left.png');
+    left             : 0;
+    top              : 55px;
+}
+
+.km_body_karuzela .slide_navi .nastepne {
+    background-image : url('img/navi_right.png');
+    right            : 0;
+    top              : 55px;
+}
+
+.km_body_karuzela .slide_navi .disabled {
+    background : none
+}
+
+.km_body_karuzela .km_karuzela .slide_items {
+    overflow : hidden
+}
+
+.km_body_karuzela .km_karuzela ul {
+    margin  : 0;
+    padding : 0;
+}
+
+.km_body_karuzela .km_karuzela li {
+    width  : 260px;
+    height : 200px;
+}
+
+.km_body_karuzela .km_karuzela li a {
+    color           : #000;
+    text-decoration : none;
+    display         : block;
+    text-align      : center
+}
+
+.km_body_karuzela .km_karuzela li img {
+    padding-bottom : 5px
+}
+
+.wizard_space {
+    background-color : #fff;
+    padding          : 12px;
+    overflow         : hidden;
+}
+
+.wizard_space a {
+    border           : 1px solid #dc4a38;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+    padding          : 5px 20px;
+    background-color : #d74937;
+    text-align       : center;
+    display          : block;
+    float            : left;
+    text-decoration  : none;
+    white-space      : nowrap;
+}
+
+.wizard_space .untrash {
+    float            : right;
+    background-color : #F4F4F4 !important;
+    border           : 1px solid #D8D8D8;
+    color            : #444444;
+    cursor           : pointer;
+    display          : none
+}
+
+.wizard_space .trash {
+    float            : right;
+    background-color : #F4F4F4 !important;
+    border           : 1px solid #D8D8D8;
+    color            : #444444;
+    cursor           : pointer;
+    display          : none
+}
+
+.box_trash {
+    display : none
+}
+
+.delete_server {
+    float           : right;
+    color           : #F00 !important;
+    font-size       : 10px;
+    text-decoration : none
+}
+
+h2 {
+    color     : #d54937;
+    font-size : 20px;
+    margin    : 20px;
+}
+
+.wizard_service {
+    list-style : none;
+    margin     : 0 20px;
+    padding    : 0;
+    overflow   : hidden;
+}
+
+.wizard_service li {
+    float    : left;
+    width    : 240px;
+    margin   : 0 30px 30px 0;
+    overflow : hidden;
+    color    : #1155CC;
+}
+
+.wizard_service a {
+    color           : #1155CC;
+    text-decoration : none;
+}
+
+.wizard_service img {
+    border : 0
+}
+
+.wizard_service i {
+    color     : #666;
+    font-size : 10px
+}
+
+.wizard_service_tmb {
+    display : block;
+}
+
+.wizard_service_name {
+    float : left;
+}
+
+.wizard_service_rename,
+.wizard_service_remove {
+    float       : right;
+    color       : #F00 !important;
+    font-size   : 10px;
+    margin-left : 5px;
+}
+
+#km_wizard_dialog {
+    display  : none;
+    overflow : hidden;
+}
+
+#km_wizard_family,
+#km_wizard_list {
+    height   : 400px;
+    overflow : auto;
+}
+
+#km_wizard_family {
+    width : 190px;
+    float : left;
+}
+
+#km_wizard_list {
+    width : 780px;
+    float : right;
+}
+
+#km_wizard_helper {
+    float : left;
+    width : 100%;
+}
+
+#km_wizard_name {
+    width   : 270px;
+    border  : 1px solid #CCC;
+    padding : 5px;
+}
+
+#km_wizard_family ul,
+#km_wizard_list ul {
+    list-style : none;
+    padding    : 0;
+    margin     : 0;
+}
+
+#km_wizard_family ul li {
+    padding : 10px 0 10px 10px;
+    cursor  : pointer;
+}
+
+#km_wizard_list ul li {
+    float  : left;
+    margin : 0 10px 15px 0;
+    border : 2px solid transparent;
+    cursor : pointer;
+}
+
+#km_wizard_list ul li span {
+    display    : block;
+    text-align : center;
+}
+
+.km_wizard_template_active {
+    border : 2px solid #d74937 !important;
+}
+
+.km_wizard_family_active {
+    background-color : #ededed;
+}
+
+#km_wizard_error {
+    background-image    : url(img/icon_delete2.png);
+    background-repeat   : no-repeat;
+    background-position : 0 3px;
+    color               : #d90000;
+    padding             : 5px 0 5px 25px;
+    display             : none;
+    float               : right;
+    width               : 400px;
+}

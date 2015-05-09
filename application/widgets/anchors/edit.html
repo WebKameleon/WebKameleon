@@ -1,0 +1,37 @@
+{with:anchorsWidget}
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+
+    <h1>{translate.Anchors}</h1>
+    
+    {if:levels}
+    <h2>{translate.Choose page parts}</h2>
+    {loop:levels}
+    
+    <div class="edit_box">
+        <div class="label">{name}</div>
+        <div class="value">
+            <input type="checkbox" name="anchors[level][{level}]" value="1" class="km_checkbox" {if:checked}checked{endif:checked}/>
+        </div>
+    </div>    
+    {endloop:levels}
+    {endif:levels}
+    
+    <div class="edit_box">
+        <div class="label">{translate.Animation}</div>
+        <div class="value">
+            <input type="hidden" name="anchors[animation]" value="0"/>
+            <input type="checkbox" name="anchors[animation]" value="1" class="km_checkbox" {if:data.animation}checked{endif:data.animation}/>
+        </div>
+    </div>    
+    
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+</script>
+{endwith:anchorsWidget}

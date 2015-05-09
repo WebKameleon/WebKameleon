@@ -1,0 +1,48 @@
+{with:gplusWidget}
+
+
+
+<form id="gplus_form" method="post">
+    {include:_widget.header.html}
+    <h1>{translate.Google+}</h1>
+
+    <div class="edit_box">
+        <div class="label">{translate.Width}</div>
+        <div class="value">
+            <input type="text" name="gplus[width]" value="{data.width}" size="4" /> px
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Size}</div>
+        <div class="value">
+            <select name="gplus[size]">
+                <option value="small" {if:data.size=small}selected{endif:data.size=small}>small</option>
+                <option value="medium" {if:data.size=medium}selected{endif:data.size=medium}>medium</option>
+                <option value="standard" {if:data.size=standard}selected{endif:data.size=standard}>standard</option>
+                <option value="tall" {if:data.size=tall}selected{endif:data.size=tall}>tall</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Annotation}</div>
+        <div class="value">
+            <select name="gplus[annotation]">
+                <option value="inline" {if:data.annotation=inline}selected{endif:data.annotation=inline}>inline</option>
+                <option value="bubble" {if:data.annotation=bubble}selected{endif:data.annotation=bubble}>bubble</option>
+                <option value="none" {if:data.annotation=none}selected{endif:data.annotation=none}>none</option>
+            </select>
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+function SaveChanges()
+{
+    jQueryKam("#gplus_form").submit();
+    return false;
+}
+</script>
+{endwith:gplusWidget}

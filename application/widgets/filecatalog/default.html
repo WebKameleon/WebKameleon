@@ -1,0 +1,12 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:filecatalogWidget}
+
+<ul class="kmw_filecatalog">
+    {loop:files}
+    <li class="{type}"><a href="{url}">{name}</a></li>
+    {endloop:files}
+</ul>
+
+
+{endwith:filecatalogWidget}
+{plain}

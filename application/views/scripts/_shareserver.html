@@ -1,0 +1,24 @@
+<div id="km_share_dialog" scrolltop="0" scrollleft="0">
+    <div class="km_dialog_content">
+        <ul id="km_share_list">
+        </ul>
+        <div class="km_share_form">
+            <label for="km_share_name">{translate.Add person}</label>
+            <input id="km_share_name" autocomplete="off" class="km_input">
+            <button id="km_share_submit">{translate.Add}</button>
+            <div class="km_share_error"></div>
+        </div>
+        <div id="km_share_role_select">
+            <ul>
+                <li rel="is_owner">{translate.Share role owner}</li>
+                <li rel="can_ftp">{translate.Share role ftp}</li>
+                <li rel="can_edit">{translate.Share role edit}</li>
+                <li rel="can_view">{translate.Share role view}</li>
+                {if:user.admin}
+                <li><a id="share_more_options" href="{root}admin/role/">{translate.More options}</a></li>
+                {endif:user.admin}
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="{root}js/share.js"></script>

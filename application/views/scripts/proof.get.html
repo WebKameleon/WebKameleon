@@ -1,0 +1,101 @@
+{include:_header.html}
+{include:_menu.html}
+
+<div class="km_fbtn">
+    
+    <a class="km_fbtn_action" href="#" id="send_req" {if:canProof}style="display: none"{endif:canProof}>{translate.Send}</a>
+    <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+</div>
+
+
+{if:!canProof}
+<form method="post" action="{root}proof/request/{page}" id="proofSend">
+<ul>
+{loop:users}
+<li title="{email}">
+    <input type="checkbox" checked name="user[]" value="{email}" /> {if:fullname}{fullname}{endif:fullname}{if:!fullname}{email}{endif:!fullname}
+</li>
+{endloop:users}
+</ul>
+ 
+<textarea name="txt" placeholder="{translate.Write your comment to the request}"></textarea>
+
+</form>
+
+{endif:!canProof}
+
+{if:canProof}
+
+<form method="post" action="{root}proof/reject/" id="proofSend" style="display: none">
+    
+    
+    <textarea name="txt" placeholder="{translate.Write your comment to the request}"></textarea>
+</form>
+
+<div class="km_trash menu_links">
+    <table id="km_menus" class="tabelka">
+        <thead>
+            <tr>
+                <th width="45%">{translate.Page}</th>
+                <th width="5%">{translate.Id}</th>
+                <th width="30%">{translate.Date} & {translate.Person}</th>
+                <th width="20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {loop:pages}
+        <tr{if:active=$id} class="active"{endif:active=$id} title="{unproof_comment|addslashes}" rel="{sid}">
+            <td><a name="s{sid}" href="{root}index/get/{id}">{title}</a></td>
+            <td>{id}</td>
+            <td>{unproof_date|kameleon.datetime}, {user.fullname}</td>
+            <td>
+                <a class="km_icon km_iconi_proof" href="{root}proof/proof/{id}" title="{translate.Proof}" >{translate.Proof}</a>
+                {if:waiting}
+                <a class="km_icon km_iconi_noproof" href="#" title="{translate.Reject}" rel="{id}">{translate.Reject}</a> 
+                {endif:waiting}
+            </td>
+        </tr>
+        {endloop:pages}
+        </tbody>
+    </table>
+</div>
+{endif:canProof}
+
+
+
+
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        $("#send_req").on("click", function (e) {
+    
+    
+            $('#proofSend').submit();
+            return false;
+        });
+        
+        $(".km_iconi_proof").on("click",function(e){
+            
+            var hash=$(this).parent().parent().next().attr('rel');
+            
+            if (typeof hash != 'undefined') $(this).attr('href',$(this).attr('href')+'?hash=s'+hash);
+        });
+        
+        $(".km_iconi_noproof").on("click",function(e){
+            
+            $('#proofSend').fadeIn().attr('action','{root}proof/reject/'+$(this).attr('rel'));
+            $('.km_fbtn_action').fadeIn();
+            
+            $('html, body').animate({
+                    scrollTop: $("#proofSend").offset().top
+                }, 2000);            
+            
+            
+            return false;
+        });
+        
+    });
+    
+    
+
+</script>

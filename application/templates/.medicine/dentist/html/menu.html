@@ -1,0 +1,11 @@
+{if:title}{title}{endif:title}
+{if:menu}
+<div class="menu"><ul>
+{loop:menu}
+    <li {if:class}class="{class}"{endif:class}>
+        <a href="{href}"{if:alt_title} title="{alt_title}"{endif:alt_title}>{alt}</a>
+    </li>
+{endloop:menu}
+</ul></div>
+{endif:menu}
+{plain}

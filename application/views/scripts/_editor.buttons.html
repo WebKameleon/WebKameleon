@@ -1,0 +1,13 @@
+<div class="km_nheader_right">
+    <div class="buttons" >
+        <a class="submit km_tip" tip="4" onclick="SaveChanges()">{translate.Save and exit}</a>
+        <a class="anuluj" href="{root}index/get/{referpage?0}">{translate.Cancel}</a>
+    </div>
+    <div class="info">
+        {translate.Modified by}:
+        {if:td.autor_update}{td.autor_update|kameleon.fullname}{endif:td.autor_update}{if:!td.autor_update}{td.autor|kameleon.fullname}{endif:!td.autor_update},
+        {if:td.nd_update}{td.nd_update|kameleon.datetime}{endif:td.nd_update}
+        {if:!td.nd_update}{td.nd_create|kameleon.datetime}{endif:!td.nd_update}
+        
+    </div>
+</div>

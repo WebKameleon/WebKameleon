@@ -1,0 +1,4 @@
+#facebook_form .facebook_type > * {
+    vertical-align : top;
+    display        : inline-block;
+}

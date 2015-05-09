@@ -1,0 +1,27 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/header.css" />
+
+<div class="col-md-12 wk-container wk-bg-grey" style="margin:0px; padding:0px;">
+ 
+ <div class="row">
+   <div class="col-md-6 km_logo_holder">
+    {if:!controller_name=wizard}
+     <a href="{root}index/get/{if:controller_name=index}{page.id}{endif:controller_name=index}{if:!controller_name=index}{referpage?0}{endif:!controller_name=index}" class="km_logo">WebKameleon</a>
+    {endif:!controller_name=wizard}
+    
+    {if:controller_name=wizard}
+     <a href="{root}wizard" class="km_logo">WebKameleon</a>
+    {endif:controller_name=wizard}
+   </div>
+   
+   <div class="col-md-6">
+    {include:_auth.html}
+   </div>
+ </div>
+
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="km_error_div km_tip" tip="0">{tokens.error}</div>
+  </div>
+ </div>
+ 
+</div>

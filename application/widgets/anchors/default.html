@@ -1,0 +1,10 @@
+{if:title}<{tokens.h1}>{title}</{tokens.h1}>{endif:title}
+{with:anchorsWidget}
+{if:titles}
+<ul class="kmw_anchors">
+{loop:titles}
+    <li><a href="#{__loop__}">{__loop__}</a></li>
+{endloop:titles}
+</ul>
+{endif:titles}
+{endwith:anchorsWidget}

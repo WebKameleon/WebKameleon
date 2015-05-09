@@ -1,0 +1,15 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:sitemapWidget}
+<div id="sitemap_{sid}" class="sitemap">
+    {plain}
+    {ul}
+</div>
+<script type="text/javascript">
+jQueryKam(function ($) {
+    $("#sitemap_{sid}").on("click", ".sitemap_box_plus, .sitemap_box_minus", function (e) {
+        $(this).toggleClass("sitemap_box_plus sitemap_box_minus").siblings("ul").slideToggle();
+    });
+});
+</script>
+{endwith:sitemapWidget}
+{plain}

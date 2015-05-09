@@ -1,0 +1,123 @@
+{include:_header.html}
+{include:_menu.html}
+
+<div class="top-page-list">
+<div class="row">
+ <div class="col-md-9">
+  <h2>{translate.Total count}: {count} {if:user}({user.fullname} &lt;{user.email}&gt;){endif:user}</h2>
+ </div>
+<div class="col-md-3">
+<form method="GET" id="search-page-list">
+    <input name="u" type="hidden" value="{_GET.u}"/>
+    <input type="text" style="width: 300px" name="q" value="{_GET.q}" placeholder="{translate.Search}, special - :user :admin :paid :template :trash"/>
+</form>
+</div>
+</div>
+</div>
+
+{if:pages}
+<div class="pagination">
+{loop:pages}
+<a href="{root}admin/get?page={loop}&q={_GET.q}" {if:loop=$page} class="current"{endif:loop=$page}>{loop}</a>
+{endloop:pages}
+</div>
+{endif:pages}
+
+
+
+<div class="km_observers">
+
+    {if:servers}
+    <table id="km_observer_events">
+        <thead>
+        <tr>
+            <th>{translate.Index}</th>
+            <th>{translate.Website}</th>
+	    <th>{translate.Template}</th>
+            <th>{translate.Expire}</th>
+            <th>{translate.Last payment}</th>
+            <th>{translate.Limits} page/box/link<br/>{security.limit.webpage}/{security.limit.webtd}/{security.limit.weblink}</th>
+	    <th>{translate.Price}</th>
+            <th>{translate.Users}</th>
+	    <th>{translate.Time} [min]</th>
+        </tr>
+        </thead>
+        <tbody>
+        {loop:servers}
+        <tr id="{id}">
+            <td>{__index__|+:$start}.</td>
+            <td title="{if:trash}{nd_trash|kameleon.datetime}{endif:trash}{if:!trash}{nazwa_long}{endif:!trash}">
+                {if:trash}<s>{endif:trash}<a href="{root}admin/enter/{id}">{nazwa}</a>{if:trash}</s>{endif:trash}
+            
+                <a title="{translate.Template}" value="{social_template}" prompt="Template, one of: {families}" rel="social_template">
+                [{if:social_template}
+                <span style="color:red; font-weight: bold">{social_template}</span>{endif:social_template}]
+                </a>
+                {if:social_template}
+		<b>{social_template_count}</b>
+		<br/>
+                (<a title="{translate.Price}" value="{social_template_price_en}" prompt="Template price USD" rel="social_template_price_en">{social_template_price_en?0}USD</a>,
+                <a title="{translate.Price}" value="{social_template_price_pl}" prompt="Template price PLN" rel="social_template_price_pl">{social_template_price_pl?0}PLN</a>,
+                <a title="{translate.Description}" value="{social_template_desc}" prompt="Description" rel="social_template_desc">{social_template_desc|mb_substr:0,4}...</a>,
+                <a title="{translate.Tags}" value="{social_template_tags}" prompt="Comma separated tags" rel="social_template_tags">{social_template_tags|mb_substr:0,4}...</a>
+                )
+                {endif:social_template}
+            </td>
+	    <td>{if:from_social_template}<font color="red">{from_social_template}{endif:from_social_template}</font>{if:!from_social_template}{szablon}{endif:!from_social_template}</td>
+            <td><a title="{translate.Expire}" rel="nd_expire" value="{nd_expire|kameleon.date}" prompt="{translate.Expire} [dd-mm-rrrr]">{nd_expire|kameleon.datetime}{if:!nd_expire}-{endif:!nd_expire}</a></td>
+            <td><a title="{translate.Last payment}" rel="nd_last_payment" value="{nd_last_payment|kameleon.date}" prompt="{translate.Last payment} [dd-mm-rrrr]">{nd_last_payment|kameleon.datetime}{if:!nd_last_payment}-{endif:!nd_last_payment}</a></td>
+            
+            <td>
+                <a title="Page limit" rel="webpage_limit" value="{webpage_limit}" prompt="Limit">
+                {if:webpage_limit}{webpage_limit}{endif:webpage_limit}{if:!webpage_limit}-{endif:!webpage_limit}
+                </a>
+                /
+                <a title="Box limit" rel="webtd_limit" value="{webtd_limit}" prompt="Limit">
+                {if:webtd_limit}{webtd_limit}{endif:webtd_limit}{if:!webtd_limit}-{endif:!webtd_limit}
+                </a>
+                /
+                <a title="Link limit" rel="weblink_limit" value="{weblink_limit}" prompt="Limit">
+                {if:weblink_limit}{weblink_limit}{endif:weblink_limit}{if:!weblink_limit}-{endif:!weblink_limit}
+                </a>
+		<br/>
+		({webpage} / {webtd} / {weblink}) 
+            </td>
+	    
+	    <td>
+	        <a title="{translate.Price}" value="{price_en}" prompt="Template price USD" rel="price_en">{price_en?0}USD</a>,
+                <a title="{translate.Price}" value="{price_pl}" prompt="Template price PLN" rel="price_pl">{price_pl?0}PLN</a>
+	    </td>
+            <td title="{creator.fullname}">
+                <a title="{translate.Owner}" value="{creator.email}" prompt="E-mail of new creator" rel="creator">{creator.email}</a>
+                {if:more}
+                    <span title="{loop:more}{email}{if:!last}, {endif:!last}{endloop:more}"><b>+</b></span>
+                {endif:more}
+            </td>
+
+	    <td>
+	      {time|/:60|round:1}
+	    </td>
+        </tr>
+        {endloop:servers}
+        </tbody>
+    </table>
+    {endif:servers}
+</div>
+
+
+<script type="text/javascript">
+    
+    jQueryKam('a[rel]').css('cursor','pointer').click(function() {
+        var rel=jQueryKam(this).attr('rel');
+        var id=jQueryKam(this).parent().parent().attr('id');
+        KamPrompt(jQueryKam(this).attr('prompt'),jQueryKam(this).attr('title'),function (v) {
+            
+            var lh="{root}admin/get/"+id+"?u={_GET.u}&q={_GET.q}&page={page}&_="+Math.random();
+            lh+='&set['+rel+']='+ encodeURIComponent(v);
+            
+            location.href=lh;
+        },jQueryKam(this).attr('value'),700);
+        
+    });
+    
+</script>

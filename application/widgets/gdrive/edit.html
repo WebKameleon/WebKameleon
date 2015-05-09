@@ -1,0 +1,184 @@
+{with:gdriveWidget}
+
+<style>
+    #share_warning {
+        padding-left: 20px;
+        font-size: 18px;
+        color: red;
+        display: none;
+    }
+</style>
+
+
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+    <h1>{translate.Google Drive}</h1>
+    <div class="edit_box" id="{name}_part">
+        <div class="label">{translate.Google Drive element}</div>
+        <div class="value">
+            <a href="javascript:" id="{name}_a" class="btn btn-success">{if:data.name}{data.name}{endif:data.name}{if:!data.name}{translate.Select}{endif:!data.name}</a>
+            <input type="hidden" name="{name}[id]" value="{data.id?}" id="{name}_id"/>
+            <input type="hidden" name="{name}[name]" value="{data.name?}" id="{name}_name"/>
+            <input type="hidden" name="{name}[type]" value="{data.type?}" id="{name}_type"/>
+            
+            <span id="share_warning">{translate.Webkameleon will make this item viewable after saving}</span>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Width}</div>
+        <div class="value">
+            <input type="text" name="{name}[width]" value="{data.width}" size="4" />
+        </div>
+    </div>
+
+    <div class="edit_box gdrive_height">
+        <div class="label">{translate.Height}</div>
+        <div class="value">
+            <input type="text" name="{name}[height]" value="{data.height}" size="4" />
+        </div>
+    </div>
+
+    <div class="edit_box" id="next_input">
+        <div class="label">{translate.Link}</div>
+        <div class="value">
+            <input type="text" name="td[next]" size="4" value="{td.next}" jstree="{page_id}" />
+        </div>
+    </div>        
+
+    <div class="edit_box gdrive_presentation">
+        <div class="label">{translate.Automaticly start presentation}</div>
+        <div class="value">
+            <input type="hidden" name="{name}[start]" value="0" />
+            <input type="checkbox" name="{name}[start]" {if:data.start}checked{endif:data.start} value="1" />
+        </div>
+    </div>
+
+    <div class="edit_box gdrive_presentation">
+        <div class="label">{translate.Restart presentation after it reaches the end}</div>
+        <div class="value">
+            <input type="hidden" name="{name}[loop]" value="0" />
+            <input type="checkbox" name="{name}[loop]" {if:data.loop}checked{endif:data.loop} value="1" />
+        </div>
+    </div>
+
+    <div class="edit_box gdrive_presentation">
+        <div class="label">{translate.Presentation delay} </div>
+        <div class="value">
+            <input type="text" name="{name}[delayms]" value="{data.delayms?3000}" size="4" /> [ms]
+        </div>
+    </div>
+
+    
+    <div class="edit_box gdrive_folder">
+        <div class="label">{translate.View}</div>
+        <div class="value">
+            <input type="radio" name="{name}[view]" {if:data.view=grid}checked{endif:data.view=grid} value="grid" /> {translate.Grid} <br/>
+            <input type="radio" name="{name}[view]" {if:data.view=list}checked{endif:data.view=list} {if:!data.view}checked{endif:!data.view} value="list" /> {translate.List}    
+        </div>
+    </div>
+    
+    
+    
+</form>
+
+
+
+
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+
+    function picked(data)
+    {
+        if (data.action == google.picker.Action.PICKED) {
+            var fileId = data.docs[0].id;
+            var name = data.docs[0].name;
+            var type = data.docs[0].mimeType.split('/');
+            
+            jQueryKam(".gdrive_presentation").hide();
+            jQueryKam("#next_input").hide();
+            
+            jQueryKam("#{name}_a").html(name);
+            jQueryKam("#{name}_name").val(name);
+            jQueryKam("#{name}_id").val(fileId);
+            jQueryKam("#{name}_type").val(type[1]);
+            
+            jQueryKam(".gdrive_folder").hide();
+            
+            if (type[1]=='vnd.google-apps.presentation') jQueryKam(".gdrive_presentation").show();
+            if (type[1]=='vnd.google-apps.folder') jQueryKam(".gdrive_folder").show();
+            
+            if (type[1]=='vnd.google-apps.drawing') {
+                jQueryKam(".gdrive_height").hide();
+                jQueryKam("#next_input").show();
+            } else {
+                jQueryKam(".gdrive_height").show();
+            }
+            
+            jQueryKam("#share_warning").fadeIn();
+            
+            //console.log(data);
+            
+        }
+    }
+    
+    function createPicker() {
+        
+        
+        var picker = new google.picker.PickerBuilder().
+                            addViewGroup(
+                                new google.picker.ViewGroup(new google.picker.DocsView(google.picker.ViewId.DOCS).setOwnedByMe(true)).
+                                    addView(new google.picker.DocsView(google.picker.ViewId.DOCUMENTS).setOwnedByMe(true)).
+                                    addView(new google.picker.DocsView(google.picker.ViewId.DRAWINGS).setOwnedByMe(true)).
+                                    addView(new google.picker.DocsView(google.picker.ViewId.SPREADSHEETS).setOwnedByMe(true)).
+                                    addView(new google.picker.DocsView(google.picker.ViewId.FORMS).setOwnedByMe(true)).
+                                    addView(new google.picker.DocsView(google.picker.ViewId.PRESENTATIONS).setOwnedByMe(true)).
+                                    addView(new google.picker.DocsView(google.picker.ViewId.PDFS).setOwnedByMe(true)).                                    
+                                    addView(new google.picker.DocsView(google.picker.ViewId.FOLDERS).setSelectFolderEnabled(true))
+                                    ).
+                            setAppId('{data.oauth2.client_id}').
+                            setOAuthToken('{data.access_token}').
+                            setCallback(picked).
+                            setLocale('{ulang?en}').
+                            build().
+                            setVisible(true);
+
+    }
+
+    function initPicker() {
+        jQueryKam("#{name}_part").show();
+        jQueryKam("#{name}_a").on('click',function() {
+            gapi.load('picker', {
+                'callback':createPicker
+            });
+        });
+    }
+    jQueryKam(".gdrive_folder").hide();
+    jQueryKam("#{name}_part").hide();
+    
+    {if:!data.type=vnd.google-apps.presentation}
+    jQueryKam(".gdrive_presentation").hide();
+    {endif:!data.type=vnd.google-apps.presentation}
+
+    {if:data.type=vnd.google-apps.folder}
+    jQueryKam(".gdrive_folder").show();
+    {endif:data.type=vnd.google-apps.folder}
+
+
+    {if:!data.type=vnd.google-apps.drawing}
+    jQueryKam("#next_input").hide();
+    {endif:!data.type=vnd.google-apps.drawing}
+    
+    
+
+</script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi?key={data.oauth2.api_key}"></script>
+<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=initPicker"></script>
+
+{endwith:gdriveWidget}

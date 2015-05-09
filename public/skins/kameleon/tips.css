@@ -1,0 +1,295 @@
+body {
+	position:relative;
+	z-index:1;
+	height:100%;
+}
+
+#bg {
+	height:100%;
+	width:100%;
+	display:block;
+	padding:250px;
+}
+
+.popover {
+	overflow:visible !important;
+}
+
+.popover a.btn {
+	color:#fff !important;
+	text-decoration:none !important;
+}
+
+a.tipLight {
+	position:relative;
+	z-index:2;
+	background-color:#fff;
+	padding:10px;
+}
+
+.nextTip {
+	float:right !important;
+	margin:15px 0 15px 0 !important;
+}
+
+.closeTip {
+	float:right !important;
+	color:#777 !important;
+	cursor:pointer !important;
+	font-size:16px !important;
+	text-decoration:none !important;
+}
+
+.closeTip:hover {
+	color:#383838 !important;
+	text-decoration:none !important;
+}
+
+h3.popover-title{
+	font-size:12px !important;
+	text-transform:uppercase !important;
+	font-weight:600 !important;
+	color:#777 !important;
+	padding:10px 10px 10px 10px !important;
+}
+
+#white-dim {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255, 255, 255, 0.5);
+	z-index: 60;
+	display: none;
+}
+
+#km-black-bg {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 60;
+	display:none;
+}
+
+.km-black-bg-active {
+	position: fixed;
+	/*display: block !important;*/
+}
+
+.getout {display:none !important;}
+
+.km_tip_active {
+	position: relative !important;
+	z-index: 75 !important;
+	background-color: white;
+}
+
+.tip-article-pencil:before {
+	content: " ";
+	left: 46px;
+	margin-left: -11px;
+	top: -11px;
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 11px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 0 12px 12px 12px;
+	border-color: transparent transparent #ffffff transparent;
+	
+}
+
+.tip-article-title:before {
+	content: " ";
+	top: -12px !important;
+	margin-left: -10px;
+	left: 15%;
+	margin-left: -11px;
+	top: -11px;
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 11px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 0 12px 12px 12px;
+	border-color: transparent transparent #ffffff transparent;
+}
+
+.tip-article-content:after {
+	content: " ";
+	left: 50%;
+	margin-left: -11px;
+	bottom: -11px;
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 11px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 12px 12px 0 12px;
+	border-color: #ffffff transparent transparent transparent;
+	
+}
+
+.tip-article-save:before {
+	content: " ";
+	top: -12px !important;
+	margin-left: -10px;
+	right: 35px;
+	margin-left: -11px;
+	top: -11px;
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 11px;
+	width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 0 12px 12px 12px;
+	border-color: transparent transparent #ffffff transparent;
+}
+
+.tip-article-title, .tip-article-content, .tip-article-save {
+	-webkit-box-shadow: 0 2px 23px 0 #555;
+	box-shadow: 0 2px 23px 0 #555;
+}
+
+.tip-thanks,
+.tip-article-pencil, 
+.tip-article-content,
+.tip-article-save,
+.tip-article-title,
+.tip-closed {
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 6px;
+	-webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+	box-shadow: 0 5px 10px rgba(0,0,0,.2);
+	white-space: normal;	
+	font-size:14px;
+	line-height:1.5;
+}
+
+.tip-thanks .ui-dialog-titlebar,
+.tip-article-pencil .ui-dialog-titlebar, 
+.tip-article-content .ui-dialog-titlebar,
+.tip-article-save .ui-dialog-titlebar,
+.tip-article-title .ui-dialog-titlebar,
+.tip-closed .ui-dialog-titlebar {
+	margin: 0;
+	padding: 8px 14px;
+	font-size: 12px;
+	text-transform:uppercase;
+	font-weight: 400;
+	line-height: 18px;
+	background: none;
+	background-color: #f7f7f7;
+	border-bottom: 1px solid #ebebeb !important;
+	border-radius: 5px 5px 0 0;
+	border: 0px;
+	color: #555;
+	font-weight: bold;
+}
+
+.tip-thanks .ui-button.ui-button-text-only,
+.tip-article-pencil .ui-button.ui-button-text-only, 
+.tip-article-content .ui-button.ui-button-text-only,
+.tip-article-save .ui-button.ui-button-text-only,
+.tip-article-title .ui-button.ui-button-text-only,
+.tip-closed .ui-button.ui-button-text-only {
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	padding: 3px 6px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.tip-thanks .ui-dialog-titlebar-close,
+.tip-article-pencil .ui-dialog-titlebar-close, 
+.tip-article-content .ui-dialog-titlebar-close,
+.tip-article-save .ui-dialog-titlebar-close,
+.tip-article-title .ui-dialog-titlebar-close,
+.tip-closed .ui-dialog-titlebar-close {
+	border:0px;
+	background:none;
+	margin-right:5px;
+}
+
+.tip-thanks .ui-button.ui-button-text-only:hover,
+.tip-article-pencil .ui-button.ui-button-text-only:hover, 
+.tip-article-content .ui-button.ui-button-text-only:hover,
+.tip-article-save .ui-button.ui-button-text-only:hover,
+.tip-article-title .ui-button.ui-button-text-only:hover,
+.tip-closed .ui-button.ui-button-text-only:hover {
+	background-color: #46b8da;
+	border-color: #46b8da;
+}
+
+.tip-thanks .ui-widget-content,
+.tip-article-pencil .ui-widget-content, 
+.tip-article-content .ui-widget-content,
+.tip-article-save .ui-widget-content,
+.tip-article-title .ui-widget-content,
+.tip-closed .ui-widget-content {
+	border-bottom: 0px;
+	color: #1d1d1d;
+}
+
+.tip-thanks .ui-widget-content a,
+.tip-thanks .ui-widget-content a:active,
+.tip-thanks .ui-widget-content a:focus,
+.tip-article-pencil a, 
+.tip-article-pencil a:active, 
+.tip-article-pencil a:focus, 
+.tip-article-content a,
+.tip-article-content a:active,
+.tip-article-content a:focus,
+.tip-article-save a,
+.tip-article-save a:active,
+.tip-article-save a:focus,
+.tip-article-title a,
+.tip-article-title a:active,
+.tip-article-title a:focus,
+.tip-closed a,
+.tip-closed a:active,
+.tip-closed a:focus{
+	border:0px;
+	color:#46b8da;
+}

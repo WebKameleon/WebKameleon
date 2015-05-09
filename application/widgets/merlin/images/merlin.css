@@ -1,0 +1,370 @@
+
+.input-group.date .input-group-addon {
+  cursor: pointer;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Merlin Results */
+.merlin_results,
+#merlin-results-here {
+	margin: 15px 0 15px 0;
+}
+
+.merlin_results .row,
+#merlin-results-here .row {
+	padding-bottom: 15px;
+	border-bottom: 1px solid #dedede;
+	margin-bottom: 15px;
+}
+
+.merlin_results ul,
+#merlin-results-here ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.merlin_results ul li,
+#merlin-results-here ul li {
+	display: inline-block;
+	background-image: url('attributes.png');
+	width: 20px;
+	height: 20px;
+}
+
+.merlin_results ul li.m_1 { background-position: 0px -464px }
+.merlin_results ul li.m_2 { background-position: 0 -618px }
+.merlin_results ul li.m_3 { background-position: 0 -398px }
+.merlin_results ul li.m_4 { background-position: 0 -354px }
+.merlin_results ul li.m_5 { background-position: 0 -2px }
+.merlin_results ul li.m_6 { background-position: 0 -266px }
+.merlin_results ul li.m_7 { background-position: 0 -420px }
+.merlin_results ul li.m_8 { background-position: 0 -442px }
+.merlin_results ul li.m_9 { background-position: 0 -200px }
+.merlin_results ul li.m_10 { background-position: 0 -508px }
+.merlin_results ul li.m_11 { background-position: 0 -552px }
+.merlin_results ul li.m_12 { background-position: 0 -222px }
+.merlin_results ul li.m_13 { background-position: 0 -134px }
+.merlin_results ul li.m_14 { background-position: 0 -596px }
+.merlin_results ul li.m_15 { background-position: 0 -332px }
+.merlin_results ul li.m_16 { background-position: 0 -178px }
+.merlin_results ul li.m_17 { background-position: 0 -530px }
+.merlin_results ul li.m_18 { background-position: 0 -486px }
+.merlin_results ul li.m_19 { background-position: 0 -24px }
+.merlin_results ul li.m_20 { background-position: 0 -46px }
+.merlin_results ul li.m_21 { background-position: 0 -574px }
+.merlin_results ul li.m_22 { background-position: 0 -310px }
+.merlin_results ul li.m_23 { background-position: 0 -90px }
+.merlin_results ul li.m_24 { background-position: 0 -244px }
+.merlin_results ul li.m_25 { background-position: 0 -376px }
+.merlin_results ul li.m_26 { background-position: 0 -68px }
+.merlin_results ul li.m_27 { background-position: 0 -156px }
+.merlin_results ul li.m_28 { background-position: 0 -112px }
+.merlin_results ul li.m_29 { background-position: 0 -288px }
+.merlin_results ul li.m_30 { background-position: 0 -640px }
+.merlin_results ul li.m_31 { background-position: 0 -662px }
+.merlin_results ul li.m_32 { background-position: 0 -684px }
+.merlin_results ul li.m_33 { background-position: 0px 0px }
+.merlin_results ul li.m_35 { background-position: 0 -706px }
+.merlin_results ul li.m_36 { background-position: 0 -750px }
+.merlin_results ul li.m_37 { background-position: 0px -2px }
+.merlin_results ul li.m_38 { background-position: 0 -794px }
+.merlin_results ul li.m_60 { background-position: 0px -2px }
+.merlin_results ul li.m_62 { background-position: 0px -2px }
+.merlin_results ul li.m_63 { background-position: 0px -2px }
+.merlin_results ul li.m_64 { background-position: 0px -2px }
+
+.merlin_results .rating {
+  float: left;
+  width: 74px;
+  position: relative;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+}
+
+.merlin_results .progress {
+  margin: 5px 5px 5px 0;
+  border-radius: 0;
+  height: 25px;
+  background-color: #dedede;
+  width: 74px!important;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+}
+
+.merlin_results .stars {
+  position: absolute;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+  background: url('stars.png');
+  width: 74px;
+  height: 25px;
+  display: block;
+}
+
+.merlin_results .rating .progress-bar.rating-bar {
+  float: left;
+  width: 0;
+  height: 23px;
+  font-size: 12px;
+  line-height: 34px;
+  color: #fff;
+  text-align: center;
+  background-color: #9f111d;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+  margin: 1px;
+}
+
+.merlin_results h3,
+#merlin-results-here h3{
+	margin-top:4px;
+	float: left;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	font-size: 20px;
+}
+
+.merlin_results .col-md-3.col-sm-3 {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.merlin_results p.country {
+	font-size: 14px;
+}
+
+.merlin_results .col-md-1.col-sm-1 {
+	padding-left: 0px;
+}
+
+.merlin_results .col-md-2.col-sm-2.date {
+	font-size: 18px;
+}
+
+.merlin_results .col-md-2.col-sm-2.price,
+#merlin-results-here  .col-md-2.col-sm-2.price {
+	font-size: 24px;
+	font-weight: 700;
+}
+
+.merlin_results .col-md-2.col-sm-2 .btn.btn-info,
+#merlin-results-here .col-md-2.col-sm-2 .btn.btn-info {
+	float: right;
+}
+
+.merlin_results .header,
+#merlin-results-here .header{
+	font-size: 14px;
+	font-weight: 700;
+	color: #fff;
+	background: #00acef;
+	border-bottom: 0px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	-webkit-border-radius: 4px 4px 0 0;
+	border-radius: 4px 4px 0 0;
+}
+
+ul.merlin_nav {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	width:100%;
+	text-align: center;
+}
+
+ul.merlin_nav li {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+}
+
+ul.merlin_nav li.active {
+	font-weight: 700;
+}
+
+.merlin_results,
+#merlin-results-here {
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid #00acef;
+  margin: 0px 0 15px 0;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  border-radius: 4px 4px 4px 4px;
+}
+
+.merlin_results .no-photo {
+	background: url('no-photo.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	display: block;
+	width: 100%;
+	height: 75px;
+}
+
+.img-resposnvie {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+
+#merlin-results-nav-here {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#merlin-results-nav-here li {
+	display: inline-block;
+}
+
+/* Merlin Hotel */
+.merlin-hotel h1.hotel-name {
+	font-size: 36px;
+	font-weight: 300;
+	float: left;
+}
+
+.merlin-hotel .rating {
+  float: left;
+  width: 74px;
+  position: relative;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+  margin: 22px 0 0 15px;
+}
+
+.merlin-hotel .progress {
+  margin: 5px 5px 5px 0;
+  border-radius: 0;
+  height: 25px;
+  background-color: #dedede;
+  width: 74px!important;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+}
+
+.merlin-hotel .stars {
+  position: absolute;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+  background: url('stars.png');
+  width: 74px;
+  height: 25px;
+  display: block;
+}
+
+.merlin-hotel .rating .progress-bar.rating-bar {
+  float: left;
+  width: 0;
+  height: 23px;
+  font-size: 12px;
+  line-height: 34px;
+  color: #fff;
+  text-align: center;
+  background-color: #9f111d;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+  margin: 1px;
+}
+
+.merlin-hotel h2.hotel-place {
+	font-weight: 300;
+	margin-top: 0px;
+	font-size: 24px;
+}
+
+.merlin-hotel h2.hotel-place span {
+	color: #fca61b;
+	margin-right: 10px;
+}
+
+.merlin-hotel .orange-line {
+	color:  #fca61b;
+	background:  #fca61b;
+	border-color:  #fca61b;
+	margin-bottom: 25px;
+	margin-top:0px;
+}
+.merlin-hotel h6 {
+	font-size: 24px;
+	font-weight: ;
+}
+
+.merlin-hotel .big-price {
+	color:  #fca61b !important;
+	font-size: 24px;
+	font-weight: 700;
+	padding-bottom: 0px;
+}
+
+.merlin-hotel .nav.nav-stacked {
+  border: 1px solid #dedede;
+  border-top: 0px;
+  -webkit-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  background: #f3f3f3;
+}
+
+.merlin-hotel .col-md-9.col-sm-8 {
+	padding-left: 0px;
+}
+
+.merlin-hotel .col-md-3.col-sm-4 {
+	padding-right: 0px;
+}
+
+.merlin-hotel .nav.nav-stacked li a {
+    text-transform: uppercase;
+    color: #232323;
+    border:0px;
+    margin-right: 0px;
+}
+
+.merlin-hotel .nav.nav-stacked li a:hover,
+.merlin-hotel .nav.nav-stacked li.active a{
+    background: #fba61a;
+    color: #fff;
+    font-weight: 700;
+    -webkit-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0;
+    border:0px;
+    margin-right: 0px;
+}
+
+.merlin-hotel .print-download {
+    background: #fff !important;
+    border: 1px solid #dedede !important;
+    -webkit-border-radius: 4px 4px 0 0 !important;
+    border-radius: 4px 4px 0 0 !important;
+}
+
+.merlin-hotel .print-download li a {
+  text-transform: uppercase !important;
+  color: #908f8f !important;
+  font-size: 14p !importantx;
+  padding: 5px 5px 5px 0 !important;
+  -webkit-border-radius: 0 0 0 0 !important;
+  border-radius: 0 0 0 0 !important;
+  text-align: center;
+}
+
+.merlin-form-horizontal .pax {
+	width: 40px;
+}
+
+.merlin-hotel .hotel-gallery {
+	margin-bottom: 25px;
+}
+
+.merlin-hotel .col-md-9.col-sm-8 .orange-line {
+	margin-left: 15px;
+	margin-right: 15px;
+}

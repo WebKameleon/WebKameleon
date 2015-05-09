@@ -1,0 +1,14 @@
+{if:google_translate_from}{if:!page.olang=$lang}
+
+    {if:page.title}<div class="km_translate" rel="page,{page.sid},title">{page.title}</div>{endif:page.title}
+    {if:page.description}<div class="km_translate" rel="page,{page.sid},description">{page.description}</div>{endif:page.description}
+    {if:page.og_desc}<div class="km_translate" rel="page,{page.sid},og_desc">{page.og_desc}</div>{endif:page.og_desc}
+    {if:page.keywords}<div class="km_translate" rel="page,{page.sid},keywords">{page.keywords}</div>{endif:page.keywords}
+    {if:page.title_short}<div class="km_translate" rel="page,{page.sid},title_short">{page.title_short}</div>{endif:page.title_short}
+
+{endif:!page.olang=$lang}{endif:google_translate_from}
+{if:tips}
+{include:kameleon.tips.html}
+{endif:tips}
+
+{if:page.kmw_bgslide_body}</div>{endif:page.kmw_bgslide_body}

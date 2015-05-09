@@ -1,0 +1,12 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:flashWidget}
+{if:data.file}
+<div id="flash{webtd.sid}"></div>
+<script type="text/javascript">
+swfobject.embedSWF("{uimages}/{data.file}", "flash{webtd.sid}", "{data.width}", "{data.height}", "9", "{widget_images}/expressInstall.swf", {}, {
+    flashvars : "{data.vars}"
+});
+</script>
+{endif:data.file}
+{plain}
+{endwith:flashWidget}

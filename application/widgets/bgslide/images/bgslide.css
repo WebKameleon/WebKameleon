@@ -1,0 +1,33 @@
+.kmw_bgslide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -20000;
+    width: 100%;
+    
+    overflow: hidden;
+}
+
+.kmw_bgslide img {
+    width: 100%;
+    display: none;
+}
+
+.kmw_bgslide_loading {
+    display: none;
+}
+
+.kmw_bgslide_editmode img {
+    display: inline;
+    margin: 2px;
+}
+
+#kmw_bgslide_1 {
+    z-index: -20001;
+}
+
+#kmw_bgslide_body {
+    overflow: auto;
+    width: 100%;
+}
+

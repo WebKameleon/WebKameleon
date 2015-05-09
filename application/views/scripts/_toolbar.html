@@ -1,0 +1,171 @@
+{if:page_not_found}
+	{define:page-not-found=wk-display-none}
+	{define:page-disabled=wk-disabled}
+{endif:page_not_found}
+
+<div class="container-fluid wk-container wk-toolbar-bg-color km_toolbar">
+	<div class="row"> <!-- toolbar \-->
+		<div class="col-md-12">
+		<ul class="notranslate">
+			{if:page}
+			<li class="{page-not-found}" id="help_new_page"><a class="km_icon_easy km_iconi_new km_prompt_title" href="{root}index/add/{page.id}" title="{translate.Add new page}">{translate.Add new page}</a></li>
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_iconi_copy" style="cursor: pointer" onclick="copyToClib('{page.sid}','page')" title="{translate.Copy page}">{translate.Copy page}</a></li>
+			{endif:page}
+			{if:clipboard}
+			<li class="hidden-xs hidden-sm"><a class="km_icon_easy km_iconi_paste {if:!clipboard}km_icon_disabled{endif:!clipboard}" onclick="km_paste_bymulti({requested_page_id?})" title="{translate.Paste}">{translate.Paste}</a></li>
+			{if:endclipboard}
+			{if:page}
+
+			{if:page.id}
+			<li class="{page-not-found}"><a class="km_icon_easy km_iconi_delete" href="{root}index/remove/{page.id}" onclick="return confirmDelete()" title="{translate.Delete page}">{translate.Delete page}</a></li>
+			{endif:page.id}
+			{if:!page.id}
+			<li class="{page-not-found}"><a class="km_icon_easy km_iconi_delete km_icon_disabled" href="#" title="{translate.Delete page}">{translate.Delete page}</a></li>
+			{endif:!page.id}
+
+			{if:mayOpenGallery}
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_iconi_image" href="{root}gallery?setreferpage={page.id}" title="{translate.Files manager}">{translate.Files manager}</a></li>
+			{endif:mayOpenGallery}
+
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_iconi_explorer" href="{root}tree/explorer{if:page.id}?node={page.id}{endif:page.id}" title="{translate.Explorer}">{translate.Explorer}</a></li>
+	 
+			{if:user.admin}
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_page_visible km_iconi_{if:page.hidden}in{endif:page.hidden}visible" onclick="km_page_visible('{page.sid}')" title="{if:page.hidden}{translate.Page invisible}{endif:page.hidden}{if:!page.hidden}{translate.Page visible}{endif:!page.hidden}">{if:page.hidden}{translate.Page invisible}{endif:page.hidden}{if:!page.hidden}{translate.Page visible}{endif:!page.hidden}</a></li>
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_page_sitemap_visible km_iconi_{if:page.nositemap}n{endif:page.nositemap}sm" onclick="km_page_sitemap('{page.sid}')" title="{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}">{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}</a></li>
+			{endif:user.admin}
+	<!--		
+			{if:page.id}
+			<li class=""><a class="km_icon_easy km_iconi_prev km_toolbar_toggle" href="{root}index/get/{page.prev}" title="{translate.Goto previous page}">{translate.Goto previous page}</a></li>
+			{endif:page.id}
+	-->    
+			{if:page.next}
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon km_iconi_next" href="{root}index/get/{page.next}" title="{translate.Goto next page}">{translate.Goto next page}</a></li>
+			{endif:page.next}
+			
+			{endif:page}
+
+			<li class="km_label hidden-xs hidden-sm {page-not-found}">
+				<form name="change_page" class="change_easy_page" action="{root}index/get">
+					<input type="text" class="km_easy_text" size="5" name="page" value="{page.id}">
+					<input class="km_iconi_enter" type="submit" value="{translate.Go to page}" title="{translate.Go to page}" />
+				</form>
+			</li>
+
+			<!--
+			{if:page}
+			<li id="km_bookmark_link" class="km_toolbar_toggle"><span class="km_icon_easy km_iconi_bookmark" title="Ulubione">Ulubione</span></li>
+			{endif:page}
+			-->
+			
+			{if:page.noproof}
+			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_iconi_prooftp" title="{translate.Proof}"  href="{root}proof/get/{page.id}?setreferpage={page.id}#s{page.sid}" id="km_ddmenu_proof">{translate.Proof}</a></li>
+			{endif:page.noproof}
+				   
+			{if:page}
+			<li><a class="km_icon_easy km_iconi_previewmode {page-not-found}" href="{root}index/get/{page.id}?seteditmode=0"  title="{translate.Show preview mode}" >{translate.Show preview mode}</a></li>
+			{endif:page}
+
+			{if:server.ftp}
+			<!-- <li><a class="km_icon_easy km_iconi_ftpall {page-not-found}" title="{translate.FTP}"  href="{root}ftp/get?setreferpage={page.id}" id="km_ddmenu_publikacja">{translate.FTP}</a></li> -->
+			{endif:server.ftp}
+				  
+			<li class="notranslate km_label {page-not-found}" id="km_server_link">
+				<!-- <label for="km_selectserver">{translate.Maintained servers}:</label> -->
+				<div class="km_server"><span title="{translate.Change server}">{if:server.nazwa_long}{server.nazwa_long}{endif:server.nazwa_long}{if:!server.nazwa_long}{server.nazwa}{endif:!server.nazwa_long}</span>
+				<span class="km_icon_easy km_iconi_arrow_down"></span>
+				</div>
+			</li>
+			<li id="km_lang_link" class="{page-not-found}"><span class="flag flag-{lang}" title="{translate|trans:$lang}"></span></li>
+			
+			<!-- <li><a id="km_toolbar_toggle" href="#"></a></li> -->
+			
+			{if:!server.owner}
+			{if:server.ftp}
+			<li class="notranslate km_share_button {page-not-found}">
+				<a title="{translate.FTP}" class="btn btn-primary km_tip" tip="5" style="color:#fff;margin-left:10px; background-color: #4D90FE; border: 1px solid #3079ED; background-image:none;" href="{root}ftp/get?setreferpage={page.id}">{translate.FTP}</a>
+			</li>
+			{endif:server.ftp}
+			{endif:!server.owner}
+			
+			
+			{if:server.owner}
+			<li class="notranslate km_share_button {page-not-found}">
+				{if:currentUser|hasAccess:mail}
+				<a id="km_button_share" class="btn btn-default" style="color:#000;background-color: #F1F1F1; border: 1px solid #DADADA; background-image:none;">{translate.Share}</a>
+				{endif:currentUser|hasAccess:mail}
+			
+				{if:!currentUser|hasAccess:mail}
+				<a class="btn btn-default" style="color:#000;background-color: #F1F1F1; border: 1px solid #DADADA; background-image:none;" onclick="location.href='{root}scopes/mail?setreferpage={page.id}'">{translate.Share}</a>
+				{endif:!currentUser|hasAccess:mail}		
+				{if:server.ftp}
+				<a title="{translate.FTP}" class="btn btn-primary km_tip" tip="5" style="color:#fff;margin-left:10px; background-color: #4D90FE; border: 1px solid #3079ED; background-image:none;" href="{root}ftp/get?setreferpage={page.id}">{translate.FTP}</a>
+				{endif:server.ftp}
+			</li>
+			
+			<li class="notranslate km_setup_button hidden-xs hidden-sm {page-not-found}">
+				<button>{translate.Properities}</button>
+				<ul class="km_setup_menu">
+					<li><a id="km_setup_properties">{translate.Service properties}</a></li>
+					<li><a id="km_setup_export_local" href="{root}wizard/export">{translate.Export to local file}</a></li>
+					
+					<li>
+					{if:currentUser|hasAccess:drive}
+					<a id="km_setup_export_drive" href="{root}wizard/export?to=drive">
+					{endif:currentUser|hasAccess:drive}
+					{if:!currentUser|hasAccess:drive}
+					<a href="{root}scopes/drive?setreferpage={page.id}">
+					{endif:!currentUser|hasAccess:drive}
+					{translate.Export to Google drive}</a>
+					</li>
+					{if:user.admin}<li><a id="km_setup_template">{translate.My website is a template setup}</a></li>{endif:user.admin}
+				</ul>
+			</li>
+			
+			{if:google_translate_from}
+			<li class="notranslate hidden-xs hidden-sm">
+				<div id="km_translate_form">
+					<select id="km_translate_lang">
+						{loop:langs_used}
+						<option value="{loop}">{loop|tokens.trans}</option>
+						{endloop:langs_used}
+					</select>
+					&raquo;
+					<div id="km_translate_tool"></div>
+					<script type="text/javascript">
+						function googleTranslateToolInit() {
+							new google.translate.TranslateElement({
+								pageLanguage: "{google_translate_from}", includedLanguages: "{lang}", layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+							}, "km_translate_tool");
+						}
+
+						jQueryKam(function ($) {
+							$("#km_translate_form select").val("{google_translate_from}").on("change", function (e) {
+								document.location = "{root}index/get/{page.id}?google_translate_from=" + this.value;
+							});
+						});
+					</script>
+					<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateToolInit"></script>
+					<button class="km_blue_button" id="km_translate_save">{translate.Save}</button>
+				</div>
+			</li>
+			
+			{endif:google_translate_from}
+			
+			{if:google_translate_next}
+			
+			<li class="notranslate hidden-xs hidden-sm">
+				<div id="km_translate_form">
+					<a class="km_icon km_iconi_next" href="{root}index/get/{google_translate_next}?google_translate_from={google_translate_lang}" title="{translate.Translate next page}">{translate.Translate next page}</a>
+				</div>
+			</li>
+			
+			{endif:google_translate_next}
+			
+			
+			{endif:server.owner}
+		</ul>	
+		
+		
+		</div>
+	</div> <!-- toolbar \-->
+</div>

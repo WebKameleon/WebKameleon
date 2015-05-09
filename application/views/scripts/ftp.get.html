@@ -1,0 +1,182 @@
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li>
+                    <a>{translate.Page}</a>
+		    <ul>
+			<li>
+			    <a id="km_ddmenu_editpage" href="{root}index/get/{referpage?0}">{translate.Page} {referpage?0}</a>
+			</li>
+		    </ul>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+<!--
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+-->
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+
+
+<div class="km_toolbar">
+<form id="publikacje_form" action="{root}ftp/start">
+
+	<input type="hidden" name="ftpall" id="ftpall" value="0">
+        <ul>
+            <li class="ftp_all_btn km_tip" tip="6">
+                <a href="javascript:ftp_start(1,'')" title="{translate.Publish whole service}">{translate.Publish whole service}</a>
+            </li>
+            
+	    {if:!__count__ftp}
+		<input type="hidden" value="" name="ftplimit" id="ftplimit" />
+	    {endif:!__count__ftp}
+
+	    {if:__count__ftp}
+            <li>
+                <a class="km_icon_easy km_iconi_ftp" href="javascript:ftp_start(0,'')" title="{translate.Start new FTP transfer}">{translate.Start new FTP transfer}</a>
+            </li>    
+        
+            <li class="km_label">
+                <label for="ftplimit">{translate.Page}</label>
+                <input type="text" value="{session.referpage}" name="ftplimit" id="ftplimit" size="8" class="km_text">
+            </li>
+            <li>
+                <a class="km_icon_easy km_iconi_ftp_one" href="javascript:ftp_start(0)" title="{translate.Limit to one page}">{translate.Limit to one page}</a>
+            </li>
+            <li>
+                <a class="km_icon_easy km_iconi_ftp_down" href="javascript:document.getElementById('ftplimit').value=document.getElementById('ftplimit').value+'+';ftp_start(0)" title="{translate.Limit to the tree}">{translate.Limit to the tree}</a>
+            </li>
+            <li>
+                <a class="km_icon_easy km_iconi_ftp_img" href="javascript:ftp_start(0,'img')" title="{translate.Transfer images}">{translate.Transfer images}</a>
+            </li>
+            <li>
+                <a class="km_icon_easy km_iconi_ftp_inc" href="javascript:ftp_start(0,'inc')" title="{translate.Transfer include modules}">{translate.Transfer include modules}</a>
+            </li>
+            
+	    <li>
+                <a class="km_icon_easy km_iconi_ftp_att" href="javascript:ftp_start(0,'att')" title="{translate.Transfer attachment}">{translate.Transfer attachment}</a>
+            </li>
+            
+	    {endif:__count__ftp}
+            <li>
+                <a class="km_icon km_iconi_ftp_setup" href="{root}ftp/setup" title="{translate.FTP server configuration}">{translate.FTP server configuration}</a>
+            </li>
+            <li id="km_lang_link">
+                <span class="flag flag-{lang}" title="{translate|trans:$lang}"></span>
+            </li>
+            
+	    
+	    
+            {if:__count__ftp}
+            {if:session.server.http_url}        
+            <li style="float: right; margin: 10px 10px 0 0" tip="7" class="km_tip">
+                <a href="{session.server.http_url}{if:path.pageprefix}/{path.pageprefix}{endif:path.pageprefix}{if:page.file_name}{if:!path.pageprefix}/{endif:!path.pageprefix}{page.file_name}{endif:page.file_name}" target="_blank" title="{translate.Destination URL}">{session.server.http_url}{if:path.pageprefix}/{path.pageprefix}{endif:path.pageprefix}{if:page.file_name}{if:!path.pageprefix}/{endif:!path.pageprefix}{page.file_name}{endif:page.file_name}</a>
+            </li>
+            {endif:session.server.http_url}
+            {endif:__count__ftp}
+	    
+	    {if:session.server.owner} 
+	    {if:config.ftp.map.check}
+	    <li class="ftp_map_btn">
+                <a href="{root}ftp/map">
+		    {if:session.server.map_url}
+		    {translate.Unmap your URL}
+		    {endif:session.server.map_url}
+		    {if:!session.server.map_url}
+		    {translate.Map your URL}
+		    {endif:!session.server.map_url}		    
+		</a>
+            </li>
+	    {endif:config.ftp.map.check}
+	    {endif:session.server.owner}
+    </ul>
+</form>
+<div class="km_clean"></div>
+</div>
+
+
+<table class="tabelka ftp" cellpadding="1" cellspacing="0">
+ <tr>
+  <th>{translate.No}</th>
+  <th>{translate.Username}</th>
+  <th>{translate.Language}</th>
+  <th>{translate.Version}</th>
+  <th>{translate.Begin date}</th>
+  <th>{translate.Finish date}</th>
+ </tr>
+ 
+ {loop:ftp}
+ <tr class="line">
+  <td><a href="{root}ftp/get{if:!log}/{id}{endif:!log}"><img border=0
+        src='{root}skins/{skin}/img/km_{if:log}minus{endif:log}{if:!log}plus{endif:!log}.png' alt='Zwin' title='Zwin' /></a> {lp}.</td>
+  <td>{if:user.fullname}{user.fullname}{endif:user.fullname}{if:!user.fullname}{username}{endif:!user.fullname}</td>
+  <td>{translate|trans:$lang}</td>
+  <td>{ver}</td>
+  <td>{t_begin|kameleon.datetime}</td>
+  <td>{t_end|kameleon.datetime?}{if:!t_end}<a href="{root}ftp/stop/{id}"><img border="0" src="{root}skins/{skin}/img/i_stop.png"/></a>{endif:!t_end}</td>
+ </tr>
+ {if:log}
+ {loop:log}
+ <tr class="ftp_raport">
+  <td colspan=5 align=right>{rozkaz}</td>
+  <td>{nczas|kameleon.datetime}<img border=0 src='{root}skins/{skin}/img/icon_{if:ok}ok{endif:ok}{if:!ok}delete{endif:!ok}.png' alt='{wynik}' title='{wynik}' /></td>
+ </tr>
+ {endloop:log}
+ {endif:log}
+ {endloop:ftp}
+ 
+ 
+</table>
+
+<script type="text/javascript">
+    
+    function ftp_start(all,value)
+    {
+	document.getElementById('ftpall').value=all;
+	if (value!=null) document.getElementById('ftplimit').value=value;
+	
+	//in case of ad block of analytics
+	setTimeout(function() {
+	    jQueryKam.get(KAM_ROOT+'ajax/tip_done/6',function(data){
+		document.getElementById('publikacje_form').submit();
+	    });
+	},1000);
+	
+	ga('send', 'event', {
+		    'eventCategory': 'FTP',
+		    'eventAction': 'started',
+		    'hitCallback': function() {
+			jQueryKam.get(KAM_ROOT+'ajax/tip_done/6',function(data){
+			    document.getElementById('publikacje_form').submit();
+			});
+		    }
+	});
+	
+	
+    }
+    {if:tips}
+    
+    jQueryKam('.km_logo').addClass('km_tip').attr('tip',8);
+    
+    {endif:tips}
+</script>

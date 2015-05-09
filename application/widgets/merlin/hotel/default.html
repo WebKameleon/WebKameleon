@@ -1,0 +1,173 @@
+{with:merlin_hotelWidget}
+<div class="merlin-hotel">
+<div class="row">
+ <div class="comtainer">
+  <h1 class="hotel-name">{hotel.obj.name}</h1>
+   <div class="rating">
+     <div class="progress">
+     <div class="stars"></div>  
+     <div class="progress-bar rating-bar" role="progressbar" aria-valuenow="{hotel.category|*2}" aria-valuemin="0" aria-valuemax="100" style="width: {hotel.obj.category|*2}%;">
+     <span class="sr-only">{hotel.category|*2} Complete</span>
+   </div>
+   </div>
+   </div>  
+ </div>
+</div>
+
+<div class="row">
+ <h2 class="hotel-place">Kraj:<span>{hotel.obj.country}</span> Miasto: <span>{hotel.obj.city}</span></h2>
+</div>
+
+<div class="row">
+ <hr class="orange-line" size="1" />
+</div>
+
+<div class="row">
+<div class="col-md-9 col-sm-8">
+{if:hotel.obj.info.photos}
+<div class="row">
+<div class="col-md-6 col-sm-6 hotel-gallery">
+    
+ {loop:hotel.obj.info.photos}
+  <div class="hide-me"><a href="{loop}" fancybox="1" rel="merlin-hotel-gallery"><div class="gallery-icon"></div><img src="{loop}" class="img-responsive"/></a></div>
+ {endloop:hotel.obj.info.photos}
+        
+</div>
+{endif:hotel.obj.info.photos.0}
+
+{if:hotel.obj.info.photos.0}<div class="col-md-6 col-sm-6">{endif:obj.info.photos.0}
+<div class="hotel-desc">
+    <h6>{hotel.obj.info.desc.2.subject}</h6>
+    <p>{hotel.obj.info.desc.2.content}</p>
+</div>
+{if:hotel.obj.info.photos.0}</div></div>{endif:obj.info.photos.0}
+
+<div class="row">
+ <hr class="orange-line" size="1" />
+</div>
+
+<div class="hotel-info tab-content">
+
+<div role="tabpanel" class="hotel-desc tab-pane fade in active" id="tab1">
+    <h6>Lokalizacja</h6>
+    <p>{hotel.obj.hotel.Lokalizacja}</p>
+    
+    <h6>Pokoje</h6>
+    <p>{hotel.obj.hotel.Pokoje}</p>
+    
+    <h6>Udogodnienia</h6>
+    <p>{hotel.obj.hotel.Udogodnienia}</p>
+    
+    <h6>Wyżywienie</h6>
+    <p>{hotel.obj.hotel.Wyżywienie}</p>
+</div>
+
+<div role="tabpanel" class="hotel-desc tab-pane fade" id="tab2">
+    <h6>Inne terminy</h6>
+    <p id="merlin-results-here">Jak tu wrzucic wyniki z dolu?</p>
+    <ul id="merlin-results-nav-here">Nawigacja</ul>
+</div>
+
+<div role="tabpanel" class="hotel-desc tab-pane fade" id="tab3">
+    <h6>Cena zawiera</h6>
+    <p>{hotel.obj.hotel.Cena zawiera}</p>
+    
+    <h6>Cena nie zawiera</h6>
+    <p>{hotel.obj.hotel.Cena nie zawiera}</p>
+    
+    <h6>Dopłaty</h6>
+    <p>{hotel.obj.hotel.Dopłaty}</p>
+</div>
+
+<div role="tabpanel" class="hotel-desc tab-pane fade" id="tab4">
+    <h6>{hotel.obj.info.desc.6.subject}</h6>
+    <p>{hotel.obj.info.desc.6.content}</p>
+</div>
+
+</div>
+</div>
+
+<div class="col-md-3 col-sm-4">
+    <div class="booking">
+   
+    
+    <div class="container-fluid">
+     
+     <table class="table table-responsive table-condensed">
+   <tbody>
+    
+    <tr>
+     <td style="vertical-align: bottom;">Cena/os:</td>
+     <td class="big-price">{hotel.price} {hotel.operCurr}</td>
+    </tr>
+    
+    <tr style="height:25px"></tr>
+    
+    <tr>
+     <td>Termin:</td>
+     <td>{hotel.startDate.DDMMYYYY}</td>
+    </tr>
+    
+    
+   <tr>
+     <td>Ilość dni:</td>
+     <td>{hotel.trp.duration}&nbsp;dni</td>
+   </tr>
+   
+    
+   <tr>
+     <td>Wylot z:</td>
+     <td>{hotel.trp.depName}, {hotel.trp.flightOp}</td>
+   </tr>
+   
+   <tr style="height:25px"></tr>
+   
+    <tr>
+     <td>Pokój:</td>
+     <td>{hotel.obj.room}</td>
+   </tr>
+   
+   <tr>
+     <td>Wyżywienie:</td>
+     <td>{hotel.obj.serviceDesc}</td>
+   </tr>
+   
+
+ </tbody></table>
+     
+    </div>
+
+  <div class="clearfix"></div>
+      
+      
+    <a class="btn btn-primary button-col" href="#CForm1">Zapytaj</a>
+    
+    </div>
+    
+    
+
+
+<ul class="nav nav-stacked print-download" role="tablist">
+    <li><a href="javascript:window.print()"><img src="{widget_images}/print.png" alt="Drukuj" class="img">Drukuj</a></li>
+</ul>
+<ul class="nav nav-stacked" role="tablist">
+    <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Hotel</a></li>
+    <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Inne terminy</a></li>
+    <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Przed wyjazdem</a></li>
+</ul>
+
+</div>
+
+</div> <!-- row end -->
+<!--{if:mode}
+<hr size="1" style="margin:0"/>
+Debug:
+{loop:data.dbg}
+{debug.__item__.#.blue.$__loop__}
+{endloop:data.dbg}
+{debug.hotel}
+{endif:mode}-->
+
+<div class="clearfix"></div>
+</div>
+{endwith:merlin_hotelWidget}

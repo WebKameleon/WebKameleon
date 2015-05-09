@@ -1,0 +1,62 @@
+<div id="km_setup_properties_dialog" class="km_setup_dialog">
+    <form id="km_setup_properties_form" class="km_dialog_content" action="{root}index/setup_properties" method="post">
+        <ul>
+            {if:!template_media}
+            <li>
+                <label for="km_setup_template">{translate.Template}</label>
+                <select id="km_setup_template" name="server[szablon]"></select>
+                <a href="{root}wizard/copy_template" id="menu_copy" title="{translate.Copy}"></a>
+            </li>
+            {endif:!template_media}
+            {if:config.webpage.show.logo}
+            <li>
+                <label for="km_setup_logo">{translate.Logo}</label>
+                <input type="text" id="km_setup_logo" class="km_input" name="server[logo]" files="1" />
+            </li>
+            {endif:config.webpage.show.logo}
+            {if:config.webpage.show.background}
+            <li>
+                <label for="km_setup_background">{translate.Background image}</label>
+                <input type="text" id="km_setup_background" class="km_input" name="server[background]" files="1" />
+            </li>
+            {endif:config.webpage.show.background}
+            
+            {if:config.webpage.show.bgcolor}
+            <li>
+                <label for="km_setup_bgcolor">{translate.Background color}</label>
+                <input id="km_setup_bgcolor" name="server[bgcolor]" size="10" value="{server.bgcolor}" class="km_input" type="text" colorpicker="1"> 
+            </li>
+            {endif:config.webpage.show.bgcolor}            
+            
+            
+            <li>
+                <label for="km_setup_lang">{translate.Main language}</label>
+                <select id="km_setup_lang" name="server[lang]"></select>
+            </li>
+            <li>
+                <label for="km_setup_http_url">{translate.Service URL}</label>
+                <input type="text" id="km_setup_http_url" class="km_input" name="server[http_url]" />
+            </li>
+            <li>
+                <label for="km_setup_analytics">{translate.Analytics}</label>
+                <input type="text" id="km_setup_analytics" class="km_input" name="server[analytics]" />
+                <a id="km_setup_analytics_load" class="km_icon km_iconi_arr_right" href="#" title="{translate.Choose}">{translate.Choose}</a>
+            </li>
+        </ul>
+    </form>
+</div>
+
+<div id="km_setup_analytics_dialog" class="km_setup_dialog">
+    <ul class="km_dialog_content">
+        <li rel="list">
+            <select id="km_setup_analytics_list"></select>
+            <a class="km_blue_button" href="http://www.google.com/analytics" target="_blank">{translate.Manage}</a>
+        </li>
+        <li rel="empty">
+            {translate.No analytics data}
+            <a class="km_blue_button" href="http://www.google.com/analytics" target="_blank">{translate.Create account}</a>
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript" src="{root}js/setup.js"></script>

@@ -1,0 +1,55 @@
+
+
+.simply-scroll-container { 
+	position: relative;
+}
+
+.simply-scroll-clip { 
+    position: relative;
+    overflow: hidden;
+}
+
+.simply-scroll-list { 
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.simply-scroll-list li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.simply-scroll-list li img {
+    border: none;
+    display: block;
+}
+
+
+.simply-scroll { 
+    width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+.simply-scroll .simply-scroll-clip {
+    width: 100%;
+    height: auto;
+}
+
+.simply-scroll .simply-scroll-list {}
+
+.simply-scroll .simply-scroll-list li {
+    float: left;
+
+}
+.simply-scroll .simply-scroll-list li img {
+    padding-right:3px
+}
+	
+	
+
+
+

@@ -1,0 +1,100 @@
+<script type="text/javascript">
+    var aaa;
+    
+    function aaa_go()
+    {
+        var amp=aaa.href.indexOf('?');
+        location.href=aaa.href+(amp>0?'&':'?')+'a='+Math.random();
+    }
+    
+    function a_go(a)
+    {
+        aaa=a;
+        setTimeout(aaa_go,200);
+        km_preloader_show();
+        return false;
+    }
+    
+</script>
+
+	<link href='http://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<!-- Rocket extras -->
+	<link href="{root}login/css/animate.css" rel="stylesheet">
+	<link href="{root}login/css/prettyPhoto.css" rel="stylesheet">
+	<link href="{root}login/css/style.css" rel="stylesheet">
+
+
+
+<!-- Start Rocket -->
+	<!-- ********************* -->
+	
+	<!-- Parallax Background
+	================================================== -->
+	<!-- image is set in the CSS as a background image -->
+	<div id="parallax"></div>
+	<!-- End Parallax Background
+	================================================== -->
+	
+	<!-- Start Header
+	================================================== -->
+	<header id="header" class="navbar navbar-inverse" role="banner">
+    <div class="container">
+		<a class="btn btn-lg btn-danger" href="{root}auth" onClick="return a_go(this)">{translate.Log in}</a>
+	    <div class="navbar-header">
+	  
+	      <!-- Your Logo -->
+	      <a href="http://www.webkameleon.com" class="navbar-brand km_logo">WebKameleon</a>
+	    </div>
+	    <!-- Start Navigation -->
+        <div class="km_error_div">
+			{tokens.error}
+		</div>
+    </div>
+	</header>
+	<!-- ==================================================
+	End Header -->
+	
+	<!-- Start Hero Section
+	================================================== -->
+	<section id="hero2" class="section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="lp-element">
+						<h1>WEB<span class="lighter">KAMELEON</span></h1>
+						<p class="lead">{translate.To create new service, click create service button}</p>
+						<p><a class="btn btn-default btn-lg" role="button" href="{root}wizard/create{if:return_url}?return_url={return_url|base64_encode}{endif:return_url}" onclick="return a_go(this)">{translate.Create service}</a> <!--<a class="btn btn-default btn-lg" role="button">See Gallery</a>--></p>
+                        <p><em>{translate.Google account required}</em></p>
+                        <p class="account-info">
+						    {translate.if you dont have gmail, create}
+							<a href="http://www.gammanet.pl/google-apps-for-business" target="_blank">{translate.business account}</a>
+							{translate.or free}
+							<a href="https://accounts.google.com/SignUp?service=mail" target="_blank">{translate.personal account}</a>
+							{translate.in few minutes}
+						</p>
+					</div>
+				</div>
+				<div class="col-md-7"></div>
+			</div>
+		</div>
+	</section>
+	<!-- ================================================== 
+	End Hero -->
+    
+
+	
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<script src="{root}bootstrap/js/bootstrap.js"></script>
+	
+	
+	
+	<!-- ********************* -->
+	<!-- Start Rocket -->
+	
+		
+		
+
+		

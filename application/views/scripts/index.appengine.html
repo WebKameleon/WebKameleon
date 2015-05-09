@@ -1,0 +1,136 @@
+{include:_header.html}
+{include:_menu.html}
+
+<form id="appengine" method="post" style="padding:10px">
+    
+    <div class="km_fbtn">
+        <a class="km_fbtn_action" href="#" id="appengine_save">{translate.Save}</a>
+        <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+    </div>
+
+    <h1>Google Appengine</h1>
+    
+    <div class="edit_box">
+        <div class="label">{translate.ID}:</div>
+        <div class="value">
+            <input type="text" name="appengine[appengine_id]" value="{server.appengine_id}"  />
+        </div>
+    </div> 
+
+    <div class="edit_box">
+        <div class="label">{translate.Version}:</div>
+        <div class="value">
+            <input type="text" name="appengine[appengine_ver]" value="{server.appengine_ver?1}"  />
+        </div>
+    </div>     
+
+    <div class="edit_box">
+        <div class="label">{translate.Cron calendar}:</div>
+        <div class="value" style="height: 100px; overflow: auto">
+            {loop:cron}
+            <p>
+            <input size="40" type="text" name="appengine[appengine_cron][desc][]" value="{desc}" placeholder="{translate.Description}" />
+            <input size="40" type="text" name="appengine[appengine_cron][url][]" value="{url}" placeholder="{translate.URL}" />
+            <input size="40" type="text" name="appengine[appengine_cron][when][]" value="{when}" placeholder="{translate.When}" />
+            </p>
+            
+            {endloop:cron}
+            <p>
+            <input size="40" type="text" name="appengine[appengine_cron][desc][]" value="" placeholder="{translate.Description}" />
+            <input size="40" type="text" name="appengine[appengine_cron][url][]" value="" placeholder="{translate.URL}" />
+            <input size="40" type="text" name="appengine[appengine_cron][when][]" value="" placeholder="{translate.When}" />
+            </p>
+        </div>
+    </div>     
+
+
+    
+    <div class="edit_box">
+        <div class="label">
+            {translate.Rewrite rules}:
+            <p style="margin-top:20px">
+            <input size="40" type="text" id="regex_test" placeholder="{translate.Test, results in console F12}"/>
+            </p>
+        </div>
+        <div class="value" style="height: {if:!__count__rewrite}50{endif:!__count__rewrite}{if:__count__rewrite}200{endif:__count__rewrite}px; overflow: auto">
+            {loop:rewrite}
+            <p>
+            <input size="61" type="text" class="regex_rx" name="appengine[appengine_rewrite][regex][]" value="{regex}" placeholder="{translate.Regular expression}" />
+            <input size="61" type="text" name="appengine[appengine_rewrite][dest][]" value="{dest}" placeholder="{translate.URL}" />
+            </p>            
+            {endloop:rewrite}
+            <p>
+            <input size="61" type="text" class="regex_rx" name="appengine[appengine_rewrite][regex][]" value="" placeholder="{translate.Regular expression}" />
+            <input size="61" type="text" name="appengine[appengine_rewrite][dest][]" value="" placeholder="{translate.URL}" />
+            </p>
+        </div>
+    </div>     
+    
+    
+    
+    <div class="edit_box">
+        <div class="label">{translate.Scripts available as URL}:</div>
+        <div class="value" style="height: 300px; overflow: auto">
+            {loop:scripts}
+            <input title="{translate.Available}" type="checkbox" name="appengine[appengine_scripts][{file}][filename]" value="{file}" {if:checked}checked{endif:checked} /> {file}
+            <span class="login" {if:!checked}style="display: none"{endif:!checked}>
+            (<input type="radio" name="appengine[appengine_scripts][{file}][login]" {if:!login}checked{endif:!login} value=""/> {translate.Everybody can access}
+            <input type="radio" name="appengine[appengine_scripts][{file}][login]" {if:login=required}checked{endif:login=required} value="required"/> {translate.Only logged in}
+            <input type="radio" name="appengine[appengine_scripts][{file}][login]" {if:login=admin}checked{endif:login=admin} value="admin"/> {translate.Only admin})
+            </span>
+            
+            <br/>
+            {endloop:scripts}
+        </div>
+    </div>     
+    
+</form>
+
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        jQueryKam('[type=checkbox]').on('click',function(){
+            //console.log(this.attr('checked'));
+            var span=jQueryKam(this).next();
+            if (jQueryKam(this).prop('checked')) span.fadeIn(); else span.fadeOut();
+        });
+        
+        $("#appengine_save").on("click", function (e) {
+    
+            jQueryKam('#appengine').submit();
+            return false;
+        });
+        
+        
+        $("#regex_test").on("blur", function () {
+    
+            var regex=[];
+            
+            $(".regex_rx").each (function () {
+                if ($(this).val().length>0)
+                {
+                    regex[regex.length]=[$(this).val() , $(this).next().val()];
+                }
+            });
+    
+            var data={
+                url: $("#regex_test").val(),
+                regex: regex
+            };
+    
+            if ($("#regex_test").val().length>0)
+            {
+                $.post('{root}ajax/appengie_regex_test', data, function (result) {
+                    console.log(result);
+                });
+            }
+            
+    
+        });
+        
+        
+        
+    });
+    
+</script>
+

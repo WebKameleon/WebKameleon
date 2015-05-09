@@ -1,0 +1,160 @@
+<link type="text/css" rel="stylesheet" href="{widget_images}/{name}.css">
+<form id="{name}_form" method="post">
+    {include:_widget.header.html}
+
+    <ul class="km_zakladki">
+        <li><a rel="images">{translate.Images}</a></li>
+        <li><a rel="options">{translate.Options}</a></li>
+    </ul>
+
+    <input id="{name}_data" type="hidden" name="{name}[images]" />
+    <input type="hidden" name="{name}[menu_id]" value="{data.menu_id}" />
+    <div class="km_zakladka km_zakladka_images">
+        <a class="km_blue_button" href="#" files="1">{translate.Add files}</a>
+        <ul id="km_images_list"></ul>
+    </div>
+
+    <div class="km_zakladka km_zakladka_options">
+        {include:options.html}
+        <div class="edit_box">
+            <a href="{root}menu/get/{data.menu_id}?return_url={_SERVER.REQUEST_URI|base64_encode}">{translate.Go to list}</a>
+        </div>
+    </div>
+</form>
+
+<div id="image_link_dialog">
+    <ul>
+        <li>
+            <label for="image_link_page">{translate.Page}</label>
+            <input type="text" id="image_link_page" size="4" jstree="0" />
+        </li>
+        <li>
+            <label for="image_link_href">{translate.External link}</label>
+            <input type="text" id="image_link_href" />
+        </li>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    var SaveChanges;
+
+    jQueryKam(function ($) {
+
+        SaveChanges = function () {
+            var data = [];
+
+            $("#km_images_list li").each(function () {
+                var file = $(this).data("file");
+                if (file) {
+                    var URL = file.url.replace(file.baseUrl, "");
+                    if (URL[0] == "/")
+                        URL = URL.substring(1);
+
+                    data.push({
+                        sid   : file.sid || null,
+                        url   : URL,
+                        title : $(this).find(".km_image_title").val(),
+						titlea : $(this).find(".km_image_titlea").val(),
+						titleb : $(this).find(".km_image_titleb").val(),
+						titlec : $(this).find(".km_image_titlec").val(),
+                        page  : $(this).find(".km_image_page").val() || null,
+                        href  : $(this).find(".km_image_href").val()
+                    });
+                }
+            });
+
+            $("#{name}_data").val(JSON.stringify(data));
+            $("#{name}_form").submit();
+        }
+
+        var km_image_add = function (file) {
+            $("<li></li>").data("file", file).append(
+                $("<a></a>").attr("href", "#").addClass("km_image_delete"),
+                $("<img />").attr("src", file.url),
+                $("<div></div>").addClass("km_image_info").append(
+                    $("<input />").attr("type", "text").addClass("km_image_title").val(file.title).attr("placeholder",tr("Title")),
+					$("<input />").attr("type", "text").addClass("km_image_titlea").val(file.titlea).attr("placeholder",tr("Title A")),
+					$("<input />").attr("type", "text").addClass("km_image_titleb").val(file.titleb).attr("placeholder",tr("Title B")),
+					$("<input />").attr("type", "text").addClass("km_image_titlec").val(file.titlec).attr("placeholder",tr("Title C")),
+                    $("<input />").attr("type", "hidden").addClass("km_image_page").val(file.page),
+                    $("<input />").attr("type", "hidden").addClass("km_image_href").val(file.href),
+                    $("<a></a>").attr("href", "#").addClass("km_image_link")
+                )
+            ).appendTo("#km_images_list");
+	    
+	    if ('{data.show.titlea}'!='1') $('.km_image_titlea').hide();
+	    if ('{data.show.titleb}'!='1') $('.km_image_titleb').hide();
+	    if ('{data.show.titlec}'!='1') $('.km_image_titlec').hide();
+        }
+
+        var km_image_delete = function (e) {
+            var image = $(this).closest("li");
+            KamConfirm("Usunąć slide?", function () {
+                image.remove();
+            });
+        }
+
+        var km_image_link = function (e) {
+            var el_page = $(this).siblings(".km_image_page"),
+                el_href = $(this).siblings(".km_image_href");
+
+            $("#image_link_page").val(
+                el_page.val()
+            );
+            $("#image_link_href").val(
+                el_href.val()
+            );
+            $("#image_link_dialog").dialog({
+                title : "{translate.Edit link}",
+                modal : true,
+                width : 450,
+                buttons : [
+                    {
+                        text : "{translate.Ok}",
+                        click : function (e) {
+                            el_page.val(
+                                $("#image_link_page").val()
+                            );
+                            el_href.val(
+                                $("#image_link_href").val()
+                            );
+                            $(this).dialog("close");
+                        }
+                    }
+                ]
+            });
+        }
+
+        $("#km_images_list").sortable({
+            containment : "parent",
+            placeholder : "ui-state-highlight",
+            forceHelperSize : true,
+            forcePlaceholderSize : true
+        });
+
+        $("body").on("picker_files", function (e, files) {
+            $.each(files, function (k, file) {
+                km_image_add(file);
+            });
+            $("#km_images_list").sortable("refresh");
+            $("#files_dialog").dialog("close");
+        });
+
+        $("body").on("click", ".km_image_delete", km_image_delete);
+        $("body").on("click", ".km_image_link", km_image_link);
+
+        {loop:webtd.menu}
+        km_image_add({
+            sid     : "{sid}",
+            url     : "{imagesUrl}/{img}",
+            title   : "{alt|addslashes}",
+			titlea  : "{titlea|addslashes}",
+			titleb  : "{titleb|addslashes}",
+			titlec  : "{titlec|addslashes}",
+            page    : "{page_target?}",
+            href    : "{href?}",
+            baseUrl : "{uimages}/"
+        });
+        {endloop:webtd.menu}
+    });
+</script>

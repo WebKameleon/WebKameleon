@@ -1,0 +1,9 @@
+{with:tokens.loadMoreLibs}
+{if:js}{loop:js}
+    <script type="text/javascript" src="{__loop__}"></script>
+{endloop:js}
+{endif:js}
+{if:css}{loop:css}
+    <link href="{__loop__}" type="text/css" rel="stylesheet"/>
+{endloop:css}{endif:css}
+{endwith:tokens.loadMoreLibs}

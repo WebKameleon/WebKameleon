@@ -1,0 +1,116 @@
+{include:_gallery.files.html}
+
+<script type="text/javascript">
+jQuery(function ($) {
+
+    var cmdupload = function () {
+        var e = $.Event("keydown");
+        e.keyCode  = 85;
+        e.ctrlKey  = true;
+        e.altKey   = false;
+        e.shiftKey = false;
+        $("body").trigger(e);
+    };
+
+    var ret = getUrlVar("files_return");
+
+    elFinder.prototype.i18.en.messages['cmdupload_dialog'] = 'More upload files options';
+    elFinder.prototype.i18.pl.messages['cmdupload_dialog'] = 'Więcej opcji wysyłania plików';
+    elFinder.prototype._options.commands.push('upload_dialog');
+    elFinder.prototype.commands.upload_dialog = function() {
+        this.exec = cmdupload;
+        this.getstate = function() {
+            return 0;
+        }
+    }
+
+    var URL = "{root}gallery/connector";
+    var target_element = getUrlVar("target_element");
+
+    var options = $.extend({
+        url : URL,
+        customData : {
+            type : "{elfinder.type}"
+        },
+        height : $(window).height() - 10,
+        lang: "{lang}",
+        rememberLastDir : true,
+        defaultView : "list",
+        dateFormat : "d.m.Y, h:i",
+        resizable : false,
+        uiOptions : {
+            // toolbar configuration
+            toolbar : [
+                ['home', 'back', 'up'],
+                ['upload', 'upload_dialog'],
+                ['info', 'quicklook'],
+                ['view']
+            ],
+
+            // directories tree options
+            tree : {
+                // expand current root on init
+                openRootOnLoad : true,
+                // auto load current dir parents
+                syncTree : true
+            },
+
+            // current working directory options
+            cwd : {
+                // display parent directory in listing as ".."
+                oldSchool : true
+            }
+        },
+        contextmenu : {
+            // navbarfolder menu
+            navbar : [
+
+            ],
+
+            // current directory menu
+            cwd    : [
+
+            ],
+
+            // current directory file menu
+            files  : [
+
+            ]
+        },
+        getFileCallback : function (file) {
+            file.target_element = target_element;
+            if (file.url.match(new RegExp(URL))) {
+                file.url = "media/get/" + getUrlVar("target", 0, file.url) ;
+            }
+            if (frameElement) {
+                parent.jQueryKam("body").trigger("gallery_file_selected", file);
+            } else {
+                $("body").trigger("gallery_file_selected", file);
+            }
+        },
+        handlers : {
+            select : function (e, instance) {
+                instance.exec("getfile");
+            },
+            load : function (e, instance) {
+                if (ret) {
+                    $("<a></a>").attr("href", "#").addClass("km_blue_button").text("{translate.Return}").appendTo(".elfinder-toolbar");
+//                    setTimeout(cmdupload, 0);
+                }
+            }
+        }
+    }, {elfinder|json_encode});
+
+    var elfinder = $("#elfinder-{elfinder.type}").elfinder(options).elfinder("instance");
+
+    $("body").on("click", ".km_blue_button", function (e) {
+        var path = elfinder.path(elfinder.cwd().hash).split("/").slice(1).join("/");
+        if (path)
+            document.location = KAM_ROOT + "files?dir=" + Base64.encode("/" + path);
+        else
+            document.location = KAM_ROOT + "files";
+        return false;
+    });
+});
+</script>
+<div id="elfinder-{elfinder.type}"></div>

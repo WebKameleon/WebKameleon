@@ -1,0 +1,28 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:scrollWidget}
+{if:webtd.menu}
+<div id="jcarousel-navi{sid}" class="jcarousel-navi">
+    <span class="jcarousel-navi-prev">Poprzednie</span>
+    <span class="jcarousel-navi-next">Nastepne</span>
+</div>
+<div id="jcarousel{sid}" class="jcarousel">
+    <ul>
+        {loop:webtd.menu}
+        <li>
+            <a href="{href}">
+                <img src="{imagesUrl}{img}" {if:alt}title="{alt}"{endif:alt} />
+            </a>
+        </li>
+        {endloop:webtd.menu}
+    </ul>
+</div>
+<script type="text/javascript">
+jQueryKam(function ($) {
+    $("#jcarousel{sid}").jCarouselLite($.extend({
+        btnPrev : "#jcarousel-navi{sid} .jcarousel-navi-prev",
+        btnNext : "#jcarousel-navi{sid} .jcarousel-navi-next"
+    }, {js_options}));
+});
+</script>
+{endif:webtd.menu}
+{endwith:scrollWidget}

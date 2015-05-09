@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Webkameleon CMS - un créateur de sites web",
+    "description": "responsive website creator"
+  },
+  "appDesc": {
+    "message": "Dessinez et créez votre site. On n'a pas besoin des compétences techniques.", 
+    "description":"Commencez avec votre nouvelle entreprise. Faitez grandir un site qui fonctionne avec les ordinateurs, avec les tablettes ou les mobiles."
+  },
+  "appShortName" : {
+    "message": "webkameleon",
+    "description": "responsive website creator"    
+  }
+}

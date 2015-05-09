@@ -1,0 +1,7 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:iframeWidget}
+{if:data.url}
+<iframe src="{data.url}" class="kmw_iframe" {if:data.width}width="{data.width}"{endif:data.width} {if:data.height}height="{data.height}"{endif:data.height} frameborder="0"></iframe>
+{endif:data.url}
+{endwith:iframeWidget}
+{plain}

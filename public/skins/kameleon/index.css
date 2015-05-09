@@ -1,0 +1,129 @@
+/* **************************** */
+/* *** Index CSS by KH 2014 *** */
+/* ******* version 1.0.0 ****** */
+/* ============================ */
+/* Last modification 19.03.2014 */
+/* **************************** */
+
+#no-page {
+	font-family: 'Open Sans', sans-serif;
+	color:#222;
+}
+
+#no-page .col-md-12 {
+	padding-left:0px;
+	padding-right:0px;
+}
+
+#no-page .row {
+	margin-right:0px;
+	margin-left:0px;
+}
+
+.btn {
+	-webkit-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+}
+
+/*----- main content -----*/
+#no-page.blank {
+	margin-top:150px;
+}
+
+#no-page {
+	clear:both;
+	padding-top:100px;
+}
+
+#no-page h1 {
+	font-weight:600;
+	font-size:24px;
+	color:#555;
+	padding-top:0px;
+	margin-top:0px;
+}
+
+#no-page h1.no-page {
+	color:#d54937;
+	text-transform:uppercase;
+	font-size:36px;
+	font-weight:300;
+}
+
+#no-page h1 > span {
+	font-weight:800;
+	color:#222;
+	margin-left:15px;
+}
+
+#no-page h1 span span.flag {
+	display: inline-block;
+}
+
+#no-page h2 {
+	font-weight:800;
+	font-size:18px;
+	color:#d54937;
+	border-top:1px solid #f1f1f1;
+	padding-top:25px;
+	padding-bottom:10px;
+}
+
+.radio {
+	font-size:18px;
+	margin:15px 0 15px 0;
+}
+
+.radio label:hover {
+	color:#555;
+}
+
+.no-page-comments {
+	font-size:14px;
+	color:#999;
+	margin-top:25px;
+	padding-top:15px;
+	border-top:1px solid #f1f1f1;
+}
+
+#no-page img {
+	margin-bottom:25px;
+}
+
+a#return-btn {
+	margin-left:5px;
+}
+/*----- end main content -----*/
+
+/*----- Media Queries -----*/
+@media (max-width:480px) {
+
+.row, .col-md-12, .col-md-10 {
+	text-align:center;
+}
+
+.col-md-4 {text-align:center;}
+.col-md-4 img {margin:0 auto;}
+
+a#return-btn {
+	margin:0 0 0 0;
+	float:none;
+	text-align:center;
+	width:100%;
+}
+
+a#idCopyContents {
+	margin-bottom:10px;
+	width:100%;
+}
+
+.radio {
+	text-align:left;
+}
+
+#no-page {
+	clear:both;
+	padding-top:50px;
+}
+
+}

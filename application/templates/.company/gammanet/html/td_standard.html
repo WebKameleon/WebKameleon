@@ -1,0 +1,21 @@
+<div  {if:class} class="{class}"{endif:class}{tokens.webtd_style} id="{costxt}">
+{if:title}
+{tokens.box_title}
+{endif:title}
+<div class="txt">
+{if:costxt}<div class="date">{costxt|substr,0,2}-{costxt|substr,2,2}-{costxt|substr,4,2}</div>{endif:costxt}{plain}{if:menu_id}
+<div class="sitemenu_c"><ul class="sitemenu">
+{loop:menu}
+    <li {if:class}class="{class}"{endif:class}>
+        <a href="{href}">{alt}</a>
+    </li>
+{endloop:menu}
+</ul></div>
+{endif:menu_id}{tokens.html}
+<div align="right">
+{if:more}
+{if:more}<a href="{more_link}">{translate.More} &raquo;</a>{endif:more}
+{endif:more}
+</div>
+</div>
+</div>

@@ -1,0 +1,140 @@
+{with:facebookWidget}
+<form id="facebook_form" method="post" validate="1">
+    {include:_widget.header.html}
+    <div class="edit_box">
+        <div class="label">{translate.Widget type}</div>
+        <div class="value facebook_type">
+            <input type="radio" id="facebook_type_button" name="facebook[type]" value="button" {if:data.type=button}checked{endif:data.type=button} />
+            <label for="facebook_type_button">
+                <img src="{widget_images}/button.png" />
+            </label>
+            <input type="radio" id="facebook_type_box" name="facebook[type]" value="box" {if:data.type=box}checked{endif:data.type=box} />
+            <label for="facebook_type_box">
+                <img src="{widget_images}/box.png" />
+            </label>
+            <input type="radio" id="facebook_type_comments" name="facebook[type]" value="comments" {if:data.type=comments}checked{endif:data.type=comments} />
+            <label for="facebook_type_comments">
+                <img src="{widget_images}/comments.png" />
+            </label>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.URL address}</div>
+        <div class="value">
+            <input type="url" name="facebook[href]" value="{data.href}" class="km_wide" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Width}</div>
+        <div class="value">
+            <input type="text" name="facebook[width]" value="{data.width}" size="4" /> px
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Height}</div>
+        <div class="value">
+            <input type="text" name="facebook[height]" value="{data.height}" size="4" /> px
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_button">
+        <div class="label">{translate.Layout style}</div>
+        <div class="value">
+            <select name="facebook[layout]">
+                <option value="standard" {if:data.layout=standard}selected{endif:data.layout=standard}>standard</option>
+                <option value="button_count" {if:data.layout=button_count}selected{endif:data.layout=button_count}>button_count</option>
+                <option value="box_count" {if:data.layout=box_count}selected{endif:data.layout=box_count}>box_count</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_button">
+        <div class="label">{translate.Verb to display}</div>
+        <div class="value">
+            <select name="facebook[action]">
+                <option value="like" {if:data.action=like}selected{endif:data.action=like}>like</option>
+                <option value="recommend" {if:data.action=recommend}selected{endif:data.action=recommend}>recommend</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Color scheme}</div>
+        <div class="value">
+            <select name="facebook[colorscheme]">
+                <option value="light" {if:data.colorscheme=light}selected{endif:data.colorscheme=light}>light</option>
+                <option value="dark" {if:data.colorscheme=dark}selected{endif:data.colorscheme=dark}>dark</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show faces}</div>
+        <div class="value">
+            <input type="hidden" name="facebook[show_faces]" value="0" />
+            <input type="checkbox" name="facebook[show_faces]" value="1" {if:data.show_faces}checked{endif:data.show_faces} />
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show header}</div>
+        <div class="value">
+            <input type="hidden" name="facebook[header]" value="0" />
+            <input type="checkbox" name="facebook[header]" value="1" {if:data.header}checked{endif:data.header} />
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show stream}</div>
+        <div class="value">
+            <input type="hidden" name="facebook[stream]" value="0" />
+            <input type="checkbox" name="facebook[stream]" value="1" {if:data.stream}checked{endif:data.stream} />
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show border}</div>
+        <div class="value">
+            <input type="hidden" name="facebook[show_border]" value="0" />
+            <input type="checkbox" name="facebook[show_border]" value="1" {if:data.show_border}checked{endif:data.show_border} />
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_comments">
+        <div class="label">{translate.Number of posts to show}</div>
+        <div class="value">
+            <input type="text" name="facebook[num_posts]" value="{data.num_posts}" size="4" />
+        </div>
+    </div>
+
+    <div class="edit_box facebook_type_comments">
+        <div class="label">{translate.Order posts by}</div>
+        <div class="value">
+            <select name="facebook[order_by]">
+                <option value="social" {if:data.order_by=social}selected{endif:data.order_by=social}>social</option>
+                <option value="reverse_time" {if:data.order_by=reverse_time}selected{endif:data.order_by=reverse_time}>reverse_time</option>
+                <option value="time" {if:data.order_by=time}selected{endif:data.order_by=time}>time</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+function SaveChanges()
+{
+    jQueryKam("#facebook_form").submit();
+    return false;
+}
+
+jQueryKam(function ($) {
+
+    $(".facebook_type input:radio").on("change", function (e) {
+        $(".facebook_type_button, .facebook_type_box").hide().filter(".facebook_type_" + this.value).show();
+    }).filter(":checked").trigger("change");
+
+});
+</script>
+{endwith:facebookWidget}

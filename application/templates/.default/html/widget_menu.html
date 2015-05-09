@@ -1,0 +1,55 @@
+{if:menu}
+
+{if:level=101}
+    <ul class="nav navbar-nav">
+    {loop:menu}
+	 {if:!menu:s1}<li class="{if:menu:s1}dropdown{endif:menu:s1} {if:active}active{endif:active}{if:!page.id}{if:!page_target} active{endif:!page_target}{endif:!page.id}" >{endif:!menu:s1}
+     {if:menu:s1}<li class="dropdown">{endif:menu:s1}
+      {if:menu:s1}<a href="{href}" class="dropdown-toggle" data-toggle="dropdown">{alt} <b class="caret"></b></a>{endif:menu:s1}
+      {if:!menu:s1}<a href="{href}"{if:target} target="{target}"{endif:target}>{alt}</a>{endif:!menu:s1}
+      {if:menu:s1}
+       <ul class="dropdown-menu">
+        {loop:menu:s1}
+         <li><a href="{href}">{alt}</a></li>
+        {endloop:menu:s1}
+       </ul>
+      {endif:menu:s1}
+     </li>
+    {endloop:menu}
+    </ul>
+    {define:level_found=1}
+{endif:level=101}
+
+
+{if:!level_found}
+        {if:title}<h4 class="subtitle">{title}</h4>{endif:title}
+	{if:!title}{if:name}<h4 class="subtitle">{name}</h4>{endif:name}{endif:!title}
+        {plain}
+	
+	{if:class=tagcloud}
+	<div class="{class}">
+	{loop:menu}
+	    <a href="{href}"{if:target} target="{target}"{endif:target}>{alt}</a>
+	{endloop:menu}
+	{endif:class=tagcloud}
+	{if:!class=tagcloud}
+	<div class="listbox1">
+	<ul>
+	{loop:menu}
+	    <li class="{if:active}current{endif:active}">
+		<a href="{href}" {if:alt_title} title="{alt_title}"{endif:alt_title} {if:target} target="{target}"{endif:target}>
+		{if:img}<img src="{uimages}/{img}" alt="{alt}" class="img" />{if:imga}<img src="{uimages}/{imga}" alt="{alt}" class="imga"/>{endif:imga}{endif:img}
+		{if:!img}{alt}{endif:!img}
+		</a>
+	    </li>
+	{endloop:menu}
+	</ul>
+	{endif:!class=tagcloud}
+	
+	
+	</div>
+        <br class="clear"/>
+{endif:!level_found}
+
+
+{endif:menu}

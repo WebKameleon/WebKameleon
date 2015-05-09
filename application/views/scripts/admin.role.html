@@ -1,0 +1,129 @@
+{include:_header.html}
+{include:_menu.html}
+
+
+<form id="role" method="post" style="padding:10px">
+    
+    <div class="km_fbtn">
+        <a class="km_fbtn_action" href="#" id="role_save">{translate.Save}</a>
+        <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+    </div>
+
+    <img src="{user.photo}?sz=120" style="float: left; margin-right:20px;"/>
+
+    <h1><a href="{root}admin/user/{user.username}">{translate.Pretend}</a> {user.fullname}, {total_time} s.</h1>
+    <h2><a href="{root}admin/user/{user.username}">{translate.Pretend}</a> {user.email}</h2>
+    
+    
+    <div class="edit_box">
+        <div class="label">{translate.Admin}</div>
+        <div class="value">
+            <input type="hidden" name="user[admin]" value="0" />
+            <input type="checkbox" name="user[admin]" value="1" {if:user.admin}checked{endif:user.admin} />
+        </div>
+    </div>
+    
+    <div class="edit_box">
+        <div class="label">{translate.Owner}: {server.nazwa_long}</div>
+        <div class="value">
+            <input type="hidden" name="right[owner]" value="0" />
+            <input type="checkbox" name="right[owner]" value="1" {if:right.owner}checked{endif:right.owner} />
+        </div>
+    </div>    
+    
+    <div class="edit_box">
+        <div class="label">{translate.FTP}: {server.nazwa_long}</div>
+        <div class="value">
+            <input type="hidden" name="right[ftp]" value="0" />
+            <input type="checkbox" name="right[ftp]" value="1" {if:right.ftp}checked{endif:right.ftp} />
+        </div>
+    </div>      
+    
+
+    <div class="edit_box">
+        <div class="label">{translate.Update}: {server.nazwa_long}</div>
+        <div class="value">
+            <input type="hidden" name="right[pages]" value="-" />
+            <input type="checkbox" name="right[pages]" value="" {if:!right.pages=-}checked{endif:!right.pages=-} onclick="this.checked?jQueryKam('#pages_text').show():jQueryKam('#pages_text').hide()"/>
+            <input type="text" name="right[pages]" value="{if:!right.pages=-}{right.pages}{endif:!right.pages=-}" id="pages_text" {if:right.pages=-}style="display: none"{endif:right.pages=-}/>
+            
+        </div>
+    </div>
+    
+    <div class="edit_box">
+        <div class="label">{translate.Menu}: {server.nazwa_long}</div>
+        <div class="value">
+            <input type="hidden" name="right[menus]" value="-" />
+            <input type="checkbox" name="right[menus]" value="" {if:!right.menus=-}checked{endif:!right.menus=-} onclick="this.checked?jQueryKam('#menus_text').show():jQueryKam('#menus_text').hide()"/>
+            <input type="text" name="right[menus]" value="{if:!right.menus=-}{right.menus}{endif:!right.menus=-}" id="menus_text" {if:right.menus=-}style="display: none"{endif:right.menus=-}/>
+            
+        </div>
+    </div>  
+   
+    <div class="edit_box">
+        <div class="label">{translate.Proof}: {server.nazwa_long}</div>
+        <div class="value">
+            <input type="hidden" name="right[proof]" value="-" />
+            <input type="checkbox" name="right[proof]" value="" {if:!right.proof=-}checked{endif:!right.proof=-} onclick="this.checked?jQueryKam('#proof_text').show():jQueryKam('#proof_text').hide()"/>
+            <input type="text" name="right[proof]" value="{if:!right.proof=-}{right.proof}{endif:!right.proof=-}" id="proof_text" {if:right.proof=-}style="display: none"{endif:right.proof=-}/>
+        </div>
+    </div>  
+       
+
+</form>
+
+<div class="km_observers">
+<table>
+{loop:logins}
+<tr>
+    <td style="text-align: right; padding-right: 40px;">{__index__}.</td>
+    <td><a href="?login={id}">{tin|kameleon.datetime}</a></td>
+    <td><a href="?login={id}">{tout|kameleon.datetime}</a></td>
+    <td colspan="2" style="text-align: right">{tout|-:$tin} sek.</td>
+</tr>
+{if:activities}
+{define:index}{__index__}{enddefine:index}
+{loop:activities}
+<tr>
+    <td style="text-align: right; padding-right: 15px;">{index}.{__index__}.</td>
+    <td style="padding-left: 10px">{nd_click|kameleon.datetime:H\:i\:s}</td>
+    <td style="padding-left: 10px">{table_name}{if:table.widget}/{table.widget}{endif:table.widget} [{lang}]</td>
+    <td style="padding-left: 10px">{click_type}</td>
+    <td style="padding-left: 10px">
+        {with:table}
+        {if:nazwa}
+            {nazwa} ({nazwa_long})
+        {endif:nazwa}
+        
+        {if:sid}
+        [{if:level}{page_id}{endif:level}{if:file_name}{id}{endif:file_name}{if:alt}{menu_id}{endif:alt}]
+        {if:!alt}{if:title}{title}{endif:title}{endif:!alt}
+        {if:alt}{alt}{endif:alt}
+        {endif:sid}
+        {endwith:table}
+    </td>
+</tr>
+
+{endloop:activities}
+{endif:activities}
+{endloop:logins}
+</table>
+</div>
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        $("#role_save").on("click", function (e) {
+    
+            $('input[style*="display: none"]').each(function() {
+                $(this).remove();
+            });
+    
+            jQueryKam('#role').submit();
+            return false;
+        });
+    });
+    
+    
+
+</script>
+

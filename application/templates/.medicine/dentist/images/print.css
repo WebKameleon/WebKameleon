@@ -1,0 +1,14 @@
+body { background-image: none; background-color: #fff;  }
+.body_header { display: none; }
+
+.body_footer { display: none; }
+
+.article .up { display: none; }
+
+.article .down { display: none; }
+
+.body_middle { width: auto; }
+
+.fb { display: none; }
+
+.butt { display: none; }

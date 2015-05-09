@@ -1,0 +1,14 @@
+{with:articleWidget}
+<div class="kmw_article">
+    {if:bgimg}
+    <a class="kmw_article_photo" href="{uimages}/{bgimg}" fancybox="1">
+        <img{if:itemtype} itemprop="image"{endif:itemtype} src="{imagesUrl}/{bgimg}" />
+    </a>
+    {endif:bgimg}
+    <div class="kmw_article_content">
+        {if:title}<{tokens.h1}{if:itemtype} itemprop="name"{endif:itemtype}>{if:more}<a href="{more_link}">{endif:more}{title}{if:more}</a>{endif:more}</{tokens.h1}>{endif:title}
+        <div class="kmw_article_text">{plain}</div>
+        {if:more}<a href="{more_link}" class="kmw_article_more">{translate.More} &raquo;</a>{endif:more}
+    </div>
+</div>
+{endwith:articleWidget}

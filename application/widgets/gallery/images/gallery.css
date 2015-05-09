@@ -1,0 +1,10 @@
+.ad-gallery .ad-nav {
+    margin : 0 auto;
+    width  : 90%;
+}
+
+.ad-gallery .ad-nav .ad-back,
+.ad-gallery .ad-nav .ad-forward {
+    height              : 100%;
+    background-position : 0 50%;
+}

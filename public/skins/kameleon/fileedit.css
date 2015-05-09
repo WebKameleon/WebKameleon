@@ -1,0 +1,25 @@
+body { font-size: 11px; font-family: Arial; background-color: #F7F8FD; margin: 0; padding:0;  }
+
+.path { padding: 6px 0; }
+
+#uploader .hint { padding-bottom: 6px; }
+#uploader .buttons { vertical-align: middle; }
+
+.filelist select { width: 100%; height: 200px; }
+
+.wfile input { vertical-align: middle; }
+
+.kol_left { width: 400px; float: left; }
+
+.kol_right { width: 400px; float: right;  }
+
+.km_prompt { border: 1px solid #000; background-color: #fff; position: absolute; width: 400px; left: 20px; top: 20px; z-index: 100004;}
+  .km_prompt .km_schowek_header { overflow: hidden; background-image: url('img/multischowek/header.jpg'); background-repeat: repeat-x; background-position: top; font-size: 18px; color: #7f7f7f; padding: 10px; }
+  .km_prompt .km_schowek_items { background-color: #D1D1D1; padding: 3px; }
+  .km_prompt .km_schowek_items ul { height: 200px; overflow: auto; margin: 0; padding: 0; display: block; background-color: #fff;}
+  .km_prompt li { background-image: url('img/multischowek/item.jpg'); background-repeat: repeat-x;  background-color: #fff; background-position: bottom; padding: 0px; margin: 0; overflow: hidden;  }
+  .km_prompt .km_schowek_items li { padding: 10px 5px; }
+  .km_prompt .km_schowek_items ul { height: 42px; }
+  .km_prompt .km_schowek_buttons { background-color: #e4e4e4; padding: 12px; }
+  .km_prompt .km_schowek_header h1 { float: left; width: auto; }
+  .km_prompt .km_close { float: right; width: 21px; height: 21px; font-size: 20px; color: #000; font-weight: bold; text-decoration: none; display: block; }

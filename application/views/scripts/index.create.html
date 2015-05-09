@@ -1,0 +1,65 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/index.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+<script type="text/javascript">
+    var aaa;
+    
+    function aaa_go()
+    {
+        var amp=aaa.href.indexOf('?');
+        location.href=aaa.href+(amp>0?'&':'?')+'a='+Math.random();
+    }
+    
+    function a_go(a)
+    {
+		if (a.hash=='#empty') {
+			alert ('{translate.Choose language version}');
+			return true;
+		}
+		else {
+			aaa=a;
+			setTimeout(aaa_go,200);
+			km_preloader_show();
+			return false;
+		}
+    }
+    
+</script>
+
+<!----- NO PAGE ----->
+<div id="no-page">
+
+  <!----- MAIN CONTENT ----->
+  <div class="container">
+   <div class="row">
+    <div class="col-md-2"><img class="img-responsive" src="{root}skins/{skin}/img/unknown.png" alt="{translate.No page}"></div>
+    <div class="col-md-10">
+     <h1>{translate.You are trying to create website contents in following language}:<span>{lang|tokens.trans} <span class="flag flag-{lang}" title="{lang|tokens.trans}"></span></span></h1>
+     <h2>{translate.Copy contents from other available language version}:</h2>
+	 
+	 {loop:langs_used}
+     <div class="radio">
+      <label><input type="radio" class="classRadioBtn" name="nameOptionsRadios" value="{root}index/copyfrom/{loop}">{loop|tokens.trans}</label>
+     </div>
+	 {endloop:langs_used}
+	 <a id="idCopyContents" class="btn btn-lg btn-primary" href="#empty" onclick="return a_go(this)" >{translate.Copy Contents}</a>
+	 <a id="return-btn" class="btn btn-lg btn-default" href="?setLang={referlang}" title="{translate.Return}">{translate.Return}</a>
+  
+	 <div class="no-page-comments">
+      <p>{translate.Always use language flag selector to switch between contents}</p>
+      <p>{translate.You can use Tools -> Google -> Translate tool, to easily and quickly translate website or edit contents manualy}</p>
+	 </div>
+   </div>
+  </div>
+ </div>
+ <!----- end MAIN CONTENT ----->
+
+ <script type="text/javascript">
+jQueryKam(function ($) {
+    $(".classRadioBtn").on("click", function (e) {
+        var value = $(this).val();
+		$("#idCopyContents").attr("href",value);
+
+    });
+});
+</script>

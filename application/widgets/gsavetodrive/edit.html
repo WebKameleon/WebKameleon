@@ -1,0 +1,35 @@
+{with:gsavetodriveWidget}
+<form id="gsavetodrive_form" method="post">
+    {include:_widget.header.html}
+
+    <div class="edit_box">
+        <div class="label">{translate.File}</div>
+        <div class="value">
+            <input type="text" name="gsavetodrive[src]" value="{data.src}" files="1" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Filename}</div>
+        <div class="value">
+            <input type="text" name="gsavetodrive[filename]" value="{data.filename}" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Sitename}</div>
+        <div class="value">
+            <input type="text" name="gsavetodrive[sitename]" value="{data.sitename}" />
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#gsavetodrive_form").submit();
+        return false;
+    }
+</script>
+{endwith:gsavetodriveWidget}

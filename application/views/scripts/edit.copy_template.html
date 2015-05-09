@@ -1,0 +1,74 @@
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="km_fbtn">
+    <a class="km_fbtn_action" href="#" id="copy_template_save">{translate.Save}</a>
+    <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+</div>
+
+
+<div class="ftp_sftp">
+
+<form method="post" id="copy_template_form">
+ 
+    <h1>{translate.Copy widget files to my template}</h1>
+
+    <ul>
+	{loop:widgets}
+	<li style="list-style: none">
+	    <input type="checkbox" name="copy_template[{widget}]" title="{name}" value="1"/>
+	    {if:exists}<b>{endif:exists}
+	    {name}
+	    {if:exists}</b> ({translate.File exists in your template}: <b>widget_{widget}.html</b>){endif:exists}
+	</li>
+	{endloop:widgets}
+    </ul>
+    
+    
+</form>
+
+</div>
+
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        $("#copy_template_save").on("click", function (e) {
+
+    
+            jQueryKam('#copy_template_form').submit();
+            return false;
+        });
+    });
+    
+    
+
+</script>

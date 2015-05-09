@@ -1,0 +1,5 @@
+{if:autor_update}{autor_update|kameleon.fullname}{endif:autor_update}{if:!autor_update}{autor|kameleon.fullname}{endif:!autor_update},
+{if:nd_create}
+{if:nd_update}{translate.Updated}: {nd_update|kameleon.datetime}{endif:nd_update}
+{if:!nd_update}{translate.Created}: {nd_create|kameleon.datetime}{endif:!nd_update}
+{endif:nd_create}

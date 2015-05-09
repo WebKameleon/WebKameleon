@@ -1,0 +1,361 @@
+<script type="text/javascript" src="{root}js/cookies.js"></script>
+<script type="text/javascript" src="{root}fileupload/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="{root}fileupload/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="{root}fileupload/jquery.fileupload.js"></script>
+<script type="text/javascript" src="{root}fileupload/jquery.fileupload-process.js"></script>
+
+<div id="km_files" {if:files.extra_class}class="{files.extra_class}"{endif:files.extra_class}>
+    <div id="km_files_left">
+        <ul>
+            <li rel="list">{translate.Home directory}</li>
+            <li rel="url">{translate.From URL}</li>
+            <li rel="upload">{translate.Send files}</li>
+        </ul>
+    </div>
+    <div id="km_files_right">
+        <div id="km_files_container">
+            <div id="km_files_list">
+                <div id="km_files_list_top">
+                    <div id="km_files_breadcrums"></div>
+                    <div id="km_files_layout">
+                        <div id="km_files_layout_list"><span></span></div>
+                        <div id="km_files_layout_tiles"><span></span></div>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <th class="th_1"></th>
+                        <th class="th_2"></th>
+                        <th class="th_3">{translate.File name}</th>
+                        <th class="th_4">{translate.Last modification}</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div id="km_files_url">
+                <div>
+                    <h2>{translate.Paste image URL}</h2>
+                    <input type="url" class="km_input" />
+                    <img src="" />
+                    <div class="noimage">{translate.Could not find image under this URL}</div>
+                </div>
+            </div>
+            <div id="km_files_upload">
+                <div>
+                    <div id="km_files_upload_dropzone">
+                        <div id="km_files_upload_info">{translate.Drag image here}</div>
+                        <div id="km_files_upload_or">{translate.Or, if you prefer}</div>
+                        <div id="km_files_upload_button">
+                            <a class="km_blue_button" href="#">
+                                <input id="fileupload" type="file" name="files[]" multiple />
+                                {translate.Choose image to upload}
+                            </a>
+                        </div>
+                        <ul id="km_files_upload_errors"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="km_files_buttons">
+            <div id="km_files_pick" class="km_blue_button">{translate.Choose}</div>
+            <div id="km_files_resize_helper">
+                <input type="checkbox" id="km_files_resize" value="1" />
+                <label for="km_files_resize">{translate.Dont resize images}</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+jQueryKam(function ($) {
+
+    var single_mode = {files.single_mode};
+    var type = "{files.type}";
+    var last_dir;
+
+    var km_files_list = function (dir) {
+        last_dir = dir;
+        KamCookie("km_files_" + type, dir);
+        km_preloader_show();
+        $.post(KAM_ROOT + "files/browse", {
+            dir : dir || "",
+            type : type
+        }, function (data) {
+            km_preloader_hide();
+            $("#km_files_list table tbody, #km_files_breadcrums").empty();
+            km_pick_check();
+            $.each(data.files, function (k, file) {
+                km_files_add(file);
+            });
+            $.each(data.breadcrumbs, function (k, file) {
+                km_breadcrumbs_add(file, k + 1 == data.breadcrumbs.length);
+            });
+            km_layout_check();
+        }, "json");
+    }
+
+    var km_breadcrumbs_add = function (file, is_last) {
+        var span = $("<span></span>").text(file.name).data("file", file);
+        if (is_last) {
+            span.addClass("last");
+        }
+        span.appendTo("#km_files_breadcrums");
+        if (is_last == false) {
+            $("<span></span>").addClass("separator").appendTo("#km_files_breadcrums");
+        }
+    }
+
+    var add_zero = function (n) {
+        return n < 10 ? "0" + n : n;
+    }
+
+    var km_files_mtime = function (t) {
+        var mtime = new Date(t * 1000),
+            now   = new Date;
+
+        return add_zero(mtime.getHours())
+             + ":"
+             + add_zero(mtime.getMinutes())
+             + " "
+             + add_zero(mtime.getDate())
+             + "."
+             + add_zero(mtime.getMonth() + 1)
+             + "."
+             + mtime.getFullYear();
+    }
+
+    var km_files_add = function (file) {
+        // checkbox
+        var td_1 = $("<td></td>").addClass("td_1");
+        // icon
+        var td_2 = $("<td></td>").addClass("td_2").append(
+            $("<span></span>").addClass("km_file_" + file.mime.split("/")[0])
+        );
+        // name
+        var td_3 = $("<td></td>").addClass("td_3").text(file.name);
+        // last modification
+        var td_4 = $("<td></td>").addClass("td_4").text(km_files_mtime(file.t));
+        if (file.mime != "directory") {
+            if (file.checked && !$("#km_files_pick").hasClass("active")) $("#km_files_pick").addClass("active");
+            $("<input />").attr("type", "checkbox").prop("checked", file.checked).appendTo(td_1);
+            $("body").one("km_layout_tiles", function (e) {
+                $("<img/>").attr("src", file.url).appendTo(td_2);
+            });
+        }
+        $("<tr></tr>").data("file", file).append(
+            td_1, td_2, td_3, td_4
+        ).appendTo("#km_files_list table tbody");
+    }
+
+    var km_pick_check = function () {
+        var tab = km_get_tab();
+        if (tab == "list")
+            km_pick_check_list();
+        if (tab == "url")
+            km_pick_check_url();
+        if (tab == "upload")
+            km_pick_check_upload();
+    }
+
+    var km_pick_check_list = function () {
+        if ($("#km_files_list table tbody input:checked").length) {
+            $("#km_files_pick").addClass("active");
+        } else {
+            $("#km_files_pick").removeClass("active");
+        }
+        $("#km_files_resize_helper").hide();
+    }
+
+    var km_pick_check_url = function () {
+        $("#km_files_url img").attr("src", $("#km_files_url input").val());
+        $("#km_files_resize_helper").hide();
+    }
+
+    var km_pick_check_upload = function () {
+        $("#km_files_pick").removeClass("active");
+        $("#km_files_upload ul").empty();
+        $("#km_files_resize_helper").show();
+    }
+
+    var km_get_tab = function () {
+        return $("#km_files_left ul li.active").attr("rel");
+    }
+
+    var km_show_tab = function (rel) {
+        $("#km_files_left ul li[rel='" + rel + "']").addClass("active").siblings().removeClass("active");
+        $("#km_files_container > *").hide().removeClass("active").filter("#km_files_" + rel).show().addClass("active");
+        $("#km_files_buttons").attr("rel", rel);
+        km_pick_check();
+    }
+
+    var km_files_pick = function (files) {
+        if (files.length) {
+            if (frameElement) {
+                parent.jQueryKam("body").trigger("picker_files", [ files ]);
+            } else {
+                $("body").trigger("picker_files", [ files ]);
+            }
+        }
+    }
+
+    $("#km_files_left ul li[rel]").on("click", function (e) {
+        km_show_tab(
+            $(this).attr("rel")
+        );
+    }).first().trigger("click");
+
+    var km_layout_check = function () {
+        var layout = $("#km_files_list table").attr("class");
+        $("body").trigger("km_layout_" + layout);
+    }
+
+    $("#km_files_layout div").on("click", function (e) {
+        $(this).siblings().removeClass("active").end().addClass("active");
+        $("#km_files_list table").removeClass().addClass(
+            this.id.split("_").pop()
+        );
+        km_layout_check();
+    }).first().trigger("click");
+
+    $("#km_files_breadcrums").on("click", "span", function (e) {
+        var file = $(this).data("file");
+        if (file) {
+            km_files_list(file.path);
+        }
+        return false;
+    });
+
+    $("#km_files_list tbody").on("click", "tr", function (e) {
+        var file = $(this).data("file");
+        if (file.mime == "directory") {
+            km_files_list(file.path);
+            return false;
+        }
+
+        var checkbox = $(this).find(":checkbox");
+        if (checkbox.is(e.target) == false) {
+            checkbox.attr("checked", !checkbox.is(":checked"));
+        }
+        if (checkbox.is(":checked")) {
+            $(this).addClass("active");
+        } else {
+            $(this).removeClass("active");
+        }
+        if (single_mode) {
+            $("#km_files_list tbody :checkbox").not(checkbox).filter(":checked").removeAttr("checked").closest("tr").removeClass("active");
+        }
+        if (frameElement) {
+            parent.jQueryKam("body").trigger("picker_file_selected", file);
+        } else {
+            $("body").trigger("picker_file_selected", file);
+        }
+        km_pick_check();
+    });
+
+    $("#km_files_url img").hide().on("load", function (e) {
+        $("#km_files_url .noimage").hide();
+        $("#km_files_pick").addClass("active");
+        $(this).show();
+    }).on("error", function (e) {
+        $(this).hide();
+        $("#km_files_pick").removeClass("active");
+        if ($(this).attr("src"))
+            $("#km_files_url .noimage").show();
+    });
+
+    $("#km_files_url input").on("keyup", km_pick_check_url);
+
+    $("#km_files_pick").on("click", function (e) {
+        if ($(this).hasClass("active")) {
+            var tab = km_get_tab(),
+                    files = [];
+
+            if (tab == "list") {
+                $("#km_files_list table tbody td.td_1 input:checkbox:checked").each(function (k) {
+                    var file = $(this).closest("tr").data("file");
+                    if (file) {
+                        files.push(file);
+                    }
+                });
+                km_files_pick(files);
+            }
+
+            if (tab == "url") {
+                var input = $("#km_files_url input");
+                km_preloader_show();
+                $.post(KAM_ROOT + "files/from_url", {
+                    type : type,
+                    dir : last_dir,
+                    url : input.val()
+                }, function (data) {
+                    km_preloader_hide();
+                    if (data.status == 1) {
+                        input.val("");
+                        $("#km_files_left ul li[rel]:first").trigger("click");
+                        km_files_list(last_dir);
+                    }
+                }, "json");
+            }
+        }
+        return false;
+    });
+
+    $("#km_files_upload .km_blue_button input").fileupload({
+        url : KAM_ROOT + "files/handle",
+        dataType : "json",
+        dropZone : $("#km_files_upload_dropzone"),
+        pasteZone : $("#km_files_upload_dropzone"),
+        singleFileUploads : false,
+        submit : function (e, data) {
+            km_pick_check_upload();
+            data.formData = {
+                dir : last_dir,
+                dont_resize : $("#km_files_resize").is(":checked") ? 1 : 0,
+                type : type
+            };
+            km_preloader_show();
+        },
+        always : function (e, data) {
+            km_preloader_hide();
+        },
+        done : function (e, data) {
+            if (data.result.errors.length == 0) {
+                km_show_tab("list");
+                km_files_list(last_dir);
+            } else {
+                $.each(data.result.errors, function (k, error) {
+                    $("<li></li>").text(error).appendTo("#km_files_upload ul");
+                });
+            }
+        },
+        progressall : function (e, data) {
+            var progress = parseInt(data.loaded * 100 / data.total, 10);
+            km_preloader_show(progress + "%");
+        }
+    });
+
+    KamCookie("km_files_" + type, function (dir) {
+        km_files_list(dir || getUrlVar("dir", ""));
+    });
+
+//    if (frameElement)
+//        $("#km_files").addClass("in_cke_editor");
+
+    var on_window_resize = function () {
+        var wD = 30;
+        var wH = $(window).height();
+        var bH = $("#km_files_buttons").outerHeight();
+
+        $("#km_files").height(wH - wD);
+        $("#km_files_container").height(wH - wD - bH);
+        $("#km_files_list table").height(wH - wD - bH - $("#km_files_list_top").outerHeight());
+        $("#km_files_upload_dropzone").height(wH - wD - bH - 2 * wD);
+    }
+
+    $(window).on("resize", on_window_resize);
+    on_window_resize();
+
+});
+</script>

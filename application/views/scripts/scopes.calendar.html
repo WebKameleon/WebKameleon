@@ -1,0 +1,70 @@
+{include:_header.html}
+
+<!----- header ----->
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+</div>
+<!----- /header ----->
+
+<!----- main ----->
+<div class="container">
+ <div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 scopes-single">	
+   <ul class="scopes">
+	
+	<!----- google calendar ----->
+    <li class="km_scopes_calendar">
+		<div class="row">
+		 <div class="col-md-12">
+		  <div class="col-md-3"><img src="http://www.google.com/images/icons/product/calendar-128.png" class="img-responsive" alt="Google Calendar" /></div>
+		  <div class="col-md-9"><h2 class="scope-title">{translate.Google Calendar}</h2><p>{translate.scope_calendar_description}</p></div>
+		 </div>
+		</div>
+    </li>
+	<div class="col-md-3 pull-right">
+	 <ul class="scopes-buttons">
+	  {if:hasAccess}<li><a href="{root}auth/get_token/calendar" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>{endif:hasAccess}  
+	  {if:!hasAccess}<li><a href="{root}auth/get_token/calendar" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!hasAccess}
+	 </ul>
+	</div>
+    <!----- /google calendar ----->
+	
+   </ul>
+  </div>
+  <div class="col-md-2"></div>
+ </div>
+</div>
+<!----- /main ----->

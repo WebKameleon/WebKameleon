@@ -1,0 +1,28 @@
+    {if:tokens.is_admin}
+    <li class="notranslate">
+        <a>{translate.Admin}</a>
+        <ul class="sf-no-icons">
+            <li><a href="{root}admin">{translate.Website list}</a></li>
+            <li><a href="{root}admin/users">{translate.Users}</a></li>
+            <li><a href="{root}observer/get" id="km_ddmenu_observer">{translate.Observer}</a></li>
+
+        </ul>
+    </li>
+    {endif:tokens.is_admin}
+
+    <li class="notranslate km_menu_help">
+        <a>{translate.Help}</a>
+            <ul>
+                <li><a id="km_ddmenu_kontakt" target="_blank" href="http://docs.webkameleon.com/">{translate.Documentation}</a></li>
+
+                <li>
+                    <a id="km_ddmenu_podglad">{translate.Guide}</a>
+                    <ul>
+                        <li>
+                            <a href="{request_uri_no_get}?settips=1-8">{translate.Getting started}</a>
+                        </li>                         
+                    </ul>
+                </li>
+
+            </ul>
+    </li>

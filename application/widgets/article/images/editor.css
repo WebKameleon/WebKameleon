@@ -1,0 +1,26 @@
+.article_photo {
+    background-image : url(photo.png);
+    width            : 80px;
+    height           : 60px;
+    float            : left;
+    margin           : 5px;
+    cursor           : pointer;
+    position         : relative;
+}
+
+.article_photo img {
+    width  : 80px;
+    height : 60px;
+    cursor : pointer;
+}
+
+.article_photo span.ui-icon {
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    display  : none;
+}
+
+.article_photo:hover img ~ span.ui-icon {
+    display : block;
+}

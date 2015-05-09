@@ -1,0 +1,178 @@
+<script type="text/javascript">
+    var KAM_ROOT = "{root}";
+</script>
+<script type="text/javascript" src="{template_images}/widgets/common/fancybox2/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="{root}js/cookies.js"></script>
+<link rel="stylesheet" type="text/css" href="{template_images}/widgets/common/fancybox2/jquery.fancybox.css" />
+
+
+<style type="text/css">
+    body {
+        overflow : {if:controller_action=get}hidden{endif:controller_action=get}{if:!controller_action=get}auto{endif:!controller_action=get};
+    }
+
+    #preview {
+        background-color : #FFFFE6;
+        border-bottom    : 1px solid #eee;
+        text-align       : center;
+        position         : relative;
+    }
+
+    #preview ul {
+        list-style : none;
+        margin     : 0;
+        padding    : 3px 0;
+        height     : 50px;
+        display    : inline-block;
+    }
+
+    #preview ul li {
+        float  : left;
+        margin : 0 5px;
+    }
+
+    #preview ul li a {
+        display             : inline-block;
+        height              : 50px;
+        width               : 50px;
+        text-indent         : -300px;
+        overflow            : hidden;
+        background-repeat   : no-repeat;
+        background-position : 50%;
+    }
+
+    #preview ul li a.edit_mode {
+        background-image : url('{root}img/edit.png');
+    }
+
+    #preview ul li a.preview_mode {
+        background-image : url('{root}img/pc.png');
+    }
+
+    #preview ul li a.ipad_mode {
+        background-image : url('{root}img/ipad_v.png');
+    }
+
+    #preview ul li a.ipad_hmode {
+        background-image : url('{root}img/ipad_h.png');
+    }
+
+    #preview ul li a.iphone_mode {
+        background-image : url('{root}img/iphone_v.png');
+    }
+
+    #preview ul li a.iphone_hmode {
+        background-image : url('{root}img/iphone_h.png');
+    }
+
+    #preview ul li a.debugger {
+        background-image : url('{root}img/debug.png');
+    }
+    
+    #preview ul li a.qr_link {
+        background-image : url('{root}qr/get?size=1&url=http%3A%2F%2F{HTTP_HOST}{root|urlencode}anonymous%2F{server.anonymous}%2F{page.id?0}%2F{lang}%2F{ver}');
+    }    
+
+    #preview ul li a.debugger img {
+        display : none;
+    }
+
+    #preview-toolbar {
+        display : none;
+    }
+
+    #preview-toggle {
+        position         : absolute;
+        width            : 50px;
+        height           : 30px;
+        margin-left      : 0px;
+        left             : 20px;
+        bottom           : 0px;
+        background-color : #FFFFE6;
+        border           : 1px solid #c0c0E6;
+        border-top       : 0;
+        margin-bottom    : -30px;
+        cursor           : pointer;
+        z-index          : 1000;
+    }
+
+    #preview-toggle div {
+        width        : 0px;
+        height       : 0px;
+        border-style : solid;
+        border-width : 0 8px 10px 8px;
+        border-color : transparent transparent #000000 transparent;
+        display      : inline-block;
+        margin-top   : 10px;
+    }
+
+    #preview-toggle.toggle div {
+        border-width : 10px 8px 0 8px;
+        border-color : #000000 transparent transparent transparent;
+    }
+
+    #preview-content {
+        overflow : auto;
+    }
+</style>
+<div id="preview">
+    <div id="preview-toolbar">
+        <ul>
+            <li><a class="edit_mode" href="{root}index/get/{page.id}?hidetopbar=0&seteditmode=1" title="{translate.Edit mode}">{translate.Edit mode}</a></li>
+            <li><a class="preview_mode" href="{root}index/get/{page.id}?hidetopbar=0&seteditmode=0" title="{translate.Preview mode}">{translate.Preview mode}</a></li>
+            <li><a class="ipad_mode" href="{root}index/ipad/{page.id}" title="{translate.iPad mode}">{translate.iPad mode}</a></li>
+            <li><a class="ipad_hmode" href="{root}index/ipadh/{page.id}" title="{translate.iPad horizontal mode}">{translate.iPad horizontal mode}</a></li>
+            <li><a class="iphone_mode" href="{root}index/phone/{page.id}" title="{translate.iPhone mode}">{translate.iPhone mode}</a></li>
+            <li><a class="iphone_hmode" href="{root}index/phoneh/{page.id}" title="{translate.iPhone horizontal mode}">{translate.iPhone horizontal mode}</a></li>
+            {if:server.owner}
+            <li><a class="qr_link" href="{root}qr/get?size=8&url=http%3A%2F%2F{HTTP_HOST}{root|urlencode}anonymous%2F{server.anonymous}%2F{page.id?0}%2F{lang}%2F{ver}" title="{translate.QR Link for your device}">{translate.QR Link for your device}</a></li>
+            {endif:server.owner}
+            {if:config.security.debug}
+            <li>{debug.__debugger__.$root/img/debugger.png}</li>
+            {endif:config.security.debug}
+        </ul>
+		{if:server.ftp}
+		
+		<a title="{translate.FTP}" style="float:right; margin-right:15px; margin-top: 12px; width:auto; height:auto; text-indent:initial;color:#fff; background-color: #4D90FE; border: 1px solid #3079ED; background-image:none;display: inline-block;font-weight: 400;text-align: center;vertical-align: middle;cursor: pointer;white-space: nowrap;padding: 6px 12px; font-size: 12px; font-family:Arial, Helvetica, sans-serif;" href="{root}ftp/get?setreferpage={page.id}">{translate.FTP}</a>
+		{endif:server.ftp}
+	</div>
+	<span id="preview-toggle" class="toggle"><div></div></span>
+</div>
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        var set_height = function () {
+            $("#preview-content").height(
+                $(window).height() - $("#preview").height()
+            );
+        }
+
+        $("#preview-toggle").on("click", function (e) {
+            $("#preview-toolbar").slideToggle(set_height);
+            $(this).toggleClass("toggle");
+            KamCookie("km_toolbar_preview", $(this).hasClass("toggle") ? "hidden" : "visible");
+        });
+
+        KamCookie("km_toolbar_preview", function (value) {
+            if (value == "hidden") {
+                $("#preview-toolbar").hide(0);
+                $("#preview-toggle").addClass("toggle");
+            } else {
+                $("#preview-toolbar").show(0);
+                $("#preview-toggle").removeClass("toggle");
+            }
+            set_height();
+        });
+
+        $(window).on("resize", set_height);
+
+        var qr;
+        $(".qr_link").on("click", function (e) {
+            if (qr == null) {
+                qr = new Image();
+                qr.src = this.href;
+            }
+            $.fancybox.open(qr);
+            return false;
+        });
+    });
+</script>

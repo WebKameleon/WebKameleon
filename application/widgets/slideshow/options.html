@@ -1,0 +1,101 @@
+<div class="edit_box">
+    <div class="label">{translate.Width}</div>
+    <div class="value">
+        <input type="text" name="{name}[width]" value="{data.width}" size="4" /> px
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Height}</div>
+    <div class="value">
+        <input type="text" name="{name}[height]" value="{data.height}" size="4" /> px
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Slide speed}</div>
+    <div class="value">
+        <input type="text" name="{name}[speed]" value="{data.speed}" size="4" /> ms
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Keep aspect ratio}</div>
+    <div class="value">
+        <input type="hidden" name="{name}[keep_ratio]" value="0" />
+        <input type="checkbox" name="{name}[keep_ratio]" value="1" {if:data.keep_ratio}checked{endif:data.keep_ratio} />
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Slide pause}</div>
+    <div class="value">
+        <input type="text" name="{name}[pause]" value="{data.pause}" size="4" /> ms
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Text position}</div>
+    <div class="value">
+        <select id="image_text_position" name="{name}[text_position]">
+            <option value="top" {if:data.text_position=top}selected{endif:data.text_position=top}>{translate.Top}</option>
+            <option value="bottom" {if:data.text_position=bottom}selected{endif:data.text_position=bottom}>{translate.Bottom}</option>
+        </select>
+    </div>
+</div>
+
+<div class="edit_box text_position">
+    <div class="label">{translate.Text size}</div>
+    <div class="value">
+        <input type="text" name="{name}[text_size]" value="{data.text_size}" size="4" /> px
+    </div>
+</div>
+
+<div class="edit_box text_position">
+    <div class="label">{translate.Text color}</div>
+    <div class="value">
+        <input type="text" name="{name}[text_color]" value="{data.text_color}" size="4" colorpicker="1" />
+    </div>
+</div>
+
+<div class="edit_box text_position">
+    <div class="label">{translate.Background color}</div>
+    <div class="value">
+        <input type="text" name="{name}[background_color]" value="{data.background_color}" size="4" colorpicker="1" />
+    </div>
+</div>
+
+<div class="edit_box text_position">
+    <div class="label">{translate.Text opacity}</div>
+    <div class="value">
+        <input type="text" name="{name}[text_opacity]" value="{data.text_opacity}" size="4" readonly slider="0:1:0.1" />
+    </div>
+</div>
+
+<div class="edit_box text_position">
+    <div class="label">{translate.Text align}</div>
+    <div class="value">
+        <input type="radio" id="image_text_left" name="{name}[text_align]" value="left" {if:data.text_align=left}checked{endif:data.text_align=left} />
+        <label for="image_text_left">{translate.Left}</label>
+        <input type="radio" id="image_text_right" name="{name}[text_align]" value="right" {if:data.text_align=right}checked{endif:data.text_align=right} />
+        <label for="image_text_right">{translate.Right}</label>
+    </div>
+</div>
+
+<div class="edit_box text_position">
+    <div class="label">{translate.Slides character style}</div>
+    <div class="value">
+        <select name="{name}[pager_style]">
+            <option value="circle" {if:data.pager_style=circle}selected{endif:data.pager_style=circle}>{translate.Circle}</option>
+            <option value="square" {if:data.pager_style=square}selected{endif:data.pager_style=square}>{translate.Square}</option>
+        </select>
+    </div>
+</div>
+
+<script type="text/javascript">
+jQueryKam(function ($) {
+    $("#image_text_position").on("change", function (e) {
+        $(".text_position").toggle(this.value != "none");
+    }).trigger("change");
+});
+</script>

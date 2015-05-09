@@ -1,0 +1,52 @@
+.yt-list {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+    overflow   : hidden;
+}
+
+.yt-list h1 {
+    margin : 20px;
+}
+
+.yt-list li {
+    float        : left;
+    width        : 150px;
+    height       : 150px;
+    margin-right : 15px;
+    margin-bottom: 10px;
+    border       : 2px solid transparent;
+    text-align   : center;
+}
+
+.yt-list li.active {
+    border : 2px solid #f00;
+}
+
+.yt-list li > * {
+    display : block;
+}
+
+.yt-list li img {
+    cursor : pointer;
+    margin : 0 auto;
+}
+
+.yt-list li a {
+    text-decoration : none;
+    color           : #2793e6;
+}
+
+.yt-list li a:hover {
+    text-decoration : underline;
+}
+
+.yt-list-videos {
+    border-top  : 1px solid #E5E5E5;
+    padding-top : 10px;
+    display     : none;
+}
+
+#yt_video_id {
+    width : 80%;
+}

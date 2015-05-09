@@ -1,0 +1,54 @@
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="{root}skins/kameleon/payment.css">
+
+{include:_header.html}
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" href="{root}wizard">{translate.Return}</a>
+</div>
+
+<div id="payment_content">
+    <h1>{translate.Payment for website}</h1>
+
+    <div class="row">
+            <div class="col-md-12">
+			    <div class="preview">
+                {payment.server|tokens.get_expire_info}
+                <img src="{root}thumb/{payment.server.id}" title="{payment.server.nazwa_long}"/> 
+				<p><strong>{payment.server.nazwa_long}</strong></p>
+				</div>
+            </div>
+            <div class="col-md-12">
+
+                <p class="info">{translate.To pay} <strong>{payment.info.total}{payment.info.currency}</strong>/{translate.year}</p>
+                <p class="license">{translate.Payment includes a license to access the webkameleon and maintenance of website until} <strong>{payment.server.payment_expire}</strong></p>
+				{if:payment.info.template_price}
+				<p class="license">{translate. Included additional price for template license} <strong>{payment.info.template_price}{payment.info.currency}</strong></p>				
+				{endif:payment.info.template_price}
+                <p class="small invoice">{payment.info.invoice_info}</p>
+				<div class="payment">
+					{if:payment.info.payu}
+					<div>
+						<a class="btn btn-success" href="{root}payment/payu/{payment.server.id}">{translate.Pay with PayU}</a>
+						<p>{translate.immediate realization}</p>
+					</div>
+					{endif:payment.info.payu}
+	
+					{if:payment.info.paypal}
+					<div>
+						<a class="btn btn-primary" href="{root}payment/paypal/{payment.server.id}"><span class="glyphicon glyphicon-credit-card"></span>{translate.Pay with PayPal}</a>
+						<p>{translate.immediate realization}</p>
+					</div>
+                {endif:payment.info.paypal}
+				
+				{if:payment.info.bank_transfer}
+					<div>
+						<a class="btn btn-default" href="{root}payment/bank_transfer/{payment.server.id}">{translate.Pay with bank transfer}</a>
+						<p>{translate.realization service after booking means}</p>
+					</div>
+					{endif:payment.info.bank_transfer}
+				</div>
+            </div>
+  </div>
+</div>
+

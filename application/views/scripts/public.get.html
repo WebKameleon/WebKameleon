@@ -1,0 +1,86 @@
+<script type="text/javascript">
+    var aaa;
+    
+    function aaa_go()
+    {
+        var amp=aaa.href.indexOf('?');
+        location.href=aaa.href+(amp>0?'&':'?')+'a='+Math.random();
+    }
+    
+    function a_go(a)
+    {
+        aaa=a;
+        setTimeout(aaa_go,200);
+        km_preloader_show();
+        return false;
+    }
+    
+</script>
+
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/header.css">
+
+<div class="col-md-12 wk-container wk-bg-grey" style="margin:0px; padding:0px;">
+ 
+ <div class="row">
+   <div class="col-md-6 km_logo_holder">
+    {if:!controller_name=wizard}
+     <a href="{root}index/get/{if:controller_name=index}{page.id}{endif:controller_name=index}{if:!controller_name=index}{referpage?0}{endif:!controller_name=index}" class="km_logo">WebKameleon</a>
+    {endif:!controller_name=wizard}
+    
+	{if:controller_name=wizard}
+     <a href="{root}wizard" class="km_logo">WebKameleon</a>
+    {endif:controller_name=wizard}
+   </div>
+   
+   <div class="col-md-6">
+    <a class="btn btn-primary wk-btn-login" href="{root}auth" onClick="return a_go(this)">{translate.Log in}</a>
+   </div>
+ </div>
+
+ <div class="row">
+  <div class="col-xs-12">
+   <div class="km_error_div">{tokens.error}</div>
+  </div>
+ </div>
+ 
+</div>
+
+
+
+<!-- LOGOWANIE -->
+<div class="wk-container">
+<div id="login_page" class="col-md-12">
+    <h1>{translate.Welcome!}</h1>
+    <div class="a">{translate.To create new service, click create service button}</div>
+    <div class="b">
+        <a class="btn btn-danger wk-btn-create" href="{root}wizard/create{if:return_url}?return_url={return_url|base64_encode}{endif:return_url}" onclick="return a_go(this)">{translate.Create service}</a>
+    </div>
+    <div class="c">{translate.Google account required}</div>
+    <div class="d">
+        {translate.if you dont have gmail, create}
+        <a href="http://www.gammanet.pl/google-apps-for-business" target="_blank">{translate.business account}</a>
+        {translate.or free}
+        <a href="https://accounts.google.com/SignUp?service=mail" target="_blank">{translate.personal account}</a>
+        {translate.in few minutes}
+    </div>
+</div>
+</div>
+
+<div class="container-fluid wk-container">
+<div class="km_promo">
+	<ul class="col-md-12">
+		<li class="km_promo_one col-md-4">{translate.Choose template}</li>
+		<li class="km_promo_two col-md-4">{translate.Edit contents}</li>
+		<li class="km_promo_three col-md-4">{translate.Publish, that's it!}</li>
+	</ul>
+</div>
+</div>
+<div class="push"></div>
+
+<!-- end LOGOWANIE -->
+
+
+
+
+
+

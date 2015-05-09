@@ -1,0 +1,321 @@
+<style type="text/css">
+    li.jstree-leaf > a > ins.jstree-icon {
+        background-image    : url({root}skins/kameleon/jstree/tree_strona.gif);
+        background-position : 0 !important;
+    }
+
+    li.jstree-hidden > a {
+        text-decoration : line-through;
+    }
+
+    li.jstree-nositemap > a > ins.jstree-icon {
+        background-image    : url({root}skins/kameleon/jstree/i_nsm.gif);
+        background-position : 0 !important;
+    }
+
+    #vakata-contextmenu {
+        width : 250px;
+    }
+
+    #vakata-contextmenu ul li ins {
+        width               : 25px;
+        height              : 20px;
+        background-repeat   : no-repeat;
+        background-position : top left;
+    }
+
+    #vakata-contextmenu ul li a {
+        line-height : 20px;
+    }
+
+    #vakata-contextmenu ul li ins.create_page {
+        background-image : url({root}skins/kameleon/jstree/i_addpage.gif);
+    }
+
+    #vakata-contextmenu ul li ins.edit_page {
+        background-image : url({root}skins/kameleon/jstree/i_property.gif);
+    }
+
+    #vakata-contextmenu ul li ins.remove_page {
+        background-image : url({root}skins/kameleon/jstree/i_delete.gif);
+    }
+
+    #vakata-contextmenu ul li ins.rename_page {
+        background-image : url({root}skins/kameleon/jstree/i_title.gif);
+    }
+
+    #vakata-contextmenu ul li ins.copy_page {
+        background-image : url({root}skins/kameleon/jstree/i_copy.gif);
+    }
+
+    #vakata-contextmenu ul li ins.paste_page {
+        background-image : url({root}skins/kameleon/jstree/i_paste.gif);
+    }
+
+    #vakata-contextmenu ul li ins.visibility_page {
+        background-image : url({root}skins/kameleon/jstree/i_visible.gif);
+    }
+
+    #vakata-contextmenu ul li ins.nositemap_page {
+        background-image : url({root}skins/kameleon/jstree/i_sm.gif);
+    }
+
+    #jsTreeLangs {
+
+        margin-bottom : 20px;
+        border-bottom : 1px solid black;
+    }
+
+    #jsTreeLangs ul {
+        list-style : none;
+        padding    : 10px;
+        margin     : 0;
+        overflow   : hidden;
+    }
+
+    #jsTreeLangs ul li {
+        float       : left;
+        margin-left : 10px;
+    }
+
+    #jsTreeLangs ul li:first-child {
+        margin-left : 0;
+    }
+
+    #jsTreeLangs ul li.active a {
+        font-weight : bold;
+    }
+</style>
+
+<script type="text/javascript" src="{root}jsTree/jquery.jstree.js"></script>
+<script type="text/javascript">
+jQueryKam(function ($) {
+    var explorer_mode  = "{jstree.explorer_mode}",
+        initially_load = "{jstree.initially_load}".split("#");
+
+    var jstree_options = {
+        core : {
+            html_titles : true,
+            initially_open : ["{jstree.initially_open}"],
+            initially_load : initially_load
+        },
+        plugins : ["themes", "json_data", "ui"],
+        themes : {
+            theme : "classic"
+        },
+        json_data : {
+            ajax : {
+                url : "{root}tree/connector",
+                data : function (n) {
+                    var ret = {
+                        lang : "{jstree.lang}"
+                    };
+                    if (n != -1) {
+                        var metadata = $(n[0]).data();
+                        ret.prev = metadata.id;
+                    }
+                    return ret;
+                }
+            }
+        },
+        ui : {
+            select_limit : 1,
+            initially_select : ["{jstree.initially_select}"]
+        }
+    };
+
+    if (explorer_mode == 1) {
+//        jstree_options.plugins.push("cookies");
+//        jstree_options.cookies = {
+//            save_opened : true,
+//            save_selected : true,
+//            auto_save : true
+//        }
+        jstree_options.plugins.push("contextmenu");
+        jstree_options.contextmenu = {
+            items : {
+                create : {
+                    label : "{translate.New page}",
+                    icon : "create_page",
+                    action : function (node) {
+                        km_tree_ajax("ajax/tree_add_page", null, node, this);
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                ccp : {
+                    label : "{translate.Edit}",
+                    icon : "edit_page",
+                    action : function (node) {
+                        document.location = KAM_ROOT + "index/edit/" + km_tree_get_node_id(node) + "?return_url=" + getReturnUrl();
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                remove: {
+                    label : "{translate.Delete}",
+                    icon : "remove_page",
+                    action : function (node) {
+                        var tree = this;
+                        var html = '{translate.Are you sure you want to delete}?'
+                                 + '<div class="km_dialog_block" style="margin-top: 10px;">'
+                                 + '<input type="checkbox" id="km_tree_whole_tree" checked />'
+                                 + '<label for="km_tree_whole_tree">{translate.Remove all sub pages}</label>'
+                                 + '</div>';
+
+                        KamConfirm(html, function () {
+                            km_tree_ajax("ajax/tree_remove_page", {
+                                whole_tree : $("#km_tree_whole_tree").is(":checked") ? 1 : 0
+                            }, node, tree);
+                        });
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                rename: {
+                    label : "{translate.Rename}",
+                    icon : "rename_page",
+                    action : function (node) {
+                        var tree = this;
+                        KamPrompt("{translate.Page title}", null, function (title) {
+                            if (title) {
+                                km_tree_ajax("ajax/tree_rename_page", {
+                                    title : title
+                                }, node, tree);
+                            }
+                        }, $.trim(node.data("title")));
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                copy: {
+                    label : "{translate.Copy}",
+                    icon : "copy_page",
+                    action : function (node) {
+                        copyToClib(node.data("sid"), "page");
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                paste: {
+                    label : "{translate.Paste}",
+                    icon : "paste_page",
+                    action : function (node) {
+                        km_paste_bymulti(node.data("id"), "page", true);
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                visibility: {
+                    label : "{translate.Page invisible}",
+                    icon : "visibility_page",
+                    action : function (node) {
+                        var tree = this;
+                        KamConfirm("{translate.Do you want to change whole tree}?", function () {
+                            km_tree_ajax("ajax/tree_change_visibility", {
+                                whole_tree : 1
+                            }, node, tree);
+                        }, function () {
+                            km_tree_ajax("ajax/tree_change_visibility", null, node, tree);
+                        });
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                },
+                nositemap : {
+                    label : "{translate.Page invisible in sitemap}",
+                    icon : "nositemap_page",
+                    action : function (node) {
+                        var tree = this;
+                        KamConfirm("{translate.Do you want to change whole tree}?", function () {
+                            km_tree_ajax("ajax/tree_change_nositemap", {
+                                whole_tree : 1
+                            }, node, tree);
+                        }, function () {
+                            km_tree_ajax("ajax/tree_change_nositemap", null, node, tree);
+                        });
+                    },
+                    separator_before : false,
+                    separator_after : false,
+                    submenu : null
+                }
+            }
+        }
+
+        $("body").bind("tree_node_selected", function (e, data) {
+            if (data.id > -1) {
+                document.location = KAM_ROOT + "index/get/" + data.id;
+            }
+        });
+    }
+
+    var km_tree_get_node_id = function (node) {
+        return $(node).attr("id").split("_")[1];
+    }
+
+    var km_tree_ajax = function (action, params, node, tree) {
+        params = params || {};
+        params.referer = km_tree_get_node_id(node);
+        km_preloader_show();
+        $.post(KAM_ROOT + action, params, function (data) {
+            km_preloader_hide();
+            tree.refresh(tree._get_parent(node));
+
+            if (typeof(data.redirect)!='undefined' && data.redirect!=null && data.redirect.length>0)
+            {
+                location.href=data.redirect;
+            }
+            
+            
+        }, "json");
+    }
+
+    $("#jsTree").bind("select_node.jstree", function (e, data) {
+        if (data.rslt.e) {
+            var node = $(this).jstree("get_selected")[0];
+            var metadata = $(node).data();
+            {if:!jstree.lang=$lang}
+            metadata.id = "{jstree.lang}:" + metadata.id;
+            {endif:!jstree.lang=$lang}
+            if (frameElement) {
+                parent.jQueryKam("body").trigger("tree_node_selected", metadata);
+            } else {
+                $("body").trigger("tree_node_selected", metadata);
+            }
+        }
+    }).bind("after_open.jstree reopen.jstree refresh.jstree", function (e, data) {
+        $.each(data.inst._get_children(data.rslt.obj), function (k, node_id) {
+            var metadata = $(node_id).data();
+            if (metadata.hidden) {
+                $(node_id).addClass("jstree-hidden");
+            }
+            if (metadata.nositemap) {
+                $(node_id).addClass("jstree-nositemap");
+            }
+        });
+    }).jstree(jstree_options);
+
+    $("body").on("click", ".km_schowek_items a[rel='page']", function (e) {
+        var href = this.href;
+
+        KamConfirm("{translate.Do you want to copy whole tree}?", function () {
+            window.location = href + "&wholeTree=1";
+        }, function () {
+            window.location = href + "&wholeTree=0";
+        });
+
+        return false;
+    });
+});
+</script>
+{if:jstree.multi_langs}
+<div id="jsTreeLangs">{jstree.lang|tokens.get_langs_ul_html}</div>
+{endif:jstree.multi_langs}
+<div id="jsTree"></div>

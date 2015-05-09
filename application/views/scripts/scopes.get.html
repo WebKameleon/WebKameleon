@@ -1,0 +1,320 @@
+{include:_header.html}
+
+<!----- header ----->
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" href="{root}index/get/{referpage}">{translate.Return}</a>
+</div>
+<!----- /header ----->
+
+
+<!----- main ----->
+<div class="container">
+ <div class="row">
+  <div class="col-md-12">
+  
+    <h1 class="scopes-title">{translate.List of Scopes}</h1>
+
+	<ul class="scopes">
+            
+            {if:oauth.scopes.drive}
+            <!----- google drive ----->
+            <li class="km_scopes_drive">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/drive-32.png" class="img-responsive scope-title-img" alt="Google Drive" /><h3 class="scope-title">{translate.Google Drive}
+                          
+                          {if:user|hasAccess:drive}
+                                        <a href="{root}scopes/remove/drive" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:drive} 
+                          
+                          </h3><p>{translate.scope_drive_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:drive}
+                                        {if:scopes.drive.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.drive.valid}
+                                        {if:!scopes.drive.valid}
+                                        <li><a href="{root}scopes/drive" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.drive.valid}
+                                {endif:user|hasAccess:drive}  
+                                {if:!user|hasAccess:drive}<li><a href="{root}scopes/drive" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:drive}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google drive ----->
+            {endif:oauth.scopes.drive}
+            
+            {if:oauth.scopes.calendar}
+            <!----- google calendar ----->
+            <li class="km_scopes_calendar">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/calendar-32.png" class="img-responsive scope-title-img" alt="Google Calendar" /><h3 class="scope-title">{translate.Google Calendar}
+                          
+                           {if:user|hasAccess:calendar}
+                                        <a href="{root}scopes/remove/calendar" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:calendar} 
+                          
+                          </h3><p>{translate.scope_calendar_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:calendar}
+                                        {if:scopes.calendar.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.calendar.valid}
+                                        {if:!scopes.calendar.valid}
+                                        <li><a href="{root}scopes/calendar" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.calendar.valid}
+                                {endif:user|hasAccess:calendar}  
+                                {if:!user|hasAccess:calendar}<li><a href="{root}scopes/calendar" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:calendar}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google calendar ----->
+            {endif:oauth.scopes.calendar}
+            
+            {if:oauth.scopes.mail}
+                <!----- google mail ----->
+            <li class="km_scopes_gmail">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/googlemail-32.png" class="img-responsive scope-title-img" alt="Google Mail" /><h3 class="scope-title">{translate.Google Mail}
+                          
+                          {if:user|hasAccess:mail}
+                                        <a href="{root}scopes/remove/mail" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:mail} 
+                          
+                          </h3><p>{translate.scope_mail_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:mail}
+                                        {if:scopes.mail.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.mail.valid}
+                                        {if:!scopes.mail.valid}
+                                        <li><a href="{root}scopes/mail" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.mail.valid}
+                                {endif:user|hasAccess:mail}  
+                                {if:!user|hasAccess:mail}<li><a href="{root}scopes/mail" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:mail}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google mail ----->
+            {endif:oauth.scopes.mail}
+            
+            {if:oauth.scopes.youtube}    
+            <!----- google youtube ----->
+            <li class="km_scopes_youtube">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/youtube-32.png" class="img-responsive scope-title-img" alt="Google Youtube" /><h3 class="scope-title">{translate.Google Youtube}
+                          
+                          {if:user|hasAccess:youtube}
+                                        <a href="{root}scopes/remove/youtube" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:youtube} 
+                          
+                          </h3><p>{translate.scope_youtube_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:youtube}
+                                        {if:scopes.youtube.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.youtube.valid}
+                                        {if:!scopes.youtube.valid}
+                                        <li><a href="{root}scopes/youtube" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.youtube.valid}
+                                {endif:user|hasAccess:youtube}  
+                                {if:!user|hasAccess:youtube}<li><a href="{root}scopes/youtube" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:youtube}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google youtube ----->
+            {endif:oauth.scopes.youtube}
+                
+            {if:oauth.scopes.analytics}
+            <!----- google analytics ----->
+            <li class="km_scopes_analytics">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/analytics-32.png" class="img-responsive scope-title-img" alt="Google Analytics" /><h3 class="scope-title">{translate.Google Analytics}
+                          
+                          {if:user|hasAccess:analytics}
+                                        <a href="{root}scopes/remove/analytics" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:analytics} 
+                          
+                          </h3><p>{translate.scope_analytics_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:analytics}
+                                        {if:scopes.analytics.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.analytics.valid}
+                                        {if:!scopes.analytics.valid}
+                                        <li><a href="{root}scopes/analytics" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.analytics.valid}
+                                {endif:user|hasAccess:analytics}  
+                                {if:!user|hasAccess:analytics}<li><a href="{root}scopes/analytics" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:analytics}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google analytics ----->
+            {endif:oauth.scopes.analytics}
+                
+            {if:oauth.scopes.appengine}
+                <!----- google appengine ----->
+            <li class="km_scopes_appengine">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/app_engine-32.png" class="img-responsive scope-title-img" alt="Google AppEngine" /><h3 class="scope-title">{translate.Google AppEngine}
+                          
+                          {if:user|hasAccess:appengine}
+                                        <a href="{root}scopes/remove/appengine" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:appengine} 
+                          
+                          </h3><p>{translate.scope_appengine_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:appengine}
+                                        {if:scopes.appengine.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.appengine.valid}
+                                        {if:!scopes.appengine.valid}
+                                        <li><a href="{root}scopes/appengine" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.appengine.valid}
+                                {endif:user|hasAccess:appengine}  
+                                {if:!user|hasAccess:appengine}<li><a href="{root}scopes/appengine" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:appengine}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google appengine ----->
+            {endif:oauth.scopes.appengine}
+            
+            {if:oauth.scopes.spreadsheets}    
+            <!----- google spreadsheets ----->
+            <li class="km_scopes_spreadsheets">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/spreadsheets-32.png" class="img-responsive scope-title-img" alt="Google Spreadsheets" /><h3 class="scope-title">{translate.Google Spreadsheets}
+                          
+                          {if:user|hasAccess:spreadsheets}
+                                        <a href="{root}scopes/remove/spreadsheets" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:spreadsheets} 
+                          
+                          </h3><p>{translate.scope_spreadsheets_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:spreadsheets}
+                                        {if:scopes.spreadsheets.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.spreadsheets.valid}
+                                        {if:!scopes.spreadsheets.valid}
+                                        <li><a href="{root}scopes/spreadsheets" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.spreadsheets.valid}
+                                {endif:user|hasAccess:spreadsheets}  
+                                {if:!user|hasAccess:spreadsheets}<li><a href="{root}scopes/spreadsheets" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:spreadsheets}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google spreadsheets ----->
+            {endif:oauth.scopes.spreadsheets}
+        
+        
+            {if:oauth.scopes.gcs}    
+            <!----- google gcs ----->
+            <li class="km_scopes_gcs">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/icons/product/cloud_storage-32.png" class="img-responsive scope-title-img" alt="Google Cloud Storage" /><h3 class="scope-title">{translate.Google Cloud Storage}
+                          
+                          {if:user|hasAccess:gcs}
+                                        <a href="{root}scopes/remove/gcs" class="btn btn-sm btn-default">{translate.Remove Key} </a>
+                          {endif:user|hasAccess:gcs} 
+                          
+                          </h3><p>{translate.scope_gcs_description}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                            {if:user|hasAccess:gcs}
+                                        {if:scopes.gcs.valid}
+                                        <li><i class="glyphicon glyphicon-ok"></i></li>
+                                        {endif:scopes.gcs.valid}
+                                        {if:!scopes.gcs.valid}
+                                        <li><a href="{root}scopes/gcs" class="btn btn-sm btn-success">{translate.Regrant Access} <i class="glyphicon glyphicon-retweet"></i></a></li>			
+                                        {endif:!scopes.gcs.valid}
+                                {endif:user|hasAccess:gcs}  
+                                {if:!user|hasAccess:gcs}<li><a href="{root}scopes/gcs" class="btn btn-sm btn-primary">{translate.Grant Access} <i class="glyphicon glyphicon-ok"></i></a></li>{endif:!user|hasAccess:gcs}
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google gcs ----->
+            {endif:oauth.scopes.gcs}
+        
+                <!----- google all ----->
+            <li class="km_scopes_spreadsheets">
+                        <div class="row">
+                         <div class="col-md-12">
+                          <div class="col-md-9"><img src="http://www.google.com/images/google_favicon_128.png" class="img-responsive scope-title-img" alt="Google" style="max-width:32px;" /><h3 class="scope-title">{translate.Revoke All}</h3><p>{translate.Revoke all grants}</p></div>
+                          <div class="col-md-3">
+                           <ul class="scopes-buttons">
+                                <li><a href="https://security.google.com/settings/security/permissions" class="btn btn-sm btn-danger">{translate.Revoke All}</a></li>
+                           </ul>
+                          </div>
+                         </div>
+                        </div>
+            </li>
+            <!----- /google all ----->
+	
+
+</ul>
+  </div>
+ </div>
+</div>
+<!----- main ----->

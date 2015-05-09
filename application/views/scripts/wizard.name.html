@@ -1,0 +1,184 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/wizard.css">
+{include:_header.html}
+
+{with:wizard}
+<div class="container">
+<div class="row">
+<div class="col-md-3"></div>
+	 <form method="post" id="km_wizard_form" class="km_wizard_form_name col-md-6">
+	<div class="col-md-12 wizard-form-top">
+	{if:!drive}
+		<div class="col-md-12  template-name">{template|tokens.template_name}</div>
+		{endif:!drive}
+		
+ 		<div class="col-md-6 preview-img">
+			{if:drive}<img src="{root}img/logo_drive.png" />{endif:drive}
+			{if:!drive}<img class="wizard_name shadow" src="{root}thumb/{template|base64_encode}" />{endif:!drive}
+		</div>
+			
+		
+		<div class="col-md-6 details">
+			<p class="author">{translate.Author}: 
+			 <strong>{if:drive}{author}{endif:drive}{if:!drive}{template|tokens.template_author}{endif:!drive}</strong>
+			</p>
+			{if:info.template_price}<p class="license">{translate.Template license}: <a>{info.template_price} {info.currency}</a> </p>{endif:info.template_price}
+			{if:!info.template_price}<p class="license">{translate.Template license}: <a>free</a> </p>{endif:!info.template_price}
+		</div>
+		
+    </div>
+	
+    <div class="col-md-12">
+	 <div class="col-md-12">
+      <input type="text" id="km_wizard_name" class="km_wizard_input" name="wizard[name]" value="{suggested_name?}" placeholder="{translate.Enter service name}"/>
+	 </div>
+	 
+	 {if:user.admin}
+	 <!---- 3hR2jd5 -->
+	 <fieldset style="margin: 100px 15px 5px 15px; border:dashed 1px black;padding: 10px">
+		<legend style="display: inline">{translate.Admin only}: {translate.import contents from another server}</legend>
+
+		<input type="text" name="import[server]" style="width: 110px" placeholder="{translate.server}" value="{import.server?}"/>
+		<input type="text" name="import[port]" style="width: 35px" placeholder="{translate.port}" value="{import.port?5432}"/>
+			
+		<input type="text" name="import[user]" style="width: 70px" placeholder="{translate.user}" value="{import.user?}"/>
+		<input type="password" name="import[pass]" style="width: 70px" placeholder="{translate.password}" value="{import.pass?}"/>
+		
+		<input type="text" name="import[db]" style="width: 70px" placeholder="{translate.database}" value="{import.db?}"/>
+		<input type="text" name="import[website]" style="width: 90px" placeholder="{translate.website}" value="{import.website?}"/>
+		<input type="text" name="import[ver]" style="width: 22px" placeholder="{translate.ver}" value="{import.ver?1}"/>
+	 
+		{debug.import}
+	 
+		{define:pagetypesoptions}
+			{loop:import.template.types}
+				<option value="{__loop__}">{name}</option>
+			{endloop:import.template.types}
+		{enddefine:pagetypesoptions}
+	 
+	 
+	 
+		{define:headerlevels}
+			{with:import.template}
+			{loop:levels.header}
+				<option value="{__loop__}">{loop}</option>
+			{endloop:levels.header}
+			{endwith:import.template}
+		{enddefine:headerlevels}
+
+		{define:bodylevels}
+			{with:import.template}
+			{loop:levels.body}
+				<option value="{__loop__}">{loop}</option>
+				<option value="-{__loop__}">{loop} (repeated)</option>
+			{endloop:levels.body}
+			{endwith:import.template}
+		{enddefine:bodylevels}		
+		
+		{define:footerlevels}
+			{with:import.template}
+			{loop:levels.footer}
+				<option value="{__loop__}">{loop}</option>
+			{endloop:levels.footer}
+			{endwith:import.template}
+		{enddefine:footerlevels}
+		
+		<hr size="1"/>
+	 
+		{loop:import.types}
+			<div>
+				PAGE TYPE={type} ({count} pages) ->
+				<select name="import[transcode][type][{type}]" rel="{import.transcode.type.$type}" class="select2select">
+					<option value="">{translate.Choose}</option>
+					{pagetypesoptions}
+				</select>
+			</div>
+		{endloop:import.types}
+	 
+		<hr size="1"/>
+		{loop:import.levels_hf}
+		{if:part=header}
+			<div>
+				HEADER LEVEL={level}, TYPE={type} ({count} boxes) ->
+				<select name="import[transcode][level-hf][{page_id}][{level}]" rel="{import.transcode.level-hf.$page_id.$level}" class="select2select">
+					<option value="">{translate.Choose}</option>
+					{headerlevels}
+				</select>
+			</div>			
+		{endif:part=header}
+		{endloop:import.levels_hf}
+
+		<hr size="1"/>
+	 
+		{loop:import.levels_body}
+			<div>
+				BODY LEVEL={level} ({count} boxes) ->
+				<select name="import[transcode][level-body][{level}]" rel="{import.transcode.level-body.$level}" class="select2select">
+					<option value="">{translate.Choose}</option>
+					{bodylevels}
+				</select>
+			</div>			
+		{endloop:import.levels_body}
+
+		<hr size="1"/>
+
+		{loop:import.levels_hf}
+		{if:part=footer}
+			<div>
+				FOOTER LEVEL={level}, TYPE={type} ({count} boxes) ->
+				<select name="import[transcode][level-hf][{page_id}][{level}]" rel="{import.transcode.level-hf.$page_id.$level}" class="select2select">
+					<option value="">{translate.Choose}</option>
+					{footerlevels}
+				</select>
+			</div>			
+		{endif:part=footer}
+		{endloop:import.levels_hf}
+		
+		
+		
+
+	 
+	 </fieldset>
+	 
+	 {endif:user.admin}
+	 
+	 <div class="col-md-12 buttons-name">
+		<a class="btn btn-lg btn-default" href="{root}wizard/create">{translate.Return}</a>
+        <input type="button" id="km_wizard_create_submit" class="btn btn-lg btn-success" value="{translate.Create}" />
+	 </div>
+    </div>
+	</form>
+<div class="col-md-3"></div>	
+</div>
+</div>
+{endwith:wizard}
+
+<script type="text/javascript">
+jQueryKam(function ($) {
+	
+	$('.select2select').each(function() {
+		$(this).val($(this).attr('rel'));
+	});	
+
+	
+    $("#km_wizard_create_submit").on("click", function (e) {
+        var name = $("#km_wizard_name").val();
+
+        if (name.length == 0) {
+            KamDialog(tr("Please enter service name"));
+            return false;
+        }
+
+        if (name.length > 40) {
+            KamDialog(tr("Please enter shorter service name"));
+            return false;
+        }
+            
+        km_preloader_show();
+        
+        setTimeout(function(){
+            $("#km_wizard_form").submit();
+        },200)
+        return true
+    });
+});
+</script>

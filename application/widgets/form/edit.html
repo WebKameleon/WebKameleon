@@ -1,0 +1,58 @@
+{with:formWidget}
+
+<style>
+    #share_warning {
+        padding-left: 20px;
+        font-size: 18px;
+        color: red;
+        display: none;
+    }
+</style>
+
+
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+    <!--<h1><a href="{data.form.alternateLink}" target="_blank" id="edit_link">{translate.Google Drive Form}</a></h1>-->
+    <div class="km-form-nav"><a class="km-form-mamge-btn" href="{data.form.alternateLink}" target="_blank" id="edit_link">Zarzadzaj</a><div class="clearfix"></div></div>
+    <div class="edit_box">
+        <div class="label">{translate.Width}</div>
+        <div class="value">
+            <input type="text" name="{name}[width]" value="{data.width}" size="4" />
+        </div>
+    </div>
+    
+    <div class="edit_box">
+        <div class="label">{translate.Send}</div>
+        <div class="value">
+            <input type="text" name="{name}[send]" value="{data.send}" id="sendButton" size="20" />
+        </div>
+    </div>     
+    
+</form>
+
+<iframe style="width:100%; height:100%; overflow-x:hidden;" src="{data.url}"></iframe>
+
+
+
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+
+    {if.data.form.title}
+    jQueryKam('#edit_link').html(jQueryKam('#edit_link').html()+' - {data.form.title}');
+    {endif.data.form.title}
+    
+    {if:!data.send}
+    jQueryKam("#sendButton").val('{translates.Send}');
+    {endif:!data.send}
+    
+
+</script>
+
+
+
+{endwith:formWidget}

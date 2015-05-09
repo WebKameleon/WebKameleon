@@ -1,0 +1,78 @@
+{include:_header.html}
+{include:_menu.html}
+
+{if:event}
+<div class="km_fbtn">
+    <a class="km_fbtn_action" href="{root}observer/add/{event}">{translate.DODAJ}</a>
+    <a href="{root}observer/get" class="km_fbtn_normal">{translate.Return}</a>
+    <a href="{root}observer/test/{event}" class="km_fbtn_action">{translate.Test}</a>
+    
+</div>
+{endif:event}
+
+<div class="km_observers">
+    {if:list}
+    <table id="km_observer_list">
+        <thead>
+            <tr>
+                <th>{translate.Event}</th>
+                <th>{translate.Number of observers}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop:list}
+            <tr>
+                <td>{event}</td>
+                <td>{amount}</td>
+                <td class="km_fbtn">
+                    <a class="km_fbtn_normal" href="{root}observer/get/{event}">{translate.Choose}</a>
+                </td>
+            </tr>
+            {endloop:list}
+        </tbody>
+    </table>
+    {endif:list}
+
+    {if:events}
+    <table id="km_observer_events">
+        <thead>
+        <tr>
+            <th>{translate.Event}</th>
+            <th>{translate.Mail to}</th>
+            <th>{translate.Subject}</th>
+            <th>{translate.Language}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {loop:events}
+        <tr>
+            <td>{event}</td>
+            <td>{mail_to}</td>
+            <td>{mail_subject}</td>
+            <td>{lang}</td>
+            <td class="km_fbtn">
+                <a class="km_fbtn_normal km_observer_delete" href="{root}observer/remove/{id}">{translate.Delete}</a>
+                <a class="km_fbtn_normal" href="{root}observer/edit/{id}">{translate.Edit}</a>
+            </td>
+        </tr>
+        {endloop:events}
+        </tbody>
+    </table>
+    {endif:events}
+</div>
+
+<script type="text/javascript">
+
+jQueryKam(function ($) {
+    $(".km_observers").on("click", ".km_observer_delete", function (e) {
+        var URL = $(this).attr("href");
+        KamConfirm("{translate.Are you sure you want to delete observer}?", function (e) {
+            document.location = URL;
+        });
+        return false;
+    });
+});
+
+</script>

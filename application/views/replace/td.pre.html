@@ -1,0 +1,76 @@
+<div sid="{sid},{pri}" class="km_{if:readonly}no{endif:readonly}dragbox" id="km_dragbox_{sid}">
+    <a name="kameleon_td{sid}"></a>
+    <script type="text/javascript">
+        identyfiersArray['{sid}'] = '{uniqueid}';
+    </script>
+    <div class="km_smallbar" id="km_td_{sid}" {if:!readonly}contextmenu="{page.id},{page_id},{sid},{server},{pri},{level},{menu_id},{hidden},{more},{next},{uniqueid},{contents_repeat?0}"{endif:!readonly}>
+        <ul class="notranslate"{if:widget} title="{widget_name}"{endif:widget}>
+            {if:!readonly}
+            <li class="km_r">
+                <a class="km_icon_easy km_icontd_delete" href="{root}edit/remove/{sid}?page={page.id}" onclick="return confirmDelete()" title="{translate.Delete}">{translate.Delete}</a>
+            </li>
+            <li>
+                <a class="km_icon_easy km_icontd_dragdrop km_dragicon hidden-xs" title="{translate.Drag and drop}">{translate.Drag and drop}</a>
+            </li>
+            <li class="km_r">
+                <a class="km_icon km_icontd_showmenu hidden-xs" title="Pokaż menu kontekstowe">Pokaż menu kontekstowe</a>
+            </li>
+
+            <li{if:default_level}{if:widget=article} class="km_tip" tip="1"{endif:widget=article}{endif:default_level}>
+                <a class="km_icon_easy km_icontd_edit" href="javascript:tdedit('{sid}','{page.id}','kameleon_td{sid}')" title="{translate.Edit}">{translate.Edit}</a>
+            </li>
+            <li>
+                <a class="km_icon_easy km_icontd_copy" style="display:none" href="javascript:copyToClib('{sid}','td')" title="{translate.Copy}">{translate.Copy}</a>
+            </li>
+            
+            {if:need_ftp}
+            <li>
+                <a class="km_icon km_icontd_new" title="{translate.To publish}">{translate.To publish}</a>
+            </li>
+            {endif:need_ftp}
+
+            
+            <li class="km_r">
+                <a class="km_icon_easy km_modul_visible km_icontd_visible_{if:hidden}off{endif:hidden}{if:!hidden}on{endif:!hidden}" {if:!hidden}style="display: none"{endif:!hidden} onclick="km_module_visible('{sid}')" title="{translate.Show module}">translate.Show module</a>
+            </li>
+            {if:next}
+            <li>
+                <a class="km_icon_easy km_iconi_next_m" href="{root}index/get/{next}" title="{translate.Next page}">{translate.Next page}</a>
+            </li>
+            {endif:next}
+            {if:plain}
+            <li>
+                <a {if:more}
+                    class="km_icon_easy km_iconi_more_m"        
+                    href="{root}index/get/{more}"
+                    title="{translate.Goto full description page}">{translate.Goto full description page}
+                    {endif:more}
+                    {if:!more}
+                    class="km_icon_easy km_iconi_more_m_over"
+                    href="{root}index/add/{page.id}?tdsid={sid}"
+                    title="{translate.Create full description page}">{translate.Create full description page}
+                    {endif:!more}</a>
+            </li>
+            {endif:plain}
+            {endif:!readonly}
+            {if:lost}
+            <li>{translate.Lost and found} ({lost})</li>
+            {endif:lost}
+            {if:sid|kameleon.new_sid}{define:new_td=1}
+            <li><span class="km_new_sid">{translate.New}</span></li>
+            {endif:sid|kameleon.new_sid}
+            {if:readonly}<li>{readonly}</li>{endif:readonly}
+        </ul>
+    </div>
+    <div id="km_infotd_{sid}" class="km_infotd">
+        <table class="km_table">
+            <tr>
+                <td>{translate.Level}:</td>
+                <td>{level}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="km_tdin{if:new_td}{if:!plain} km_newtd km_new_{widget}{endif:!plain}{endif:new_td}" id="tab{_page_id}_{pri}">
+        
+    {if:new_td}{if:!plain}<a class="click_to_edit" href="javascript:tdedit('{sid}','{page.id}','kameleon_td{sid}')">{translate.Click to edit}</a>{endif:!plain}{endif:new_td}
+        

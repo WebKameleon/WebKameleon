@@ -1,0 +1,183 @@
+{with:youtubeWidget}
+<form id="youtube_form" method="post" validate="1">
+    {include:_widget.header.html}
+
+    <div class="edit_box">
+        <div class="label">{translate.URL address}</div>
+        <div class="value">
+            <input type="text" id="yt_video_id" name="youtube[video_id]" value="{data.video_id}" required />
+            <input type="hidden" id="yt_playlist_id" name="youtube[playlist_id]" value="{data.playlist_id}" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Width}</div>
+        <div class="value">
+            <input type="text" id="yt_video_width" name="youtube[width]" value="{data.width}" size="4" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Height}</div>
+        <div class="value">
+            <input type="text" id="yt_video_height" name="youtube[height]" value="{data.height}" size="4" />
+        </div>
+    </div>
+    
+    <div class="edit_box">
+        <div class="label">{translate.Auto play}</div>
+        <div class="value">
+            <input type="hidden" name="youtube[auto]" value="0" />
+            <input type="checkbox" name="youtube[auto]" value="1" {if:data.auto}checked{endif:data.auto} />
+        </div>
+    </div>    
+    <div class="edit_box">
+        <div class="label">{translate.Mute}</div>
+        <div class="value">
+            <input type="hidden" name="youtube[mute]" value="0" />
+            <input type="checkbox" name="youtube[mute]" value="1" {if:data.mute}checked{endif:data.mute} />
+        </div>
+    </div>
+    
+    
+    <ul class="km_zakladki">
+        <li><a rel="popular">{translate.Popular videos}</a></li>
+        <li><a rel="mine">{translate.Your videos}</a></li>
+        <li><a rel="favorites">{translate.Favourite videos}</a></li>
+        <li><a rel="history">{translate.Videos history}</a></li>
+        <li><a rel="to_watch">{translate.Videos to watch}</a></li>
+        <li><a rel="playlists">{translate.Your playlists}</a></li>
+    </ul>
+
+    <div class="km_zakladka km_zakladka_popular">
+        <ul class="yt-list"></ul>
+    </div>
+
+    <div class="km_zakladka km_zakladka_mine" rel="uploads">
+        <ul class="yt-list"></ul>
+    </div>
+
+    <div class="km_zakladka km_zakladka_favorites" rel="favorites">
+        <ul class="yt-list"></ul>
+    </div>
+
+    <div class="km_zakladka km_zakladka_history" rel="watchHistory">
+        <ul class="yt-list"></ul>
+    </div>
+
+    <div class="km_zakladka km_zakladka_to_watch" rel="watchLater">
+        <ul class="yt-list"></ul>
+    </div>
+
+    <div class="km_zakladka km_zakladka_playlists">
+        <ul class="yt-list"></ul>
+
+        <div class="yt-list-videos">
+            <ul class="yt-list"></ul>
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+function SaveChanges()
+{
+    jQueryKam("#youtube_form").submit();
+    return false;
+}
+
+jQueryKam(function ($) {
+
+    $.ajaxSetup({
+        beforeSend : km_preloader_show,
+        complete : km_preloader_hide
+    });
+
+    var yt_add_items = function (items, container) {
+        if (items.length) {
+            $.each(items, function (k, item) {
+                yt_add_item(item, container);
+            });
+        } else {
+            $(container).html("<h1>{translate.No results}</h1>");
+        }
+    }
+
+    var yt_add_item = function (item, container) {
+        var anchor = $("<a></a>").attr("href", "#").text(item.title);
+        if (item.id && !item.playlist_id) {
+            var href = "http://www.youtube.com/watch?v=" + item.id;
+            anchor.attr("href", href).on("click", function (e) {
+                $.fancybox({
+                    padding : 0,
+                    autoScale : false,
+                    transitionIn : "none",
+                    transitionOut : "none",
+                    width : 680,
+                    height : 495,
+                    href : href.replace(new RegExp("watch\\?v=", "i"), "v/"),
+                    type : "swf",
+                    swf : {
+                        wmode : "transparent",
+                        allowfullscreen : true
+                    }
+                });
+                return false;
+            });
+        }
+
+        $("<li></li>").data("item", item).append(
+            $("<img />").attr("src", item.tmb),
+            anchor
+        ).appendTo(container);
+    }
+
+    $.getJSON(KAM_ROOT + "ajax/youtube_list_videos", function (data) {
+        yt_add_items(data.videos, ".km_zakladka_popular ul");
+    });
+
+    $.getJSON(KAM_ROOT + "ajax/youtube_list_channels", function (data) {
+        var channel = data.channels[0];
+
+        $(".km_zakladka[rel]").one("show", function (e) {
+            var container = $(this).find("ul");
+            $.getJSON(KAM_ROOT + "ajax/youtube_list_videos", {
+                playlist : channel.related_playlists[$(this).attr("rel")]
+            }, function (playlist) {
+                yt_add_items(playlist.videos, container);
+            });
+
+        });
+    });
+
+    $(".km_zakladka_playlists").one("show", function (e) {
+        var container = $(this).find("> ul");
+        $.getJSON(KAM_ROOT + "ajax/youtube_list_playlists", function (data) {
+            yt_add_items(data.playlists, container);
+        });
+    }).on("click", "> ul li", function (e) {
+        var item = $(this).data("item");
+        var container = $(this).parent().siblings(".yt-list-videos").hide().find("ul").empty();
+        $.getJSON(KAM_ROOT + "ajax/youtube_list_videos", {
+            playlist : item.playlist_id
+        }, function (data) {
+            if (data.videos.length) {
+                container.parent().show();
+                yt_add_items(data.videos, container);
+            }
+        });
+    });
+
+    $(".yt-list").on("click", "li", function (e) {
+        var item = $(this).data("item");
+        if (item) {
+            $("#yt_video_id").val(item.id);
+            $("#yt_playlist_id").val(item.playlist_id || "");
+            $(".yt-list li").removeClass("active");
+            $(this).addClass("active");
+        }
+    });
+
+});
+</script>
+{endwith:youtubeWidget}

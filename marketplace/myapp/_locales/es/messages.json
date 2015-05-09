@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Webkameleon CMS: un creador de páginas",
+    "description": "responsive website creator"
+  },
+  "appDesc": {
+    "message": "Diseña y crea tu página web. No se requieren conocimientos técnicos.", 
+    "description":"Empieza tu nuevo negocio. Haz crecer tu página que funciona bien tanto con los ordenadores. como con tabletas o móviles."
+  },
+  "appShortName" : {
+    "message": "webkameleon",
+    "description": "responsive website creator"    
+  }
+}

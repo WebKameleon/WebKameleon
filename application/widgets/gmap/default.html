@@ -1,0 +1,44 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+
+{define:_width}{gmapWidget.data.width}{if:gmapWidget.data.width|is_numeric}px{endif:gmapWidget.data.width|is_numeric}{enddefine:_width}
+{define:_height}{if:gmapWidget.data.height|is_numeric}{gmapWidget.data.height}px{endif:gmapWidget.data.height|is_numeric}{if:!gmapWidget.data.height|is_numeric}300px{endif:!gmapWidget.data.height|is_numeric}{enddefine:_height}
+
+
+{if:gmapWidget.data.link}
+<iframe class="kmw_gmap" {if:gmapWidget.data.width} width="{_width}"{endif:gmapWidget.data.width}
+        {if:gmapWidget.data.height}height="{_height}"{endif:gmapWidget.data.height}
+        frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="{gmapWidget.data.link}"></iframe>
+{endif:gmapWidget.data.link}
+{if:!gmapWidget.data.link}
+
+
+{if:plain}<div class="kmw_gmap_plain">{plain}</div>{endif:plain}
+
+
+
+<div id="kmw_gmap_{sid}" class="kmw_gmap" style="{if:gmapWidget.data.width}width: {_width};{endif:gmapWidget.data.width}{if:gmapWidget.data.height} height: {_height}{endif:gmapWidget.data.height}"></div>
+
+<script type='text/javascript'>
+
+function kmw_gmap_{sid}_start() {
+    wkw_gmap_add('kmw_gmap_{sid}','{gmapWidget.data.type}',
+                 {gmapWidget.data.lat},{gmapWidget.data.lng},
+                 {gmapWidget.data.zoom},!!{gmapWidget.data.marker},'{gmapWidget.data.title}'
+                 {if:img},{
+                    url:'{uimages}/{img}',
+                    w:{img_w},
+                    h:{img_h}
+                 }{endif:img});
+}
+
+(function () {
+    if (window.addEventListener) {
+        window.addEventListener('load', kmw_gmap_{sid}_start, false);
+    } else if (window.attachEvent) {
+        window.attachEvent('onload', kmw_gmap_{sid}_start);
+    }
+})();
+</script>
+{endif:!gmapWidget.data.link}
+
+{tokens.php}

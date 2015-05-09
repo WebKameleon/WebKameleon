@@ -1,0 +1,421 @@
+/* **************************** */
+/* *** Header CSS by KH 2014 ** */
+/* ******* version 1.0.0 ****** */
+/* ============================ */
+/* Last modification 25.03.2014 */
+/* **************************** */
+.col-md-12.wk-container.wk-bg-grey {
+	position:relative !important;
+}
+
+#elfinder-.ui-widget-content {
+	background:none;
+}
+
+.col-md-12.wk-container.wk-bg-grey .col-md-6 {
+	padding-left:15px !important;
+	padding-right:15px !important;
+}
+
+.wk-bg-grey {
+	background-color: #F1F1F1 !important;
+}
+
+.wk-container *, .container-fluid *, .container *, .ui-dialog * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.km_logo {
+	cursor: pointer;
+	width: 160px;
+	height: 45px;
+	background-image: url('img/wk_logo.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+	display: inline-block;
+	overflow: hidden;
+	font-size: 0;
+	line-height: 0;
+	float: left;
+	position:relative !important;
+	z-index:10;
+
+}
+
+.km_gapps {
+    
+    margin     : 0 0 0 15px;
+    padding    : 0;
+    list-style : none;
+    position   : relative;
+}
+
+.km_gapps ul {
+    list-style : none;
+    display    : none;
+    position   : absolute;
+    z-index    : 101;
+    top        : 40px;
+    left       : 0;
+    
+}
+
+.km_gapps li {
+    overflow : hidden;
+	margin-bottom: 0px;
+}
+
+.km_gapps ul {
+    list-style          : none;
+    margin              : 0;
+    padding             : 10px 0 0 0;
+    background-image    : url('img/gapps_ulup.png');
+    background-repeat   : no-repeat;
+    background-position : top;
+}
+
+.km_gapps ul li {
+    border-top       : 1px solid #686868;
+    background-color : #2d2d2d;
+    background-image : none;
+}
+
+.km_gapps ul li:first-child {
+    border-top : 0;
+}
+
+.km_gapps ul a {
+    display         : block;
+    padding         : 0;
+    font-weight     : bold;
+    text-decoration : none;
+    font-weight     : bold;
+    color           : #fff;
+    padding-left    : 10px;
+}
+
+.km_gapps ul span {
+    display             : block;
+    padding             : 19px 10px 19px 42px;
+    background-repeat   : no-repeat;
+    background-position : left;
+}
+
+.km_gapps ul .home {
+    background-image    : url('img/menu/home.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .yala {
+    background-image    : url('img/menu/yala.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .epu {
+    background-image    : url('img/menu/epu.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .headmaster {
+    background-image    : url('img/menu/headmaster.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .calendar {
+    background-image    : url('img/menu/calendar.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .gmail {
+    background-image    : url('img/menu/gmail.png');
+    background-position : 0 5px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .docs {
+    background-image    : url('img/menu/docs.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps ul .apps {
+    background-image    : url('img/menu/apps.png');
+    background-position : 0 10px;
+    background-repeat   : no-repeat;
+}
+
+.km_gapps_yala {
+    background-image : url('img/gapps_yala.png');
+}
+
+.km_loginb {
+    cursor              : pointer;
+    float               : right;
+    margin              : 15px;
+    color               : #666666;
+    background-image    : url('img/nheader_arr.png');
+    background-position : right;
+    background-repeat   : no-repeat;
+    padding-right       : 16px;
+	position:relative;
+	z-index:10;
+}
+
+.km_profileb {
+    z-index             : 9998;
+    display             : none;
+    position            : absolute;
+    right               : 10px;
+    top                 : 45px;
+    width               : 340px;
+    
+    background-position : 300px 0px;
+    background-repeat   : no-repeat;
+    padding-top         : 0px;
+}
+
+.km_profileb_up_arrow {
+	display:block;
+	float:right;
+	margin-right:25px;
+	margin-bottom:-1px;
+	width:20px;
+	height:10px;
+	background-image    : url('img/profileb.png');
+	background-repeat   : no-repeat;
+	position:relative;
+	z-index:9999;
+}
+
+.km_profileb_up {
+	border-top       : 1px solid #bebebe;
+    border-left      : 1px solid #bebebe;
+    border-right     : 1px solid #bebebe;
+    border-bottom    : 1px solid #bebebe;
+    background-color : #fff;
+    padding          : 20px;
+    overflow         : hidden;
+	margin-top:-1px;
+}
+
+.km_profileb_info {
+    font-size : 14px;
+    color     : #000;
+}
+
+.km_profileb_info img {
+    float  : right;
+    border : 0px;
+    width  : 50px;
+    height : 50px;
+}
+
+.km_profileb_email {
+    display     : block;
+    color       : #666666;
+    font-size   : 12px;
+    overflow    : hidden;
+    margin-left : 10px;
+}
+
+.km_profileb_login {
+    display     : block;
+    margin-left : 10px;
+}
+
+
+
+.km_profileb_info ul {
+	clear:both;
+    list-style : none;
+    margin     : 10px 0 0 0;
+    padding    : 0;
+	padding-top:3px;
+}
+
+.km_profileb_info ul li {
+    overflow : hidden;
+    float    : left;
+}
+
+.km_profileb_info ul a {
+    color           : #3366cc;
+    text-decoration : none;
+    display         : block;
+    float           : left;
+    padding         : 5px 10px;
+}
+
+.km_profileb_info ul a:hover {
+    background-color : #eff3fb;
+}
+
+.km_profileb_down {
+    border-top       : 1px solid #bebebe;
+    border-left      : 1px solid #bebebe;
+    border-right     : 1px solid #bebebe;
+    border-bottom    : 1px solid #bebebe;
+    background-color : #fff;
+    padding          : 10px 6px;
+    overflow         : hidden;
+}
+
+.km_profileb_down a {
+    color           : #3366cc;
+    text-decoration : none;
+    display         : block;
+    float           : left;
+    padding         : 5px 10px;
+}
+
+.km_profileb_down a:hover {
+    background-color : #eff3fb;
+}
+
+.km_profileb_switch {
+    float : right !important;
+}
+
+/* FACES */
+.km_others {
+    float    : right;
+}
+
+.km_others ul {
+	margin-top: 10px;
+}
+
+.km_others img {
+    border : 0;
+    width  : 25px;
+    height : 25px;
+}
+
+.km_others li {
+	float:left;
+    width       : 25px;
+    height      : 26px;
+    text-align  : center;
+    color       : #fff;
+    font-family : Arial;
+    font-weight : bold;
+    list-style  : none;
+    font-size   : 14px;
+    list-style  : none;
+	margin-left:5px;
+}
+
+.km_others li.km_others_system {
+	border-radius: 50% !important;
+	font-size: 11px !important;
+	line-height: 25px;
+}
+
+/* end FACES */
+
+.km_loginb {
+	background:none;
+	padding-right:0px;
+	margin-right:0px;
+}
+
+.km_loginb .caret {
+	margin-left:5px;
+	width:auto;
+	height:auto;
+	vertical-align:inherit;
+	opacity:1;
+	filter: alpha(opacity=100);
+}
+
+
+/* Media Querys */
+@media (max-width: 480px){
+.km_logo_holder {
+	text-align:center;
+}
+
+.km_logo {
+	float: none;
+	margin:0 auto;
+	text-align:center;
+}
+
+.km_others {
+	clear:both;
+	float:none;
+	text-align:center;
+	margin:0 auto;
+	padding-bottom:25px;
+}
+
+.km_loginb {
+	float: none;
+	margin: 10px;
+	text-align: center;
+	background:none;
+}
+
+.km_loginb:after {
+	background-image: url('img/nheader_arr.png');
+	background-position: right;
+	background-repeat: no-repeat;
+	padding-right: 16px;
+}
+
+.km_others {
+  float:right;
+  position:relative;
+  left:-50%;
+  text-align:left;
+}
+.km_others ul {
+  clear:both;
+  list-style:none;
+  position:relative;
+  left:50%;
+  padding:0px;
+  margin:0px;
+  margin-top:15px;
+}
+
+.km_others li{
+  float:left;
+  position:relative;
+}
+
+.km_profileb_up_arrow {
+	display:block;
+	float:none;
+	margin:0 auto;
+	margin-bottom:-1px;
+	width:20px;
+	height:10px;
+	background-image    : url('img/profileb.png');
+	background-repeat   : no-repeat;
+	position:relative;
+	z-index:9999;
+}
+
+}
+
+@media (max-width: 430px){
+.km_profileb {
+    z-index             : 9998;
+    display             : none;
+    position            : absolute;
+    right               : 10px;
+    top                 : 25px;
+    width               : auto;
+    padding-top         : 9px;
+}
+
+.km_profileb img {display:none;}
+}

@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    var identyfiersArray = [];
+
+    var km_infos = [];
+    km_infos["page"] = "{page.id}";
+    km_infos["ajax_link"] = "{root}ajax";
+    km_infos["public_link"] = "{root}public";
+    km_infos["page_hf"] = "{if:editmode=3}1{endif:editmode=3}{if:!editmode=3}0{endif:!editmode=3}";
+    km_infos["page_header"] = "{page.header_id}";
+    km_infos["page_footer"] = "{page.footer_id}";
+    km_infos["error"] = "{translate.Error occurred}";
+    km_infos["skin"] = "{skin}";
+    km_infos["root"] = "{root}";
+    km_infos["uimages"] = "{uimages}";
+
+    var km_droplist = [];
+    km_droplist["active"] = "";
+</script>
+
+{include:scripts.kameleon.html}

@@ -1,0 +1,19 @@
+{with:embeddedWidget}
+
+
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+    <h1>{translate.Embedded}</h1>
+    <div class="edit_box">
+            <textarea name="{name}[body]">{data.body}</textarea>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+</script>
+{endwith:embeddedWidget}

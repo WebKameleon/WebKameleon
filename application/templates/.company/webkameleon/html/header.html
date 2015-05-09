@@ -1,0 +1,37 @@
+{with:header}
+
+<div class="top-bar">
+   <div class="container">		
+        {level101}
+        {level102}
+   </div>
+</div>
+
+<header id="header">
+    <div  class="container">
+        <div class="four columns logo">
+            {if:tokens.logoUrl}<a href="{tokens.page_href}"><img src="{tokens.logoUrl}"  id="img-logo" alt="logo"/></a>{endif:tokens.logoUrl}
+            {level103}
+        </div>
+        <nav id="nav-wrap" class="nav-wrap1 twelve columns">
+            <div id="search-form">
+                {level104}
+            </div>
+
+            <!-- webkameleon main menu-->
+
+            {level100}
+
+        </nav>
+		<!-- /nav-wrap -->
+    </div>
+
+    <div id="search-form2">
+	<form action="#" method="get">
+            <input type="text" class="search-text-box2">
+	</form>
+    </div>
+
+</header>
+
+{endwith:header}

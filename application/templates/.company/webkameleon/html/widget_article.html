@@ -1,0 +1,55 @@
+{with:articleWidget}
+
+{if:level=2}
+    <div class="one_third{if:last_child} column-last{endif:last_child}">
+        <article class="icon-box3">{if:class} <i class="{class}"></i>{endif:class}{if:!class} <i class="icomoon-cube4"></i>{endif:!class}<br />
+            {if:bgimg}
+            <a class="kmw_article_photo" href="{uimages}/{bgimg}" fancybox="1">
+                <img{if:itemtype} itemprop="image"{endif:itemtype} src="{imagesUrl}/{bgimg}" />
+            </a>
+            {endif:bgimg}
+            {if:title}<h4><strong>{title}</strong></h4>{endif:title}
+            <div class="kmw_article_text">
+                {plain}{tokens.html}
+                {if:more}<br /><a href="{more_link}" class="magicmore">{translate.More}</a>{endif:more}
+            </div>        
+        </article>
+    </div>
+    {define:level_found=1}
+{endif:level=2}
+
+
+{if:level=3}
+    <article>
+        {if:title}<{tokens|h1:4}>{title}</{tokens|h1}>{endif:title}
+        {plain}{tokens.html}
+        {if:more}<br /><a href="{more_link}" class="magicmore">{translate.More}</a>{endif:more}
+    </article>
+    {define:level_found=1}
+{endif:level=3}
+
+
+{if:level=6}
+    <div class="qot-pic"></div>
+    {if:title}<h6 class="qot-title">{title}</h6>{endif:title}
+    <blockquote>
+        {plain}{tokens.html}
+    </blockquote>
+    {if:more}<br /><a href="{more_link}" class="magicmore">{translate.More}</a>{endif:more}
+    
+    {define:level_found=1}
+{endif:level=6}
+
+
+
+{if:!level_found}
+        {if:title}
+            {if:body}<{tokens|h1:10} class="subtitle"><strong>{title}</strong></{tokens|h1}>{endif:body}
+            {if:!body}<h4 class="subtitle">{title}</h4>{endif:!body}
+        {endif:title}
+        {plain}{tokens.html}
+        {if:more}<br /><a href="{more_link}" class="magicmore">{translate.More}</a>{endif:more}
+        <br class="clear"/>
+{endif:!level_found}
+
+{endwith:articleWidget}

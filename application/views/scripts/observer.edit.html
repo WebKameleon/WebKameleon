@@ -1,0 +1,162 @@
+{include:_header.html}
+{include:_menu.html}
+
+<form id="observer_form" method="post">
+
+    <div class="km_fbtn">
+        <input type="submit" class="km_fbtn_action" value="Zapisz" />
+        <a href="{root}observer/get/{observer.event}" class="km_fbtn_normal">{translate.Return}</a>
+    </div>
+
+    {if:observer.id}<input type="hidden" name="observer[id]" value="{observer.id}" />{endif:observer.id}
+    <input type="hidden" name="observer[event]" value="{event}" />
+    <input type="hidden" name="observer[lang]" value="{lang}" />
+
+    <div class="edit_box">
+        <div class="label">{translate.Language}</div>
+        <div class="value">
+            <select id="observer_lang" name="observer[lang]">
+                {loop:languages}
+                <option value="{__loop__}" {if:__loop__=$ulang}selected{endif:__loop__=$ulang}>{loop}</option>
+                {endloop:languages}
+            </select>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Event priority}</div>
+        <div class="value">
+            <input type="text" name="observer[pri]" value="{observer.pri}" size="4" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Event days}</div>
+        <div class="value">
+            <input type="text" name="observer[days]" value="{observer.days}" size="4" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label" style="height: 40px">{translate.Event result}</div>
+        <div class="value">
+            <div>
+                <input type="radio" name="observer[result]" value="0" id="obs_res_0" {if:!observer.result}checked{endif:!observer.result} />
+                <label for="obs_res_0">{translate.Event always}</label>
+            </div>
+            <div>
+                <input type="radio" name="observer[result]" value="1" id="obs_res_1" {if:observer.result=1}checked{endif:observer.result=1} />
+                <label for="obs_res_1">{translate.Event on success}</label>
+            </div>
+            <div>
+                <input type="radio" name="observer[result]" value="2" id="obs_res_2" {if:observer.result=2}checked{endif:observer.result=2} />
+                <label for="obs_res_2">{translate.Event on error}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Mail from}</div>
+        <div class="value">
+            <input type="text" name="observer[mail_from]" value="{observer.mail_from}" class="km_wide" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Mail reply}</div>
+        <div class="value">
+            <input type="text" name="observer[mail_reply]" value="{observer.mail_reply}" class="km_wide" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Mail to}</div>
+        <div class="value">
+            <input type="text" name="observer[mail_to]" value="{observer.mail_to}" class="km_wide" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label" style="height: 120px">{translate.Mail CC}</div>
+        <div class="value">
+            <textarea id="mail_cc" name="observer[mail_cc]">{observer.mail_cc}</textarea>
+            <br />
+            {translate.One mail per line}
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Subject}</div>
+        <div class="value">
+            <input type="text" name="observer[mail_subject]" value="{observer.mail_subject}" class="km_wide" />
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label" style="height: 400px">{translate.Body}</div>
+        <div class="value" id="km_wysiwyg">
+            <textarea id="wysiwyg" name="observer[mail_msg]" style="height: 400px">{observer.mail_msg}</textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="observer[mail_html]" value="1" />
+    <!--
+    <div class="edit_box">
+        <div class="label">{translate.Mail html}</div>
+        <div class="value">
+            <input type="hidden" name="observer[mail_html]" value="0" />
+            <input type="checkbox" name="observer[mail_html]" value="1" {if:observer.mail_html}checked{endif:observer.mail_html} />
+        </div>
+    </div>
+    -->
+    
+    <div class="edit_box">
+        <div class="label">{translate.Active}</div>
+        <div class="value">
+            <input type="hidden" name="observer[active]" value="0" />
+            <input type="checkbox" name="observer[active]" value="1" {if:observer.active}checked{endif:observer.active} />
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript" src="{root}ckeditor4/ckeditor.js"></script>
+<script type="text/javascript">
+    jQueryKam(function ($) {
+
+        CKEDITOR.replace("wysiwyg", {
+            baseHref : KAM_ROOT,
+            language : "pl",
+            resize_dir : "vertical",
+            autoParagraph : false,
+            scayt_autoStartup : false,
+            ignoreEmptyParagraph : false,
+            templates_replaceContent : false,
+            enterMode : CKEDITOR.ENTER_DIV,
+            toolbar : [ [
+                "Undo", "Redo" ,
+                "-",
+                "Format", "Font", "FontSize",
+                "-",
+                "Bold", "Italic", "Underline", "Strike",
+                "-",
+                "TextColor", "BGColor",
+                "-",
+                "Link", "Unlink",
+                "-",
+                "NumberedList", "BulletedList",
+                "-",
+                "Outdent", "Indent",
+                "-",
+                "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock",
+                "-",
+                "RemoveFormat", "Source"
+            ] ]
+        });
+
+        {if:observer.id}
+        $("#observer_lang option[value='{observer.lang}']").attr("selected", "selected");
+        {endif:observer.id}
+
+    });
+</script>

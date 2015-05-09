@@ -1,0 +1,153 @@
+<table class="kmw_newsletter_table">
+    <tr>
+        <td>{translate.Message from}:</td>
+        <td>{data.user.fullname} &lt;{data.user.email}&gt;</td>
+    </tr>
+    <tr>
+        <td>{translate.Message to}:</td>
+        <td>
+            <input id="kmw_newsletter_to" value="{_COOKIE.kmw_newsletter_to}"/>
+            <a href="javascript:" style="padding: 3px 10px" id="kmw_newsletter_spname" class="btn btn-success">{if:_COOKIE.kmw_newsletter_spname}{_COOKIE.kmw_newsletter_spname}{endif:_COOKIE.kmw_newsletter_spname}{if:!_COOKIE.kmw_newsletter_spname}{translate.Select spreadsheet}{endif:!_COOKIE.kmw_newsletter_spname}</a>
+            <input type="hidden" id="kmw_newsletter_spid" value=""/>
+            
+            <select id="kmw_newsletter_sheet" class="btn btn-success" style="padding: 4px 10px">
+                
+            </select>
+        </td>
+    </tr>
+    
+    <tr>
+        <td>{translate.Message subject}:</td>
+        <td>{title}</td>
+    </tr>
+
+    
+    <tr>
+        <td colspan="2"><iframe src="{root}index/plain/{sid}"></iframe></td>
+    </tr>
+    
+    <tr>
+        <td><input type="button" class="button" value="{translate.Send}"/></td>
+        <td class="kmw_newsletter_status">
+        </td>
+    </tr>
+    
+    {if:data.links}
+
+    <tr>
+        <td>{translate.Used links statistics}:</td>
+        <td><ul>
+            {loop:data.links}{if:goo}
+            <li>
+                <a href="http://goo.gl/#analytics/goo.gl/{goo}/all_time" target="_blank">{href}</a>
+            </li>
+            {endif:goo}{endloop:data.links}
+        </ul></td>
+    </tr>    
+    
+    {endif:data.links}
+    
+</tr>
+</table>
+
+
+
+
+<script>
+    
+    function get_status()
+    {
+        
+        jQueryKam.get('{root}ajax/newsletter_status/{sid}',function (status) {
+            jQueryKam('.kmw_newsletter_status').html(status.data.status);
+            
+            if (typeof(status.data.current)!='undefined' && typeof(status.data.total)!='undefined')
+            {
+                var prc=Math.round((100*status.data.current)/status.data.total);
+                var size=prc+'% 50px';
+                
+                jQueryKam('.kmw_newsletter_status').css({"background-size": size});
+                jQueryKam('.kmw_newsletter_status').html(status.data.status+' '+prc+'%');
+            }
+            
+            if (!status.data.end) setTimeout(get_status,1000);
+            else km_preloader_hide();
+        });        
+    }
+
+
+    jQueryKam('#kmw_newsletter_to').on('change',function () {
+        document.cookie='kmw_newsletter_to='+jQueryKam(this).val();
+    });
+    
+    jQueryKam('.kmw_newsletter_table .button').click(function() {
+    
+        var url='{root}ajax/newsletter/{sid}?to='+encodeURIComponent(jQueryKam('#kmw_newsletter_to').val())+'&spid='+jQueryKam('#kmw_newsletter_spid').val()+'&sheet='+jQueryKam('#kmw_newsletter_sheet').val();
+        
+        km_preloader_show();
+        jQueryKam.get(url);
+        setTimeout(get_status,500);
+    });
+    
+
+    
+    
+    function picked(data)
+    {
+        if (data.action == google.picker.Action.PICKED) {
+            var fileId = data.docs[0].id;
+            var name = data.docs[0].name;
+            
+            jQueryKam("#kmw_newsletter_spname").html(name);
+            jQueryKam("#kmw_newsletter_spid").val(fileId);
+            
+            km_preloader_show();
+            jQueryKam.get('{root}ajax/sheets/'+fileId, function (sheets){
+                km_preloader_hide();
+                var select=jQueryKam('#kmw_newsletter_sheet');
+                select.find('option').remove();
+                for (key in sheets)
+                {
+                    select.append(jQueryKam("<option />").val(key).text(sheets[key].title));
+                }
+            });
+            
+            
+        }
+    }    
+ 
+    
+    
+    function createPicker() {
+        
+        
+        var picker = new google.picker.PickerBuilder().
+                            addView(google.picker.ViewId.SPREADSHEETS).
+                            setAppId('{data.oauth2.client_id}').
+                            setOAuthToken('{data.access_token}').
+                            setCallback(picked).
+                            setLocale('{ulang?en}').
+                            build().
+                            setVisible(true);
+
+    }
+    
+    
+    
+    function initPicker() {
+
+        jQueryKam("#kmw_newsletter_spname").on('click',function() {
+            gapi.load('picker', {
+                'callback':createPicker
+            });
+        });
+    }    
+    
+    
+</script>
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi?key={data.oauth2.api_key}"></script>
+<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=initPicker"></script>
+
+

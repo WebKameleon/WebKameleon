@@ -1,0 +1,102 @@
+<link type="text/css" rel="stylesheet" href="{widget_images}/{name}.css">
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        {if:!show_title}
+        <ul class="km_gapps">
+            <li><a href="{root}index/get/{page.id}" class="km_logo">WebKameleon</a>
+            </li>
+        </ul>
+        {endif:!show_title}
+        {if:show_title}
+        <div class="title km_tip" tip="2">
+            <div class="webtd_notitle">[ {translate.No title} ]</div>
+            <input class="webtd_title" type="text" name="td[title]" value="{td.title}" />
+        </div>
+        {endif:show_title}
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                {if:!edit_module}
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+                {endif:!edit_module}
+
+                {if:edit_module}
+                <li>
+                    <a>{translate.Page}</a>
+                    <ul>
+                        <li><a href="{root}edit/get/{webtd.sid}?setreferpage={referpage}&dontfollow=1&page={page_id}">{translate.Edit box contents}</a></li>
+                    </ul>
+                </li>
+                {endif:edit_module}
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    <ul>
+                        <li><a href="{root}wizard" id="km_ddmenu_wizard">{translate.My services}</a></li>
+                        <li><a href="{root}tree/explorer?node={page.id}" id="km_ddmenu_explorer">{translate.Explorer}</a></li>
+                        <li><a href="{root}menu/get?setreferpage={page.id}" id="km_ddmenu_menus">{translate.Menu}</a></li>
+                        {if:server.ftp}
+                        <li><a href="{root}ftp/get?setreferpage={page.id}" id="km_ddmenu_publikacja">{translate.FTP}</a></li>
+                        {endif:server.ftp}
+                        <li><a href="{root}trash?setreferpage={page.id}" id="km_ddmenu_trash">{translate.Trash}</a></li>
+                    </ul>
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    {include:_editor.buttons.html}
+    <div class="km_clean"></div>
+</div>
+{if:!data.__saved__}
+<script type="text/javascript">
+jQueryKam(function ($) {
+
+    var iW = $("input[name$='[width]']"),
+        iH = $("input[name$='[height]']"),
+        iR = $("input[name$='[keep_ratio]']:checkbox")
+        vW = getUrlVar("w");
+
+    if (iW.length) {
+        if (iR.length) {
+            iR.on("change", function (e) {
+                iH.attr("readonly", iR.is(":checked"));
+            }).trigger("change");
+
+            iW.on("keyup", function (e) {
+               if (iR.is(":checked")) {
+                   iH.val(iW.val() === "" ? "" : parseInt(iW.val() * 9 / 16, 10));
+               }
+            });
+        }
+        
+        
+        if (iW.val() == "" && vW) {
+            iW.val(vW);
+            /*
+            if (iR.length) {
+                iW.trigger("keyup");
+            } else {
+                iH.val(parseInt(vW * 9 / 16, 10));
+            }
+            */
+        }
+        
+    }
+
+});
+</script>
+{endif:!data.__saved__}

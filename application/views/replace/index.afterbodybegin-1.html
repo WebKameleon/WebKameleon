@@ -1,0 +1,38 @@
+{if:config.global.analytics.code}
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{config.global.analytics.code}', 'auto');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview', {
+    'page': '/index-preview{if:server}/{server.nazwa}{endif:server}',
+    'title': 'index{if:server} - {server.nazwa}{endif:server}'
+  });
+
+</script>
+{endif:config.global.analytics.code}
+
+{if:page.kmw_bgslide_body}<div id="kmw_bgslide_body">{endif:page.kmw_bgslide_body}
+
+{if:!hidetopbar}
+{include:kameleon.preview_top.html}
+{endif:!hidetopbar}
+
+{if:hidetopbar}{if:!user.anonymous}
+<script>
+  //check if I'm outside Iframe
+  if (window.location == window.parent.location)
+  {
+    var lh=window.location.href;
+    lh+=(lh.indexOf('?')>0) ? '&' : '?';
+    lh+='hidetopbar=0';
+    window.location.href=lh;
+  }
+</script>
+{endif:!user.anonymous}{endif:hidetopbar}
+
+<div id="preview-content">

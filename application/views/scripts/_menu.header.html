@@ -1,0 +1,41 @@
+{include:_header.html}
+
+
+<div class="km_nheader">
+    <div class="km_nheader_left">
+
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li {if:!refersid}class="sf-disable"{endif:!refersid}>
+                <a>{translate.Page}</a>
+                {if:refersid}
+                <ul class="sf-no-icons">
+                    <li><a href="{root}edit/get/{refersid}?page={referpage}&dontfollow=1" id="">{translate.Edit box contents}</a></li>
+                </ul>
+                {endif:refersid}
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+
+                </li>
+
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    <div class="km_clean"></div>
+</div>

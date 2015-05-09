@@ -1,0 +1,67 @@
+<ul id="km_jsdomenu" class="km_jqcontextmenu">
+    <li id="km_contenxtmenu_menu_up"><a href="#">{translate.Move up}</a></li>
+    <li id="km_contenxtmenu_menu_down"><a href="#">{translate.Move down}</a></li>
+    <li id="km_contenxtmenu_menu_edit"><span></span><a href="#">{translate.Edit}</a></li>
+    <li id="km_contenxtmenu_menu_copy"><a href="#">{translate.Copy}</a></li>
+    <li id="km_contenxtmenu_menu_delete"><a href="#">{translate.Delete}</a></li>
+    <li id="km_contenxtmenu_menu_infoswf"><a href="#">{translate.Info}</a></li>
+    <li id="km_contenxtmenu_menu_next"><a href="#">{translate.Next page}</a></li>
+    <li id="km_contenxtmenu_menu_more"><a href="#">{translate.More}</a></li>
+    <li id="km_contenxtmenu_menu_visibility"><a href="#">{translate.Show/hide module}</a></li>
+    <li class="km_sep"></li>
+
+    {if:config.level.header}
+    <li id="km_contenxtmenu_lvl_header" class="km_contenxtmenu_level"><a class="km_contenxtmenu_lvl" href="#">{translate.Level}</a>
+        <ul>
+        {loop:config.level.header}
+            <li><a href="{__loop__}" rel="{__loop__}">{loop}</a></li>
+        {endloop:config.level.header}
+        </ul>
+    </li>
+    {endif:config.level.header}
+
+    {if:config.level.body}
+    <li id="km_contenxtmenu_lvl_body" class="km_contenxtmenu_level"><a class="km_contenxtmenu_lvl" href="#">{translate.Level}</a>
+        <ul>
+        {loop:config.level.body}
+            <li><a href="{__loop__}" rel="{__loop__}">{loop}</a></li>
+        {endloop:config.level.body}
+        </ul>
+    </li>
+    {endif:config.level.body}
+
+    {if:config.level.footer}
+    <li id="km_contenxtmenu_lvl_footer" class="km_contenxtmenu_level"><a class="km_contenxtmenu_lvl" href="#">{translate.Level}</a>
+        <ul>
+            {loop:config.level.footer}
+            <li><a href="{__loop__}" rel="{__loop__}">{loop}</a></li>
+            {endloop:config.level.footer}
+        </ul>
+    </li>
+    {endif:config.level.footer}
+
+    {if:config.webtd.show.repeat}
+    <li id="km_contenxtmenu_repeat"><a href="#">{translate.Repeat}</a>
+        <ul>
+            <li><a href="0" rel="0">{translate.No repeat}</a></li>
+            <li><a href="-1" rel="-1">{translate.Repeat at the top}</a></li>
+            <li><a href="1" rel="1">{translate.Repeat at the bottom}</a></li>
+        </ul>
+    </li>
+    {endif:config.webtd.show.repeat}
+
+    <li class="km_sep"></li>
+    <li id="km_contenxtmenu_menu"><a href="#">{translate.Menu}</a></li>
+    <li id="km_contenxtmenu_menu_new"><a href="#">{translate.Insert new menu}</a></li>
+    <li id="km_contenxtmenu_menu_change">
+        <a href="#">{translate.Change to existing menu}</a>
+        <ul>
+        {loop:menu_list}
+            <li><a rel="{menu_id}">{menu_id}. {name}</a></li>
+        {endloop:menu_list}
+        </ul>
+    </li>
+    <li id="km_contenxtmenu_menu_disable"><a href="#">{translate.Turn off menu}</a></li>
+    <li id="km_contenxtmenu_menu_mask"><a href="#">{translate.Copy module identifier}</a></li>
+</ul>
+<script type="text/javascript" src="{root}js/contextmenu.js"></script>

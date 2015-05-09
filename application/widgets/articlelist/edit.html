@@ -1,0 +1,107 @@
+{with:articlelistWidget}
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+
+    <h1>{translate.Article list}</h1>
+
+    <div class="edit_box">
+        <div class="label">{translate.Category}</div>
+        <div class="value" style="display: block;float: left">
+            {if:!data.cats}{translate.Add categories to your articles}!{endif:!data.cats}
+            {loop:data.cats}
+                <input type="checkbox" name="{name}[category][]" value="{category}" {if:checked}checked{endif:checked}/>
+                {category} <br/>
+            {endloop:data.cats}
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Number of articles}</div>
+        <div class="value">
+            <input type="text" name="{name}[na]" value="{data.na}" size="4" />
+        </div>
+    </div>
+    <div class="edit_box">
+        <div class="label">{translate.Articles per page}</div>
+        <div class="value">
+            <input type="text" name="td[size]" value="{webtd.size}" size="4" />
+        </div>
+    </div>     
+    <div class="edit_box">
+        <div class="label">{translate.Start from}</div>
+        <div class="value">
+            <input type="text" name="{name}[from]" value="{data.from}" size="4" />
+        </div>
+    </div>      
+
+    <div class="edit_box">
+        <div class="label">{translate.Max characters}</div>
+        <div class="value">
+            <input type="text" name="{name}[chr]" value="{data.chr}" size="4" />
+        </div>
+    </div>
+    
+    <div class="edit_box">
+        <div class="label">{translate.Since}</div>
+        <div class="value">
+            <input type="text" name="{name}[since]" value="{data.since|kameleon.datetime}" size="15" datetimepicker="1" />
+        </div>
+    </div>    
+
+    <div class="edit_box">
+        <div class="label">{translate.Till}</div>
+        <div class="value">
+            <input type="text" name="{name}[till]" value="{data.till|kameleon.datetime}" size="15" datetimepicker="1" />
+        </div>
+    </div>     
+    
+    <div class="edit_box">
+        <div class="label">{translate.Sort by}</div>
+        <div class="value">
+            <select name="{name}[sort]">
+                <option value="0">{translate.Custom date}</option>
+                <option value="1"{if:data.sort=1} selected{endif:data.sort=1}>{translate.Custom date end}</option>
+                <option value="2"{if:data.sort=2} selected{endif:data.sort=2}>{translate.Article title}</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="edit_box">
+        <div class="label">{translate.Sort direction}</div>
+        <div class="value">
+            <input type="radio" name="{name}[sort_dir]" value="1" {if:data.sort_dir=1} checked{endif:data.sort_dir=1}>
+            {translate.From the smallest to the biggest}
+            <input type="radio" name="{name}[sort_dir]" value="0" {if:!data.sort_dir} checked{endif:!data.sort_dir}>
+            {translate.From the biggest to the smallest}
+            
+        </div>
+    </div>    
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show only articles with images}</div>
+        <div class="value">
+            <input type="hidden" name="{name}[images]" value="0" />
+            <input type="checkbox" name="{name}[images]" value="1" {if:data.images}checked{endif:data.images} />
+        </div>
+    </div>    
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show only not empty articles}</div>
+        <div class="value">
+            <input type="hidden" name="{name}[text]" value="0" />
+            <input type="checkbox" name="{name}[text]" value="1" {if:data.text}checked{endif:data.text} />
+        </div>
+    </div>    
+    
+ 
+</form>
+
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+</script>
+{endwith:articlelistWidget}

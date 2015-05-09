@@ -1,0 +1,1 @@
+{with:page}{if:id}{if:next}{if:config.webpage.follow_next}{if:mode=0}<?php header('Location: {tokens|href:,,$next}');?>{endif:mode=0}{if:mode=1}<script>location.href='{tokens|href:,,$next}'</script>{endif:mode=1}{endif:config.webpage.follow_next}{endif:next}{endif:id}{endwith:page}

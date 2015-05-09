@@ -1,0 +1,63 @@
+{include:_header.html}
+{include:_menu.html}
+
+
+<div class="km_fbtn">
+    <a class="km_fbtn_action" href="#" id="trans_save">{translate.Save}</a>
+    <a class="km_fbtn_normal" href="#" id="trans_copy">{translate.Copy translations}</a>
+
+    <div style="overflow:hidden">
+        <div id="google_translate_element" style="float:right"></div>
+    </div>
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: '{lang}', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+    }
+
+    jQueryKam(function ($) {
+        $("#trans_save").on("click", function (e) {
+            jQueryKam('#translation').submit();
+            return false;
+        });
+
+        $("#trans_copy").on("click", function (e) {
+            $(".km_translate").each(function () {
+                var text = $(this).find("font font").text();
+                $(this).parent().next().find("input").val(text);
+            });
+            return false;
+        });
+    });
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>    
+
+</div>
+
+<form method="POST" id="translation">
+<div class="km_observers">
+    {if:words}
+    <table id="km_observer_list">
+        <thead>
+            <tr>
+                <th>{translate.Expresion}</th>
+                <th>{translate.Translation}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {loop:words}
+            <tr id="tr_{__index__}">
+                <td><span id="sp_{__index__}" {if:!word}class="km_translate"{endif:!word}>{if:en}{en}{endif:en}{if:!en}{key}{endif:!en}</span></td>
+                <td><input id="in_{__index__}" type="text" size="50" value="{word}" name="t[{key}]"/></td>
+                <td class="km_fbtn">
+                    <a class="km_fbtn_normal" href="#" onclick="jQueryKam('#tr_{__index__}').remove()">{translate.Delete}</a>
+                </td>
+            </tr>
+            {endloop:words}
+        </tbody>
+    </table>
+    {endif:words}
+</div>
+</form>
+
+

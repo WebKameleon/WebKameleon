@@ -1,0 +1,40 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/kameleon/payment.css">
+
+{include:_header.html}
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" href="{root}payment/get/{payment.server.id}">{translate.Return}</a>
+</div>
+
+<div id="payment_content">
+    <h1>{translate.Payment with bank transfer}</h1>
+
+    <table cellspacing="0" cellpadding="0" class="bank_transfer_info">
+        <tr>
+            <td class="left">{translate.bank transfer title}:</td>
+            <td class="right name">{payment.server.nazwa_long}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="empty">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td class="left">{translate.bank transfer amount}:</td>
+            <td class="right amount">{payment.info.total} {payment.info.currency}</td>
+        </tr>
+
+        <tr>
+            <td colspan="2" class="empty">&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td colspan="2">{translate.bank transfer recipient}:</td>
+        </tr>
+
+        <tr>
+            <td class="left"></td>
+            <td class="right recipient">{payment.bank_transfer.recipient|nl2br}</td>
+        </tr>
+    </table>
+</div>

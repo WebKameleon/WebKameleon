@@ -1,0 +1,70 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:galleryWidget}
+{if:webtd.menu}
+<style type="text/css">
+    #ad-gallery{webtd.sid} .ad-controls {
+        display : none;
+    }
+    {if:!data.show_preview}
+    #ad-gallery{webtd.sid} .ad-image-wrapper {
+        display : none;
+    }
+    {endif:!data.show_preview}
+
+    {if:!data.show_thumbs}
+    #ad-gallery{webtd.sid} .ad-image-wrapper {
+        margin-bottom : 0;
+    }
+    #ad-gallery{webtd.sid} .ad-nav {
+        display : none;
+    }
+    {endif:!data.show_thumbs}
+</style>
+
+<div id="ad-gallery{webtd.sid}" class="ad-gallery">
+    <div class="ad-image-wrapper"></div>
+    <div class="ad-controls"></div>
+    <div class="ad-nav">
+        <div class="ad-thumbs">
+            <ul class="ad-thumb-list">
+                {loop:webtd.menu}
+                <li>
+                    <a href="{imagesUrl}/{img}" rel="ad-gallery{webtd.sid}" more="{uimages}/{img}">
+                        <img src="{thumbsUrl}/{img}" {if:alt}title="{alt}"{endif:alt} />
+                    </a>
+                </li>
+                {endloop:webtd.menu}
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+jQueryKam(function ($) {
+    var gallery = $("#ad-gallery{webtd.sid}").on("click", ".ad-image", function (e) {
+        var index = 0;
+        var images = $("#ad-gallery{webtd.sid} .ad-thumb-list a").each(function (k) {
+            if ($(this).hasClass("ad-active")) {
+                index = k;
+            }
+        });
+        
+        $.fancybox.open(images, {
+            index : index,
+            nextEffect : "fade",
+            prevEffect : "fade",
+            nextSpeed : 500,
+            prevSpeed : 500,
+            afterClose : function () {
+                gallery.showImage(this.index);
+            }
+        });
+        
+    }).adGallery($.extend({js_options}, {
+        update_window_hash : false,
+        loader_image : "{widget_images}/loader.gif"
+    }))[0];
+});
+</script>
+{endif:webtd.menu}
+{endwith:galleryWidget}
+{plain}

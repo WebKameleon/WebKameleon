@@ -1,0 +1,138 @@
+{include:_header.html}
+
+{include:_gallery.files.html}
+
+<script type="text/javascript">
+var elfinder;
+jQuery(function ($) {
+
+    var get_height = function () {
+        return $(window).height() - $(".km_nheader").height() - 5;
+    }
+
+    elFinder.prototype.i18.{ulang}.messages['cmdupload_dialog'] = tr('More upload files options');//'';
+    
+    
+    elFinder.prototype._options.commands.push('upload_dialog');
+    elFinder.prototype.commands.upload_dialog = function() {
+        this.exec = function (hashes) {
+            var e = $.Event("keydown");
+            e.keyCode  = 85;
+            e.ctrlKey  = true;
+            e.altKey   = false;
+            e.shiftKey = false;
+            $("body").trigger(e);
+        }
+        this.getstate = function() {
+            return 0;
+        }
+    }
+
+    var URL = "{root}gallery/connector";
+
+    var options = $.extend({
+        url : URL,
+        customData : {
+            type : "{elfinder.type}",
+            debug : getUrlVar("debug", "")
+        },
+        lang: "{ulang?en}",
+        height : get_height(),
+        rememberLastDir : true,
+        defaultView : "list",
+        dateFormat : "d.m.Y, h:i",
+        resizable : false,
+        uiOptions : {
+            // toolbar configuration
+            toolbar : [
+                ['home', 'back', 'forward', 'up', 'reload'],
+                ['open', 'mkdir', 'download'],
+                ['upload', 'upload_dialog'],
+                ['info', 'quicklook'],
+                ['copy', 'cut', 'paste', 'rm'],
+                ['duplicate', 'rename', 'edit', 'resize'],
+                ['search'],
+                ['view', 'sort'],
+                ['help']
+            ],
+
+            // directories tree options
+            tree : {
+                // expand current root on init
+                openRootOnLoad : true,
+                // auto load current dir parents
+                syncTree : true
+            },
+
+            // current working directory options
+            cwd : {
+                // display parent directory in listing as ".."
+                oldSchool : true
+            }
+        },
+        contextmenu : {
+            // navbarfolder menu
+            navbar : [
+                'open',
+                '|',
+                'copy', 'cut', 'paste', 'duplicate', 'rm',
+                '|',
+                'info'
+            ],
+
+            // current directory menu
+            cwd    : [
+                'reload', 'back',
+                '|',
+                'upload', 'mkdir', 'mkfile', 'paste',
+                '|',
+                'info'
+            ],
+
+            // current directory file menu
+            files  : [
+                'getfile',
+                '|',
+                'open', 'download', 'quicklook',
+                '|',
+                'copy', 'cut', 'paste', 'duplicate', 'rm',
+                '|',
+                'edit', 'rename', 'resize',
+                '|',
+                'info'
+            ]
+        },
+        getFileCallback : function (file) {
+            if (file.url.match(new RegExp(URL))) {
+                file.km_path = "media/get/" + getUrlVar("target", 0, file.url);
+            } else {
+                file.km_path = file.url.replace(KAM_ROOT, "");
+            }
+            if (frameElement) {
+                parent.jQueryKam("body").trigger("gallery_file_selected", file);
+            } else {
+                $("body").trigger("gallery_file_selected", file);
+            }
+        },
+        handlers : {
+
+        }
+    }, {elfinder|json_encode});
+
+    elfinder = $("#elfinder-{elfinder.type}").elfinder(options).elfinder("instance");
+
+    var timer;
+    $(window).on("resize", function (e) {
+        if (timer)
+            clearTimeout(timer);
+
+        if (e.originalEvent === undefined)
+            return;
+
+        timer = setTimeout(function () {
+            elfinder.resize("auto", get_height());
+        }, 500);
+    });
+});
+</script>
+<div id="elfinder-{elfinder.type}"></div>

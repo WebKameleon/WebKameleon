@@ -1,0 +1,59 @@
+{include:_header.html}
+
+<div class="container-fluid">
+{if:trash}
+<div class="km_fbtn">
+    <a href="{root}index/get/{referpage?0}" class="km_fbtn_normal">{translate.Return}</a>
+    <a id="trash_remove_all" href="{root}trash/remove/all" class="km_fbtn_normal" confirm="1">{translate.Empty trash}</a>
+</div>
+
+<div class="km_trash menu_links">
+    <table id="km_menus" class="tabelka">
+        <thead>
+            <tr>
+                <th width="20%">{translate.Resource}</th>
+                <th width="20%"></th>
+                <th width="20%"></th>
+                <th width="10%">{translate.Language}</th>
+                <th width="15%">{translate.Date}</th>
+                <th width="15%"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {loop:trash}
+        <tr>
+            {if:_table=weblink}
+            <td>{translate.Link}</td>
+            <td>{name}</td>
+            <td>{alt}</td>
+            {endif:_table=weblink}
+            {if:_table=webpage}
+            <td>{translate.Page}</td>
+            <td>{title}</td>
+            <td>{title_short}</td>
+            {endif:_table=webpage}
+            {if:_table=webtd}
+            <td>{translate.Module}</td>
+            <td>{title}</td>
+            <td>{widget?}</td>
+            {endif:_table=webtd}
+            <td>{lang|kameleon.trans}</td>
+            <td>{trash|kameleon.datetime}</td>
+            <td>
+                <a class="km_icon km_icontd_delete" href="{root}trash/remove/{_table}:{sid}" title="{translate.Delete link}" confirm="1">{translate.Delete link}</a>
+                <a class="km_icon km_icontd_visible km_icontd_visible_on" href="{root}trash/untrash/{_table}:{sid}" title="{translate.Restore}">{translate.Restore}</a>
+            </td>
+        </tr>
+        {endloop:trash}
+        </tbody>
+    </table>
+</div>
+{endif:trash}
+
+{if:!trash}
+<div class="km_fbtn">
+    <a href="{root}index/get/{referpage?0}" class="km_fbtn_normal">{translate.Return}</a>
+</div>
+<h2 class="wizard_trash_empty">{translate.Trash is empty}</h2>
+{endif:!trash}
+</div>

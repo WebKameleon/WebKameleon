@@ -1,0 +1,70 @@
+{with:searchWidget}
+
+<form id="search_form" method="post">
+    {include:_widget.header.html}
+    <h1>{translate.Google Search}</h1>
+    
+    <div class="edit_box">
+        <h2>HOW-TO</h2>
+        <ol>
+            <li>{translate.Login to Google Custom Search}: <a href="https://www.google.com/cse" target="_blank">www.google.com/cse</a></li>
+            <li>{translate.Add new search engine} <a href="{widget_images}/1.png" fancybox="1"><span class="ui-icon ui-icon-help"></span></a></li>
+            <li>{translate.Click "Public URL" button} <a href="{widget_images}/2.png" fancybox="1"><span class="ui-icon ui-icon-help"></span></a></li>
+            <li>{translate.Copy CX parameter and paste it into input below} <a href="{widget_images}/3.png" fancybox="1"><span class="ui-icon ui-icon-help"></span></a></li>
+        </ol>
+    </div>
+    <div class="edit_box">
+        <div class="label">{translate.CX}</div>
+        <div class="value">
+            <input type="text" id="search_cx" name="search[cx]" value="{data.cx}" style="width: 300px;" />
+            <a id="search_manage" href="#" target="_blank">{translate.manage}</a>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label" style="height: 50px;">{translate.Type}</div>
+        <div class="value">
+            <input type="radio" id="search_type_popup" name="search[type]" value="0" {if:!data.type} checked{endif:!data.type} onclick="showNext('none')" />
+            <span rel="search_type_popup">{translate.Pop-up window}</span><br/>
+            <input type="radio" id="search_type_input" name="search[type]" value="1" {if:data.type=1} checked{endif:data.type=1}  onclick="showNext('block')"/>
+            <span rel="search_type_input">{translate.Input box}</span><br/>
+            <input type="radio" id="search_type_results" name="search[type]" value="2" {if:data.type=2} checked{endif:data.type=2}  onclick="showNext('none')"/>
+            <span rel="search_type_results">{translate.Results}</span><br/>            
+        </div>
+    </div>
+    
+    <div class="edit_box" id="next_input" {if:!data.type=1} style="display:none"{endif:!data.type=1}>
+        <div class="label">{translate.Results}</div>
+        <div class="value">
+            <input type="text" name="td[next]" value="{td.next}" jstree="{page_id}" />
+        </div>
+    </div>    
+    
+    
+</form>
+
+<script type="text/javascript">
+function SaveChanges()
+{
+    jQueryKam("#search_form").submit();
+    return false;
+}
+
+function showNext(disp)
+{
+    document.getElementById('next_input').style.display=disp;
+}
+
+jQueryKam(function ($) {
+
+    $("#search_cx").on("keyup", function (e) {
+        if (this.value) {
+            $("#search_manage").attr("href", "https://www.google.com/cse/setup/basic?cx=" + this.value + "&hl={lang}").show();
+        } else {
+            $("#search_manage").attr("href", "#").hide();
+        }
+    }).trigger("keyup");
+
+});
+</script>
+{endwith:searchWidget}

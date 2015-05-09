@@ -1,0 +1,136 @@
+{with:merlin_resultsWidget}
+
+
+{if:q.hotel}
+
+<div class="merlin_results">
+    <div class="row header">
+        <div class="col-md-2 col-sm-2">Termin</div>
+        <div class="col-md-2 col-sm-2">Cena</div>
+        <div class="col-md-2 col-sm-2">Ilość dni</div>
+        <div class="col-md-2 col-sm-2">Lotnisko</div>
+        <div class="col-md-2 col-sm-2">Pokój</div>
+        <div class="col-md-2 col-sm-2">&nbsp;</div>
+    </div>
+    
+    {loop:offers.result}
+    
+    <div class="row">    
+    
+    <div class="col-md-2 col-sm-2">
+        <p>{startDate.DDMMYYYY}</p>    
+    </div>
+    
+    <div class="col-md-2 col-sm-2 price">
+        <p>{operPrice} {operCurr}</p>
+    </div>
+    
+    <div class="col-md-2 col-sm-2 date">        
+        <p>{trp.duration}&nbsp;dni</p>
+    </div>    
+        
+    <div class="col-md-2 col-sm-2">
+        <p>{trp.depName}, {trp.flightOp}</p>
+    </div>
+    
+    <div class="col-md-2 col-sm-2">
+        <p>{obj.roomDesc}</p>
+    </div>
+    
+    <div class="col-md-2 col-sm-2">
+        <a href="#" class="btn btn-info hotels-btn">Rezerwuj</a>
+    </div>
+    
+    </div>
+        
+    {endloop:offers.result}
+</div>
+
+{endif:q.hotel}
+
+{if:!q.hotel}
+<div class="merlin_results">
+    <div class="row header">
+        <div class="col-md-2 col-sm-2">&nbsp;</div>
+        <div class="col-md-3 col-sm-3">Zakwaterowanie</div>
+        <div class="col-md-2 col-sm-2">Wylot</div>
+        <div class="col-md-1 col-sm-1">Lotnisko</div>
+        <div class="col-md-2 col-sm-2">Cena</div>
+        <div class="col-md-2 col-sm-2"></div>
+    </div>
+    
+    {loop:offers.result}
+    
+    <div class="row">
+    
+    <div class="col-md-2 col-sm-2">
+        {if:obj.info.thumb}<img src="{obj.info.thumb}" class="img-responsive"/>{endif:obj.info.thumb}
+        {if:!obj.info.thumb}<div class="no-photo"></div>{endif:!obj.info.thumb}
+    </div>
+    
+    <div class="col-md-3 col-sm-3">
+        
+        <h3>{obj.name}</h3>
+        
+        <div class="rating">
+             <div class="progress">
+              <div class="stars"></div>  
+              <div class="progress-bar rating-bar" role="progressbar" aria-valuenow="{obj.category|*2}" aria-valuemin="0" aria-valuemax="100" style="width: {obj.category|*2}%;">
+               <span class="sr-only">{obj.category|*2}% Complete</span>
+              </div>
+             </div>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <p class="country">{obj.country}, {obj.city}</p>
+        <!--<p>{obj.roomDesc}</p>-->
+        <!--<ul>
+        {loop:obj.attributes}
+        <li class="{loop}"></li>        
+        {endloop:obj.attributes}
+        </ul>-->
+    </div>
+    
+    <div class="col-md-2 col-sm-2 date">
+        <p>{startDate.DDMMYYYY}</p>
+        <p>{trp.duration}&nbsp;dni</p>
+    </div>    
+        
+    <div class="col-md-1 col-sm-1">
+        <p>{trp.depName}, {trp.flightOp}</p>
+    </div>
+    
+    <div class="col-md-2 col-sm-2 price">
+        <p>{operPrice} {operCurr}</p>
+    </div>
+    
+    <div class="col-md-2 col-sm-2">
+        <a href="{more_link}{next_sign}{merlin_url_vars}&merlin.hotel={obj.code}&merlin.id={id}" class="btn btn-info">Szczegóły</a>
+    </div>
+    
+    </div>
+        
+    {endloop:offers.result}
+</div>
+
+{endif:!q.hotel}
+
+{if:nav}
+<ul class="merlin_nav">
+    <h6>Znaleziono propozycji: {offers.count} </h6>
+{loop:nav}
+<li class="{if:active}active{endif:active}"><a href="{self_link}{next_sign}{vars}">{page}</a> </li>
+{endloop:nav}
+</ul>
+{endif:nav}
+
+<!--{if:mode}
+<hr size="1" style="margin:0"/>
+Debug:
+{loop:data.dbg}
+{debug.__item__.#.blue.$__loop__}
+{endloop:data.dbg}
+{debug.offers}
+{endif:mode}-->
+{endwith:merlin_resultsWidget}

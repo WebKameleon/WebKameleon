@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "Webkameleon cms - kreator stron www",
+    "description": "webkameleon - cms - kreator mobilnych stron www"
+  },
+  "appDesc": {
+    "message": "Webkameleon pomoże Tobie utworzyć i opublikować mobilną stronę www.", 
+    "description":"Wybierz jeden z wielu dostępnych szablonów, edytuj treść i publikuj. Webkameleon pozwala na tworzenie wielu stron www, łatwą aktualizację treści i dodawanie nowych podstron."
+  },
+  "appShortName" : {
+    "message": "Webkameleon",
+    "description": "webkameleon - cms - kreator mobilnych stron www"    
+  }  
+}

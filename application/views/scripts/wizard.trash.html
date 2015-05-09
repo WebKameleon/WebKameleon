@@ -1,0 +1,36 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/{skin}/wizard.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+{include:_header.html}
+
+<div class="container-fluid">
+<!-- CREATE AND TRASH BUTTONS -->
+ <div class="row">
+  <div class="col-md-12">
+	<a href="{root}wizard/create" id="km_wizard_create" class="btn btn-lg btn-danger" popup_mode="{config.wizard.popup_mode}">{translate.Create service}</a>
+	<a href="{root}wizard" id="km_wizard_services" class="btn btn-lg btn-primary"><i class="glyphicon glyphicon-globe "></i>{translate.Servers}</a>
+  </div>
+ </div>
+<!-- end CREATE AND TRASH BUTTONS -->
+
+{if:trash}
+<div class="row">
+	<div class="col-md-12">
+		<h2 class="wizard_trash_title">{translate.Trash}</h2>
+		<ul class="wizard_services mine">
+			{loop:trash}
+			<li>
+				<a href="javascript:alert('{translate.Website trashed}')" class="wizard_service_tmb"><img src="{root}thumb/{id}" title="{nazwa_long}" /></a>
+				<a href="javascript:alert('{translate.Website trashed}')" class="wizard_service_name" title="{nazwa_long}">{nazwa}</a>
+				<a title="{translate.Delete}" href="{root}ajax/wizard_remove/{id}" class="wizard_service_link" rel="remove"><span class="glyphicon glyphicon-trash"></span></a>
+				<a title="{translate.Restore}" href="{root}ajax/wizard_untrash/{id}" class="wizard_service_link" rel="untrash"><span class="glyphicon glyphicon-chevron-left"></a>
+			</li>
+			{endloop:trash}
+		</ul>
+	</div>
+</div>
+{endif:trash}
+<h2 class="wizard_trash_empty" {if:trash}style="display:none;"{endif:trash}>{translate.Trash is empty}</h2>
+
+</div>
+{include:_wizard.dialog.html}
+<script type="text/javascript" src="{root}js/wizard.js"></script>

@@ -1,0 +1,7 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:youtubeWidget}
+{if:video_url}
+<iframe class="wkw_youtube_iframe" id="player{sid}" width="{data.width}" height="{data.height}" src="{video_url}{if:data.auto}&autoplay=1{endif:data.auto}" frameborder="0" allowfullscreen mute="{if:data.mute}1{endif:data.mute}{if:!data.mute}0{endif:!data.mute}"></iframe>
+{endif:video_url}
+{endwith:youtubeWidget}
+{plain}

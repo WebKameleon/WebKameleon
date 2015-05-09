@@ -1,0 +1,22 @@
+
+</div>
+
+{if:body.lost}<div class="km_lost">{body.lost}</div>{if:body.lost}
+
+
+{include:_contextmenu.html}
+{include:_shareserver.html}
+{include:_setup.html}
+
+<div id="km_checkHF">
+    <ul class="km_checkHFIn">
+        <li>
+            <label for="km_check_hf">{translate.Insert into}:</label>
+            <select id="km_check_hf">
+                <option value="1">{translate.Header}</option>
+                <option value="2">{translate.Footer}</option>
+            </select>
+        </li>
+    </ul>
+</div>
+

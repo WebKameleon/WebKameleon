@@ -1,0 +1,143 @@
+#share_form .edit_box ul {
+    list-style : none;
+    width      : 250px;
+    float      : left;
+    padding: 0;
+    margin: 0;
+}
+
+#share_form .edit_box ul li {
+    float : left;
+    width : 100%;
+    padding: 3px 0;
+}
+
+
+#share_form .display_options label:after {
+    content : "";
+    display: block;
+}
+
+.kmw_share {
+    margin: 2px;
+    padding: 0px;
+}
+
+
+.kmw_share li {
+    display: inline-block;
+    list-style: none;
+}
+
+.kmw_share li a {
+    display: inline-block;
+    background: url('sprite.png') no-repeat
+}
+
+/* IKONY */
+ul.kmw_share {
+    padding-left: 0px !important;
+    margin-left:0px !important;
+}
+
+ul.kmw_share li a {
+    background-image: url('share.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 42px;
+    height: 42px;
+    text-indent: 9999px;
+    font-size: 0px !important;
+    overflow: hidden;
+    -webkit-transition: all 0.5s ease; 
+    -moz-transition: all 0.5s ease; 
+    -o-transition: all 0.5s ease; 
+    transition: all 0.5s ease;
+}
+
+ul.kmw_share li a:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70); /* For IE8 and earlier */
+}
+
+li.default_facebook a { background-position: 0 0; width: 42px; height: 42px; } 
+li.bw_facebook a { background-position: -92px 0; width: 42px; height: 42px; } 
+li.wb_facebook a { background-position: -184px 0; width: 42px; height: 42px; } 
+li.w_facebook a{ background-position: -276px 0; width: 42px; height: 42px; } 
+li.b_facebook a{ background-position: -368px 0; width: 42px; height: 42px; } 
+li.default_twitter a{ background-position: -460px 0; width: 42px; height: 42px; } 
+li.bw_twitter a{ background-position: -552px 0; width: 42px; height: 42px; } 
+li.wb_twitter a{ background-position: -644px 0; width: 42px; height: 42px; } 
+li.w_twitter a{ background-position: -736px 0; width: 42px; height: 42px; } 
+li.b_twitter a{ background-position: -828px 0; width: 42px; height: 42px; } 
+li.default_gplus a { background-position: -920px 0; width: 42px; height: 42px; } 
+li.bw_gplus a { background-position: -1012px 0; width: 42px; height: 42px; } 
+li.wb_gplus a{ background-position: -1104px 0; width: 42px; height: 42px; } 
+li.w_gplus a{ background-position: -1196px 0; width: 42px; height: 42px; } 
+li.b_gplus a{ background-position: -1288px 0; width: 42px; height: 42px; } 
+li.default_tumblr a { background-position: -1380px 0; width: 42px; height: 42px; } 
+li.bw_tumblr a { background-position: -1472px 0; width: 42px; height: 42px; } 
+li.wb_tumblr a { background-position: -1564px 0; width: 42px; height: 42px; } 
+li.w_tumblr a{ background-position: -1656px 0; width: 42px; height: 42px; } 
+li.b_tumblr a{ background-position: -1748px 0; width: 42px; height: 42px; } 
+li.default_pinterest a { background-position: -1840px 0; width: 42px; height: 42px; } 
+li.bw_pinterest a{ background-position: -1932px 0; width: 42px; height: 42px; } 
+li.wb_pinterest a{ background-position: 0 -92px; width: 42px; height: 42px; } 
+li.w_pinterest a{ background-position: -92px -92px; width: 42px; height: 42px; } 
+li.b_pinterest a{ background-position: -184px -92px; width: 42px; height: 42px; } 
+li.default_getpocket a { background-position: -276px -92px; width: 42px; height: 42px; } 
+li.bw_getpocket a{ background-position: -368px -92px; width: 42px; height: 42px; } 
+li.wb_getpocket a{ background-position: -460px -92px; width: 42px; height: 42px; } 
+li.w_getpocket a{ background-position: -552px -92px; width: 42px; height: 42px; } 
+li.b_getpocket a{ background-position: -644px -92px; width: 42px; height: 42px; } 
+li.default_reddit a { background-position: -736px -92px; width: 42px; height: 42px; } 
+li.bw_reddit a{ background-position: -828px -92px; width: 42px; height: 42px; } 
+li.wb_reddit a{ background-position: -920px -92px; width: 42px; height: 42px; } 
+li.w_reddit a{ background-position: -1012px -92px; width: 42px; height: 42px; } 
+li.b_reddit a{ background-position: -1104px -92px; width: 42px; height: 42px; } 
+li.default_linkedin a { background-position: -1196px -92px; width: 42px; height: 42px; } 
+li.bw_linkedin a { background-position: -1288px -92px; width: 42px; height: 42px; } 
+li.wb_linkedin a{ background-position: -1380px -92px; width: 42px; height: 42px; } 
+li.w_linkedin a{ background-position: -1472px -92px; width: 42px; height: 42px; } 
+li.b_linkedin a{ background-position: -1564px -92px; width: 42px; height: 42px; } 
+li.default_pinboard a { background-position: -1656px -92px; width: 42px; height: 42px; } 
+li.bw_pinboard a{ background-position: -1748px -92px; width: 42px; height: 42px; } 
+li.wb_pinboard a{ background-position: -1840px -92px; width: 42px; height: 42px; } 
+li.w_pinboard a{ background-position: -1932px -92px; width: 42px; height: 42px; } 
+li.b_pinboard a{ background-position: 0 -184px; width: 42px; height: 42px; } 
+li.default_mail a { background-position: -92px -184px; width: 43px; height: 42px; } 
+li.bw_mail a { background-position: -185px -184px; width: 43px; height: 42px; } 
+li.wb_mail a{ background-position: -278px -184px; width: 43px; height: 42px; } 
+li.w_mail a{ background-position: -371px -184px; width: 43px; height: 42px; } 
+li.b_mail a{ background-position: -464px -184px; width: 43px; height: 42px; } 
+
+/* EDITOR */
+#share_form .edit_box ul li input {
+    padding-left: 50px;
+    height: 42px;
+    float:left;
+}
+
+#share_form .edit_box ul li label {
+    line-height: 49px;
+}
+#share_form .edit_box ul li input:before {
+    content: '';
+    display: inline-block;
+    width:42px;
+    height: 42px;
+    background-image: url('share.png');
+    background-repeat: no-repeat;
+    margin-left:-50px;
+}
+
+#share_form .edit_box ul li input#share_input_facebook:before { background-position: 0 0; width: 42px; height: 42px; } 
+#share_form .edit_box ul li input#share_input_twitter:before { background-position: -460px 0; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_gplus:before { background-position: -920px 0; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_tumblr:before { background-position: -1380px 0; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_pinterest:before { background-position: -1840px 0; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_getpocket:before { background-position: -276px -92px; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_reddit:before { background-position: -736px -92px; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_linkedin:before { background-position: -1196px -92px; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_pinboard:before { background-position: -1656px -92px; width: 42px; height: 42px; }
+#share_form .edit_box ul li input#share_input_mail:before { background-position: -92px -184px; width: 43px; height: 42px; } 

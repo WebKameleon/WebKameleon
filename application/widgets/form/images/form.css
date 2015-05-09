@@ -1,0 +1,115 @@
+.kmw_form .error-message,
+.kmw_form .required-message,
+.kmw_form .ss-password-warning {
+    display: none;
+}
+
+
+.kmw_form {
+    padding: 1em;
+}
+
+.kmw_form .ss-required-asterisk {
+    color: red;
+}
+.kmw_form #ss-submit {
+    padding: 0.9em;
+}
+
+
+.kmw_form .ss-image {
+    width: 90%;
+}
+
+/* ---== BTN MANAGE ==--- */
+.km-form-nav {
+	width:100%;
+	padding:15px;
+}
+
+.km-form-mamge-btn,
+.kmw_form #ss-submit{
+	text-decoration: none;
+	background-color: #4D90FE;
+	border: 0 none;
+	border-radius: 2px 2px 2px 2px;
+	color: #FFFFFF;
+	cursor: pointer;
+	display: block;
+	font-size: 11px;
+	height: 27px;
+	line-height: 27px;
+	padding: 0 8px;
+	text-transform: uppercase;
+	float:left;
+}
+
+.km-form-mamge-btn:hover,
+.kmw_form #ss-submit{
+	text-decoration:none;
+	color:#fff;
+	background-color:#3983fd;
+}
+/* ---== BTN MANAGE ==--- */
+
+/* ---== EDITOR LOOK ==--- */
+.ss-q-item-label {
+	width:100% !important;
+}
+
+.kmw_form form .ss-q-title label {
+	display:inline-block;
+}
+
+.ss-form-entry {
+	margin-bottom:15px;
+}
+
+.kmw_form form label .ss-q-title {
+	font-size:1.2em;
+	margin-top:15px;
+}
+
+.ss-secondary-text {
+	color:#555;
+	font-style:italic;
+	font-size:0.95em;
+}
+
+.kmw_form form input.ss-q-short,
+.kmw_form form textarea.ss-q-long {
+	width:90%;
+	clear:both;
+}
+
+.kmw_form form ul.ss-choices {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+.ss-submit {
+	background-color:#F00;
+}
+
+table td#navigation-buttons {
+	border:0px !important;
+	padding:0px !important;
+	background:none !important;
+}
+/* ---== end EDITOR LOOK ==--- */
+
+/* ---== AFTER MESSAGE ==--- */
+.kmw_form_iframe {
+	display:none;
+	border:0px !important;
+	background:none !important;
+	position:relative;
+	height:400px!important;
+}
+
+.kmw_form_iframe .ss-base-body {
+	background:none !important;
+	background-color:#fff;
+}
+/* ---== AFTER MESSAGE ==--- */

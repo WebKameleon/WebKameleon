@@ -1,0 +1,41 @@
+.sitemap a {
+    color : #000;
+}
+
+.sitemap ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+}
+
+.sitemap ul li {
+    margin      : 0;
+    padding-top : 8px;
+}
+
+.sitemap > ul {
+    margin-left    : 20px;
+    padding-bottom : 8px;
+}
+
+.sitemap ul ul {
+    margin-left : 10px;
+    display     : none;
+}
+
+.sitemap ul .sitemap_box {
+    display          : inline-block;
+    width            : 9px;
+    height           : 9px;
+    background-image : url(sitemap_no.png);
+    margin-right     : 10px;
+    cursor           : pointer;
+}
+
+.sitemap ul .sitemap_box_plus {
+    background-image : url(sitemap_plus.png);
+}
+
+.sitemap ul .sitemap_box_minus {
+    background-image : url(sitemap_minus.png);
+}

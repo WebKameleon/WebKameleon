@@ -1,0 +1,49 @@
+{with:langsWidget}
+
+
+
+<form id="langs_form" method="post">
+    {include:_widget.header.html}
+    <h1>{translate.Language selector}</h1>
+
+    <div class="edit_box">
+        <div class="label">{translate.Languages}</div>
+        <div class="value">
+            <ul>
+            {loop:all_languages}
+            <li>
+                <input id="langs_input_{code}" type="checkbox" name="langs[languages][{code}]" value="1" {if:checked}checked{endif:checked} />
+                <label for="langs_input_{code}"><span class="flag flag-{code}"></span> {name}</label>
+            </li>
+            {endloop:all_languages}
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="edit_box display_options">
+        <div class="label">{translate.Advanced}</div>
+        <div class="value">
+            <input type="checkbox" name="langs[home]" id="home" value="1" {if:data.home}checked{endif:data.home} />
+            <label for="home">{translate.Link to home page}</label>
+
+        </div>
+        
+        <div class="value">
+            <input type="checkbox" name="langs[autodetect]" id="autodetect" value="1" {if:data.autodetect}checked{endif:data.autodetect} />
+            <label for="autodetect">{translate.Auto detect and follow}</label>
+
+        </div>        
+        
+    </div>
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#langs_form").submit();
+        return false;
+    }
+
+</script>
+{endwith:langsWidget}

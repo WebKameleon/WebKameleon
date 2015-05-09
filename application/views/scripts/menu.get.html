@@ -1,0 +1,247 @@
+{include:_menu.header.html}
+
+<div class="container-fluid">
+<form id="menu_form" method="post">
+	<div class="row wk-margin-top-15">
+		<div class="col-sm-8">
+			<!-- <a id="menu_new" href="{root}menu/get/{menu.new_menu_id}" class=" btn btn-danger">{translate.New menu}</a> -->
+			{if:!menu_may_copy}<a id="menu_new" href="{root}menu/get/-1" class=" btn btn-danger">{translate.New menu}</a>{endif:!menu_may_copy}
+		</div>
+		<div class="col-sm-4">
+			{if:!menu.id=-1}
+			<a id="menu_add" href="#" class="menu-btn-group btn btn-primary">{translate.Add menu link}</a>  
+			{endif:!menu.id=-1}
+			<a href="{if:_return_url}{_return_url}{endif:_return_url}{if:!_return_url}{root}index/get/{referpage?0}{endif:!_return_url}" class="menu-btn-group btn btn-default">{translate.Return}</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<h3>
+			{if:!menu.id=-1}<input id="menu_name" class="menu-input-name" name="name" type="text" value="{menu.name}" placeholder="{translate.New menu}" />{endif:!menu.id=-1}
+			</h3>
+		</div>
+	</div>
+	
+	<ul class="km_zakladki">
+		<li><a rel="menu">{translate.Menu}</a></li>
+		<!--<li><a rel="options">{translate.Options}</a></li>-->
+	</ul>
+
+	<div class="km_zakladka km_zakladka_menu">
+    <div class="edit_box">
+        <!--<div class="label">{translate.Menu links}</div>-->
+		<div class="value">
+			{if:!menu_may_copy}
+			<select id="menu_list">
+				<option value="">{translate.Select menu} </option>
+				{loop:menu.list}
+				<option value="{menu_id}" {if:menu.id=$menu_id}selected{endif:menu.id=$menu_id}>{name} [{menu_id}]</option>
+				{endloop:menu.list}
+			</select>
+			{endif:!menu_may_copy}
+			
+			{if:menu_may_copy}
+			{translate.Copy from}
+			<select name="menu_src">
+                    {loop:menu.list}
+                    <option value="{menu_id}">{name} [{menu_id}]</option>
+                    {endloop:menu.list}
+            </select>
+            <a href="#" id="menu_copy" title="{translate.Copy}"></a>
+			{endif:menu_may_copy}
+		</div>	
+    </div>
+	
+	{if:menu.links}
+    <div class="menu_links">
+        <table class="tabelka" cellpadding="1" cellspacing="0">
+            <tbody id="km_menus">
+                
+            {loop:menu.links}
+            <tr>
+                <td class="c1">
+                    {if:img}
+                    <a href="{uimages}/{img}" fancybox="1"><img src="{uimages}/{img}" /></a>
+                    {endif:img}
+                    <input type="text" sid="{sid}" value="{alt}" rel="alt" />
+                </td>
+                <td class="c2">{translate.Hyperlink to}
+                    <input type="text" sid="{sid}" value="{if:lang_target}{lang_target}:{endif:lang_target}{page_target}" rel="page_target" jstree="1" jsmultilangs="1" />
+                </td>
+                <td class="c3">
+                    <a class="km_icon km_iconi_arr_up" sid="{sid}" title="{translate.Move up}">{translate.Move up}</a>
+                    <a class="km_icon km_iconi_arr_down" sid="{sid}" title="{translate.Move down}">{translate.Move down}</a>
+                    <a class="km_icon km_icontd_edit" sid="{sid}" href="{root}menu/edit_link/{sid}?return_url={request_uri|base64_encode}" title="{translate.Edit link}">{translate.Edit link}</a>
+                    <a class="km_icon km_icontd_delete" sid="{sid}" title="{translate.Delete link}">{translate.Delete link}</a>
+                    {if:hidden}
+                    <a class="km_icon km_icontd_visible km_icontd_visible_off" sid="{sid}" title="{translate.Link hidden}">{translate.Link hidden}</a>
+                    {endif:hidden}
+                    {if:!hidden}
+                    <a class="km_icon km_icontd_visible km_icontd_visible_on" sid="{sid}" title="{translate.Link visible}">{translate.Link visible}</a>
+                    {endif:!hidden}
+                    {if:submenu_id}
+                    <a class="km_icon km_iconi_arr_right" href="{root}menu/get/{submenu_id}" sid="{sid}" title="{translate.Edit submenu}">{translate.Edit submenu}</a>
+                    {endif:submenu_id}
+                </td>
+            </tr>
+            {endloop:menu.links}
+            </tbody>
+        </table>
+        <div class="wk-margin-top-15">
+            <a id="menu_remove_all" href="#" class="btn btn-default">{translate.Remove all menu links}</a>
+        </div>
+    </div>
+    {endif:menu.links}
+	</div>
+</form>	
+</div>
+
+<script type="text/javascript">
+jQueryKam(function ($) {
+    $("#menu_list").on("change", function (e) {
+        document.location = KAM_ROOT + "menu/get/" + this.value;
+    });
+
+    $("#menu_add").on("click", function (e) {
+        $("#menu_form").attr("action", "{root}menu/add_link/{menu.id}").submit();
+        return false;
+    });
+
+    $("#menu_copy").on("click", function (e) {
+        $("#menu_form").attr("action", "{root}menu/copy/{menu.id}").submit();
+        return false;
+    });
+
+    /*$("#menu_new").on("click", function (e) {
+     KamPrompt("{translate.Enter menu number that you want to create}", "", function (menu_id) {
+     $("#menu_form").attr("action", "{root}menu/get/" + menu_id).submit();
+     }, "{menu.new_menu_id}");
+     return false;
+     });*/
+
+    $("#menu_remove_all").on("click", function (e) {
+        KamConfirm("{translate.Are you sure you want to remove all menu links}?", function () {
+            $("#menu_form").attr("action", "{root}menu/remove_links/{menu.id}").submit();
+        });
+        return false;
+    });
+
+    {if:!menu.id=-1}
+    $("#menu_name").on("blur", function (e) {
+        var input = this;
+        km_preloader_show();
+        $.getJSON(KAM_ROOT + "ajax/menu_change_name/{menu.id}", {
+            name : $(input).val()
+        }, function (data) {
+            km_preloader_hide();
+            if (data.status == 1) {
+
+            } else {
+                KamDialog(data.error || tr("Error changing menu name"));
+            }
+        });
+    });
+    {endif:!menu.id=-1}
+
+    $("#km_menus input[sid][rel]").on("change", function (e) {
+        var link = this;
+        km_preloader_show();
+        $.post(KAM_ROOT + "ajax/link_change_property/" + $(link).attr("sid"), {
+            prop : $(this).attr("rel"),
+            val : $(link).val()
+        }, function (data) {
+            km_preloader_hide();
+            if (data.status == 1) {
+
+            } else {
+                KamDialog(data.error || tr("Error changing link property"));
+            }
+        }, "json");
+    });
+
+    $("#km_menus a.km_icontd_visible[sid]").on("click", function (e) {
+        var link = this;
+        km_preloader_show();
+        $.getJSON(KAM_ROOT + "ajax/link_change_visibility/" + $(link).attr("sid"), function (data) {
+            km_preloader_hide();
+            if (data.status == 1) {
+                $(link).toggleClass("km_icontd_visible_on km_icontd_visible_off").html(data.title).attr("title", data.title);
+            } else {
+                KamDialog(data.error || tr("Error changing link visibility"));
+            }
+        });
+        return false;
+    });
+
+    $("#km_menus a.km_icontd_delete[sid]").on("click", function (e) {
+        var link = this;
+        KamConfirm("{translate.Are you sure you want to delete link}?", function () {
+            km_preloader_show();
+            $.getJSON(KAM_ROOT + "ajax/link_remove/" + $(link).attr("sid"), function (data) {
+                km_preloader_hide();
+                if (data.status == 1) {
+                    $(link).parent().parent().remove();
+                } else {
+                    KamDialog(data.error || tr("Error deleting link"));
+                }
+            });
+        });
+        return false;
+    });
+
+    var km_menu_reorder_links = function () {
+        var links = [];
+        $("#km_menus tr").each(function () {
+            links.push(
+                    $(this).find("[sid]:first").attr("sid")
+            );
+        });
+        km_preloader_show();
+        $.getJSON(KAM_ROOT + "ajax/menu_reorder_links/{menu.id}", {
+            order : links.join(":")
+        }, function (data) {
+            km_preloader_hide();
+            if (data.status == 1) {
+
+            } else {
+                KamDialog(data.error || tr("Error reordering links")).on("dialogclose", function () {
+                    document.location = KAM_ROOT + "menu/get/{menu.id}";
+                });
+            }
+        });
+    }
+
+    $("#km_menus").sortable({
+        items : "> tr",
+        opacity : 0.9,
+        stop : km_menu_reorder_links,
+        cursor : "move"
+    });
+
+    $("a.km_iconi_arr_up[sid]").on("click", function (e) {
+        var el = $(this).parent().parent();
+        var prev = el.prev("tr");
+        if (prev.length) {
+            el.detach().insertBefore(prev);
+        } else {
+            prev = el.siblings("tr").last();
+            el.detach().insertAfter(prev);
+        }
+        km_menu_reorder_links();
+        return false;
+    });
+
+    $("a.km_iconi_arr_down[sid]").on("click", function (e) {
+        var el = $(this).parent().parent();
+        var next = el.next("tr");
+        if (next.length) {
+            el.detach().insertAfter(next);
+        } else {
+            next = el.siblings("tr").first();
+            el.detach().insertBefore(next);
+        }
+        km_menu_reorder_links();
+        return false;
+    });
+});
+</script>

@@ -1,0 +1,16 @@
+{with:cookiesWidget}
+
+<div class="kmw_cookies" {if:mode=(0,1)}style="display:none"{endif:mode=(0,1)}>
+    {data.info}
+    <input type="button" value="{data.button}" onclick="kmw_cookies_ok()"/>
+</div>
+
+{if:mode=(0,1)}
+<script type="text/javascript">
+    jQueryKam(function() {
+        kmw_cookies({data.display_mode});
+    });
+</script>
+{endif:mode=(0,1)}
+
+{endwith:cookiesWidget}

@@ -1,0 +1,73 @@
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li class="sf-disable">
+                    <a>{translate.Page}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+                {include:_menu.help.html}
+            </ul>
+        </div>
+
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" href="{root}ftp">{translate.Return}</a>
+</div>
+
+
+<div class="ftp_map">
+
+{if:!server.map_url}
+<form method="post" id="ftp_map_form">
+    <h1>{translate.URL maping}</h1>
+    <p>{translate.Currently your website is here}:</p>
+    <p><a href="{server.http_url}" target="_blank">{server.http_url}</a></p>
+    <p>{translate.Submit a new address in your own domain below}:</p>
+    <p>http://<input type="text" value="{map_url?www.}" name="map_url"/></p>
+    <p>{translate.Next submit following properity to your domain in your domain provider panel}:</p>
+    <div>www&nbsp;&nbsp;&nbsp;CNAME&nbsp;&nbsp;&nbsp;{config.ftp.map.cname}</div>
+
+    <p class="ftp_map_btn"><a href="javascript:" onclick="document.getElementById('ftp_map_form').submit()">{translate.Map your URL}</a></p>
+</form>
+{endif:!server.map_url}
+
+
+{if:server.map_url}
+<form method="post" id="ftp_map_form">
+    <h1>{translate.URL unmaping}</h1>
+    <p>{translate.Currently your website is here}:</p>
+    <p><a href="{server.http_url}" target="_blank">{server.http_url}</a></p>    
+    <p>
+	{translate.You are about to remove mapping of your URL address}.
+	{translate.Remember to inform your website's users it is not going to be available at the address}.
+    </p>
+
+    <p>{translate.Remove record} <b>CNAME {config.ftp.map.cname}</b> {translate.in your domain provider panel}.</p>
+    <input type="hidden" value="1" name="unmap_url"/>
+    <p class="ftp_map_btn"><a href="javascript:" onclick="document.getElementById('ftp_map_form').submit()">{translate.Unmap your URL}</a></p>
+</form>
+{endif:server.map_url}
+
+
+</div>

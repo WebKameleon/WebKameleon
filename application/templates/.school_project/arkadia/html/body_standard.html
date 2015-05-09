@@ -1,0 +1,78 @@
+{with:page}{if:id}{if:next}{if:config.webpage.follow_next}{if:mode=0}<?php header('Location: {tokens|href:,,$next}');?>{endif:mode=0}{if:mode=1}<script>location.href='{tokens|href:,,$next}'</script>{endif:mode=1}{endif:config.webpage.follow_next}{endif:next}{endif:id}{endwith:page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset={charset}" />
+	<title>{page.title}</title>
+	<meta name="Robots" content="all" />
+	<meta name="generator" content="{generator}" />
+    <link href="{template_images}/arkadia/favicon.ico" rel="shortcut icon" />
+    <link href="{template_images}/druk.css" rel="stylesheet" type="text/css"  media="print" />
+	<meta name="WebKameleonId" content="server={page.server}; page={page.id}; ver={page.ver}; lang={page.lang}; ftp={page.nd_ftp|kameleon.datetime}" />
+	
+	
+	{if:page.description}<meta name="description" content="{page.description}" />{endif:page.description}	
+	{if:page.keywords}<meta name="keywords" content="{page.keywords}" />{endif:page.keywords}
+	<link href="{template_images}/szablon.css" rel="stylesheet" type="text/css" />
+	<link href="{template_images}/textstyle.css" rel="stylesheet" type="text/css" />
+	
+	<script src="{template_images}/js/a_jquery.js" type="text/javascript"></script>
+	<script src="{template_images}/js/b_lightbox.js" type="text/javascript"></script>
+	<script src="{template_images}/js/jquery_ui.js" type="text/javascript"></script>
+	<script src="{template_images}/js/ui.stars.js" type="text/javascript"></script>
+	<script src="{template_images}/js/x_allsite.js" type="text/javascript"></script>
+</head>
+<body {if:page.class}class="{page.class}"{endif:page.class} {if:page.bgcolor}bgcolor="#{page.bgcolor}"{endif:page.bgcolor} >
+
+
+{with:header}
+<div class="body_header">
+	{level1}
+    {level2}
+    {level3}
+</div>
+{endwith:header}
+
+{with:body}
+<div class="body_middle">
+	<div class="body_middle_left">
+        {level3_inherited_up_notype}
+        {level3}
+        {level4}
+        {tokens.glosowanie}
+    </div>
+    <div class="body_middle_right">
+    	<div class="right">
+            <div class="middle_right" id="contener">
+                <div class="breadcrumb">{tokens.breadcrumb}</div>
+                {level1_inherited_up_notype}
+                {level1}
+                {level2}
+            </div>
+        </div>
+	</div>
+</div>
+<div class="body_middle_end"></div>
+{endwith:body}
+
+{with:footer}
+<div class="body_footer">
+	{level1}
+    {level2}
+    {level3}
+    <ul class="banner">
+	<li class="li_3"></li>
+	<li class="li_2"></li>
+	<li class="li_1"></li>
+	<li class="li_logo">{tokens.logo}</li>
+</ul>
+</div>
+<div class="sitecredits">
+    <div class="unia"><span class="unia_projekt">Projekt „eSzkoła – Moja Wielkopolska” współfinansowany ze środków  Unii Europejskiej w ramach Europejskiego Funduszu Społecznego.</span></div>
+	<a href="http://www.gammanet.pl/" target="_blank">projekt www Gammanet</a> | <a href="http://www.webkameleon.com" target="_blank">cms WebKameleon</a>
+</div>
+{endwith:footer}
+
+
+</body>
+</html>

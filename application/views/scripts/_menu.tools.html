@@ -1,0 +1,63 @@
+<ul>
+    <li><a href="{root}wizard" id="km_ddmenu_wizard">{translate.My services}</a></li>
+    <li><a href="{root}tree/explorer{if:page.id}?node={page.id}{endif:page.id}" id="km_ddmenu_explorer">{translate.Explorer}</a></li>
+    <li><a href="{root}menu/get{if:page.id}?setreferpage={page.id}{endif:page.id}" id="km_ddmenu_menus">{translate.Menu}</a></li>
+    {if:server.ftp}
+    <li><a href="{root}ftp/get?setreferpage={if:page.id|strlen}{page.id}{endif:page.id|strlen}{if:!page.id|strlen}{referpage?0}{endif:!page.id|strlen}" id="km_ddmenu_publikacja">{translate.FTP}</a></li>
+    {endif:server.ftp}
+    <li><a href="{root}trash{if:page.id}?setreferpage={page.id}{endif:page.id}" id="km_ddmenu_trash">{translate.Trash}</a></li>
+    {if:config.security.debug}<li>{debug.__debugger__.Debugger.black}</li>{endif:config.security.debug}
+    {if:server.owner}
+    {if:controller_name=index}
+    {if:controller_action=get}
+    <li>
+        <a id="km_ddmenu_google">Google</a>
+        <ul>
+            <li>
+                <a href="{root}index/get/{page.id}?google_translate_from={page.olang}">{translate.Google Translate}</a>
+            </li>                                
+            
+            <li>
+                <a target="_blank" href="https://www.google.com/webmasters/markup-helper/?hl={ulang}" onclick="if ( null==prompt('Copy (Ctrl-C) this URL to use it afterwards','http://{HTTP_HOST}{root}anonymous/{server.anonymous}/{page.id?0}/{lang}/{ver}')) return false;">{translate.Structured Data Markup Helper}</a>
+            </li>
+
+            <li>
+                <a target="_blank" href="https://developers.google.com/speed/pagespeed/insights/?hl={ulang}&utm_source=wmx&utm_campaign=wmx_otherlinks&url=http%3A%2F%2F{HTTP_HOST}{root|urlencode}anonymous%2F{server.anonymous}%2F{page.id?0}%2F{lang}%2F{ver}">{translate.PageSpeed Insights}</a>
+            </li>
+            {if:server.appengine_id}
+            <li>
+                <a href="{root}index/appengine?setreferpage={page.id}">{translate.Appengine}</a>
+            </li>                                  
+            {endif:server.appengine_id}
+
+            {if:server.gcs_website}
+            <li>
+                <a href="{root}index/gcs?setreferpage={page.id}">{translate.Cloud Storage}</a>
+            </li>                                  
+            {endif:server.gcs_website}
+            
+            
+        </ul>
+        
+    </li>
+    
+    <li>
+        <a id="km_ddmenu_webmaster">{translate.Webmaster}</a>
+        <ul>
+            <li>
+                <a target="_blank" href="http://validator.w3.org/check?uri=http%3A%2F%2F{HTTP_HOST}{root|urlencode}anonymous%2F{server.anonymous}%2F{page.id?0}%2F{lang}%2F{ver}">{translate.W3C check}</a>
+            </li>
+            {if:config.ftp.sftp.server}
+            <li>
+                <a href="{root}ftp/sftp?setreferpage={page.id}">{translate.SFTP Access}</a>
+            </li>
+            {endif:config.ftp.sftp.server}
+            {if:template_media}
+            <li><a href="{root}edit/copy_template{if:page.id}?setreferpage={page.id}{endif:page.id}">{translate.Copy widget files to my template}</a></li>
+            {endif:template_media}
+        </ul>
+    </li>
+    {endif:controller_action=get}
+    {endif:controller_name=index}
+    {endif:server.owner}
+</ul>

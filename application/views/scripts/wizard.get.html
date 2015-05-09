@@ -1,0 +1,121 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/kameleon/wizard.css">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+{include:_header.html}
+
+
+<div class="container-fluid">
+{if:servers}
+
+<!-- CREATE AND TRASH BUTTONS -->
+ <div class="row">
+  <div class="col-md-12">
+   <a href="{root}wizard/create" id="km_wizard_create" class="btn btn-lg btn-danger" popup_mode="{config.wizard.popup_mode}">{translate.Create service}</a>
+   <a href="{root}wizard/trash" id="km_wizard_trash" class="btn btn-lg btn-primary" {if:!trash:t1}style="display:none;"{endif:!trash:t1}><i class="glyphicon glyphicon-trash "></i>{translate.Trash}</a>
+  </div>
+ </div>
+<!-- end CREATE AND TRASH BUTTONS -->
+
+{endif:servers}
+
+{if:trash}
+{if:!servers}
+<!-- CREATE AND TRASH BUTTONS AGAIN, UNTIL OR WILL BE IMPLEMENTED IN SMEKTA -->
+ <div class="row">
+  <div class="col-md-12">
+   <a href="{root}wizard/create" id="km_wizard_create" class="btn btn-lg btn-danger" popup_mode="{config.wizard.popup_mode}">{translate.Create service}</a>
+   <a href="{root}wizard/trash" id="km_wizard_trash" class="btn btn-lg btn-primary" {if:!trash:t2}style="display:none;"{endif:!trash:t2}><i class="glyphicon glyphicon-trash "></i>{translate.Trash}</a>
+  </div>
+ </div>
+<!-- end CREATE AND TRASH BUTTONS -->
+{endif:!servers}
+{endif:trash}
+
+{if:servers}
+<div class="row">
+	<div class="col-md-12">
+	<h2 style="padding-left:0px;">{translate.My services}</h2>
+	<ul class="wizard_services mine">
+		{loop:servers}
+		<li>
+			<div class="wizard_expire_info">{__item__|tokens.get_wizard_info}</div>
+			<a href="{if:!expired}{root}index/get/?setServer={nazwa}{endif:!expired}{if:expired}javascript:alert('{translate.Website expired}'){endif:expired}" class="wizard_service_tmb"><img src="{root}thumb/{id}" title="{nazwa_long}" /></a>
+			<a href="{if:!expired}{root}index/set/?setServer={nazwa}{endif:!expired}{if:expired}javascript:alert('{translate.Website expired}'){endif:expired}" class="wizard_service_name" title="{nazwa_long}">{nazwa_long}</a>
+			<a title="{translate.Delete}" href="{root}ajax/wizard_trash/{id}" class="wizard_service_link" rel="trash"><span class="glyphicon glyphicon-trash"></span><!--{translate.Delete}--></a>
+			<a title="{translate.Rename}" href="{root}ajax/wizard_rename/{id}" class="wizard_service_link wizard_service_rename" title="{nazwa_long}"><span class="glyphicon glyphicon-cog"><!--{translate.Rename}--></a>
+		</li>
+		{endloop:servers}
+		<li>
+			<a href="{root}wizard/create" class="create-website">
+				<i class="glyphicon glyphicon-plus glyph-size"></i><br><br>
+				{translate.Create service}
+			</a>
+		</li>
+	</ul>
+	</div>
+</div>
+{endif:servers}
+
+{if:shared}
+{if:!servers}
+<!-- CREATE AND TRASH BUTTONS AGAIN, UNTIL OR WILL BE IMPLEMENTED IN SMEKTA -->
+ <div class="row">
+  <div class="col-md-12">
+   <a href="{root}wizard/create" id="km_wizard_create" class="btn btn-lg btn-danger" popup_mode="{config.wizard.popup_mode}">{translate.Create service}</a>
+   <a href="{root}wizard/trash" id="km_wizard_trash" class="btn btn-lg btn-primary" {if:!trash:t2}style="display:none;"{endif:!trash:t2}><i class="glyphicon glyphicon-trash "></i>{translate.Trash}</a>
+  </div>
+ </div>
+<!-- end CREATE AND TRASH BUTTONS -->
+{endif:!servers}
+<h2 style="padding-left:0px;">{translate.Shared services}</h2>
+<ul class="wizard_services shared">
+    {loop:shared}
+    <li>
+	<div class="wizard_expire_info"><p>{translate.Shared by}: <strong>{creator.fullname}</strong></p></div>
+        <a href="{if:!expired}{root}index/get/?setServer={nazwa}{endif:!expired}{if:expired}javascript:alert('{translate.Website expired}'){endif:expired}" class="wizard_service_tmb"><img src="{root}thumb/{id}" title="{nazwa_long}" /></a>
+        <a href="{if:!expired}{root}index/set/?setServer={nazwa}{endif:!expired}{if:expired}javascript:alert('{translate.Website expired}'){endif:expired}" class="wizard_service_name" title="{nazwa_long}">{nazwa_long}</a>
+        <a title="{translate.Unshare me}" href="{root}ajax/wizard_unshare/{id}" class="wizard_service_link" rel="unshare"><span class="glyphicon glyphicon-share"></span><!--{translate.Unshare me}--></a>
+    </li>
+    {endloop:shared}
+</ul>
+{endif:shared}
+
+{if:templates}
+{if:!servers}
+<!-- CREATE AND TRASH BUTTONS AGAIN, UNTIL OR WILL BE IMPLEMENTED IN SMEKTA -->
+ <div class="row">
+  <div class="col-md-12">
+   <a href="{root}wizard/create" id="km_wizard_create" class="btn btn-lg btn-danger" popup_mode="{config.wizard.popup_mode}">{translate.Create service}</a>
+   <a href="{root}wizard/trash" id="km_wizard_trash" class="btn btn-lg btn-primary" {if:!trash:t2}style="display:none;"{endif:!trash:t2}><i class="glyphicon glyphicon-trash "></i>{translate.Trash}</a>
+  </div>
+ </div>
+<!-- end CREATE AND TRASH BUTTONS -->
+{endif:!servers}
+<h2 style="padding-left:0px;">{translate.My templates}</h2>
+<ul class="wizard_services shared">
+    {loop:templates}
+    <li>
+        <div class="wizard_expire_info">{__item__|tokens.get_wizard_info}</div>
+        <a href="{if:!expired}{root}index/get/?setServer={nazwa}{endif:!expired}{if:expired}javascript:alert('{translate.Website expired}'){endif:expired}" class="wizard_service_tmb"><img src="{root}thumb/{id}" title="{nazwa_long}" /></a>
+        <a href="{if:!expired}{root}index/set/?setServer={nazwa}{endif:!expired}{if:expired}javascript:alert('{translate.Website expired}'){endif:expired}" class="wizard_service_name" title="{nazwa_long}">{nazwa_long}</a>
+        <a title="{translate.Delete}" href="{root}ajax/wizard_trash/{id}" class="wizard_service_link" rel="trash"><span class="glyphicon glyphicon-trash"></span><!--{translate.Delete}--></a>
+        <a title="{translate.Rename}" href="{root}ajax/wizard_rename/{id}" class="wizard_service_link wizard_service_rename" title="{nazwa_long}"><span class="glyphicon glyphicon-cog"><!--{translate.Rename}--></a>
+    </li>
+    {endloop:templates}
+</ul>
+{endif:templates}
+</div>
+
+{if:!all_servers_count}
+<div class="row dont-be-shy">
+<div class="dont-be-shy-message">
+ <div class="col-md-12">
+  <h1>{translate.Don't be shy!}</h1>
+  <p>{translate.Create your new website for free}. {translate.It's fast and easy}. {translate.Choose template and publish website}. {translate.Click the button to start!}</p>
+  <a href="{root}wizard/create" class="create-website">{translate.Create service}</a>
+ </div>
+</div>
+</div>
+{endif:!all_servers_count}
+
+{include:_wizard.dialog.html}
+<script type="text/javascript" src="{root}js/wizard.js"></script>

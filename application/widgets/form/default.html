@@ -1,0 +1,25 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+
+{with:formWidget}
+{define:px}{if:!data.width|strstr:%}px{endif:!data.width|strstr:%}{enddefine:px}
+
+
+<div class="kmw_form" {if:data.width}style="width:{data.width}{px}"{endif:data.width}> 
+{data.form_html}
+</div>
+
+<iframe class="kmw_form_iframe" name="kmw_form" width="{data.width}"></iframe>
+
+<script>
+    jQueryKam('.ss-required-asterisk').each(function () {
+        jQueryKam(this).attr('title',jQueryKam(this).prev().attr("aria-label"));
+    });
+    
+    jQueryKam('.kmw_form #ss-submit').val('{data.send}');
+    
+    jQueryKam('.kmw_form form').attr('target','kmw_form').on('submit',function() {
+        jQueryKam('.kmw_form_iframe').fadeIn();
+        jQueryKam('.kmw_form').fadeOut();
+    });
+</script>
+{endwith:formWidget}

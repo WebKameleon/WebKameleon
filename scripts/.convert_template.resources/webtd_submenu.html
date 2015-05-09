@@ -1,0 +1,16 @@
+{if:menu}
+<ul class="top_menu">
+{loop:menu}
+	<li class="{class}{if:last_child} lastchild{endif:last_child}"><a href="{href}">{alt}</a><br/>
+	{if:menu:sub}
+		<ul>
+			{loop:menu:sub}
+				<li class="{class}"><a href="{href}">{alt}</a></li>
+			{endloop:menu:sub}
+		</ul>
+	{endif:menu:sub}
+	</li>
+
+{endloop:menu}
+</ul>
+{endif:menu}

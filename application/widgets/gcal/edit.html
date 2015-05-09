@@ -1,0 +1,180 @@
+{with:gcalWidget}
+<form id="gcal_form" method="post">
+{include:_widget.header.html}
+    <div class="edit_box_left">
+
+        <div class="edit_box">
+            <div class="label">{translate.Calendars to show}</div>
+            <div class="value">
+                <ul class="gcal_calendars_list">
+                    {loop:calendars_list}
+                    <li style="background-color:{backgroundColor};">
+                        <input type="checkbox" class="gcal_calendar" id="gcal_calendar_{__loop__}" name="gcal[calendar][{__loop__}]" value="{id}" {loop:data.calendar}{if:id=$loop}checked{endif:id=$loop}{endloop:data.calendar} />
+                        <label for="gcal_calendar_{__loop__}" >{summary}</label>
+                    </li>
+                    {endloop:calendars_list}
+                </ul>
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.Calendar view type}</div>
+            <div class="value">
+                <input type="radio" class="gcal_mode" id="gcal_mode_week" name="gcal[mode]" value="WEEK" {if:data.mode=WEEK}checked{endif:data.mode=WEEK} />
+                <label for="gcal_mode_week" >{translate.Week}</label>
+                <input type="radio" class="gcal_mode" id="gcal_mode_month" name="gcal[mode]" value="MONTH" {if:data.mode=MONTH}checked{endif:data.mode=MONTH} />
+                <label for="gcal_mode_month" >{translate.Month}</label>
+                <input type="radio" class="gcal_mode" id="gcal_mode_agenda" name="gcal[mode]" value="AGENDA" {if:data.mode=AGENDA}checked{endif:data.mode=AGENDA} />
+                <label for="gcal_mode_agenda" >{translate.Agenda}</label>
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.Width}</div>
+            <div class="value">
+                <input type="text" id="gcal_width" name="gcal[width]" value="{data.width}" size="4" /> px
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.Height}</div>
+            <div class="value">
+                <input type="text" id="gcal_height" name="gcal[height]" value="{data.height}" size="4" /> px
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.First day of the week}</div>
+            <div class="value">
+                <select class="gcal_option" id="gcal_wkst" name="gcal[wkst]">
+                    <option value="1" {if:data.wkst=1}selected{endif:data.wkst=1}>{translate.Sunday}</option>
+                    <option value="2" {if:data.wkst=2}selected{endif:data.wkst=2}>{translate.Monday}</option>
+                    <option value="3" {if:data.wkst=3}selected{endif:data.wkst=3}>{translate.Tuesday}</option>
+                    <option value="4" {if:data.wkst=4}selected{endif:data.wkst=4}>{translate.Wednesday}</option>
+                    <option value="5" {if:data.wkst=5}selected{endif:data.wkst=5}>{translate.Thursday}</option>
+                    <option value="6" {if:data.wkst=6}selected{endif:data.wkst=6}>{translate.Friday}</option>
+                    <option value="7" {if:data.wkst=7}selected{endif:data.wkst=7}>{translate.Saturday}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.Show}</div>
+            <div class="value">
+                <input type="hidden" name="gcal[showTitle]" value="0" />
+                <input type="hidden" name="gcal[showNav]" value="0" />
+                <input type="hidden" name="gcal[showDate]" value="0" />
+                <input type="hidden" name="gcal[showPrint]" value="0" />
+                <input type="hidden" name="gcal[showTabs]" value="0" />
+                <input type="hidden" name="gcal[showCalendars]" value="0" />
+                <input type="hidden" name="gcal[showTz]" value="0" />
+
+                <input type="checkbox" class="gcal_option" id="gcal_show_title" name="gcal[showTitle]" value="1" rel="showTitle" {if:data.showTitle}checked{endif:data.showTitle} />
+                <label for="gcal_show_title" >{translate.Title}</label>
+                <br />
+                <input type="checkbox" class="gcal_option" id="gcal_show_nav" name="gcal[showNav]" value="1" rel="showNav" {if:data.showNav}checked{endif:data.showNav} />
+                <label for="gcal_show_nav" >{translate.Navigation buttons}</label>
+                <br />
+                <input type="checkbox" class="gcal_option" id="gcal_show_date" name="gcal[showDate]" value="1" rel="showDate" {if:data.showDate}checked{endif:data.showDate} />
+                <label for="gcal_show_date" >{translate.Date}</label>
+                <br />
+                <input type="checkbox" class="gcal_option" id="gcal_show_print" name="gcal[showPrint]" value="1" rel="showPrint" {if:data.showPrint}checked{endif:data.showPrint} />
+                <label for="gcal_show_print" >{translate.Print icon}</label>
+                <br />
+                <input type="checkbox" class="gcal_option" id="gcal_show_tabs" name="gcal[showTabs]" value="1" rel="showTabs" {if:data.showTabs}checked{endif:data.showTabs} />
+                <label for="gcal_show_tabs" >{translate.Tabs}</label>
+                <br />
+                <input type="checkbox" class="gcal_option" id="gcal_show_calendars" name="gcal[showCalendars]" value="1" rel="showCalendars" {if:data.showCalendars}checked{endif:data.showCalendars} />
+                <label for="gcal_show_calendars" >{translate.Calendars list}</label>
+                <br />
+                <input type="checkbox" class="gcal_option" id="gcal_show_timezone" name="gcal[showTz]" value="1" rel="showTz" {if:data.showTz}checked{endif:data.showTz} />
+                <label for="gcal_show_timezone" >{translate.Timezone}</label>
+            </div>
+        </div>
+
+        <div class="edit_box">
+            <div class="label">{translate.Background color}</div>
+            <div class="value">
+                <input type="text" class="gcal_option" id="gcal_bgcolor" name="gcal[bgcolor]" value="{data.bgcolor}" rel="bgcolor" colorpicker />
+            </div>
+        </div>
+    </div>
+
+    <div class="edit_box_right">
+        <iframe id="gcal_preview" frameborder="0" width="{data.width}" height="{data.height}"></iframe>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#gcal_form").submit();
+        return false;
+    }
+
+    jQueryKam(function ($) {
+
+        var km_gcal_defaults = JSON.parse('{data|json_encode}');
+
+        var km_gcal_update_preview = function () {
+
+            var calendars = [];
+            $("input.gcal_calendar:checked").each(function () {
+                calendars.push(this.value);
+            });
+
+            var params = {};
+
+            $(".gcal_option[rel]").each(function () {
+                var rel = $(this).attr("rel"),
+                    val = $(this).val();
+
+                if ($(this).is(":checkbox") || $(this).is(":radio")) {
+                    params[rel] = $(this).is(":checked") ? val : 0;
+                }
+
+                if ($(this).is(":text") && val) {
+                    params[rel] = val;
+                }
+
+                if ($(this).is("select")) {
+                    params[rel] = val;
+                }
+            });
+
+            var mode   = $("input.gcal_mode:checked").val(),
+                width  = $("#gcal_width").val(),
+                height = $("#gcal_height").val();
+
+            if (mode)
+                params.mode = mode;
+
+            if (width)
+                params.width = width;
+
+            if (height)
+                params.height = height;
+
+            params = $.extend({}, km_gcal_defaults, params);
+
+            var URL = "https://www.google.com/calendar/embed?";
+            $.each(calendars, function (k, v) {
+                URL = URL + "src=" + v + "&";
+            });
+            URL = URL + $.param(params);
+
+            $("#gcal_preview").attr({
+                width  : params.width,
+                height : params.height,
+                src    : URL
+            });
+
+            return false;
+        }
+
+        $("input[name], select[name]").on("change", km_gcal_update_preview);
+        km_gcal_update_preview();
+    });
+</script>
+{endwith:gcalWidget}

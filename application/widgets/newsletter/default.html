@@ -1,0 +1,18 @@
+{with:newsletterWidget}
+
+{if:mode=(0,1)}
+
+<div class="kmw_newsletter">
+    <div class="kmw_newsletter_content">
+        {if:title}<{tokens.h1}{if:itemtype} itemprop="name"{endif:itemtype}>{if:more}<a href="{more_link}">{endif:more}{title}{if:more}</a>{endif:more}</{tokens.h1}>{endif:title}
+        <div class="kmw_newsletter_text">{plain}</div>
+    </div>
+</div>
+{endif:mode=(0,1)}
+
+{if:mode=(2,3)}
+{include:kmw_newsletter.html}
+{endif:mode=(2,3)}
+
+
+{endwith:newsletterWidget}

@@ -1,0 +1,6 @@
+{if:itemtype}</div>{endif:itemtype}
+{if:!staticinclude}{if:ob_end}<?php $_td_ob_contents=ob_get_contents(); ob_end_clean(); if (file_exists($INCLUDE_PATH.'/_smekta.php')) {
+require_once($INCLUDE_PATH.'/_smekta.php');
+echo GN_Smekta::smektuj($_td_ob_contents,get_defined_vars());
+} else echo $_td_ob_contents;?>{endif:ob_end}{endif:!staticinclude}
+{if:valid}<?php } ?>{endif:valid}

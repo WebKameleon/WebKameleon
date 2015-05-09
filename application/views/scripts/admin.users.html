@@ -1,0 +1,79 @@
+{include:_header.html}
+{include:_menu.html}
+
+
+<h2>
+{translate.Total count}: {count}
+</h2>
+
+<form method="GET">
+    <input style="float: right; margin-right: 25px;width: 300px" type="text" name="q" value="{_GET.q}" placeholder="{translate.Search}, special - :now :admin :creator :lang"/>
+</form>
+<br clear="all"/>
+
+
+
+{if:pages}
+<h3><center>
+{loop:pages}
+<a href="{root}admin/users?page={loop}&q={_GET.q}" {if:loop=$page}style="color:red"{endif:loop=$page}>{loop}</a>
+{endloop:pages}
+</center></h3>
+{endif:pages}
+<div class="km_observers">
+
+    {if:users}
+    <table id="km_observer_events">
+        <thead>
+        <tr>
+            <th>{translate.Index}</th>
+            <th>{translate.Fullname}</th>
+            <th>{translate.Email}</th>
+            <th>{translate.Date}</th>
+            <th>{translate.Websites}</th>
+            <th>{translate.Time} [min]/ {translate.Logins}</th>
+            <th>{translate.From}</th>
+            <th>{translate.Info}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {loop:users}
+        <tr>
+            <td valign="middle">{__index__|+:$start}. </td>
+            <td valign="middle"><a href="{root}admin/role/{username}">
+                {if:logged_in}<b>{endif:logged_in}
+                {fullname} [{ulang}]
+                {if:logged_in}</b>{endif:logged_in}
+            </a></td>
+            <td valign="middle"><a href="{root}admin/role/{username}">{email}</a></td>
+            
+            <td valign="middle">{nlicense_agreement_date|kameleon.datetime}</td>
+            <td valign="middle">
+                {if:__count__servers}<a href="{root}admin/get?u={username}">{__count__servers}</a>{endif:__count__servers}
+                {if:logged_in}[<a href="{root}admin/enter/{logged_in.id}" style="color:red">{logged_in.nazwa_long}</a>]{endif:logged_in}
+            </td>
+            
+            <td valign="middle">{time|/:60|round:1} / {logins} {if:last_login}<span title="{translate.Last click}">[<b>{last_login|kameleon.datetime}</b>]</span>{endif:last_login}</td>
+            
+            <td>{from_campaign}</td>
+            <td>
+                {if:photo}<a href="{link2?javascript:console.log('none')}" class="gpluslink" target="_blank"><img src="{photo}" border="0" align="absmiddle" width="50px" height="50px"/></a>{endif:photo}
+                {if:circle}<img src="{root}img/circles.png" width="50"/>{endif:circle}
+            </td>
+
+        </tr>
+        {endloop:users}
+        </tbody>
+    </table>
+    {endif:users}
+</div>
+
+
+<script>
+    jQueryKam('.gpluslink').click(function(){
+        jQueryKam(this).attr('title','').parent().css('border','').parent().next().find('.gpluslink').attr('title','next').parent().css('border','1px solid red').css('padding','1px');    
+        
+    });
+    
+    
+</script>

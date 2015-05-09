@@ -1,0 +1,4 @@
+body { background-color: #fff !important; background-image: transparent !important; }
+
+.body_header, .body_middle_left, .opcje_dodatkowe, .body_footer .left  { display: none !important; }
+.body_middle_right { float:left; width:100% !important;}

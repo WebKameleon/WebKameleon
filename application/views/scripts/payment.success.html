@@ -1,0 +1,24 @@
+<link type="text/css" rel="stylesheet" href="{root}skins/kameleon/payment.css">
+{include:_header.html}
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" href="{root}wizard">{translate.Return}</a>
+</div>
+
+<div id="payment_content">
+    <h1>{translate.Thanku You for payment}</h1>
+
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td class="server_info">
+                <img src="data:image/jpg;base64,{payment.server.tmb}" title="{payment.server.nazwa_long}" />
+                {payment.server.nazwa_long}
+            </td>
+            <td class="payment_info">
+                <p class="info">{translate.We recieved a license to access the webkameleon and maintenance of website until} <strong>{payment.server.payment_expire}</strong></p>
+                <p class="small invoice">{payment.info.invoice_info}</p>
+            </td>
+        </tr>
+    </table>
+
+</div>

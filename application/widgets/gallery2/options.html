@@ -1,0 +1,54 @@
+<div class="edit_box">
+    <div class="label">{translate.Animation effect}</div>
+    <div class="value">
+        <select name="{name}[effect]">
+			<option value="fade" {if:data.effect=fade}selected{endif:data.effect=fade}>{translate.Fade}</option>
+			<option value="elastic" {if:data.effect=elastic}selected{endif:data.effect=elastic}>{translate.Elastic}</option>
+			<option value="none" {if:data.effect=none}selected{endif:data.effect=none}>{translate.None}</option>
+        </select>
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Maximum image width}</div>
+    <div class="value">
+        <input type="text" name="{name}[width]" value="{data.width}" size="4" /> px
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Thumb height}</div>
+    <div class="value">
+        <input type="text" name="{name}[thumb_height]" value="{data.thumb_height}" size="4" /> px
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Slideshow autostart}</div>
+    <div class="value">
+        <input type="hidden" name="{name}[slideshow_autostart]" value="0" />
+        <input type="checkbox" name="{name}[slideshow_autostart]" value="1" {if:data.slideshow_autostart}checked{endif:data.slideshow_autostart} />
+    </div>
+</div>
+
+<div class="edit_box">
+    <div class="label">{translate.Animation speed}</div>
+    <div class="value">
+        <input type="text" name="{name}[animation_speed]" value="{data.animation_speed}" size="4" /> ms
+    </div>
+</div>
+
+<script type="text/javascript">
+jQueryKam(function ($) {
+
+    var iW = $("input[name$='[width]']"),
+        tH = $("input[name$='[thumb_height]']");
+
+    if (tH.val() == "" && iW.val()) {
+        tH.val(
+            parseInt(iW.val() * 0.20, 10)
+        );
+    }
+
+});
+</script>

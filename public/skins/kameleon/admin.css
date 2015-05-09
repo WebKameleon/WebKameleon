@@ -1,0 +1,46 @@
+.secname, .secname2 { display: block;  overflow: hidden; margin: 0; padding: 10px; background-color: #fff; color: #DD4B39; font-size: 11px; font-weight: normal;  }
+  .secname .km_icon, .secname2 .km_icon { float: left; margin-right: 10px; }
+  .secname h2, .secname2 h2 { float: left; margin: 5px 10px 0 0; padding: 0; font-size: 14px; font-weight: normal;}
+.secname2 { background-color: #646464; border-top: 1px solid #fff; }
+
+.formularz .litem_1, .formularz .litem_2 { padding: 8px; background-color: #fafafa; overflow: hidden;  }
+
+.formularz .litem_2 { background-color: #efefef; }
+
+.formularz label { display: block; float: left; width: 40%; text-align: right; margin-right: 20px; }
+
+.formularz .inputer { overflow: hidden; float: right; width: 50%; text-align: left; }
+  
+  .formularz .inputer img { vertical-align: middle; }
+ 
+.km_icon { display: block; text-indent: -600px; overflow: hidden; margin-right: 10px; }
+
+
+
+body { margin:0; border:0; padding:0;  background:#ffffff; font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+
+form { background-color: #f5f5f5; margin: 0; padding: 0;}
+
+h1 { margin: 0; padding: 15px; background-color: #fff; color: #DD4B39; font-size: 20px; }
+
+.profile_box { overflow: hidden; border-bottom: 1px solid #E5E5E5; padding: 15px; background-color: #f5f5f5; }
+.label { width: 20%; float: left; font-weight: bold;  }
+.value { width: 78%; float: right; }
+.buttons { overflow: hidden; background-color: #fff; padding: 15px; }
+	.btn_czerwony { text-decoration:none; cursor:pointer; border:1px solid #d14836; text-transform:uppercase; color:#fff; font-size:11px; padding:5px 20px; margin-left:10px;  background-image: url('img/btn_bg.png'); background-position:top left; background-repeat:repeat-x; float: right; }	
+	.btn_szary { text-decoration:none; cursor:pointer; text-transform:uppercase; color:#fff; font-size:11px; padding:5px 20px;  background:none; background-color:#f4f4f4; border:1px solid #d8d8d8; color: #444444; float:right; }
+	.btn_szary_l { text-decoration:none; cursor:pointer; text-transform:uppercase; color:#fff; font-size:11px; padding:5px 20px;  background:none; background-color:#f4f4f4; border:1px solid #d8d8d8; color: #444444; float:left; }
+.error { background-image:url('img/icon_delete.png'); background-repeat:no-repeat; background-position: center center; color:#d90000; font-size:0; line-height:0; width:20px; height:20px; text-indent:400px; display:inline-block; overflow:hidden }
+.error_txt { background-image:url('img/icon_delete.png'); background-repeat:no-repeat; background-position: 15px 12px; color:#d90000 !important; padding-left:40px !important }
+
+.tabelka { width: 100%;}
+  .tabelka th { background-color: #707070; color: #fff; font-size: 11px; text-align: left; padding: 15px; }
+  .tabelka .km_icon { text-indent: -600px; float: left; overflow: hidden; margin-right: 10px; }
+  .tabelka .line_1 td, .tabelka .line_0 td, .tabelka .line_2 td, .tabelka .line_3 td, .tabelka .line_4 td { border-bottom: 1px solid #E5E5E5; padding: 15px; color: #000; font-size: 11px; }
+  .tabelka td { border-bottom: 1px solid #E5E5E5; padding: 15px; color: #000; font-size: 11px; background-color: #F5F5F5;}
+  .tabelka .line_1 td { background-color:#FFF}
+  .tabelka a { color: #000; text-decoration: none; }
+
+.km_verinfo { padding-left: 10px; font-size: 9px; font-family: Verdana; color: #b0afaf; }
+	.km_verinfo a {color: #b0afaf; text-decoration:none}
+	

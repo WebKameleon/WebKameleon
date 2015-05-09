@@ -1,0 +1,9 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:gcalWidget}
+
+{define:_width}{data.width}{if:data.width|is_numeric}px{endif:data.width|is_numeric}{enddefine:_width}
+{define:_height}{if:data.height|is_numeric}{data.height}px{endif:data.height|is_numeric}{if:!data.height|is_numeric}300px{endif:!data.height|is_numeric}{enddefine:_height}
+
+<iframe src="{calendar_url}" width="{_width}" height="{_height}" frameborder="0"></iframe>
+{endwith:gcalWidget}
+{plain}

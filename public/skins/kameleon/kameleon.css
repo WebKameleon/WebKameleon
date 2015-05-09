@@ -1,0 +1,4964 @@
+/* Reset v1.0 | 20080212 - http://meyerweb.com/eric/tools/css/reset/
+----------------------------------------------------------------------------------------------------*/
+html, body, div, span, applet, object, iframe,
+    /*h1, h2, h3, h4, h5, h6, p, */
+blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, /*ol, ul,*/
+li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin         : 0;
+    padding        : 0;
+    border         : 0;
+    outline        : 0;
+    font-size      : 100%;
+    vertical-align : baseline;
+    background     : transparent;
+}
+
+body {
+    line-height : 1;
+}
+
+ol, ul {
+    /*list-style : none;*/
+}
+
+blockquote, q {
+    quotes : none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content : "";
+    content : none;
+}
+
+/* remember to define focus styles! */
+:focus {
+    outline : 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+    text-decoration : none;
+}
+
+del {
+    text-decoration : line-through;
+}
+
+/* tables still need ‘cellspacing=”0”’ in the markup */
+table {
+    border-collapse : collapse;
+    border-spacing  : 0;
+}
+
+/* tells browsers that don’t read HTML5 tags to render like divs */
+header, footer, aside, nav, article, section {
+    display : block;
+    margin  : 0;
+    padding : 0;
+}
+
+.clear:after {
+    content    : ".";
+    display    : block;
+    height     : 0;
+    clear      : both;
+    visibility : hidden;
+}
+
+/* Reset END */
+
+body {
+	font-family: Arial;
+    font-size : 12px;
+}
+
+* {
+    outline : none;
+}
+
+.km_clean {
+    clear : both;
+}
+
+.km_sharedialog .ui-widget-header {
+    background  : none;
+    border      : 0;
+    color       : #000;
+    font-size   : 18px;
+    font-weight : normal
+}
+
+.km_sharedialog .ui-dialog-buttonset button {
+    border           : 1px solid #3079ED;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+    padding          : 5px 20px;
+    background-color : #4D90FE !important;
+    background-image : none;
+}
+
+.km_sharedialog .ui-dialog-buttonset button:hover {
+    background-color : #3079ED;
+}
+
+.km_sharedialog .ui-dialog-buttonset #cancel {
+    background       : none;
+    background-color : #f4f4f4;
+    border           : 1px solid #d8d8d8;
+    color            : #444444
+}
+
+.km_sharedialog .ui-dialog-buttonset #cancel:hover {
+    background-color : #d8d8d8
+}
+
+.km_sharedialog .ui-widget-header .ui-icon {
+    border              : 0;
+    width               : 21px;
+    height              : 20px;
+    background-image    : url('img/i_close.png');
+    background-position : top left;
+    background-repeat   : no-repeat
+}
+
+#km_share_list {
+    background-color : #fff;
+    overflow         : auto;
+}
+
+#km_share_roleselect {
+    display          : none;
+    position         : absolute;
+    width            : 140px;
+    left             : -1px;
+    margin           : 0;
+    padding          : 0;
+    list-style       : none;
+    background-color : #fff;
+    border           : 1px solid #999;
+    z-index          : 101;
+}
+
+#km_share_roleselect li {
+    cursor : pointer
+}
+
+#km_share_roleselect li:hover {
+    background-color : #EEEEEE
+}
+
+#km_shareselect li {
+    margin  : 0;
+    padding : 8px 0;
+}
+
+.km_share_form {
+    margin   : 0;
+    overflow : hidden;
+    padding  : 10px;
+}
+
+#km_share_name {
+    width   : 300px;
+    padding : 6px 3px;
+}
+
+.km_share_form label {
+    width   : 120px;
+    display : inline-block;
+}
+
+.km_share_button button, .km_share_button button:hover {
+    cursor           : pointer;
+    border           : 1px solid #3079ED;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 11px;
+    padding          : 0 20px;
+    background-color : #4D90FE;
+    height           : 30px;
+    line-height      : 20px;
+	margin-bottom	 : 0px;
+}
+
+#km_share_submit {
+    border           : 1px solid #d8d8d8;
+    text-transform   : uppercase;
+    color            : #444444;
+    font-size        : 11px;
+    padding          : 0 20px;
+    background-color : #f4f4f4;
+    height           : 30px;
+    line-height      : 20px;
+    cursor           : pointer;
+    margin-bottom    : 0;
+}
+
+.km_setup_button button, .km_setup_button button:hover {
+    background-color      : #f3f3f3;
+    border                : 1px solid #dbdbdb;
+    text-transform        : uppercase;
+    color                 : #fff;
+    font-size             : 0;
+    padding               : 0 20px;
+    background-image      : url('img/km_setup.png');
+    background-position   : center;
+    background-repeat     : no-repeat;
+    width                 : 58px;
+    height                : 30px;
+    line-height           : 0;
+    overflow              : hidden;
+    text-indent           : 300px;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    border-radius         : 3px;
+    box-shadow            : none;
+    -moz-box-shadow       : none;
+    -webkit-box-shadow    : none;
+	margin-bottom		  : 0px;
+}
+
+.km_setup_button button:hover {
+    background-color : #dadada;
+}
+
+.km_share_form * {
+    vertical-align : middle;
+    margin-right   : 10px;
+}
+
+.km_share_error {
+    display             : none;
+    background-image    : url('img/icon_delete2.png');
+    background-repeat   : no-repeat;
+    background-position : 0 2px;
+    color               : #d90000;
+    padding             : 2px 0 3px 25px;
+    margin              : 2px 0 0 135px;
+}
+
+#km_share_list {
+    list-style : none;
+    display    : block;
+    margin     : 0;
+    padding    : 0;
+}
+
+#km_share_list li {
+    margin        : 0;
+    padding       : 8px;
+    border-bottom : 1px solid #EBEBEB;
+}
+
+#km_share_list .km_share_listdel {
+    cursor              : pointer;
+    float               : right;
+    width               : 30px;
+    height              : 30px;
+    background-image    : url('img/srole_del.png');
+    background-position : center;
+    background-repeat   : no-repeat;
+    overflow            : hidden;
+    text-indent         : 300px;
+    font-size           : 0;
+    line-height         : 0;
+}
+
+#km_share_list .km_share_listrola {
+    float        : right;
+    width        : 140px;
+    position     : relative;
+    color        : #1155CC;
+    border       : 1px solid #fff;
+    margin-right : 20px;
+}
+
+#km_share_list .km_share_listrola:hover {
+    border : 1px solid #999;
+}
+
+#km_share_list .km_share_listrola span {
+    padding             : 6px 8px;
+    display             : block;
+    background-image    : url('img/srole_arr.png');
+    background-repeat   : no-repeat;
+    background-position : 104px 12px;
+    cursor              : pointer
+}
+
+.km_share_listrola_owner {
+    float        : right;
+    width        : 170px;
+    color        : #1155CC;
+    margin-right : 20px;
+}
+
+.km_share_listrola_owner span {
+    padding : 6px 8px;
+    display : block;
+}
+
+#km_share_list .km_share_name span {
+    display   : block;
+    font-size : 10px;
+    color     : #666;
+}
+
+#km_share_dialog {
+    display : none;
+}
+
+#km_share_list .km_share_user {
+    float         : left;
+    width         : 350px;
+    margin-right  : 5px;
+    white-space   : nowrap;
+    text-overflow : ellipsis;
+    overflow      : hidden;
+}
+
+#km_share_list .km_share_name {
+    margin-right : 5px;
+}
+
+#km_share_list .km_share_email {
+    color : #666666;
+}
+
+#km_share_list .km_share_role {
+    float        : left;
+    width        : 150px;
+    margin-right : 5px;
+}
+
+#km_share_list .km_share_delete {
+    float             : left;
+    background-image  : url(img/i_close.png);
+    background-repeat : no-repeat;
+    width             : 19px;
+    height            : 18px;
+    cursor            : pointer;
+}
+
+#km_share_list .km_share_role a {
+    color  : #15c;
+    cursor : pointer;
+}
+
+#km_share_role_select {
+    position   : absolute;
+    display    : none;
+    border     : 1px solid #3079ED;
+    background : #fff;
+}
+
+#km_share_role_select ul {
+    list-style : none;
+    padding    : 0;
+    margin     : 0;
+}
+
+#km_share_role_select ul li {
+    padding : 7px 10px 7px 35px;
+    cursor  : pointer;
+    margin  : 0;
+}
+
+#km_share_role_select ul li.km_checked {
+    background-color : #eee;
+}
+
+.km_share_button, .km_setup_button {
+    float        : right !important;
+    margin-right : 10px !important;
+}
+
+.km_setup_button {
+    position : relative;
+}
+
+.km_share_center {
+    float    : right !important;
+    overflow : hidden;
+    padding  : 10px;
+    margin   : 5px 0;
+}
+
+.km_share_center span {
+    float : left
+}
+
+.km_share_center a {
+    width     : 135px;
+    float     : right;
+    color     : #000000;
+    display   : block;
+    font-size : 10px;
+}
+
+.km_share_center a:hover {
+    text-decoration : underline
+}
+
+.km_setup_menu {
+    display          : none !important;
+    background-color : #fff;
+    list-style       : none;
+    position         : absolute;
+    z-index          : 101;
+    margin           : 0 !important;
+    padding          : 0 !important;
+    top              : 38px;
+    width            : 200px;
+    right            : 0;
+    border           : 1px solid #dbdbdb;
+}
+
+.km_setup_menu li {
+    margin  : 0 !important;
+    padding : 0 !important;
+    display : block;
+    float   : none !important;
+}
+
+.km_setup_menu a {
+    display : block;
+    padding : 8px;
+    cursor  : pointer;
+    color   : #000 !important;
+}
+
+.km_setup_menu a:hover {
+    background-color : #eeeeee;
+}
+
+.km_setup_button:hover .km_setup_menu {
+    display : block !important;
+}
+
+.kmw_insert_special {
+	color: #fff;
+	background-color: #f00;
+	padding: 1px 4px !important;
+	display: inline-block;
+	border-radius: 10%; 
+	margin-left: 10px !important;
+	font-weight: bold;
+}
+
+#km_setupServerIn {
+    display : none;
+}
+
+.km_setupServerIn li img, .km_setupServerIn li input {
+    vertical-align : middle;
+}
+
+.km_setupServerIn #km_setup_logo {
+    display        : inline-block;
+    vertical-align : middle;
+    margin         : 0 10px 0 0;
+    padding        : 0;
+}
+
+#km_setupServer, #km_setupLanguage, #km_checkHF, #km_uimages {
+    background-color : #fff;
+}
+
+#km_setupServer ul, #km_setupLanguage ul, #km_checkHF ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+}
+
+#km_setupServer li, #km_setupLanguage li, #km_checkHF li {
+    margin   : 0;
+    padding  : 10px 20px;
+    overflow : hidden;
+}
+
+#km_setupServer label, #km_setupLanguage label {
+    width : 100px;
+    float : left;
+}
+
+#km_setupServer select, #km_setupLanguage select {
+    width : 300px;
+    float : left;
+}
+
+#km_setup_serwis_cancel, #km_setup_lang_cancel, #km_check_hf_cancel {
+    background       : none;
+    background-color : #f4f4f4 !important;
+    border           : 1px solid #d8d8d8 !important;
+    color            : #444444 !important;
+}
+
+#int_addMenuExist {
+    background-color : #fff;
+}
+
+#int_addMenuExist ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+}
+
+#int_addMenuExist li {
+    margin   : 0;
+    padding  : 10px 20px;
+    overflow : hidden;
+}
+
+#int_addMenuExist label {
+    width : 100px;
+    float : left;
+}
+
+#int_addMenuExist select {
+    width : 300px;
+    float : left;
+}
+
+.km_zakladki {
+    overflow         : hidden;
+    background-color : #FFF;
+    list-style       : none;
+    margin           : 10px 0 0 0;
+    padding          : 0;
+    float            : left;
+    width            : 200px;
+}
+
+.km_zakladki li {
+    font-size   : 12px;
+    margin      : 0;
+    padding     : 0;
+    border-left : 5px solid #fff;
+}
+
+.km_zakladki li a {
+    color   : #000;
+    display : block;
+    padding : 16px 8px;
+    cursor  : pointer
+}
+
+.km_zakladki li.active {
+    border-left : 5px solid #DD4B39;
+	border-top: 1px solid #E5E5E5;
+	border-bottom: 1px solid #E5E5E5;
+}
+
+.km_zakladki li.active a {
+    color       : #DD4B39;
+    font-weight : bold;
+	background-color : #F5F5F5;
+}
+
+.km_zakladka {
+    margin       : 10px 0;
+    padding-left : 200px;
+}
+
+.km_zakladka table {
+    width     : 100%;
+    font-size : 12px;
+}
+
+.km_zakladka table th {
+    background-color : #6B6B6B;
+    color            : #fff;
+    font-weight      : bold;
+    text-align       : left;
+    border-collapse  : separate;
+    padding          : 5px 0 5px 10px;
+    border-color     : #DEDEDE;
+    border-style     : solid;
+    border-width     : 1px;
+}
+
+.km_zakladka table td {
+    border-color : #DEDEDE;
+    border-style : solid;
+    border-width : 1px;
+    padding      : 5px;
+}
+
+.km_fbtn {
+    margin   : 0 20px 0 0;
+    padding  : 10px 0;
+    overflow : hidden;
+}
+
+.km_fbtn_action {
+    border           : 1px solid #3079ED !important;
+    background-color : #4D90FE !important;
+    color            : #fff !important;
+    background-image : none !important;
+}
+
+.km_fbtn_normal {
+    border           : 1px solid #DBDBDB !important;
+    background-color : #F2F2F2 !important;
+    color            : #6E6E6E !important;
+    background-image : none !important;
+}
+
+.km_fbtn input, .km_fbtn a {
+    font-size        : 11px;
+    text-transform   : uppercase;
+    background-color : #F2F2F2;
+    border-radius    : 2px;
+    float            : right;
+    margin-left      : 16px;
+    vertical-align   : middle;
+    cursor           : pointer;
+    display          : inline-block;
+    height           : 28px;
+    line-height      : 28px;
+    border           : 1px solid #DBDBDB;
+    width            : auto;
+    padding          : 0 8px;
+    text-decoration  : none;
+    color            : #6E6E6E;
+}
+
+.km_nopage {
+    /*background: transparent url(img/page_shadow.png) repeat-y top center;*/
+}
+
+.km_nopage_in {
+    margin              : 150px auto 0 auto;
+    width               : 500px;
+    background-image    : url('img/unknown.png');
+    background-repeat   : no-repeat;
+    background-position : top left;
+    height              : 150px;
+}
+
+.km_nopage_in h1 {
+    font-size      : 40px;
+    color          : #AF0000;
+    font-weight    : normal;
+    margin         : 26px 0 14px 160px;
+    padding        : 0;
+    text-transform : uppercase;
+}
+
+.km_nopage_btn {
+    border           : 1px solid #dc4a38;
+    text-transform   : uppercase;
+    color            : #fff;
+    margin           : 0px 0 0 160px;
+    font-size        : 11px;
+    padding          : 14px 35px;
+    background-color : #d74937;
+    text-align       : center;
+    display          : inline-block;
+    text-decoration  : none;
+    white-space      : nowrap;
+    border-radius    : 3px;
+}
+
+.km_placeholder {
+    background : #e4f7e6;
+    border     : 1px dashed #99d8a0;
+    width      : 100%;
+}
+
+.km_dragdrop_place {
+    width : 100%;
+}
+
+.km_dragdrop_place.km_dragdrop_place_active {
+    padding    : 10px 0;
+    width      : 100%;
+    border     : 1px dashed #99d8a0;
+    min-height : 50px;
+}
+
+.km_dragdrop_place {
+
+}
+
+.km_dragobj {
+    border : 1px dashed #000000;
+    width  : 100%;
+    height : 10px;
+}
+
+.km_draghelper {
+}
+
+.km_draghelper_show {
+    width  : 100%;
+    height : 20px;
+}
+
+.km_dragon_on {
+    height : 10px;
+}
+
+#km_preloader {
+    width            : 100%;
+    height           : 400px;
+    background-color : #000000;
+    position         : absolute;
+    top              : 0;
+    left             : 0;
+    opacity          : 0.6;
+}
+
+.km_preloader_msg {
+    font-size           : 16px;
+    min-height          : 32px;
+    color               : #fff;
+    position            : fixed;
+    left                : 50%;
+    top                 : 30%;
+    background-image    : url('img/km_preloader.gif');
+    background-position : left;
+    background-repeat   : no-repeat;
+    padding-left        : 40px;
+    line-height         : 32px;
+    z-index             : 101;
+}
+
+.km_szpaltanames {
+    background-color : #99d8a0;
+    color            : #fff;
+    font-size        : 10px;
+    padding          : 3px;
+}
+
+.km_head {
+    font-family         : Verdana;
+    line-height         : auto !important;
+    background-repeat   : repeat-x;
+    background-position : top left;
+    height              : 51px;
+    overflow            : hidden;
+    background-image    : url('img/km_head_bg.jpg');
+}
+
+.km_head .km_left {
+    float : left;
+    width : 460px;
+}
+
+.km_head .km_right {
+    float               : left;
+    color               : #c3c3c3;
+    font-size           : 10px;
+    width               : 650px;
+    background-position : top left;
+    background-repeat   : no-repeat;
+    padding             : 5px 0 0 46px;
+}
+
+.km_head .km_right b {
+    color : #979797;
+}
+
+.km_head .km_verinfo {
+    padding-left : 10px;
+    font-size    : 9px;
+    font-family  : Verdana;
+    color        : #b0afaf;
+}
+
+.km_head .km_verinfo a {
+    text-decoration : none;
+    color           : #b0afaf;
+}
+
+.km_head .km_head_logo {
+    display     : block;
+    text-indent : -174px;
+    margin      : 10px 0 0 10px;
+}
+
+.km_head .km_sysinfo {
+    float               : left;
+    width               : 250px;
+    font-size           : 10px;
+    padding             : 10px 0 0 10px;
+    background-repeat   : no-repeat;
+    background-position : 0px 8px;
+    height              : 40px;
+    background-image    : url('img/sysinfo.gif');
+}
+
+.km_head .km_iconi_sysinfo {
+    float        : left;
+    display      : block;
+    margin-right : 10px;
+}
+
+.km_head .km_iconkm_profile {
+    float        : left;
+    display      : block;
+    margin-right : 10px;
+}
+
+.km_head .km_mini_icons {
+    margin-top : 4px;
+}
+
+.km_head .km_chpass_icon {
+    height              : 12px;
+    font-size           : 10px;
+    color               : #000;
+    text-decoration     : none;
+    padding             : 2px 0 2px 16px;
+    margin-left         : 5px;
+    background-image    : url('img/km_sprite.png');
+    background-repeat   : no-repeat;
+    background-position : -515px -2383px;
+}
+
+.km_head .km_logout_icon {
+    height              : 12px;
+    font-size           : 10px;
+    color               : #000;
+    text-decoration     : none;
+    padding             : 2px 0 2px 16px;
+    background-image    : url('img/km_sprite.png');
+    background-repeat   : no-repeat;
+    background-position : -515px -2416px;
+}
+
+.km_mainmenu {
+    font-family         : Verdana;
+    line-height         : auto !important;
+    background-repeat   : repeat-x;
+    background-position : top left;
+    height              : 30px;
+    background-image    : url('img/km_mainmenu_bg.jpg');
+}
+
+.km_mainmenu * {
+    outline : none;
+}
+
+.km_mainmenu ul {
+    margin     : 0;
+    padding    : 0;
+    list-style : none;
+    overflow   : hidden;
+    display    : block;
+}
+
+.km_mainmenu li {
+    float               : left;
+    display             : block;
+    background-position : bottom right;
+    background-repeat   : no-repeat;
+    font-size           : 10px;
+    color               : #fff;
+}
+
+.km_mainmenu li a {
+    color           : #fff;
+    text-decoration : none;
+}
+
+.km_item_n, .km_item_v {
+    background-image : url('img/km_item_n_r.gif');
+}
+
+.km_item_n .km_item_href, .km_item_n .km_item_block, .km_item_v .km_item_select {
+    background-image : url('img/km_item_n_l.gif');
+}
+
+.km_item_a {
+    background-image : url('img/km_item_a_r.gif');
+}
+
+.km_item_a .km_item_href, .km_item_a .km_item_block {
+    background-image : url('img/km_item_a_l.gif');
+}
+
+.km_item_href, .km_item_block, .km_item_select {
+    display             : block;
+    background-position : bottom left;
+    background-repeat   : no-repeat;
+    padding             : 9px 12px 8px 12px;
+}
+
+.km_item_select {
+    padding : 4px 7px 5px 7px;
+}
+
+#km_ver_vdiv {
+    position : relative;
+    width    : 40px;
+    height   : 12px;
+}
+
+#km_ver_input {
+    position : absolute;
+    top      : 3px;
+    left     : 5px;
+}
+
+#km_plugins_link {
+    display : none;
+}
+
+.km_toolbar {
+    background-color : #fff;
+    padding          : 0;
+    border-bottom    : 1px solid #e5e5e5;
+    font-family      : arial;
+    padding-left     : 14px;
+}
+
+.km_toolbar_left {
+    width       : 580px;
+    float       : left;
+    padding     : 4px 0;
+    margin-left : 10px
+}
+
+.km_toolbar_left label {
+    color     : #717171;
+    font-size : 11px;
+}
+
+.km_toolbar_left .k_input {
+    border         : 1px solid #DDDDDD;
+    color          : #717171;
+    font-size      : 12px;
+    padding        : 4px;
+    vertical-align : middle;
+    width          : 350px
+}
+
+.km_toolbar_right {
+    float   : right;
+    padding : 5px;
+}
+
+.km_toolbar_right a {
+    color : #717171;
+}
+
+.km_toolbar .ftp_all_btn {
+    float            : right;
+    background-color : #fff;
+    padding          : 12px 8px;
+    overflow         : hidden;
+}
+
+.km_toolbar .ftp_all_btn a {
+    text-transform   : uppercase;
+    background-color : #4D90FE;
+    border-radius    : 2px;
+    float            : right;
+    vertical-align   : middle;
+    cursor           : pointer;
+    display          : inline-block;
+    height           : 28px;
+    line-height      : 28px;
+    border           : 1px solid #3079ED;
+    width            : auto;
+    padding          : 0 8px;
+    text-decoration  : none;
+    color            : #fff;
+}
+
+.km_toolbar .ftp_map_btn {
+    float            : right;
+    background-color : #fff;
+    padding          : 12px 8px;
+    overflow         : hidden;
+}
+
+.km_toolbar .ftp_map_btn a {
+    text-transform   : uppercase;
+    background-color : #f1f1f1;
+    border-radius    : 2px;
+    float            : right;
+    vertical-align   : middle;
+    cursor           : pointer;
+    display          : inline-block;
+    height           : 28px;
+    line-height      : 28px;
+    border           : 1px solid #aaa;
+    width            : auto;
+    padding          : 0 8px;
+    text-decoration  : none;
+    color            : #333;
+}
+
+.ftp_map {
+    background-color : #fff;
+    padding          : 0px 40px;
+    overflow         : hidden;
+}
+
+.ftp_map .ftp_map_btn {
+    align : center;
+    width : 100%;
+}
+
+.ftp_map .ftp_map_btn a {
+    text-transform   : uppercase;
+    background-color : #f1f1f1;
+    border-radius    : 2px;
+    vertical-align   : middle;
+    cursor           : pointer;
+    display          : inline-block;
+    height           : 28px;
+    line-height      : 28px;
+    border           : 1px solid #aaa;
+    width            : auto;
+    padding          : 0 8px;
+    text-decoration  : none;
+    color            : #333;
+}
+
+.ftp_map p {
+    font-size   : 16px;
+    padding-top : 10px;
+}
+
+.ftp_map a {
+    font-size : 16px;
+}
+
+.ftp_map input {
+    font-size : 16px;
+    padding   : 4px;
+    width     : 300px;
+}
+
+.ftp_map div {
+    font-size   : 16px;
+    color       : #006000;
+    font-weight : bold;
+}
+
+.ftp_sftp {
+    background-color : #fff;
+    padding          : 0px 40px;
+    overflow         : hidden;
+}
+.ftp_sftp p {
+    font-size   : 16px;
+    padding-top : 10px;
+}
+
+.ftp_sftp a {
+    font-size : 16px;
+}
+
+
+.km_toolbar .adres_publikacji {
+    margin          : 5px 0;
+    color           : #000;
+    text-decoration : none;
+    display         : block
+}
+
+.km_toolbar .adres_publikacji:hover {
+    text-decoration : underline
+}
+
+.km_toolbar ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0px 8px 0px 0;
+    display    : block;
+}
+
+.km_toolbar ul li {
+    display : block;
+    float   : left;
+    margin  : 0;
+    padding : 9px 2px;
+}
+
+.km_toolbar #km_editsave {
+    float   : right !important;
+    display : none;
+}
+
+.km_toolbar .km_icon, .km_toolbar .km_icon_easy {
+    text-indent  : -600px;
+    overflow     : hidden;
+    margin-right : 15px;
+}
+
+#help_new_page .km_icon_easy {
+    margin-right : 7px !important
+}
+
+.km_toolbar .km_label_nopage {
+    padding : 0 !important;
+    margin  : 16px 10px 0 4px;
+    color   : #b50000;
+}
+
+.km_toolbar .km_label label {
+    font-size   : 11px;
+    color       : #717171;
+    font-family : arial;
+    display     : block;
+}
+
+.km_toolbar .km_text {
+    border         : 1px solid #dddddd;
+    font-size      : 12px;
+    padding        : 4px;
+    color          : #999999;
+    font-family    : arial;
+    vertical-align : middle;
+}
+
+.km_toolbar .km_server {
+    font-size   : 14px;
+    font-family : arial;
+    color       : #000;
+	border: 1px solid #7c7c7c;
+}
+
+.km_toolbar .km_server span {
+    color           : #000;
+    text-decoration : none;
+    display         : inline-block;
+}
+
+.km_toolbar .km_select {
+    border         : 1px solid #9e9e9e;
+    font-size      : 10px;
+    color          : #000;
+    font-family    : arial;
+    vertical-align : middle;
+}
+
+.km_toolbar .km_label {
+    padding      : 0 !important;
+    margin-right : 10px;
+}
+
+.km_toolbar .km_iconi_enter {
+    vertical-align   : middle;
+    border           : 0 solid #fff;
+    background-image : url('img/km_sprite.png');
+    background-color : transparent;
+    cursor           : pointer;
+    text-indent      : -300px;
+    margin-left      : 4px;
+    padding          : 0px;
+    margin-bottom    : 0px;
+}
+
+.km_toolbar .km_iconi_copy_m {
+    font-size        : 0;
+    line-height      : 0;
+    text-indent      : 400px;
+    vertical-align   : middle;
+    border           : 0 solid #fff;
+    background-image : url('img/easy_sprite.png');
+    background-color : transparent;
+    cursor           : pointer;
+    text-indent      : -300px;
+    margin-left      : 4px;
+}
+
+.km_toolbar .km_sep {
+    background-image : url('img/km_sprite.png');
+    display          : block;
+    margin-right     : 10px;
+}
+
+.km_toolbar form {
+    margin  : 0;
+    padding : 0;
+}
+
+.km_toolbar .km_sf-menu {
+    float  : left;
+    margin : 5px 0 0 5px;
+}
+
+.km_toolbar_info {
+    float     : right;
+    margin    : 10px;
+    color     : #8d8d8d;
+    font-size : 11px;
+}
+
+.copy_version {
+    list-style : none;
+    margin     : 0;
+    padding    : 0px 8px 0px 0;
+    float      : left
+}
+
+/*rp
+.km_smallbar {
+    background-image    : url('img/km_smallbar_bg.jpg');
+    background-repeat   : repeat-x;
+    background-position : top;
+    background-color    : #909090;
+    padding             : 3px 5px !important;
+}*/
+
+
+.km_smallbar ul {
+    margin   : 0 !important;
+    padding  : 0 !important;
+    display  : block !important;
+    overflow : hidden !important;
+    height   : 18px !important;
+    width    : auto !important;
+}
+
+.km_smallbar li.km_tdsave {
+    display : none !important;
+    cursor  : pointer;
+}
+
+.km_smallbar li.km_tdsave_active {
+    display : block !important;
+}
+
+.km_new_sid {
+	background-color: #333 !important;
+	border-radius: 3px !important;
+	padding: 0px 6px !important;
+	color: #fff !important;
+	font-size: 12px !important;
+	vertical-align: top !important;
+}
+
+
+.km_smallbar li {
+    margin  : 0 5px 0 0 !important;
+    padding : 0 !important;
+    display : block !important;
+    border  : 0 !important;
+    float   : left;
+}
+
+.km_smallbar li.km_r {
+    float : right;
+}
+
+.km_smallbar .notranslate > li a {
+    cursor : pointer;
+}
+
+
+#km_dropmenu {
+    position         : absolute;
+    background-color : #D1D1D1;
+    z-index          : 9999;
+}
+
+#km_dropmenu ul {
+    max-height       : 200px;
+    overflow         : auto;
+    margin           : 0;
+    padding          : 0;
+    display          : block;
+    background-color : #fff;
+}
+
+#km_dropmenu li {
+    /*background-image    : url('img/multischowek/item.jpg');*/
+    background-repeat   : repeat-x;
+    background-color    : #fafafa;
+	border-bottom		: 1px solid #c0c0c0;
+    background-position : bottom;
+    padding             : 0px;
+    margin              : 0;
+    overflow            : hidden;
+}
+
+#km_dropmenu a {
+    background-image    : url('img/multischowek/icon.gif');
+    background-position : 5px 8px;
+    background-repeat   : no-repeat;
+    background-size     : 16px;
+    padding             : 10px 5px 10px 35px;
+    display             : block;
+    color               : #818181;
+    text-decoration     : none;
+    cursor              : pointer;
+}
+
+.km_dropmenu_plugin {
+    border : 3px solid #8b8b8b;
+    width  : 300px;
+}
+
+#km_server_link {
+    height  : 37px;
+    padding : 0 !important;
+    cursor  : pointer;
+}
+
+#km_server_link label, #km_server_link div {
+    padding : 3px 6px;
+}
+
+.km_server_link_active {
+    background-color : #7c7c7c;
+}
+
+.km_server_link_active label {
+    color : #fff !important;
+}
+
+.km_dropmenu_server {
+    border : 1px solid #7c7c7c;
+    width  : 300px;
+}
+
+#km_lang_link {
+    height  : 37px;
+    padding : 0 !important;
+    cursor  : pointer;
+}
+
+#km_lang_link span {
+    margin  : 18px 8px 0 8px;
+    display : inline-block;
+}
+
+.km_lang_link_active {
+    background-color : #7c7c7c;
+}
+
+.km_lang_link_active label {
+    color : #fff !important;
+}
+
+.km_dropmenu_lang {
+    border : 1px solid #7c7c7c;
+    width  : 300px;
+}
+
+#km_bookmark_link {
+    height : 29px;
+    cursor : pointer;
+}
+
+#km_bookmark_link span {
+    margin : 0 7px;
+}
+
+.km_bookmark_link_active {
+    background-color : #7c7c7c;
+}
+
+.km_bookmark_link_active label {
+    color : #fff !important;
+}
+
+.km_dropmenu_bookmark {
+    border : 3px solid #7c7c7c;
+    width  : 300px;
+}
+
+.km_section {
+    border-top    : 1px dashed #aa0000;
+    border-bottom : 1px dashed #aa0000;
+    position      : relative;
+}
+
+.km_section_btn {
+    position         : absolute;
+    top              : -1px;
+    left             : -1px;
+    background-color : #930000;
+    width            : 26px;
+}
+
+.km_section_btn ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+    display    : block;
+    overflow   : hidden;
+}
+
+.km_section_btn li {
+    margin  : 0;
+    padding : 5px;
+    display : block;
+}
+
+.km_section_btn a {
+    text-indent : -300px;
+}
+
+.km_dragbox {
+    border : 0px dashed #aa0000;
+}
+
+.km_nodragbox {
+    border : 1px dashed #9b9b9b;
+}
+
+.km_nodragbox_link {
+    font-size : 12px;
+}
+
+.km_nodragbox_link a {
+    color           : #000;
+    text-decoration : none;
+    font-size       : 11px !important;
+    line-height     : 12px !important;
+    color           : #000 !important;
+    text-indent     : 0 !important;
+}
+
+.km_nodragbox_link a:hover {
+    text-decoration : underline !important;
+}
+
+.km_ruler_x {
+    background-image    : url('img/km_ruler_x.png');
+    height              : 20px;
+    background-repeat   : no-repeat;
+    background-position : top left;
+}
+
+.km_infotd {
+    display : none;
+}
+
+#km_hinter {
+    position         : absolute;
+    z-index          : 101;
+    width            : 500px;
+    padding          : 3px;
+    background-color : #fff;
+    border           : 1px solid #464646;
+    display          : none;
+}
+
+#km_hinter .km_table {
+    width           : 100%;
+    border-collapse : collapse;
+}
+
+#km_hinter .km_table td {
+    background-color : #f5f4f4;
+    padding          : 5px;
+    border-bottom    : 1px solid #fff;
+}
+
+.km_icon, .km_lang_icon {
+    background-image : url('img/km_sprite.png') !important;
+    display          : block;
+    font-size        : 0;
+    line-height      : 0;
+}
+
+.km_iconi_arch {
+    background-position : 0 0;
+    width               : 22px;
+    height              : 27px;
+}
+
+.km_iconi_arr_down {
+    background-position : 0 -97px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_iconi_arr_up {
+    background-position : 0 -343px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_iconi_arr_left {
+    background-position : 0 -179px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_iconi_arr_right {
+    background-position : 0 -261px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_iconi_back {
+    background-position : 0 -425px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_bookmark {
+    background-position : 0 -522px;
+    width               : 25px;
+    height              : 24px;
+}
+
+.km_iconi_bookmark_on {
+    background-position : 0 -616px;
+    width               : 25px;
+    height              : 24px;
+}
+
+.km_iconi_copy {
+    background-position : 0 -710px;
+    width               : 23px;
+    height              : 25px;
+}
+
+.km_iconi_copy_m {
+    background-position : 0 -805px;
+    width               : 15px;
+    height              : 16px;
+}
+
+.km_iconi_delete {
+    background-position : 0 -891px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_delete_m {
+    background-position : 0 -988px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_iconi_dirup {
+    background-position : 0 -1074px;
+    width               : 26px;
+    height              : 26px;
+}
+
+.km_iconi_doproof {
+    background-position : 0 -1170px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_editmode {
+    background-position : 0 -1267px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_editmode_m {
+    background-position : 0 -1364px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_iconi_enter {
+    background-position : 0 -1450px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_iconi_export {
+    background-position : 0 -1532px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_find {
+    background-position : 0 -1629px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_find_m {
+    background-position : 0 -1726px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_iconi_forw {
+    background-position : 0 -1812px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_ftp {
+    background-position : 0 -1909px;
+    width               : 33px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_all {
+    background-position : -163px 0;
+    width               : 32px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_att {
+    background-position : -171px -388px;
+    width               : 30px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_down {
+    background-position : -163px -194px;
+    width               : 28px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_img {
+    background-position : -163px -291px;
+    width               : 29px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_inc {
+    background-position : -168px -97px;
+    width               : 30px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_one {
+    background-position : -163px -485px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_ftp_setup {
+    background-position : -163px -582px;
+    width               : 38px;
+    height              : 27px;
+}
+
+.km_iconi_help {
+    background-position : -163px -679px;
+    width               : 22px;
+    height              : 23px;
+}
+
+.km_iconi_hfswitch {
+    background-position : -163px -772px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_image {
+    background-position : -163px -869px;
+    width               : 24px;
+    height              : 25px;
+}
+
+.km_iconi_invisible {
+    background-position : -155px -966px;
+    width               : 28px;
+    height              : 26px;
+}
+
+.km_iconi_invisible_m {
+    background-position : -163px -1060px;
+    width               : 11px;
+    height              : 16px;
+}
+
+.km_iconi_loadcss {
+    background-position : -1px -1989px;
+    width               : 30px;
+    height              : 27px;
+}
+
+.km_iconi_mailsend {
+    background-position : -163px -1146px;
+    width               : 37px;
+    height              : 27px;
+}
+
+.km_iconi_maska {
+    background-position : -163px -1243px;
+    width               : 22px;
+    height              : 22px;
+}
+
+.km_iconi_menu {
+    background-position : -163px -1335px;
+    width               : 25px;
+    height              : 27px;
+}
+
+.km_iconi_menu_m {
+    background-position : -163px -1432px;
+    width               : 15px;
+    height              : 16px;
+}
+
+.km_iconi_more_m {
+    background-position : -163px -1518px;
+    width               : 15px;
+    height              : 16px;
+}
+
+.km_iconi_new {
+    background-position : -163px -1604px;
+    width               : 22px;
+    height              : 27px;
+}
+
+.km_iconi_new_m {
+    background-position : -817px -1952px;
+    width               : 12px;
+    height              : 18px;
+}
+
+.km_iconi_newmodule {
+    background-position : -163px -1701px;
+    width               : 22px;
+    height              : 27px;
+}
+
+.km_iconi_next {
+    background-position : -163px -1798px;
+    width               : 25px;
+    height              : 27px;
+}
+
+.km_iconi_next_m {
+    background-position : -163px -1895px;
+    width               : 15px;
+    height              : 16px;
+}
+
+.km_iconi_nextnext {
+    background-position : -338px 0;
+    width               : 25px;
+    height              : 27px;
+}
+
+.km_iconi_noproof {
+    background-position : -338px -97px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_nostyle {
+    background-position : -338px -194px;
+    width               : 27px;
+    height              : 27px;
+}
+
+
+.km_iconi_open {
+    background-position : -338px -385px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_open_m {
+    background-position : -338px -482px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_iconi_paste {
+    background-position : -338px -568px;
+    width               : 22px;
+    height              : 27px;
+}
+
+.km_iconi_paste_m {
+    background-position : -338px -665px;
+    width               : 13px;
+    height              : 16px;
+}
+
+.km_iconi_prev {
+    background-position : -338px -751px;
+    width               : 25px;
+    height              : 27px;
+}
+
+.km_iconi_prev_m {
+    background-position : -338px -848px;
+    width               : 15px;
+    height              : 16px;
+}
+
+
+.km_iconi_proof {
+    background-position : -338px -1028px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_prooftp {
+    background-position : -338px -1125px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_property {
+    background-position : -338px -1222px;
+    width               : 22px;
+    height              : 23px;
+}
+
+.km_iconi_property_m {
+    background-position : -338px -1315px;
+    width               : 15px;
+    height              : 16px;
+}
+
+.km_iconi_resize_off {
+    background-position : -338px -1401px;
+    width               : 19px;
+    height              : 9px;
+}
+
+.km_iconi_resize_on {
+    background-position : -338px -1480px;
+    width               : 19px;
+    height              : 9px;
+}
+
+.km_iconi_rights {
+    background-position : -338px -1559px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_root {
+    background-position : -338px -1656px;
+    width               : 28px;
+    height              : 26px;
+}
+
+.km_iconi_save {
+    background-position : -338px -1752px;
+    width               : 24px;
+    height              : 27px;
+}
+
+.km_iconi_separator, .km_toolbar .km_sep {
+    background-position : -338px -1839px;
+    width               : 1px;
+    height              : 27px;
+}
+
+.km_iconi_sm {
+    background-position : -513px 0;
+    width               : 26px;
+    height              : 24px;
+}
+
+.km_iconi_stop {
+    background-position : -513px -94px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_stopn {
+    background-position : -513px -191px;
+    width               : 26px;
+    height              : 27px;
+}
+
+.km_iconi_style {
+    background-position : -513px -288px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_submenu {
+    background-position : -513px -385px;
+    width               : 25px;
+    height              : 27px;
+}
+
+.km_iconi_svn_end {
+    background-position : -513px -482px;
+    width               : 18px;
+    height              : 18px;
+}
+
+.km_iconi_svn_start {
+    background-position : -513px -570px;
+    width               : 18px;
+    height              : 18px;
+}
+
+.km_iconi_sysinfo {
+    background-position : -513px -658px;
+    width               : 26px;
+    height              : 26px;
+}
+
+.km_iconi_szablon {
+    background-position : -513px -754px;
+    width               : 27px;
+    height              : 24px;
+}
+
+.km_iconi_title {
+    background-position : -513px -848px;
+    width               : 15px;
+    height              : 13px;
+}
+
+.km_iconi_tools {
+    background-position : -513px -931px;
+    width               : 29px;
+    height              : 27px;
+}
+
+.km_iconi_tools_m {
+    background-position : -163px -1998px;
+    width               : 21px;
+    height              : 16px;
+}
+
+.km_iconi_trans {
+    background-position : -513px -1028px;
+    width               : 30px;
+    height              : 27px;
+}
+
+.km_iconi_tree {
+    background-position : -513px -1125px;
+    width               : 27px;
+    height              : 27px;
+}
+
+.km_iconi_visible {
+    background-position : -513px -1222px;
+    width               : 18px;
+    height              : 26px;
+}
+
+.km_iconi_visible_m {
+    background-position : -513px -1318px;
+    width               : 11px;
+    height              : 16px;
+}
+
+.km_iconkm_logo {
+    background-position : -513px -1408px;
+    width               : 174px;
+    height              : 23px;
+}
+
+.km_iconkm_profile {
+    background-position : -513px -1497px;
+    width               : 35px;
+    height              : 36px;
+}
+
+.km_iconms_close {
+    background-position : -513px -1603px;
+    width               : 21px;
+    height              : 21px;
+}
+
+.km_iconms_icon {
+    background-position : -513px -1694px;
+    width               : 14px;
+    height              : 16px;
+}
+
+.km_icontd_copy {
+    background-position : -513px -1780px;
+    width               : 14px;
+    height              : 15px;
+}
+
+.km_icontd_delete {
+    background-position : -513px -1865px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_dragdrop {
+    background-position : -817px 0;
+    width               : 16px;
+    height              : 14px;
+}
+
+.km_icontd_edit {
+    background-position : -817px -84px;
+    width               : 15px;
+    height              : 15px;
+}
+
+.km_icontd_info {
+    background-position : -817px -169px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_menu {
+    background-position : -817px -255px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_menuadd {
+    background-position : -160px -2382px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_showmenu {
+    background-position : -162px -2290px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_new {
+    background-position : -160px -2415px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_save {
+    background-position : -160px -2257px;
+    width               : 16px;
+    height              : 16px;
+}
+
+.km_icontd_visible_off {
+    background-position : -816px -341px;
+    width               : 14px;
+    height              : 18px;
+}
+
+.km_icontd_visible_d {
+    background-position : -819px -1865px;
+    width               : 12px;
+    height              : 18px;
+}
+
+.km_icontd_visible_on {
+    background-position : -817px -429px;
+    width               : 12px;
+    height              : 18px;
+}
+
+.km_icontdedit_config {
+    background-position : -817px -517px;
+    width               : 27px;
+    height              : 20px;
+}
+
+.km_icontdedit_include {
+    background-position : -817px -607px;
+    width               : 17px;
+    height              : 20px;
+}
+
+.km_icontdedit_opcje {
+    background-position : -817px -697px;
+    width               : 27px;
+    height              : 20px;
+}
+
+.km_icontdedit_save {
+    background-position : -817px -787px;
+    width               : 19px;
+    height              : 20px;
+}
+
+.km_icontdedit_js {
+    background-position : 0px -2081px;
+    width               : 24px;
+    height              : 24px;
+}
+
+.km_iconi_save_m {
+    background-position : -159px -2256px;
+    width               : 19px;
+    height              : 20px;
+}
+
+.km_icontdedit_wysiwyg {
+    background-position : -817px -877px;
+    width               : 18px;
+    height              : 20px;
+}
+
+.km_icontree_folder {
+    background-position : -817px -967px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_linia {
+    background-position : -817px -1053px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_menu {
+    background-position : -817px -1139px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_menu_e {
+    background-position : -817px -1225px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_minus {
+    background-position : -817px -1311px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_minus_e {
+    background-position : -817px -1397px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_plus {
+    background-position : -817px -1483px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_plus_e {
+    background-position : -817px -1569px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_serwis {
+    background-position : -817px -1655px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_icontree_strona {
+    background-position : -817px -1741px;
+    width               : 19px;
+    height              : 16px;
+}
+
+.km_iconi_lang_no {
+    background-position : -810px -2054px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_nl {
+    background-position : -810px -2084px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_tr, .km_iconi_lang_t {
+    background-position : -810px -2114px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_gr, .km_iconi_lang_g {
+    background-position : -810px -2144px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_bg {
+    background-position : -810px -2174px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_cz, .km_iconi_lang_cz2 {
+    background-position : -810px -2204px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_hu, .km_iconi_lang_h {
+    background-position : -810px -2234px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_it {
+    background-position : -810px -2264px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_lt, .km_iconi_lang_l {
+    background-position : -810px -2294px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_sp, .km_iconi_lang_s {
+    background-position : -810px -2324px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_fr, .km_iconi_lang_f {
+    background-position : -810px -2354px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_ru, .km_iconi_lang_r {
+    background-position : -810px -2384px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_en, .km_iconi_lang_e {
+    background-position : -810px -2414px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_de, .km_iconi_lang_d {
+    background-position : -810px -2444px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_pl, .km_iconi_lang_p, .km_iconi_lang_i {
+    background-position : -810px -2474px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_pr {
+    background-position : -810px -2504px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_iconi_lang_other {
+    background-position : -810px -2534px !important;
+    width               : 32px;
+    height              : 26px;
+}
+
+.km_icon_easy {
+    background-image : url('img/easy_sprite.png') !important;
+    display          : block;
+    font-size        : 0;
+    line-height      : 0;
+    margin           : 0px 2px;
+}
+
+.km_iconi_previewmode {
+    background-image	: url('img/pc.png') !important;
+    width               : 29px;
+    height              : 29px;
+}
+
+.km_iconi_property {
+    background-position : -250px -253px !important;
+    width               : 28px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_copy {
+    background-position : -69px -258px !important;
+    width               : 29px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_paste {
+    cursor              : pointer;
+    background-position : -69px -196px !important;
+    width               : 29px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_delete {
+    background-position : -69px -316px !important;
+    width               : 30px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_visible {
+    background-position : -69px -373px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer
+}
+
+.km_iconi_invisible {
+    background-position : -251px -197px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer
+}
+
+.km_iconi_visible_sm {
+    background-position : 0px -367px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer;
+	padding-top			: 18px !important;
+	padding-bottom		: 18px !important;
+}
+.km_iconi_invisible_sm {
+    background-position : 0px -316px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer;
+	padding-top			: 18px !important;
+	padding-bottom		: 18px !important;
+}
+
+.km_iconi_explorer {
+    background-position : -436px -46px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer
+}
+
+.km_iconi_tree_sm {
+    background-position : -167px -421px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer;
+	padding-top			: 18px !important;
+	padding-bottom		: 18px !important;
+}
+.km_iconi_tree_sm_off {
+    background-position : -167px -86px !important;
+    width               : 30px !important;
+    height              : 30px !important;
+    cursor              : pointer;
+	padding-top			: 18px !important;
+	padding-bottom		: 18px !important;
+}
+
+.km_iconi_arrow_down {
+	background-position	: -443px -5px !important;
+	width				: 15px !important;
+	height				: 15px !important;
+    cursor              : pointer;
+	margin-right		: 0px !important;
+}
+
+.km_iconi_image {
+    background-position : -69px -421px !important;
+    width               : 31px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_hfswitch {
+    background-position : -69px -471px !important;
+    width               : 28px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_prev {
+    background-position : -250px -312px !important;
+    width               : 25px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_copy_m {
+    background-position : -250px -358px !important;
+    width               : 16px !important;
+    height              : 16px !important;
+}
+
+.km_section_btn .km_iconi_copy_m {
+    background-position : -69px -41px !important;
+    width               : 26px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp_all {
+    background-position : -251px -396px !important;
+    width               : 31px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp {
+    background-position : -251px -443px !important;
+    width               : 33px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftpall {
+    background-position : -382px -412px !important;
+    width               : 27px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp_one {
+    background-position : -315px -2px !important;
+    width               : 27px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp_down {
+    background-position : -315px -49px !important;
+    width               : 31px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp_img {
+    background-position : -315px -93px !important;
+    width               : 29px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp_inc {
+    background-position : -315px -141px !important;
+    width               : 29px !important;
+    height              : 27px !important;
+}
+
+.km_iconi_ftp_att {
+    background-position : -315px -191px !important;
+    width               : 27px !important;
+    height              : 27px !important;
+}
+
+/*.km_iconi_new { background-position: -315px -250px !important; width: 30px !important; height: 27px !important; }*/
+.km_iconi_sm {
+    background-position : -381px 2px !important;
+    width               : 29px !important;
+    height              : 27px !important;
+    cursor              : pointer
+}
+
+.km_iconi_nsm {
+    background-position : -381px -45px !important;
+    width               : 29px !important;
+    height              : 27px !important;
+    cursor              : pointer
+}
+
+.km_iconi_prooftp {
+    background-position : -381px -194px !important;
+    width               : 29px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_root {
+    background-position : -381px -91px !important;
+    width               : 35px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_szablon {
+    background-position : -381px -144px !important;
+    width               : 40px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_bookmark {
+    background-position : -381px -242px !important;
+    width               : 30px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_bookmark_on {
+    background-position : -381px -305px !important;
+    width               : 30px !important;
+    height              : 29px !important;
+}
+
+.km_iconi_new {
+    background-position : -381px -365px !important;
+    width               : 29px !important;
+    height              : 29px !important;
+}
+
+#help_new_page .km_iconi_new {
+    background-position : -166px 0 !important;
+    width               : 29px !important;
+    height              : 29px !important;
+}
+
+.km_icontdedit_save {
+    background-position : -315px -311px !important;
+    width               : 28px !important;
+    height              : 27px !important;
+}
+
+.km_icontdedit_wysiwyg {
+    background-color      : #f3f3f3;
+    border                : 1px solid #dbdbdb;
+    text-transform        : uppercase;
+    color                 : #fff;
+    font-size             : 0;
+    padding               : 0;
+    background-image      : url('img/km_wysiwyg.png');
+    background-position   : center;
+    background-repeat     : no-repeat;
+    width                 : 58px;
+    height                : 29px;
+    line-height           : 0;
+    overflow              : hidden;
+    text-indent           : 300px;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    border-radius         : 3px;
+    display               : block;
+}
+
+.km_icontdedit_wysiwyg:hover {
+    background-color : #dadada;
+}
+
+.km_icontdedit_js {
+    background-color      : #f3f3f3;
+    border                : 1px solid #dbdbdb;
+    text-transform        : uppercase;
+    color                 : #fff;
+    font-size             : 0;
+    padding               : 0;
+    background-image      : url('img/km_js.png');
+    background-position   : center;
+    background-repeat     : no-repeat;
+    width                 : 58px;
+    height                : 29px;
+    line-height           : 0;
+    overflow              : hidden;
+    text-indent           : 300px;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    border-radius         : 3px;
+    display               : block;
+}
+
+.km_icontdedit_js:hover {
+    background-color : #dadada;
+}
+
+.km_icontdedit_opcje {
+    background-color      : #f3f3f3;
+    border                : 1px solid #dbdbdb;
+    text-transform        : uppercase;
+    color                 : #fff;
+    font-size             : 0;
+    padding               : 0;
+    background-image      : url('img/km_setup.png');
+    background-position   : center;
+    background-repeat     : no-repeat;
+    width                 : 58px;
+    height                : 29px;
+    line-height           : 0;
+    overflow              : hidden;
+    text-indent           : 300px;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    border-radius         : 3px;
+    display               : block;
+}
+
+.km_icontdedit_opcje:hover {
+    background-color : #dadada;
+}
+
+a.button {
+    text-align            : center;
+    cursor                : pointer;
+    display               : block;
+    float                 : right;
+    text-decoration       : none;
+    border                : 1px solid #d14836;
+    text-transform        : uppercase;
+    -webkit-border-radius : 3px;
+    -moz-border-radius    : 3px;
+    border-radius         : 3px;
+    display               : block;
+    color                 : #fff !important;
+    font-size             : 11px;
+    padding               : 7px 20px;
+    background-image      : url('img/btn_bg.png');
+    background-position   : bottom left;
+    background-color      : #dc4a38;
+    background-repeat     : repeat-x
+}
+
+a.button:hover {
+    background-color    : #dc4a38;
+    background-image    : url('img/btn_bg_hover.png');
+    background-position : top left;
+    background-repeat   : repeat-x
+}
+
+.km_smallbar .km_icontd_dragdrop {
+    background-position : 0 0 !important;
+    width               : 15px !important;
+    height              : 15px !important;
+}
+
+.km_smallbar .km_icontd_edit {
+    background-position : 0 -43px !important;
+    width               : 16px !important;
+    height              : 17px !important;
+}
+
+.km_smallbar .km_icontd_copy {
+    background-position : 0 -96px !important;
+    width               : 17px !important;
+    height              : 17px !important;
+}
+
+.km_smallbar .km_iconi_menu_m {
+    background-position : 0 -147px !important;
+    width               : 16px !important;
+    height              : 17px !important;
+}
+
+.km_smallbar .km_iconi_next_m {
+    background-position : 0 -203px !important;
+    width               : 19px !important;
+    height              : 17px !important;
+}
+
+.km_smallbar .km_iconi_more_m {
+    background-position : 0 -266px !important;
+    width               : 19px !important;
+    height              : 17px !important;
+}
+
+.km_smallbar .km_iconi_more_m_over {
+    background-position : -385px -469px !important;
+    width               : 19px !important;
+    height              : 17px !important;
+}
+
+.km_smallbar .km_icontd_visible_off {
+    background-position : 0 -322px !important;
+    width               : 19px !important;
+    height              : 16px !important;
+}
+
+.km_smallbar .km_icontd_visible_on {
+    background-position : 0 -376px !important;
+    width               : 19px !important;
+    height              : 16px !important;
+}
+
+.km_smallbar .km_icontd_info {
+    background-position : 0 -426px !important;
+    width               : 16px !important;
+    height              : 16px !important;
+}
+
+.km_smallbar .km_icontd_delete {
+    background-position : 0 -479px !important;
+    width               : 16px !important;
+    height              : 16px !important;
+}
+
+.change_easy_page {
+    margin : 8px 10px 0 5px !important;
+    border : 1px solid #7c7c7c;
+    height : 30px
+}
+
+.km_easy_text {
+    border        : 0px !important;
+    color         : #999999 !important;
+    padding       : 5px 0 0 5px !important;
+    width         : 35px !important;
+    margin-bottom : 0px !important;
+    display       : inline-block !important;
+	background-color: transparent;
+}
+
+.km_iconi_enter {
+    background-image    : url('img/easy_sprite.png') !important;
+    background-color    : transparent !important;
+    border              : 0 solid #FFFFFF !important;
+    cursor              : pointer !important;
+    margin              : 4px !important;
+    text-indent         : -300px !important;
+    vertical-align      : middle !important;
+    background-position : -166px -48px !important;
+    width               : 13px !important;
+    height              : 15px !important;
+}
+
+#km_server_link {
+    padding-top : 10px !important;
+}
+
+.km_mainmenu {
+    background : none !important
+}
+
+.km_mainmenu ul {
+    margin-top : 0
+}
+
+.km_mainmenu li {
+    background    : none !important;
+    border-top    : 1px solid #d9d9d9;
+    border-bottom : 1px solid #d9d9d9;
+    border-right  : 1px solid #d9d9d9
+}
+
+.km_mainmenu li:first-child {
+    border-left : 1px solid #d9d9d9
+}
+
+.km_item_block {
+    background : none !important;
+    padding    : 8px 8px 7px 8px !important;
+    color      : #c2c2c2 !important
+}
+
+.km_item_block a {
+    color : #c2c2c2 !important
+}
+
+.km_item_href {
+    overflow            : hidden;
+    height              : 27px;
+    padding             : 0 !important;
+    background-image    : url('img/easy_sprite.png') !important;
+    background-position : bottom right
+}
+
+.km_item_href {
+    color : #c2c2c2 !important
+}
+
+.km_item_n .km_item_explorer {
+    width               : 44px;
+    background-position : -154px -89px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+}
+
+.km_item_a .km_item_explorer {
+    width               : 44px;
+    background-position : -154px -423px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    background-color    : #dcdcdc
+}
+
+.km_item_n .km_item_menu {
+    background-position : -151px -196px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+}
+
+.km_item_a .km_item_menu {
+    background-position : -237px -3px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+    background-color    : #dcdcdc
+}
+
+.km_item_n .km_item_page {
+    background-position : -151px -141px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+}
+
+.km_item_a .km_item_page {
+    background-position : -151px -472px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+    background-color    : #dcdcdc
+}
+
+.km_item_n .km_item_ftp {
+    background-position : -154px -254px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+}
+
+.km_item_a .km_item_ftp {
+    background-position : -239px -43px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+    background-color    : #dcdcdc
+}
+
+.km_item_administration {
+    background-position : -154px -315px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+}
+
+.km_item_plugins {
+    background-position : -156px -371px;
+    font-size           : 0;
+    line-height         : 0;
+    display             : block;
+    width               : 44px;
+}
+
+.km_smallbar {
+    background       : none !important;
+    background-color : #f1f1f1 !important;
+    padding          : 2px 2px;
+    border           : 1px solid #e0e0e0;
+}
+
+.km_section_btn {
+    background : none !important
+}
+
+.km_section_btn li {
+    padding : 0 !important
+}
+
+.km_section_btn .km_iconi_new_m {
+    background-position : -69px 0 !important;
+    width               : 26px !important;
+    height              : 26px !important;
+}
+
+.km_section_btn .km_iconi_paste_m {
+    background-position : -69px -88px !important;
+    width               : 26px !important;
+    height              : 26px !important;
+}
+
+#km_pastediv, #km_bookmarks_div, #km_chpass_div, #km_chlang_div, #km_chserver_div, #km_plugins_div {
+    border           : 1px solid #000;
+    background-color : #fff;
+    position         : absolute;
+    width            : 400px;
+    left             : 20px;
+    top              : 20px;
+}
+
+#km_pastediv {
+    display : none;
+    z-index : 99;
+}
+
+.km_schowek_header {
+    overflow            : hidden;
+    position            : relative;
+    background-image    : url('img/multischowek/header.jpg');
+    background-repeat   : repeat-x;
+    background-position : top;
+    font-size           : 18px;
+    color               : #7f7f7f;
+    padding             : 10px;
+}
+
+.km_schowek_header img {
+    vertical-align : middle;
+    position       : absolute;
+    right          : 10px;
+    top            : 10px;
+    cursor         : pointer;
+}
+
+.km_schowek_items {
+    background-color : #D1D1D1;
+    padding          : 3px;
+}
+
+.km_schowek_items ul {
+    height           : 200px;
+    overflow         : auto;
+    margin           : 0;
+    padding          : 0;
+    display          : block;
+    background-color : #fff;
+}
+
+.km_schowek_items li {
+    background-image    : url('img/multischowek/item.jpg');
+    background-color    : #fff;
+    background-position : bottom;
+    padding             : 0px;
+    margin              : 0;
+    overflow            : hidden;
+}
+
+.km_schowek_items a {
+    background-image    : url('img/multischowek/icon.gif');
+    background-position : 5px 8px;
+    background-repeat   : no-repeat;
+    padding             : 10px 5px 10px 25px;
+    display             : block;
+    color               : #818181;
+    text-decoration     : none;
+}
+
+#km_chpass_div .km_schowek_items label, #km_chpass_div .km_schowek_items input {
+    float        : left;
+    width        : 160px;
+    margin-right : 10px;
+    font-size    : 12px;
+}
+
+#km_chpass_div .km_schowek_items li {
+    padding : 10px 5px;
+}
+
+#km_chpass_div .km_schowek_items ul {
+    height : 124px;
+}
+
+#km_chpass_div .km_schowek_buttons {
+    background-color : #e4e4e4;
+    padding          : 12px;
+}
+
+#km_chlang_div ul {
+    height : 150px !important;
+}
+
+#km_chlang_div .km_lang_icon {
+    width   : 100% !important;
+    padding : 15px 5px 15px 35px !important;
+    height  : auto !important;
+}
+
+#km_chlang_div .km_schowek_items a {
+    padding         : 6px 5px 10px 25px;
+    font-size       : 14px !important;
+    display         : block;
+    color           : #818181;
+    text-decoration : none;
+}
+
+#km_chserver_div .km_schowek_items a {
+    background-image    : url('img/multischowek/server.png');
+    background-position : 5px 8px;
+    background-repeat   : no-repeat;
+    padding             : 6px 5px 10px 25px;
+    font-size           : 14px !important;
+    display             : block;
+    color               : #818181;
+    text-decoration     : none;
+}
+
+#km_plugins_div .km_schowek_items a {
+    padding         : 10px 5px 10px 35px;
+    font-size       : 14px !important;
+    display         : block;
+    color           : #818181;
+    text-decoration : none;
+}
+
+.km_bookmark_add {
+    background-image    : url('img/multischowek/add.png') !important;
+    background-position : left;
+    background-repeat   : no-repeat;
+}
+
+.km_bookmark_delete {
+    background-image    : url('img/multischowek/delete.png') !important;
+    background-position : left;
+    background-repeat   : no-repeat;
+}
+
+.km_prompt {
+    border           : 1px solid #000;
+    background-color : #fff;
+    position         : absolute;
+    width            : 400px;
+    left             : 20px;
+    top              : 20px;
+    z-index          : 101;
+}
+
+.km_prompt .km_schowek_header {
+    overflow            : hidden;
+    background-image    : url('img/multischowek/header.jpg');
+    background-repeat   : repeat-x;
+    background-position : top;
+    font-size           : 18px;
+    color               : #7f7f7f;
+    padding             : 10px;
+}
+
+.km_prompt .km_schowek_items {
+    background-color : #D1D1D1;
+    padding          : 3px;
+}
+
+.km_prompt .km_schowek_items ul {
+    height           : 200px;
+    overflow         : auto;
+    margin           : 0;
+    padding          : 0;
+    display          : block;
+    background-color : #fff;
+}
+
+.km_prompt li {
+    background-image    : url('img/multischowek/item.jpg');
+    background-repeat   : repeat-x;
+    background-color    : #fff;
+    background-position : bottom;
+    padding             : 0px;
+    margin              : 0;
+    overflow            : hidden;
+}
+
+.km_prompt .km_schowek_items li {
+    padding : 10px 5px;
+}
+
+.km_prompt .km_schowek_items ul {
+    height : 42px;
+}
+
+.km_prompt .km_schowek_buttons {
+    background-color : #e4e4e4;
+    padding          : 12px;
+}
+
+.km_prompt .km_schowek_header h1 {
+    float : left;
+    width : auto;
+}
+
+.km_prompt .km_close {
+    float           : right;
+    width           : 21px;
+    height          : 21px;
+    font-size       : 20px;
+    color           : #000;
+    font-weight     : bold;
+    text-decoration : none;
+    display         : block;
+}
+
+.km_jqcontextmenu, .km_jqcontextmenu ul {
+    z-index            : 101;
+    font               : normal 11px Verdana;
+    margin             : 0;
+    padding            : 0;
+    position           : absolute;
+    left               : 0;
+    top                : 0;
+    list-style-type    : none;
+    background-color   : #fff;
+    border             : 1px solid black;
+    visibility         : hidden;
+    display            : none;
+    box-shadow         : 3px 3px 8px #818181;
+    -webkit-box-shadow : 3px 3px 8px #818181;
+    -moz-box-shadow    : 3px 3px 8px #818181;
+}
+
+.km_jqcontextmenu li {
+    position            : relative;
+    list-style-image    : none;
+    background-image    : url('img/km_contextmenu_bg.png');
+    background-repeat   : repeat-y;
+    background-position : left;
+    margin-bottom       : 0;
+}
+
+.km_jqcontextmenu li.km_sep {
+    border-top : 1px solid #000;
+}
+
+.km_jqcontextmenu .km_checked,
+#km_share_role_select .km_checked {
+    background-position : -505px -1995px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu .km_contenxtmenu_api {
+    background-position : -506px -2046px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu .km_contenxtmenu_typ {
+    background-position : -505px -2123px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu .km_contenxtmenu_lvl {
+    background-position : -506px -2170px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_copy a {
+    background-position : -505px -2283px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_edit span {
+    background-position : 7px -40px;
+    display: inline-block;
+    width: 30px;
+    height: 19px;
+    background-repeat: no-repeat;
+    background-image    : url('img/easy_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_edit a {
+    padding: 0px 5px 7px 5px;
+    width: 200px;
+    display: inline-block;
+}
+
+
+.km_jqcontextmenu #km_contenxtmenu_menu_insert a {
+    background-position : -506px -2207px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_insert_exist a {
+    background-position : -506px -2207px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_off a {
+    background-position : -506px -2243px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_mask a {
+    background-position : -508px -2083px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_delete a {
+    background-position : -156px -2151px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_next a {
+    background-position : -155px -1889px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_more a {
+    background-position : -153px -2185px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu .km_contenxtmenu_menu_visibility_off {
+    background-position : -508px -2344px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu .km_contenxtmenu_menu_visibility_on {
+    background-position : -508px -2315px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu .km_contenxtmenu_menu_visibility_d {
+    background-position : -153px -2218px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_up a {
+    background-position : -156px -2086px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_down a {
+    background-position : -156px -2118px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_jqcontextmenu #km_contenxtmenu_menu_menu a {
+    background-position : -157px -2050px;
+    background-image    : url('img/km_sprite.png');
+}
+
+.km_iconi_arr_down {
+    background-position : 0 -97px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_iconi_arr_up {
+    background-position : 0 -343px;
+    width               : 12px;
+    height              : 12px;
+}
+
+.km_jqcontextmenu li a {
+    display         : block;
+    width           : 250px;
+    color           : black;
+    text-decoration : none;
+    padding         : 7px 5px 7px 35px;
+}
+
+* html .km_jqcontextmenu li {
+    display : inline-block;
+    width   : 170px;
+}
+
+.km_jqcontextmenu li:hover {
+    background-color : #e3f9dd;
+    background-image : url('img/km_contextmenu_bg2.png');
+}
+
+.km_rightarrowclass {
+    position            : absolute;
+    background-position : -338px -2000px;
+    background-image    : url('img/km_sprite.png');
+    top                 : 6px;
+    right               : 5px;
+    width               : 7px;
+    height              : 13px;
+    display             : block;
+}
+
+.license_secname {
+    font-family      : Arial, Helvetica, sans-serif;
+    margin           : 0 auto 0 auto;
+    width            : 980px;
+    background-color : #494949;
+    color            : #FFFFFF;
+    font-size        : 12px;
+    overflow         : hidden;
+    padding          : 10px;
+    text-align       : left;
+}
+
+.license_box {
+    text-align       : left;
+    font-family      : Arial, Helvetica, sans-serif;
+    font-size        : 12px;
+    padding          : 10px;
+    height           : 300px;
+    overflow         : auto;
+    border           : 1px solid #D3D3D3;
+    background-color : #ffffff;
+    margin           : 0 auto 0 auto;
+    width            : 980px
+}
+
+.license_akcept {
+    margin      : 0 auto 0 auto;
+    width       : 980px;
+    font-family : Arial, Helvetica, sans-serif;
+    font-size   : 12px;
+    text-align  : left;
+    padding     : 10px 0;
+    overflow    : hidden
+}
+
+.license_akcept .btn1 {
+    width : 480px;
+    float : left;
+}
+
+.license_akcept .btn2 {
+    width      : 480px;
+    float      : right;
+    text-align : right
+}
+
+.license_secname_ok {
+    font-family      : Arial, Helvetica, sans-serif;
+    margin           : 0 auto 0 auto;
+    width            : 580px;
+    background-color : #494949;
+    color            : #FFFFFF;
+    font-size        : 12px;
+    overflow         : hidden;
+    padding          : 10px;
+    text-align       : left;
+}
+
+.license_box_ok {
+    text-align       : left;
+    font-family      : Arial, Helvetica, sans-serif;
+    font-size        : 12px;
+    padding          : 10px;
+    height           : 200px;
+    overflow         : auto;
+    border           : 1px solid #D3D3D3;
+    background-color : #ffffff;
+    margin           : 0 auto 0 auto;
+    width            : 580px
+}
+
+.license_akcept_ok {
+    margin      : 0 auto 0 auto;
+    width       : 580px;
+    font-family : Arial, Helvetica, sans-serif;
+    font-size   : 12px;
+    text-align  : left;
+    padding     : 10px 0;
+    overflow    : hidden
+}
+
+.license_akcept_ok .btn1 {
+    width : 280px;
+    float : left;
+}
+
+.license_akcept_ok .btn2 {
+    width      : 280px;
+    float      : right;
+    text-align : right
+}
+
+.km_nheader {
+    /*position            : relative;*/
+    background-repeat   : repeat-x;
+    background-position : bottom center;
+    background-color    : #f1f1f1;
+}
+
+.km_nheader_left {
+    float : left;
+}
+
+.km_nheader_left .km_ddmenu {
+    margin : 0 0 0 10px;
+}
+
+.km_nheader_right {
+    float : right;
+}
+
+
+/*** ESSENTIAL STYLES ***/
+.km_sf-menu, .km_sf-menu * {
+    margin     : 0;
+    padding    : 0;
+    list-style : none;
+}
+
+.km_sf-menu {
+    line-height : 1.0;
+}
+
+.km_sf-menu ul {
+    position           : absolute;
+    top                : -999em;
+    width              : 220px;
+    box-sizing         : content-box;
+    -moz-box-sizing    : content-box;
+    -webkit-box-sizing : content-box;
+}
+
+.km_sf-menu ul li {
+    width : 100%;
+}
+
+.km_sf-menu li:hover {
+    visibility : inherit; /* fixes IE7 'sticky bug' */
+}
+
+.km_sf-menu li {
+    float    : left;
+    position : relative;
+    z-index  : 102;
+}
+
+.km_sf-menu li li {
+    z-index : 99;
+}
+
+.km_sf-menu a {
+    display  : block;
+    position : relative;
+}
+
+.km_sf-menu li:hover ul, .km_sf-menu li.sfHover ul {
+    left    : 0;
+    top     : 29px; /* match top ul list item height */
+    z-index : 99;
+}
+
+ul.km_sf-menu li:hover li ul, ul.km_sf-menu li.sfHover li ul {
+    top : -999em;
+}
+
+ul.km_sf-menu li li:hover ul, ul.km_sf-menu li li.sfHover ul {
+    left : 219px; /* match ul width */
+    top  : 0;
+}
+
+ul.km_sf-menu li li:hover li ul, ul.km_sf-menu li li.sfHover li ul {
+    top : -999em;
+}
+
+ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
+    left : 219px; /* match ul width */
+    top  : 0;
+}
+
+/*** ESSENTIAL STYLES ***/
+.sf-menu, .sf-menu * {
+    margin     : 0;
+    padding    : 0;
+    list-style : none;
+}
+
+.sf-menu li {
+    position : relative;
+
+}
+
+.sf-menu ul {
+    position : absolute;
+    display  : none;
+    top      : 100%;
+    left     : 0;
+    z-index  : 9999;
+}
+
+.sf-menu > li {
+    float : left;
+}
+
+.sf-menu li:hover > ul,
+.sf-menu li.sfHover > ul {
+    display : block;
+}
+
+.sf-menu a {
+    display  : block;
+    position : relative;
+}
+
+.sf-menu ul ul {
+    top  : 0;
+    left : 100%;
+}
+
+/*** DEMO SKIN ***/
+.sf-menu {
+    float : left;
+}
+
+.sf-menu ul {
+    box-shadow : 2px 2px 6px rgba(0, 0, 0, .2);
+    min-width  : 12em;
+}
+
+.sf-menu a {
+    padding         : 10px 15px;
+    text-decoration : none;
+    zoom            : 1; /* IE7 */
+}
+
+.sf-menu li {
+    background         : #f1f1f1;
+    white-space        : nowrap;
+    -webkit-transition : background .2s;
+    transition         : background .2s;
+}
+
+.sf-menu ul li {
+    background : #fff;
+}
+
+.sf-menu ul ul li {
+    background : #fff;
+}
+
+.sf-menu li:hover,
+.sf-menu li.sfHover {
+    background         : #ccc;
+    -webkit-transition : none;
+    transition         : none;
+}
+
+/*** arrows (for all except IE7) **/
+.sf-arrows .sf-with-ul {
+    padding-right : 30px;
+}
+
+/* styling for both css and generated arrows */
+.sf-arrows .sf-with-ul:after {
+    content          : '';
+    position         : absolute;
+    top              : 50%;
+    right            : 15px;
+    margin-top       : -3px;
+    height           : 0;
+    width            : 0;
+    /*order of following 3 rules important for fallbacks to work */
+    border           : 5px solid transparent;
+    border-top-color : rgba(255, 255, 255, .5);
+}
+
+.sf-arrows > li > .sf-with-ul:focus:after,
+.sf-arrows > li:hover > .sf-with-ul:after,
+.sf-arrows > .sfHover > .sf-with-ul:after {
+    border-top-color : white; /* IE8 fallback colour */
+}
+
+/* styling for right-facing arrows */
+.sf-arrows ul .sf-with-ul:after {
+    margin-top        : -5px;
+    margin-right      : -3px;
+    border-color      : transparent;
+    border-left-color : #000;
+}
+
+.sf-arrows ul li > .sf-with-ul:focus:after,
+.sf-arrows ul li:hover > .sf-with-ul:after,
+.sf-arrows ul .sfHover > .sf-with-ul:after {
+    border-left-color : white;
+}
+
+.sf-menu a, .sf-menu a:hover {
+    color  : #000;
+    cursor : pointer;
+}
+
+.sf-menu > li {
+
+}
+
+.sf-menu > li > a.sf-with-ul {
+    padding-right : 15px;
+}
+
+.sf-menu > li > a.sf-with-ul:after {
+    border : 0;
+}
+
+.sf-menu ul {
+    border : 1px solid #ccc;
+}
+
+.sf-menu ul li {
+    padding : 0 0 0 10px;
+}
+
+.sf-menu ul a {
+    background-repeat   : no-repeat;
+    background-position : 0 50%;
+    padding-left        : 25px;
+    color               : #000;
+    font-size           : 12px;
+}
+
+.sf-disable a {
+    opacity : .5;
+
+}
+
+.sf-menu .sf-no-icons > li > a {
+    padding-left : 0;
+}
+
+.sf-menu .sf-sep {
+    border           : 0;
+    padding          : 0;
+    margin           : 0;
+    background-color : #ebebeb;
+    width            : 100%;
+    height           : 1px;
+}
+
+#km_ddmenu_editpage {
+    background-image : url('img/ddmenu/edit.png');
+}
+
+#km_ddmenu_addpage {
+    background-image : url('img/ddmenu/addpage.png');
+}
+
+#km_ddmenu_delpage {
+    background-image : url('img/ddmenu/delpage.png');
+}
+
+#km_ddmenu_wlasciwosci {
+    background-image : url('img/ddmenu/wlasciwosci.png');
+}
+
+#km_ddmenu_explorer {
+    background-image : url('img/ddmenu/eksplorator.png');
+}
+
+#km_ddmenu_menus {
+    background-image : url('img/ddmenu/menu.png');
+}
+
+#km_ddmenu_class {
+    background-image : url('img/ddmenu/styl.png');
+}
+
+#km_ddmenu_publikacja {
+    background-image : url('img/ddmenu/publikacja.png');
+}
+
+#km_ddmenu_plugins {
+    background-image : url('img/ddmenu/plugins.png');
+}
+
+#km_ddmenu_rozliczenia {
+    background-image : url('img/ddmenu/rozliczenia.png');
+}
+
+#km_ddmenu_raport {
+    background-image : url('img/ddmenu/raport.png');
+}
+
+#km_ddmenu_users {
+    background-image : url('img/ddmenu/users.png');
+}
+
+#km_ddmenu_grupy {
+    background-image : url('img/ddmenu/grupy.png');
+}
+
+#km_ddmenu_serwisy {
+    background-image : url('img/ddmenu/serwisy.png');
+}
+
+#km_ddmenu_kontakt {
+     background-image : url('img/ddmenu/kontakt.png');
+}
+
+#km_ddmenu_instrukcja {
+    background-image : url('img/ddmenu/instrukcja.png');
+}
+
+#km_ddmenu_zatwierdzanie {
+    background-image : url('img/ddmenu/zatwierdzanie.png');
+}
+
+#km_ddmenu_naglowek {
+    background-image : url('img/ddmenu/naglowek.png');
+}
+
+#km_ddmenu_podglad {
+    background-image : url('img/ddmenu/podglad.png');
+}
+
+#km_ddmenu_linijka {
+    background-image : url('img/ddmenu/linijka.png');
+}
+
+#km_ddmenu_wizard {
+    background-image : url('img/ddmenu/wizard.png');
+}
+
+#km_ddmenu_trash {
+    background-image : url('img/ddmenu/kosz2.png');
+}
+
+#km_ddmenu_google {
+    background-image : url('img/ddmenu/google.png');
+}
+
+.km_ddmenu a.debugger {
+    background-image : url('img/ddmenu/debug.png');
+}
+
+#km_ddmenu_webmaster {
+    background-image : url('img/ddmenu/webmaster.png');
+}
+
+.km_gallery_button,
+.km_jstree_button,
+.km_datetimepicker_button,
+.cke_reset_all .km_gallery_button {
+    width             : 24px;
+    height            : 24px;
+    background-repeat : no-repeat;
+    display           : inline-block;
+}
+
+.km_gallery_button,
+.cke_reset_all .km_gallery_button {
+    background-image : url(img/i_image_n.gif);
+	background-image: url('img/easy_sprite.png') !important;
+	background-position: -69px -421px !important;
+	width: 31px !important;
+	height: 29px !important;
+	margin-left: 5px;
+}
+
+.km_gallery_button:hover,
+.cke_reset_all .km_gallery_button:hover {
+    background-image : url(img/i_image_a.gif);
+}
+
+.km_gallery_button_3 {
+    background-image : url(img/i_file_n.gif);
+}
+
+.km_gallery_button_3:hover {
+    background-image : url(img/i_file_a.gif);
+}
+
+.km_gallery_button_4 {
+    background-image : url(img/i_file_n.gif);
+}
+
+.km_gallery_button_4:hover {
+    background-image : url(img/i_file_a.gif);
+}
+
+.km_datetimepicker_button {
+    background-image : url(img/i_calendar.png);
+}
+
+.cke_reset_all .km_gallery_button {
+    vertical-align : middle;
+}
+
+/*.km_gallery_button {
+    background-image : url(img/i_image_n.gif);
+}
+
+.km_gallery_button:hover {
+    background-image : url(img/i_image_a.gif);
+}*/
+
+.km_jstree_button {
+    background-image : url(img/i_tree_n.gif);
+}
+
+.km_jstree_button:hover {
+    background-image : url(img/i_tree_a.gif);
+}
+
+.ui-autocomplete {
+    z-index : 101 !important;
+}
+
+.km_dialog .km_fbtn_action,
+.km_dialog .km_fbtn_normal {
+
+}
+
+.km_dialog .ui-dialog-titlebar {
+    min-height : 19px;
+}
+
+.km_dialog_block > * {
+    vertical-align : middle;
+}
+
+.km_dialog_block label {
+    text-align : left;
+    margin     : 0 0 10px 0;
+}
+
+.km_dialog_block input {
+
+}
+
+.km_dialog_block input[type="text"] {
+    width : 100%;
+}
+
+.km_setup_dialog {
+    display : none;
+}
+
+.km_setup_dialog .km_iconi_arr_right {
+    display : inline-block;
+}
+
+#km_setup_properties_dialog ul {
+    list-style : none;
+    margin     : 0;
+    padding    : 0;
+}
+
+#km_setup_properties_dialog ul li {
+    margin  : 0;
+    padding : 10px 5px;
+}
+
+#km_setup_properties_dialog ul li label {
+    width : 100px;
+}
+
+#km_setup_properties_dialog ul li input, #km_setup_properties_dialog ul li select {
+    margin-bottom : 0;
+}
+
+.km_dialog li > * {
+    vertical-align : middle !important;
+    display        : inline-block !important;
+}
+
+.km_error_1 {
+	background-color: #f2dede;
+	color: #a94442;
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid #ebccd1;
+	border-radius: 4px;
+	width:100%;
+	font-size:14px;
+}
+
+.km_error_1, .km_error_1 span {
+    color       : #a94442;
+    font-weight : normal;
+}
+
+.km_error_1 a {
+	font-weight:normal;
+	color: #a94442;
+}
+
+.km_error_1 a:hover {
+	color: #a94442;
+	text-decoration:underline;
+}
+
+.km_error_1 span {
+	font-size:16px;
+	margin-right:10px;
+}
+
+.km_error_2 {
+	background-color: #fcf8e3;
+	color: #8a6d3b;
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid #faebcc;
+	border-radius: 4px;
+	width:100%;
+	font-size:14px;
+}
+
+.km_error_2, .km_error_2 span {
+    color       : #8a6d3b;
+    font-weight : normal;
+}
+
+.km_error_2 a {
+	font-weight:normal;
+	color: #8a6d3b;
+}
+
+.km_error_2 a:hover {
+	color: #8a6d3b;
+	text-decoration:underline;
+}
+
+.km_error_2 span {
+	font-size:16px;
+	margin-right:10px;
+}
+
+.km_zakladka .km_fbtn a {
+    margin-right : 0;
+    margin-left  : 16px;
+}
+
+.km_blue_button,
+.km_red_button,
+.km_gray_button,
+.ui-widget-content .km_blue_button {
+    cursor           : pointer;
+    border           : 1px solid #3079ED;
+    text-transform   : uppercase;
+    color            : #fff;
+    font-size        : 12px;
+    padding          : 0 20px;
+    background-color : #4D90FE;
+    height           : 30px;
+    line-height      : 30px;
+    text-decoration  : none;
+    display          : inline-block;
+    text-align       : center;
+}
+
+.km_red_button {
+    background-color : #dd4b39;
+    border           : 1px solid #dd4b39;
+}
+
+.km_gray_button {
+    background-color : #b0b0b0;
+    border           : 1px solid #808080;
+}
+
+#km_setup_http_url,
+#km_setup_analytics {
+    width : 340px;
+}
+
+#km_setup_analytics_list {
+    width : 100%;
+}
+
+.km_toolbar ul li.km_toolbar_toggle {
+    display : none;
+}
+
+#km_toolbar_toggle {
+    display       : block;
+    width         : 0px;
+    height        : 0px;
+    border-top    : 10px solid transparent;
+    border-bottom : 10px solid transparent;
+    border-left   : 10px solid #000;
+    border-right  : 0;
+    margin-top    : 5px;
+}
+
+#km_toolbar_toggle.toggle {
+    border-left  : 0;
+    border-right : 10px solid #000;
+}
+
+#km_files {
+    position  : relative;
+    width     : 800px;
+    margin    : 20px auto 0;
+    color     : #444;
+    font-size : 13px;
+}
+
+#km_files_left,
+#km_files_right {
+    position : absolute;
+    top      : 0;
+    height   : 100%;
+}
+
+#km_files_left {
+    left         : 0;
+    width        : 200px;
+    border       : 1px solid #e5e5e5;
+    border-right : 0;
+}
+
+#km_files_right {
+    left  : 200px;
+    width : 600px;
+}
+
+#km_files_container {
+    border : 1px solid #e5e5e5;
+}
+
+#km_files_buttons {
+    border     : 1px solid #e5e5e5;
+    border-top : 0;
+    padding    : 20px 10px;
+}
+
+#km_files_left ul {
+    list-style : none;
+    margin     : 20px 0;
+    padding    : 0;
+}
+
+#km_files_left ul li {
+    padding     : 10px 0 10px 10px;
+    border-left : 5px solid transparent;
+    cursor      : pointer;
+}
+
+#km_files_left ul li:hover {
+    background-color : #eee;
+}
+
+#km_files_left ul li.active {
+    font-weight : bold;
+    color       : #dd4b39;
+    border-left : 5px solid #dd4b39;
+}
+
+#km_files_left ul li a {
+    text-decoration : none;
+    color           : #444;
+}
+
+#km_files_container > div {
+    display  : none;
+    position : relative;
+}
+
+#km_files_list table {
+    width           : 100%;
+    height          : 386px;
+    display         : block;
+    border-collapse : collapse;
+    overflow-y      : auto;
+}
+
+#km_files_list table thead th,
+#km_files_list table tbody tr td {
+    text-align : left;
+    padding    : 10px 5px;
+}
+
+#km_files_list table tbody tr td {
+    cursor        : pointer;
+    border-top    : 1px solid #e5e5e5;
+    border-bottom : 1px solid #e5e5e5;
+}
+
+#km_files_list table tbody td.td_1 {
+    width : 5%;
+}
+
+#km_files_list table tbody td.td_2 {
+    width : 5%;
+}
+
+#km_files_list table tbody td.td_3 {
+    width : 60%;
+}
+
+#km_files_list table tbody td.td_4 {
+    width : 30%;
+}
+
+#km_files_list table tbody tr {
+    transition         : background-color 0.3s linear;
+    -webkit-transition : background-color 0.3s linear;
+}
+
+#km_files_list table tbody tr.active {
+    background-color : #ffc;
+}
+
+#km_files_list table tbody td.td_2 span {
+    width               : 16px;
+    height              : 16px;
+    display             : block;
+    background-repeat   : no-repeat;
+    background-position : 50%;
+}
+
+#km_files_list table tbody td.td_2 img {
+    display : none;
+    width   : 100px;
+}
+
+.km_file_image {
+    background-image : url(img/g_image.png);
+}
+
+.km_file_directory {
+    background-image : url(img/g_directory.png);
+}
+
+#km_files_list table.tiles thead {
+    display : none;
+}
+
+#km_files_list table.tiles tbody tr {
+    float    : left;
+    width    : 130px;
+    position : relative;
+    margin   : 0 10px 10px 0;
+    border   : 2px solid transparent;
+}
+
+#km_files_list table.tiles tbody tr.active {
+    border : 2px solid #4d90fe
+}
+
+#km_files_list table.tiles tbody tr td {
+    display : block;
+    width   : 120px;
+    border  : 0;
+}
+
+#km_files_list table.tiles tbody tr td.td_1 {
+    position         : absolute;
+    top              : 0;
+    left             : 0;
+    display          : none;
+    background-color : #fff;
+    width            : auto;
+    padding          : 2px;
+}
+
+#km_files_list table.tiles tbody tr:hover td.td_1,
+#km_files_list table.tiles tbody tr.active td.td_1 {
+    display : block;
+}
+
+#km_files_list table.tiles tbody tr.active td.td_1 {
+    background-color : #ffc;
+}
+
+#km_files_list table.tiles tbody tr td.td_2 {
+    height   : 80px;
+    overflow : hidden;
+}
+
+#km_files_list table.tiles tbody tr td.td_3 {
+    overflow   : hidden;
+    text-align : center;
+    width      : 110px;
+}
+
+#km_files_list table.tiles tbody tr td.td_4 {
+    display : none;
+}
+
+#km_files_list table.tiles tbody tr td.td_2 img {
+    display : block;
+    margin  : 0 auto;
+}
+
+#km_files_list table.tiles tbody tr td.td_2 span {
+    display : none;
+}
+
+#km_files_list table.tiles tbody tr td.td_2 span.km_file_directory {
+    display : block;
+    margin  : 0 auto;
+    height  : 100%;
+}
+
+#km_files_list_top {
+    height        : 40px;
+    line-height   : 40px;
+    border-bottom : 1px solid #e5e5e5;
+    padding       : 0 5px;
+}
+
+#km_files_layout {
+    float      : right;
+    border     : 1px solid #bfbfbf;
+    margin-top : 5px;
+}
+
+#km_files_layout div {
+    background-color : #f5f5f5;
+    padding          : 5px;
+    float            : left;
+    border-left      : 1px solid #bfbfbf;
+}
+
+#km_files_layout div.active {
+    background-color : #eee;
+}
+
+#km_files_layout div:first-child {
+    border-left : 0;
+}
+
+#km_files_layout span {
+    background-image  : url(img/g_picker_sprite.png);
+    background-repeat : no-repeat;
+    width             : 16px;
+    height            : 16px;
+    display           : block;
+}
+
+#km_files_layout_list span {
+    background-position : -332px -681px;
+}
+
+#km_files_layout_tiles span {
+    background-position : -166px -770px;
+}
+
+#km_files_breadcrums {
+    float : left
+}
+
+#km_files_breadcrums span.separator {
+    border-color : transparent transparent transparent #999;
+    border-style : solid;
+    border-width : 4px;
+    margin       : 0 5px 0 8px;
+    width        : 0;
+    height       : 0;
+    line-height  : 0;
+    display      : inline-block;
+    cursor       : default;
+}
+
+#km_files_breadcrums span {
+    color  : #999;
+    cursor : pointer;
+}
+
+#km_files_breadcrums span.last {
+    color : #444;
+}
+
+#km_files_pick {
+    font-weight        : bold;
+    font-size          : 13px;
+    opacity            : 0.5;
+    transition         : opacity 0.3s;
+    -webkit-transition : opacity 0.3s linear;
+}
+
+#km_files_pick.active {
+    opacity : 1;
+}
+
+#km_files_url > div {
+    padding : 10px;
+}
+
+#km_files_url h2 {
+    font-size : 13px;
+    margin    : 0;
+    padding   : 0;
+}
+
+#km_files_url .km_input {
+    margin : 10px 0;
+    width  : 570px;
+}
+
+#km_files_url img {
+    max-width  : 577px;
+    max-height : 220px;
+    margin     : 0 auto;
+    display    : block;
+}
+
+#km_files_url .noimage {
+    display : none;
+    color   : #f00;
+}
+
+#km_files_upload {
+
+}
+
+#km_files_upload > div {
+    padding : 30px;
+}
+
+#km_files_upload_errors {
+    margin      : 0;
+    padding     : 0;
+    list-style  : square;
+    margin-top  : 30px;
+    color       : #f00;
+    margin-left : 30px;
+    font-size   : 12px;
+}
+
+#km_files_upload_errors li {
+    line-height : 17px;
+}
+
+#km_files_upload_dropzone {
+    border   : 4px dashed #ddd;
+    overflow : hidden;
+}
+
+#km_files_upload_dropzone > div {
+    text-align : center;
+    padding    : 5px 0;
+}
+
+#km_files_upload_info {
+    color      : #ccc;
+    font-size  : 30px;
+    margin-top : 10%;
+}
+
+#km_files_upload_or {
+    color     : #ccc;
+    font-size : 20px;
+}
+
+#km_files_upload_button {
+
+}
+
+#km_files_upload_button a {
+    position    : relative;
+    overflow    : hidden;
+    font-weight : bold;
+    cursor      : pointer;
+    font-size   : 13px;
+}
+
+#km_files_upload_button a input {
+    position : absolute;
+    top      : 0;
+    right    : 0;
+    margin   : 0;
+    opacity  : 0;
+    width    : 100%;
+    height   : 100%;
+}
+
+#km_files_resize_helper {
+    display : inline-block;
+}
+
+#km_files_resize_helper input[type="checkbox"] {
+    margin         : 0;
+    vertical-align : middle;
+}
+
+/* okienko ckeditora */
+
+.in_cke_editor #km_files_buttons[rel='list'] #km_files_pick {
+    visibility : hidden;
+}
+
+.elfinder-toolbar .km_blue_button {
+    line-height  : 26px;
+    height       : 26px;
+    float        : right;
+    margin-right : 5px;
+}
+
+#menu_copy {
+    background-image  : url(img/i_copy_n.gif);
+    background-repeat : no-repeat;
+    width             : 23px;
+    height            : 22px;
+    display           : inline-block;
+}
+
+#menu_copy:hover {
+    background-image : url(img/i_copy_a.gif);
+}
+
+.km_input,
+.edit_box .value input[type="text"],
+.edit_box .value input[type="url"],
+.edit_box .value input[type="email"]
+.edit_box .value textarea,
+.km_dialog_input {
+    border  : 1px solid #c0c0c0;
+    padding : 3px;
+    margin  : 0;
+	margin-right: 5px;
+}
+
+.km_sf-menu a,
+.km_toolbar a {
+    font-size   : 12px;
+    font-family : Arial, Helvetica, sans-serif;
+}
+
+#menu_remove_all {
+    float       : none;
+    margin-left : 0;
+}
+
+.km_slider {
+    width       : 200px;
+    display     : inline-block;
+    margin-left : 10px;
+}
+
+.edit_box .value .jPicker {
+    display     : inline-block;
+    margin-left : 10px;
+}
+
+div.jPicker {
+    border : 1px solid #000;
+}
+
+div.jPicker table.jPicker {
+    border : none;
+}
+
+div.jPicker table.jPicker td[class="Text"] input {
+    height  : 20px;
+    padding : 2px;
+}
+
+div.jPicker table.jPicker td {
+    vertical-align : top;
+}
+
+.km_toolbar ul li {
+    box-sizing         : content-box;
+    -moz-box-sizing    : content-box;
+    -webkit-box-sizing : content-box;
+}
+
+
+
+.km_toolbar .km_label label {
+    margin-bottom : 0;
+}
+
+.km_login_button {
+    float  : right;
+    margin : 10px;
+    width  : 100px;
+}
+
+
+
+#km_setup_analytics_dialog li select {
+    width : 360px;
+}
+
+#km_setup_analytics_dialog li select + a {
+    width : 100px;
+    float : right;
+}
+
+#km_footer {
+    color      : #666;
+    font-style : italic;
+    position   : absolute;
+    bottom     : 0;
+    right      : 0;
+    padding    : 10px;
+}
+
+.km_icon_disabled {
+    opacity : 0.5;
+}
+
+/* kameleon UI fonts */
+.km_nheader, .km_toolbar, .km_dialog, #km_dropmenu {
+    font-family : Arial, Helvetica, Sans-Serif;
+    font-size   : 13px;
+}
+
+.km_dialog .ui-widget-header {
+    font-size : 14px;
+}
+
+.km_dialog.ui-dialog .ui-widget-content {
+	/*padding: .3em 1em .4em;*/
+}
+
+.km_dialog.ui-dialog .ui-widget-content .km_dialog_content {
+
+}
+
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+border-bottom-right-radius: 0px;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+border-bottom-left-radius: 0px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+border-top-right-radius: 0px;
+}
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+border-top-left-radius: 0px;
+}
+
+
+/*#jstree_dialog {
+    width : 890px !important;
+}
+
+#files_dialog {
+    width : 890px !important;
+}
+
+#km_setup_properties_dialog {
+    width : 590px !important;
+}
+
+#km_share_dialog {
+    width : 590px !important;
+}*/
+
+#km_checkHF {
+    display : none;
+}
+
+#km_check_hf {
+    width : 150px;
+}
+
+#edit_submenu {
+    /*display     : inline-block;*/
+    display     : none;
+    margin-left : 10px;
+}
+
+.km_translate {
+    display : inline-block;
+    border  : 1px dotted red;
+}
+
+.km_nopage .km_blue_button {
+    display       : inline-block;
+    margin-left   : 160px;
+    margin-top    : 10px;
+    position      : relative;
+    padding-right : 30px;
+    width         : 100px;
+}
+
+.km_nopage .km_blue_button .km_arrow_right {
+    width        : 0;
+    height       : 0;
+    border-style : solid;
+    border-width : 8px 0 8px 16px;
+    border-color : transparent transparent transparent #ffffff;
+    display      : block;
+    position     : absolute;
+    top          : 7px;
+    right        : 5px;
+}
+
+.km_nopage .km_blue_button ul {
+    position         : absolute;
+    background-color : #fff;
+    color            : #000;
+    list-style       : none;
+    padding          : 0;
+    margin           : 0;
+    border           : 1px solid #ddd;
+    top              : -1px;
+    left             : 99px; 
+    display          : none;
+}
+
+.km_nopage .km_blue_button ul li {
+    padding : 1px 20px;
+}
+
+.km_nopage .km_blue_button ul li:hover {
+    background-color : #ddd;
+}
+
+.km_nopage .km_blue_button:hover ul {
+    display : block;
+}
+
+.km_nopage .km_blue_button ul li a {
+    color           : #000;
+    text-decoration : none;
+}
+
+#km_translate_form {
+    border  : 1px dotted red;
+    padding : 5px;
+}
+
+#km_translate_lang, #km_translate_tool, #km_translate_save {
+    display        : inline-block;
+    vertical-align : middle;
+}
+
+#km_translate_save {
+    height      : 24px;
+    line-height : 24px;
+}
+
+.km_mask {
+    display          : inline-block;
+    border           : 1px dotted yellow;
+    padding          : 0;
+    margin           : 0;
+    opacity          : 0.2;
+    background-color : #fff;
+    color            : #000;
+}
+
+
+
+.km_section_prompt_over {
+
+}
+
+.km_prompter {
+    z-index  : 1000;
+    position : absolute;
+}
+
+.km_prompter_msg {
+    padding             : 5px 5px 0px 30px;
+    background-image    : url('img/ddmenu/naglowek.png');
+    background-repeat   : no-repeat;
+    background-position : 5px 50%;
+    background-color    : #fdfdfd;
+    border              : 1px solid #f0f0f0;
+    margin              : 10px;
+}
+
+.km_prompter_msg a {
+    color     : #aaa;
+    font-size : 1.2em;
+}
+
+.km_prompter_msg img {
+    width: 19px;
+    height: 18px;
+    float: right;
+    margin-left: 10px;
+}
+
+
+
+
+#proofSend li {
+    list-style : none;
+}
+
+#proofSend textarea {
+    width       : 80%;
+    margin-left : 42px;
+    height      : 200px;
+}
+
+# span[role="status"] {
+    display : none;
+}
+
+#km_checkHF li select {
+    margin-bottom : 0;
+}
+ 
+.km_smallbar ul li a {
+    margin           : 0 !important;
+    padding          : 0 !important;
+    display          : block;
+    float            : none;
+    background-color : transparent !important;
+}
+
+.km_error_div {
+	text-align:center;
+}
+
+.wk-display-none {
+	display:none !important;
+}
+.wk-disabled {
+	display:none;
+}
+
+
+/* SCOPES by KH */
+h1.scopes-title {
+	background-color:#fff;
+	padding:15px;
+	margin:0;
+	border-bottom:1px solid #dedede;
+}
+ul.scopes {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+ul.scopes > li {
+	border-bottom:1px solid #f1f1f1;
+	background:none;
+	padding:10px 0 10px 0;
+	line-height:1.5;
+}
+
+ul.scopes > li:hover {
+	background-color:#f1f1f1;
+}
+
+.scopes-single ul.scopes > li:hover {
+	background-color:#fff !important;
+}
+
+ul.scopes ul {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+	margin-top:30px;
+}
+
+h3.scope-title {
+	margin-top:0px;
+	line-height:32px;
+}
+
+h3.scope-title a {
+	margin-left:15px;
+	color:#999;
+	background-color:#fff;
+	border-color:#fff;
+}
+
+img.scope-title-img {
+	float:left;
+	margin-right:15px;
+}
+
+h3.scope-title {
+	color:#222;
+	font-size:18px;
+}
+
+ul.scopes-buttons {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+ul.scopes-buttons li {
+	padding:0 0 5px 0;
+}
+
+ul.scopes-buttons li > i {
+	font-size:36px;
+	color:#5cb85c;
+	text-align:center;
+	margin:0 auto;
+	width:100%;
+}
+
+ul.scopes-buttons li a.btn {
+	min-width:100%;
+	text-transform:uppercase;
+	text-align:center;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+	font-weight:bold;
+}
+
+ul.scopes li.km_scopes_revoke a.btn{
+	width:100%;
+	text-align:center;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	border-radius: 4px 4px 4px 4px;
+	font-size:24px;
+	padding:15px;
+}
+
+ul.scopes-buttons li a.btn i {
+	padding-left:15px;
+}
+
+.col-md-2 img {
+	margin:0 auto;
+}
+
+@media (max-width: 992px) {
+.col-md-2 img {
+	margin:0 auto;
+}
+
+ul.scopes li.km_scopes_revoke a.btn {
+	font-size:14px;
+}
+}
+/* end SCOPES by KH */
+
+
+/* GALERIA */
+.elfinder-cwd-view-icons .elfinder-cwd-file-tmp .elfinder-cwd-filename.ui-state-hover, 
+.elfinder-cwd table .elfinder-cwd-file-tmp td.ui-state-hover, 
+.elfinder-cwd-file-tmp .elfinder-button-menu .ui-state-hover {
+color: #222 !important;
+}
+
+/* BTNS TOP MNIEJ OKRĄGŁE */
+.km_share_button .btn {
+	-webkit-border-radius: 4px 4px 4px 4px !important;
+	border-radius: 4px 4px 4px 4px !important;
+}
+
+
+/* ================================================= */
+/* ============= NEW CONTENT CSS by KH ============= */
+/* ================================================= */
+.km_newtd.km_new_article,
+.km_newtd.km_new_newsletter
+ {
+	display:block;
+	min-height:150px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+	background:url(images/new-content/article-bg.png);
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:right bottom;
+	position:relative;
+	z-index:9;
+}
+
+.km_newtd.km_new_youtube {
+	display:block;
+	min-height:150px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+	background:url(images/new-content/you-tube-bg.png);
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+.km_newtd.km_new_menu {
+	display:block;
+	min-height:150px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+	background:url(images/new-content/menu-bg.png);
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+.km_newtd.km_new_gallery,
+.km_newtd.km_new_gallery2,
+.km_newtd.km_new_bgslide,
+.km_newtd.km_new_thumbslide,
+.km_newtd.km_new_slideshow {
+	display:block;
+	min-height:150px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+	background:url(images/new-content/default-bg.png);
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+.km_newtd.km_new_facebook {
+	display:block;
+	min-height:150px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+	background:url(images/new-content/facebook-bg.png);
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:right bottom;
+}
+
+.km_newtd.km_new_gmap,
+.km_newtd.km_new_gcal,
+.km_newtd.km_new_gshare,
+.km_newtd.km_new_search,
+.km_newtd.km_new_gtranslate,
+.km_newtd.km_new_form,
+.km_newtd.km_new_gdrive {
+	display:block;
+	min-height:150px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+	background:url(images/new-content/google-bg.png);
+	background-color:#fff;
+	background-repeat:no-repeat;
+	background-position:right bottom;	
+}
+
+.km_newtd.km_new_breadcrumbs,
+.km_newtd.km_new_sitemap,
+.km_newtd.km_new_langs,
+.km_newtd.km_new_anchors{
+	display:block;
+	min-height:190px;
+	border:5px dashed #dedede;
+	margin-top:5px;
+	position:relative;
+}
+
+.km_newtd .box {
+	background:none !important;
+}
+
+.km_newtd.km_new_article h1.title, .km_newtd h1.widget_h, 
+.km_newtd.km_new_article h2.title, .km_newtd h2.widget_h,
+.km_newtd.km_new_article h3.title, .km_newtd h3.widget_h,
+.km_newtd.km_new_article h4.title, .km_newtd h4.widget_h,
+.km_newtd.km_new_article h5.title, .km_newtd h5.widget_h,
+.km_newtd.km_new_article h6.title, .km_newtd h6.widget_h,
+.km_newtd.km_new_article h7.title, .km_newtd h7.widget_h,
+.km_newtd.km_new_article h8.title, .km_newtd h8.widget_h,
+.km_newtd.km_new_article h9.title, .km_newtd h9.widget_h,
+.km_newtd.km_new_article h1,
+.km_newtd.km_new_article h2,
+.km_newtd.km_new_article h3,
+.km_newtd.km_new_article h4,
+.km_newtd.km_new_article h5,
+.km_newtd.km_new_article h6, 
+.km_newtd.km_new_article h7, 
+.km_newtd.km_new_article h8,
+.km_newtd.km_new_article h9 {
+	text-align:center !important;
+	color:#555 !important;
+	text-transform:uppercase !important;
+	margin-top:10px !important;
+	font-size:24px !important;
+	position:relative !important;
+	z-index:1 !important;
+	font-family:Arial, Helvetica, sans-serif !important;
+	border:0px !important;
+	line-height:1 !important;
+}
+
+.km_newtd p, .km_newtd span, .km_newtd br {display:none !important;}
+
+.km_newtd a.click_to_edit {
+	display: block;
+	position:absolute;
+	width:100%;
+	height:100%;
+	z-index:2;
+	text-align:center;
+	color:#555 !important;
+	text-transform:uppercase;
+	font-size:18px;
+	text-decoration:none !important;
+	padding-top:110px;
+	padding-right:15px;
+	background:url(images/new-content/pencil.png);
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+@media (max-width:480px) {
+.km_newtd h1.title, 
+.km_newtd h2.title, 
+.km_newtd h3.title, 
+.km_newtd h4.title, 
+.km_newtd h5.title, 
+.km_newtd h6.title, 
+.km_newtd h7.title, 
+.km_newtd h8.title, 
+.km_newtd h9.title {
+	font-size:18px !important;
+}
+
+.km_newtd a.click_to_edit {
+	font-size:14px;
+}	
+}

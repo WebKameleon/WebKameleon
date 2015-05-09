@@ -1,0 +1,6 @@
+{if:!time_delta}
+    <script type="text/javascript">
+        d=new Date();
+        jQueryKam.get(km_infos["ajax_link"]+'/time_delta?d='+encodeURIComponent(d));
+    </script>
+{endif:!time_delta}

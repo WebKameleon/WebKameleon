@@ -1,0 +1,70 @@
+{include:_header.html}
+{include:_menu.html}
+
+
+<form id="gcs" method="post" style="padding:10px">
+    
+    <div class="km_fbtn">
+        
+        
+        
+        <a class="km_fbtn_action" href="#" id="gcs_save">{translate.Save}</a>
+        <a class="km_fbtn_normal" href="{root}index/get/{referpage?0}">{translate.Return}</a>
+    </div>
+
+    <h1>Google Cloud Storage</h1>
+
+    <ul>
+        {loop:buckets}
+        <li>
+            <b>{__loop__}</b>: {loop}
+            
+        </li>
+        {endloop:buckets}
+    </ul>
+
+    
+    <div class="edit_box">
+        <div class="label" style="width:20%"><a target="_blank" href="https://console.developers.google.com/project">{translate.Project}</a>:</div>
+        <div class="value">
+            <input type="text" name="gcs[gcs_bucket]" value="{server.gcs_bucket}" style="width:79%" placeholder="{translate.Leave empty if you have created bucket(s) yourself}"/>
+        </div>
+    </div> 
+
+    <div class="edit_box">
+        <div class="label" style="width:20%">{translate.Website} ({translate.Bucket name}):</div>
+        <div class="value">
+            <input type="text" name="gcs[gcs_website]" value="{server.gcs_website}" style="width:79%" placeholder="{translate.Use Smekta notation to differentiate language versions}"/>
+        </div>
+    </div>     
+
+    
+</form>
+
+
+
+
+<div class="km_fbtn">
+    <a class="km_fbtn_normal" target="_blank" href="https://console.developers.google.com/project">{translate.Manage your projects}</a>
+    <a class="km_fbtn_normal" target="_blank" href="https://www.google.com/webmasters/tools/home?hl={ulang}">{translate.Verify domain ownership}</a>
+</div>
+
+
+
+<script type="text/javascript">
+    jQueryKam(function ($) {
+        
+        $("#gcs_save").on("click", function (e) {
+    
+            jQueryKam('#gcs').submit();
+            return false;
+        });
+        
+
+        
+        
+        
+    });
+    
+</script>
+

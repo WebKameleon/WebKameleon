@@ -1,0 +1,22 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:slideshowWidget}
+    <div id="layerslider-container-fw">
+      <div id="layerslider" style="width: 100%; height: {data.height}px; margin: 0px auto; ">
+{if:webtd.menu}
+	{loop:webtd.menu}
+	<div class="ls-layer" style="slidedirection: {data.text_position}; slidedelay: {data.pause}; durationin: {data.speed}; durationout: {data.speed}; delayout: 500;">
+		<img src="{imagesUrl}/{img}" class="ls-bg" alt="">
+		{if:imga}
+		<img src="{uimages}/{imga}" class="ls-s6" alt="" style="top: 134px; left: 30px;  slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 750; easingin : easeInOutQuint; easingout : easeInOutQuint; delayin : 600;">
+		{endif:imga}
+		<h1 class="ls-s3" style="position: absolute; top:100px; left: 700px; slidedirection : top; slideoutdirection : top; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInBack; delayin : 1000;">{description}</h1>
+		<h4 class="ls-s3 l1-s1" style="position: absolute; top:230px; left: 700px; slidedirection : bottom; slideoutdirection : bottom; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInBack; delayin : 1000;">{alt}</h4>
+		{if:href}
+		<a class="button red ls-s8" href="{href}" style="position: absolute; top:320px; left: 700px; slidedirection : bottom; slideoutdirection : bottom; durationin : 3000; durationout : 750; easingin : easeInOutQuint; easingout : easeInOutQuint; delayin : 1100;">{alt_title}</a>
+		{endif:href}
+	</div>
+{endloop:webtd.menu}
+{endif:webtd.menu}
+      </div>
+    </div>
+{endwith:slideshowWidget}

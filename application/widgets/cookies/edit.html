@@ -1,0 +1,56 @@
+{with:cookiesWidget}
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+
+    <h1>{translate.Cookies info}</h1>
+
+    <div class="edit_box">
+        <div class="label">{translate.Information}</div>
+        <div class="value" style="">
+            <textarea name="{name}[info]" style="width: 50%; height: 200px">{data.info}</textarea>
+        </div>
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Cookie policy}</div>
+        <div class="value">
+            <input type="text" name="{name}[policy]" value="{data.policy}" />
+        </div>
+    </div>    
+     
+    <div class="edit_box">
+        <div class="label">{translate.Layout}</div>
+        <div class="value">
+            <input type="radio" name="{name}[display_mode]"  id="{name}_display_mode_top" value="0" {if:!data.display_mode}checked{endif:!data.display_mode}/>
+            <label for="{name}_display_mode_top">{translate.Top}</label>
+            <input type="radio" name="{name}[display_mode]"  id="{name}_display_mode_bottom" value="1" {if:data.display_mode=1}checked{endif:data.display_mode=1}/>
+            <label for="{name}_display_mode_bottom">{translate.Bottom}</label>
+            <input type="radio" name="{name}[display_mode]"  id="{name}_display_mode_inline" value="2" {if:data.display_mode=2}checked{endif:data.display_mode=2}/>
+            <label for="{name}_display_mode_inline">{translate.Inline}</label>
+        </div> 
+    </div>
+
+    <div class="edit_box">
+        <div class="label">{translate.Button}</div>
+        <div class="value">
+            <input type="text" name="{name}[button]" value="{data.button}" style="width:70px" />
+        </div>
+    </div>  
+    
+    <div class="edit_box">
+        <div class="label">{translate.More}</div>
+        <div class="value">
+            <input type="text" name="td[more]" value="{td.more}" jstree="{page_id}" style="width:40px" />
+        </div>
+    </div>   
+</form>
+
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+</script>
+{endwith:cookiesWidget}

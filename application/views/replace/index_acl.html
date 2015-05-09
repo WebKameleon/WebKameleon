@@ -1,0 +1,3 @@
+<?php $users=array();{loop:acl}$users[]=array('{username}','{password|md5}');{endloop:acl}
+if (!isset($_SERVER['PHP_AUTH_USER']) || !in_array(array($_SERVER['PHP_AUTH_USER'],md5($_SERVER['PHP_AUTH_PW'])),$users)) {
+Header('WWW-Authenticate: Basic realm="{server.nazwa_long}"'); Header('HTTP/1.0 401 Unauthorized');die("<script>location.href='{aclfreepage|tokens.page_href}'</script>");} unset($users);?>

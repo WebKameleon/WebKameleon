@@ -1,0 +1,111 @@
+{with:filecatalogWidget}
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+
+    <h1>{translate.File catalog}</h1>
+
+    <ul id="filecatalog_enabled">
+        <h2>{translate.Chosen files}</h2>
+        {loop:files}
+        <li id="{id}" class="{mime}">
+            <a href="javascript:remove_element('{rel}')">x</a>
+            <input type="text" name="{name}[files][{key}]" value="{fname}"/>
+        </li>
+        {endloop:files}
+    </ul>
+ 
+    <ul id="filecatalog_breadcrumbs"></ul>
+    <ul id="filecatalog_available"></ul>
+</form>
+
+
+<script type="text/javascript">
+    function SaveChanges()
+    {
+        jQueryKam("#{name}_form").submit();
+        return false;
+    }
+    
+    function remove_element(rel)
+    {
+        var id=rel.replace(/=/g,'0');
+        
+        jQueryKam('input[rel="'+rel+'"]').prop('checked',false);
+        jQueryKam('#'+id).fadeOut(1000,function(){
+            jQueryKam('#'+id).remove();
+        });
+    }
+    
+    function drow_dir(data)
+    {
+        jQueryKam('#filecatalog_available').html('');
+        jQueryKam('#filecatalog_breadcrumbs').html('');
+        
+        var li;
+        
+        for(i=0;i<data.breadcrumbs.length;i++)
+        {
+            li='<li rel="'+data.breadcrumbs[i].path+'">'+data.breadcrumbs[i].name+'</li>';
+            jQueryKam('#filecatalog_breadcrumbs').append(li);
+        }
+
+        for(i=0;i<data.files.length;i++)
+        {
+            if (data.files[i].mime!='directory') continue;
+            
+            var type=data.files[i].mime.replace('/','-');
+            var c=type;
+            if (data.files[i].name=='..') c+=' up';
+            li='<li class="'+c+'">';
+            if (data.files[i].name!='..') li+='<input type="checkbox" mime="'+type+'" rel="'+data.files[i].path+'" value="'+data.files[i].name+'"/>';
+            li+='<span rel="'+data.files[i].path+'">'+data.files[i].name+'</span></li>';
+            jQueryKam('#filecatalog_available').append(li);
+        }
+        for(i=0;i<data.files.length;i++)
+        {
+            if (data.files[i].mime=='directory') continue;
+            
+            var type=data.files[i].mime.replace('/','-');
+            li='<li class="'+type+'"><input type="checkbox" mime="'+type+'" rel="'+data.files[i].path+'" value="'+data.files[i].name+'"/>';
+            li+='<span><a href="'+data.files[i].url+'" target="_blank">'+data.files[i].name+'</a></span></li>';
+            jQueryKam('#filecatalog_available').append(li);
+        }
+        
+        
+        jQueryKam('#filecatalog_available li.directory span').click(function() {
+            jQueryKam.get('{root}files/browse?type=2&dir='+jQueryKam(this).attr('rel'),drow_dir);
+        });
+        
+        jQueryKam('#filecatalog_breadcrumbs li').click(function() {
+            jQueryKam.get('{root}files/browse?type=2&dir='+jQueryKam(this).attr('rel'),drow_dir);
+        });
+        
+        jQueryKam('#filecatalog_available input[type=checkbox]').click(function() {
+            var rel=jQueryKam(this).attr('rel');
+            
+            if (jQueryKam(this).prop('checked'))
+            {
+                var id=rel.replace(/=/g,'0');
+                li='<li id="'+id+'" style="display:none" class="'+jQueryKam(this).attr('mime')+'">';
+                li+='<a href="javascript:remove_element(\''+rel+'\')">x</a>';
+                li+='<input type="text" name="{name}[files]['+jQueryKam(this).attr('mime')+':'+jQueryKam(this).attr('rel')+']" value="'+jQueryKam(this).val()+'"/>';
+                li+='</li>';
+                
+                jQueryKam(li).appendTo(jQueryKam('#filecatalog_enabled')).fadeIn();
+            }
+            else
+            {
+                remove_element(rel);
+            }
+        }).each(function () {
+            var rel=jQueryKam(this).attr('rel');
+            var id=rel.replace(/=/g,'0');
+            if (jQueryKam('#'+id).length==1) jQueryKam(this).prop('checked',true);
+        });
+        
+    }
+    
+    jQueryKam.get('{root}files/browse?type=2',drow_dir);
+    
+</script>
+{endwith:filecatalogWidget}

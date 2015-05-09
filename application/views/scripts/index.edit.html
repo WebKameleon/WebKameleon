@@ -1,0 +1,286 @@
+<div id="km_hinter"></div>
+{include:_header.html}
+<div class="km_nheader">
+    <div class="km_nheader_left">
+
+        <div class="km_ddmenu">
+            <ul class="sf-menu">
+                <li>
+                    <a>{translate.Page}</a>
+                    <ul>
+                        <li><a href="#" onclick="document.getElementById('pageSaveForm').submit(); return false" id="km_ddmenu_editpage">{translate.Save}</a></li>
+                        <li {if:!page.id}class="sf-disable"{endif:!page.id}><a href="{root}index/remove/{page.id}" id="km_ddmenu_delpage">{translate.Delete}</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.View}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Insert}</a>
+                </li>
+
+                <li class="sf-disable">
+                    <a>{translate.Layout}</a>
+                </li>
+
+                <li>
+                    <a>{translate.Tools}</a>
+                    {include:_menu.tools.html}
+                </li>
+
+                {include:_menu.help.html}
+            </ul>
+        </div>
+    </div>
+    <div class="km_clean"></div>
+</div>
+
+<div class="km_toolbar"></div>
+
+
+<form method="post" id="pageSaveForm" style="overflow:hidden;">
+    <div class="km_fbtn">
+        <input class="km_fbtn_action" type="submit" value="{translate.Save}"/>
+        <a class="km_fbtn_normal" href="{root}index/get/{page.id}">{translate.Cancel}</a>
+    </div>
+        <input type="hidden" name="page[sid]" value="{page.sid}"/>
+
+        <ul class="km_zakladki">
+            <li><a rel="in_props">{translate.Page setup}</a></li>
+            <li><a rel="in_colors">{translate.Colors and styles}</a></li>
+            <li><a rel="in_navi">{translate.Navigation and menus}</a></li>
+            {if:d_xml}
+            <li><a rel="in_user">{translate.User variables}</a></li>
+            {endif:d_xml}
+            <li><a rel="in_social">{translate.HTML page header}</a></li>
+            {if:server.owner}
+            <li><a rel="in_acl">{translate.ACL}</a></li>
+            {endif:server.owner}
+        </ul>
+
+        <div class="km_zakladka km_zakladka_in_props">
+            {if:config.webpage.show.title}
+            <div class="edit_box" id="liopt_in_title">
+                <div class="label">{translate.Page title}:</div>
+                <div class="value">
+                    <input id="in_title" name="page[title]" size="80" value="{page.title}" class="k_input" type="text">
+                </div>
+            </div>
+            <div class="edit_box" id="liopt_in_title_short">
+                <div class="label">{translate.Page title - short}:</div>
+                <div class="value">
+                    <input id="in_title_short" name="page[title_short]" size="40" value="{page.title_short}" class="k_input" type="text">
+                </div>
+            </div>
+            {endif:config.webpage.show.title}
+
+            {if:config.webpage.show.description}
+            <div class="edit_box" id="liopt_in_description">
+                <div class="label">{translate.Description}:</div>
+                <div class="value">
+                    <textarea class="k_textarea" name="page[description]" cols="80" rows="10">{page.description}</textarea>
+                </div>
+            </div>
+            {endif:config.webpage.show.description}
+
+            {if:config.webpage.show.keywords}
+            <div class="edit_box" id="liopt_in_keywords">
+                <div class="label">{translate.Keywords}:</div>
+                <div class="value">
+                    <textarea class="k_textarea" name="page[keywords]" cols="80" rows="10">{page.keywords}</textarea>
+                </div>
+            </div>
+            {endif:config.webpage.show.keywords}
+        </div>
+
+        <div class="km_zakladka km_zakladka_in_colors">
+            {if:config.webpage.show.class}{if:config.style}
+            <div class="edit_box" id="liopt_in_class">
+                <div class="label">{translate.Style}:</div>
+                <div class="value">
+                    <select type="select" class="k_select" name="page[class]" size="1">
+                        <option value="">{translate.Choose}</option>
+                        {loop:config.style}
+                        <option {if:page.class=$class}selected=""{endif:page.class=$class} value="{class}">{name}</option>
+                        {endloop:config.style}
+                    </select>
+                </div>
+            </div>
+            {endif:config.style}{endif:config.webpage.show.class}
+
+            {if:config.webpage.show.background}
+            <div class="edit_box" id="liopt_background">
+                <div class="label">{translate.Background image}:</div>
+                <div class="value">
+                    <input name="page[background]" size="60" value="{page.background}" class="k_input" type="text" files="1" />
+                </div>
+            </div>
+            {endif:config.webpage.show.background}
+
+            {if:config.webpage.show.type}
+            <div class="edit_box" id="liopt_in_type">
+                <div class="label">{translate.Page layout}:</div>
+                <div class="value">
+                    <select type="select" class="k_select" name="page[type]" size="1">
+                        {loop:config.webpage.type}
+                        <option {if:page.type=$__loop__}selected=""{endif:page.type=$__loop__} value="{__loop__}">{name}</option>
+                        {endloop:config.webpage.type}                        
+                    </select>
+                </div>
+            </div>
+            {endif:config.webpage.show.type}
+
+            {if:config.webpage.show.bgcolor}
+            <div class="edit_box" id="liopt_bgcolor">
+                <div class="label">{translate.Background color}:</div>
+                <div class="value">
+                    <input id="bgcolor" name="page[bgcolor]" size="10" value="{page.bgcolor}" class="k_input" type="text" colorpicker="1">
+                </div>
+            </div>
+            {endif:config.webpage.show.bgcolor}
+        </div>
+
+        <div class="km_zakladka km_zakladka_in_navi">
+            {if:page.id}
+            <input type="hidden" id="in_prev_prev" name="page[prev_prev]" value="{page.prev}">
+
+            {if:config.webpage.show.prev}
+            <div class="edit_box" id="liopt_km_prev">
+                <div class="label">{translate.Parent page}:</div>
+                <div class="value">
+                    <input name="page[prev]" size="5" value="{page.prev}" class="k_input" type="text" jstree="{page.id}" />
+                </div>
+            </div>
+            {endif:config.webpage.show.prev}
+            {endif:page.id}
+            
+            {if:config.webpage.show.next}
+            <div class="edit_box" id="liopt_km_next">
+                <div class="label">{translate.Next page}:</div>
+                <div class="value">
+                    <input name="page[next]" size="5" value="{page.next}" class="k_input" type="text" jstree="{page.id}" />
+                </div>
+            </div>
+            {endif:config.webpage.show.next}
+
+            {if:config.webpage.show.filename}
+            <div class="edit_box" id="liopt_in_file_name">
+                <div class="label">{translate.File name}:</div>
+                <div class="value">
+                    <input id="in_file_name" name="page[file_name]" size="80" value="{page.file_name}" class="k_input" type="text">
+                </div>
+            </div>
+            {endif:config.webpage.show.filename}
+
+            {if:config.webpage.show.menu_id}
+            <div class="edit_box" id="liopt_in_menu_id">
+                <div class="label">{translate.Main menu}:</div>
+                <div class="value">
+                    <input id="in_menu_id" name="page[menu_id]" size="5" value="{page.menu_id}" class="k_input" type="text">
+                </div>
+            </div>
+            {endif:config.webpage.show.menu_id}
+
+            {if:config.webpage.show.submenu_id}
+            <div class="edit_box" id="liopt_in_submenu_id">
+                <div class="label">{translate.Sub-menu}:</div>
+                <div class="value">
+                    <select name="page[submenu_id]">
+                        <option value="">{translate.Select menu}</option>
+                        {loop:menu_list}
+                        <option value="{menu_id}" {if:page.submenu_id=$menu_id}selected{endif:page.submenu_id=$menu_id}>{menu_id}. {name}</option>
+                        {endloop:menu_list}
+                    </select>
+                </div>
+            </div>
+            {endif:config.webpage.show.submenu_id}
+        </div>
+
+        {if:d_xml}
+        <div class="km_zakladka km_zakladka_in_user">
+            {loop:d_xml}
+            <div class="edit_box" id="liopt_in_{name}">
+                <div class="label">{label}:</div>
+                <div class="value">{html}</div>
+            </div>
+            {endloop:d_xml}
+        </div>
+        {endif:d_xml}
+
+        <div class="km_zakladka km_zakladka_in_social">
+            {if:config.webpage.show.og_image}
+            <div class="edit_box">
+                <div class="label">{translate.Image}:</div>
+                <div class="value">
+                    <input name="page[og_image]" size="60" value="{page.og_image}" class="k_input" type="text" files="1" />
+                </div>
+            </div>
+            {endif:config.webpage.show.og_image}
+
+            {if:config.webpage.show.og_desc}
+            <div class="edit_box">
+                <div class="label">{translate.OG description}:</div>
+                <div class="value">
+                    <textarea class="k_textarea" name="page[og_desc]" cols="80" rows="10">{page.og_desc}</textarea>
+                </div>
+            </div>
+            {endif:config.webpage.show.og_desc}
+
+            {if:config.webpage.show.head}
+            <div class="edit_box">
+                <div class="label">{translate.Additional head contents}:</div>
+                <div class="value">
+                    <textarea class="k_textarea" name="page[head]" cols="80" rows="20">{page.head}</textarea>
+                </div>
+            </div>
+            {endif:config.webpage.show.head}
+
+        </div>
+        
+        
+        
+        <div class="km_zakladka km_zakladka_in_acl">
+            {if:page.id}
+            {loop:users}
+            <input name="acl[{username}][ok]" value="0" type="hidden" />
+            <div class="edit_box">
+                <div class="label"><input name="acl[{username}][ok]" value="1" class="k_checkbox" type="checkbox" {if:ok}checked{endif:ok}/> {username}</div>
+                <div class="value">
+                    <input name="acl[{username}][pass]" class="k_input" type="password" value="{password}"/>
+                    <a class="xkm_icon km_iconi_delete" href="#" title="{translate.Delete}" onclick="jQueryKam(this).parent().parent().fadeOut();jQueryKam(this).parent().parent().parent().append('<input type=hidden name=acl[{username}][delete] value=1 />');">{translate.Delete}</a>
+                </div>
+            </div>
+            
+            {endloop:users}
+            
+            <div class="edit_box">
+                <div class="label">{translate.Add user}:</div>
+                <div class="value">
+                    <input name="acl[new][user]" autocomplete="off" class="k_input" type="text" placeholder="{translate.Username}"/>
+                    <input name="acl[new][pass]" autocomplete="off" class="k_input" type="password" placeholder="{translate.Password}"/>
+                </div>
+            </div>
+            {endif:page.id}            
+            
+            {if:server.appengine_id}
+            <div class="edit_box">
+                <div class="label">{translate.Login}:</div>
+                <div class="value">
+                    <select name="page[appengine_login]">
+                        <option value="">{translate.None}</option>
+                        <option value="inherit" {if:page.appengine_login=inherit}selected{endif:page.appengine_login=inherit}>{translate.Inherit from parent}</option>
+                        <option value="required" {if:page.appengine_login=required}selected{endif:page.appengine_login=required}>{translate.Required}</option>
+                        <option value="admin" {if:page.appengine_login=admin}selected{endif:page.appengine_login=admin}>{translate.Admin}</option>
+                    </select>
+                </div>
+            </div>            
+            {endif:server.appengine_id}
+
+
+        </div>        
+        
+        
+</form>
