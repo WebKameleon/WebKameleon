@@ -1,3 +1,6 @@
 [submodule "library/GN"]
 	path = library/GN
 	url = https://github.com/GammanetPL/GN
+[submodule "library/Doctrine"]
+	path = library/Doctrine
+	url = https://github.com/GammanetPL/Doctrine.git
