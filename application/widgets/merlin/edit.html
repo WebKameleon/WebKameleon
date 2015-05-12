@@ -39,6 +39,14 @@
         </div>
     </div>
     
+    <div class="edit_box">
+        <div class="label">{translate.Debug}</div>
+        <div class="value">
+            <input type="checkbox" name="td[cos]" value="1" {if:webtd.cos}checked{endif:webtd.cos}  />
+        </div>
+    </div>      
+    
+    
     {if:name=merlin/search}
     
     <div class="edit_box">
@@ -92,12 +100,7 @@
         </div>
     </div>
     
-    <div class="edit_box">
-        <div class="label">{translate.Debug}</div>
-        <div class="value">
-            <input type="checkbox" name="td[cos]" value="1" {if:webtd.cos}checked{endif:webtd.cos}  />
-        </div>
-    </div>    
+  
     
     {endif:name=merlin/results}
     
