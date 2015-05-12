@@ -75,7 +75,7 @@ class merlinWidget extends Widget
 	if ($this->webtd['cos']) $webtd->costxt.='&mode='.$this->webtd['cos'];
 	
 	$webtd->ob=3;
-	$webtd->save();
+	if (!$this->mode) $webtd->save();
 	
 	return $this->mode ? $html : WIDGETS_PATH.'/merlin/ftp.html';
     }    
