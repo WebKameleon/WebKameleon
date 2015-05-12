@@ -71,6 +71,7 @@ class merlinWidget extends Widget
 	$webtd->costxt='login='.$this->data['login'].'&pass='.$this->data['pass'].'&operator='.implode(',',$this->data['operator']);
 	if (isset($this->data['type'])) $webtd->costxt.='&type='.$this->data['type'];
 	if (isset($this->data['xsearch'])) foreach ($this->data['xsearch'] AS $x) $webtd->costxt.='&data[xsearch]['.$x.']=1';
+	$webtd->costxt.='&widget_images='.urlencode($this->widget_images);
 	
 	$webtd->ob=3;
 	$webtd->save();
