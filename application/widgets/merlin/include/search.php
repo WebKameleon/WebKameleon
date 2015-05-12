@@ -42,6 +42,7 @@
     asort($hotels);
     $merlin_searchWidget['hotels']=$hotels;
     
+    $merlin_searchWidget['dbg']=$merlin->debug;
     
-
+    
 

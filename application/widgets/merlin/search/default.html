@@ -105,4 +105,13 @@
     });
  </script>
 
+
+{if:mode}
+<hr size="1" style="margin:0"/>
+Debug:
+{loop:dbg}
+{debug.__item__.#.blue.$__loop__}
+{endloop:dbg}
+{endif:mode}
+
 {endwith:merlin_searchWidget}
