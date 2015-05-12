@@ -1,5 +1,5 @@
 <?php
-
+    
     include __DIR__.'/pre.php';  
     $merlin_resultsWidget['q']=$merlin_q;
 
@@ -56,3 +56,4 @@
         $merlin_resultsWidget['nav']=$nav;
     }
 
+    $merlin_resultsWidget['dbg']=$merlin->debug;

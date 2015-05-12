@@ -16,7 +16,8 @@ class merlin_hotelWidget extends merlinWidget
         $merlin_hotelWidget=array();
 
 	$this->next_sign=$this->mode>1?'&':'?';
-        require_once __DIR__.'/../include/hotel.php';    
+	$costxt=$this->webtd['costxt'];
+        include __DIR__.'/../include/hotel.php';    
         foreach ($merlin_hotelWidget AS $k=>$v) $this->$k=$v;
         
         parent::run();

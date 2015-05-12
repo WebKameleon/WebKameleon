@@ -77,8 +77,6 @@ class merlinWidget extends Widget
 	$webtd->ob=3;
 	$webtd->save();
 	
-
-	
 	return $this->mode ? $html : WIDGETS_PATH.'/merlin/ftp.html';
     }    
 

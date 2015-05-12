@@ -17,7 +17,8 @@ class merlin_resultsWidget extends merlinWidget
         $type=isset($this->data['type'])?$this->data['type']:'';
         $size=$this->webtd['size'];
 	$this->next_sign=$this->mode>1?'&':'?';
-        require_once __DIR__.'/../include/results.php';    
+	$costxt=$this->webtd['costxt'];
+        include __DIR__.'/../include/results.php';    
         foreach ($merlin_resultsWidget AS $k=>$v) $this->$k=$v;
         
         parent::run();

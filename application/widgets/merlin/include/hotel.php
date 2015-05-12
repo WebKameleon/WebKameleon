@@ -16,6 +16,7 @@
             }
             //$merlin_hotelWidget['hotel']=$offer['obj'];
             $merlin_hotelWidget['hotel']=$offer;
+            $merlin_hotelWidget['dbg']=$merlin->debug;
         }
     }
   

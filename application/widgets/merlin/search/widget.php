@@ -20,7 +20,8 @@ class merlin_searchWidget extends merlinWidget
         
         $merlin=$this->merlin;
         $merlin_searchWidget=array();
-        require_once __DIR__.'/../include/search.php';    
+	$costxt=$this->webtd['costxt'];
+        include __DIR__.'/../include/search.php';    
         foreach ($merlin_searchWidget AS $k=>$v) $this->$k=$v;
         
         parent::run();

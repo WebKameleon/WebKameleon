@@ -2,8 +2,8 @@
 
     require_once __DIR__.'/fun.php';
 
-    parse_str($costxt);
-
+    if (isset($costxt)) parse_str($costxt);
+  
     require_once __DIR__.'/Merlin.php';
     $merlin=new MERLIN($login,$pass,$operator);
 
