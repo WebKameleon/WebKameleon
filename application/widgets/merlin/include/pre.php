@@ -2,12 +2,12 @@
 
     require_once __DIR__.'/fun.php';
 
-    if (!isset($merlin) || !is_object($merlin))
-    {
-        require_once __DIR__.'/Merlin.php';
-        $merlin=new MERLIN($login,$pass,$operator);
-    }
     parse_str($costxt);
+
+    require_once __DIR__.'/Merlin.php';
+    $merlin=new MERLIN($login,$pass,$operator);
+
+    
     
     
     $merlin_q=array('dest'=>'','dep'=>'');
