@@ -1070,7 +1070,7 @@ class ftpController extends Controller
         $this->log($this->ftp,"Appengine transfer started",true);
         $session=Bootstrap::$main->session();
         
-        $app="application: $id\nversion: $ver\nruntime: php\napi_version: 1\n\nhandlers:\n";
+        $app="application: $id\nversion: $ver\nruntime: php55\napi_version: 1\n\nhandlers:\n";
     
         $static_dirs=array();
         $static_files=array();
