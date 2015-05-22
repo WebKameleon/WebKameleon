@@ -25,7 +25,7 @@
     <label>Termin od:</label>
     <div class='input-group date'>
 
-	<input type='text' class="form-control datepicker" name="merlin.from" value="{q.from?}"/>
+	<input type='text' class="form-control datepicker" name="from" data-value="{q.from?}"/>
 
     </div>
 </div>
@@ -35,7 +35,7 @@
 <div class="form-inline">
     <label>Termin do:</label>
     <div class='input-group date'>
-	<input type='text' class="form-control datepicker" name="merlin.to" value="{q.to?}"/> 
+	<input type='text' class="form-control datepicker" name="to" data-value="{q.to?}"/> 
     </div>
 </div>
 
@@ -101,8 +101,20 @@
 
  <script type="text/javascript">
     jQueryKam(function() {
-	jQueryKam('.datepicker').datepicker();
+
+	jQueryKam('.datepicker').pickadate({
+	    format: 'dddd, dd mmm',
+	    formatSubmit: 'yyyy-dd-mm',
+	    hiddenPrefix: 'merlin.',
+	    hiddenSuffix: '',
+	    selectYears: false,
+	});
+
     });
+    
+    
+    
+    
  </script>
 
 
