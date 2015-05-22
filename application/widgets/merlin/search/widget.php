@@ -19,7 +19,7 @@ class merlin_searchWidget extends merlinWidget
 	$this->loadJS('../picker.js');
 	$this->loadJS('../picker.date.js');
 	$this->loadJS('../picker.time.js');
-	$this->loadJS('../legacy.js');
+	//$this->loadJS('../legacy.js');
 	$this->loadJS('../translations/pl_PL.js');
 	
 	$this->loadCSS('../themes/default.css');
