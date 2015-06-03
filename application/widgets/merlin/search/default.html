@@ -6,7 +6,7 @@
 <div class="form-inline">
     <label>Cel podróży:</label>
     <select class="form-control" name="merlin.dest">
-      <option value="">Wybierz region</option>
+      <option value="">Wybierz</option>
       {loop:countries}
       <option value="{codes}" {if:selected}selected{endif:selected}>{name}</option>
       {loop:regions}
@@ -47,7 +47,7 @@
 <div class="form-inline">
     <label>Wylot/wyjazd z:</label>
     <select class="form-control" name="merlin.dep">
-      <option value="">Wybierz miejscowość</option>
+      <option value="">Wybierz</option>
       {loop:departures}
       <option value="{loop}" {if:q.dep=$loop}selected{endif:q.dep=$loop}>{loop}</option>
       {endloop:departures}
@@ -60,7 +60,7 @@
 <div class="form-inline">
     <label>Obiekt:</label>
     <select class="form-control" name="merlin.xhotel">
-      <option value="">Wybierz obiekt</option>
+      <option value="">Wybierz</option>
       {loop:hotels}
       <option value="{__loop__}" {if:q.xhotel=$__loop__}selected{endif:q.xhotel=$__loop__}>{loop}</option>
       {endloop:hotels}
@@ -74,7 +74,7 @@
     <label>Rodzina:</label>    
     
     <select class="form-control pax" name="merlin.chd">
-	<option value="0">dzieci</option>
+	<option value="0">0</option>
 	<option value="1" {if:q.chd=1}selected{endif:q.chd=1}>1</option>
 	<option value="2" {if:q.chd=2}selected{endif:q.chd=2}>2</option>
 	<option value="3" {if:q.chd=3}selected{endif:q.chd=3}>3</option>

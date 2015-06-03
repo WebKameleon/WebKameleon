@@ -49,17 +49,30 @@
 <div class="hotel-info tab-content">
 
 <div role="tabpanel" class="hotel-desc tab-pane fade in active" id="tab1">
+    {if:hotel.obj.hotel.Lokalizacja}
     <h6>Lokalizacja</h6>
     <p>{hotel.obj.hotel.Lokalizacja}</p>
+    {endif:hotel.obj.hotel.Lokalizacja}
     
+    {if:hotel.obj.hotel.Pokoje}
     <h6>Pokoje</h6>
     <p>{hotel.obj.hotel.Pokoje}</p>
+    {endif:hotel.obj.hotel.Pokoje}
     
+    {if:hotel.obj.hotel.Udogodnienia}
     <h6>Udogodnienia</h6>
     <p>{hotel.obj.hotel.Udogodnienia}</p>
+    {endif:hotel.obj.hotel.Udogodnienia}
     
+    {if:hotel.obj.hotel.Wyżywienie}
     <h6>Wyżywienie</h6>
     <p>{hotel.obj.hotel.Wyżywienie}</p>
+    {endif:hotel.obj.hotel.Wyżywienie}
+    
+    {if:hotel.obj.hotel.Program}
+    <h6>Program</h6>
+    <p>{hotel.obj.hotel.Program|nl2br|nl2br}</p>
+    {endif:hotel.obj.hotel.Program}
 </div>
 
 <div role="tabpanel" class="hotel-desc tab-pane fade" id="tab2">
@@ -124,16 +137,15 @@
    
     <tr>
      <td>Pokój:</td>
-     <td>{hotel.obj.room}</td>
+     <td>{hotel.obj.roomDesc}</td>
    </tr>
-   
-   <tr>
-     <td>Wyżywienie:</td>
-     <td>{hotel.obj.serviceDesc}</td>
-   </tr>
-   
-
+    
  </tbody></table>
+     <div class="food">
+        <p>Wyżywienie:</p>
+        <p>{hotel.obj.serviceDesc}</p>
+        
+     </div>
      
     </div>
 

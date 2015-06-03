@@ -204,7 +204,6 @@ class Bootstrap
 	}
 	
 	
-	
 	if ($parts[0]=='public') {
 	    $this->config2array();
 	    
