@@ -632,6 +632,7 @@ class ajaxController extends Controller
             'lang' => $server['lang'],
             'http_url' => $server['http_url'],
             'analytics' => $server['analytics'],
+            'mourning' => isset($server['mourning']) ? $server['mourning'] : 0,
         );
     }
 

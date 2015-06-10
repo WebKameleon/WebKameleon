@@ -21,10 +21,11 @@ jQueryKam(function ($) {
             delete data.analitycs_list;
 
             $.each(data, function (k, v) {
-                if ($("#km_setup_" + k).length) {
+                if (k!='mourning' && $("#km_setup_" + k).length) {
                     $("#km_setup_" + k).val(v);
                 }
             });
+            if (typeof(data.mourning)!='undefined') if (data.mourning=='1') $('#km_setup_mourning').prop('checked',true);
         });
     }
 

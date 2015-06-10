@@ -948,6 +948,10 @@ class indexController extends Controller
             $server->option('logo', $_POST['server']['logo']);
         }
         
+        if (isset($_POST['server']['mourning'])) {
+            $server->option('mourning', $_POST['server']['mourning']);
+        }        
+        
         if (isset($_POST['server']['background'])) {
             $server->option('background', $_POST['server']['background']);
         }        
