@@ -15,6 +15,7 @@ class Tokens
      */
     public $loadJQuery = false;
     public $loadMoreLibs;
+    protected $_jQueryKamLoaded=false;
 
     public function __get($name)
     {
@@ -51,6 +52,7 @@ class Tokens
         $this->naglowek_h1 = array();
         $this->loadJQuery = false;
         $this->loadMoreLibs = array('js'=>false,'css'=>false);
+        $this->_jQueryKamLoaded=false;
     }
 
     
@@ -583,5 +585,12 @@ class Tokens
         if (!$style) return $html;
 
         return Html::$style($html); 
+    }
+    
+    public function jQueryKamLoaded ()
+    {
+        $ret=$this->_jQueryKamLoaded;
+        $this->jQueryKamLoaded=true;
+        return $ret;
     }
 }

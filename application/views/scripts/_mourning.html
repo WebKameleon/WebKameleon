@@ -1,8 +1,20 @@
     <!----- mourning ----->
+    {if:!tokens.jQueryKamLoaded}
+    {include:scripts.jquery.html}
+    {endif:!tokens.jQueryKamLoaded}
+    
+    
     <style>
-        *:not(.wk-container)  {
- 
+        .km_mourning {
             -webkit-filter: grayscale(100%);
         }
     </style>
+    
+    <script>
+        jQueryKam(function($){
+            $('*:not(.wk-container)').addClass('km_mourning');
+            $('html,head,body,script,.wk-container *,.km_ruler_x,#km_jsdomenu').removeClass('km_mourning');
+        });
+    </script>
+    
     <!----- /mourning ----->
