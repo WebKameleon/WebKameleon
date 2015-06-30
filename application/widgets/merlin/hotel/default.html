@@ -37,8 +37,16 @@
 
 {if:hotel.obj.info.photos.0}<div class="col-md-6 col-sm-6">{endif:obj.info.photos.0}
 <div class="hotel-desc">
-    <h6>{hotel.obj.info.desc.2.subject}</h6>
-    <p>{hotel.obj.info.desc.2.content}</p>
+    {if:hotel.obj.city=Wyc. objazdowe}
+    <h6>Cena nie zawiera</h6>
+    <p>{hotel.obj.hotel.Cena nie zawiera}</p>
+    {endif:hotel.obj.city=Wyc. objazdowe}
+    
+    {if:!hotel.obj.city=Wyc. objazdowe}
+    <h6>Lokalizacja</h6>
+    <p>{hotel.obj.hotel.Lokalizacja}</p>
+    {endif:!hotel.obj.city=Wyc. objazdowe}
+
 </div>
 {if:hotel.obj.info.photos.0}</div></div>{endif:obj.info.photos.0}
 
@@ -74,6 +82,11 @@
     <p>{hotel.obj.hotel.Program|nl2br|nl2br}</p>
     {endif:hotel.obj.hotel.Program}
     
+    {if:hotel.obj.hotel.Część objazdowa}
+    <h6>Ramowy program imprezy</h6>
+    <p>{hotel.obj.hotel.Część objazdowa|nl2br|nl2br}</p>
+    {endif:hotel.obj.hotel.Część objazdowa}
+    
 </div>
 
 <div role="tabpanel" class="hotel-desc tab-pane fade" id="tab2">
@@ -83,14 +96,20 @@
 </div>
 
 <div role="tabpanel" class="hotel-desc tab-pane fade" id="tab3">
+    {if:hotel.obj.hotel.Cena zawiera}
     <h6>Cena zawiera</h6>
     <p>{hotel.obj.hotel.Cena zawiera}</p>
+    {endif:hotel.obj.hotel.Cena zawiera}
     
+    {if:hotel.obj.hotel.Cena nie zawiera}
     <h6>Cena nie zawiera</h6>
     <p>{hotel.obj.hotel.Cena nie zawiera}</p>
+    {endif:hotel.obj.hotel.Cena nie zawiera}
     
+    {if:hotel.obj.hotel.Dopłaty}
     <h6>Dopłaty</h6>
     <p>{hotel.obj.hotel.Dopłaty}</p>
+    {endif:hotel.obj.hotel.Dopłaty}
 </div>
 
 <div role="tabpanel" class="hotel-desc tab-pane fade" id="tab4">
