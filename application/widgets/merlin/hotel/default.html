@@ -38,8 +38,8 @@
 {if:hotel.obj.info.photos.0}<div class="col-md-6 col-sm-6">{endif:obj.info.photos.0}
 <div class="hotel-desc">
     {if:hotel.obj.city=Wyc. objazdowe}
-    <h6>Cena nie zawiera</h6>
-    <p>{hotel.obj.hotel.Cena nie zawiera}</p>
+    <h6>Cena zawiera</h6>
+    <p>{hotel.obj.hotel.Cena zawiera}</p>
     {endif:hotel.obj.city=Wyc. objazdowe}
     
     {if:!hotel.obj.city=Wyc. objazdowe}
@@ -86,6 +86,16 @@
     <h6>Ramowy program imprezy</h6>
     <p>{hotel.obj.hotel.Część objazdowa|nl2br|nl2br}</p>
     {endif:hotel.obj.hotel.Część objazdowa}
+    
+    {if:hotel.obj.hotel.Ramowy program}
+    <h6>Ramowy program imprezy</h6>
+    <p>{hotel.obj.hotel.Ramowy program|nl2br|nl2br}</p>
+    {endif:hotel.obj.hotel.Ramowy program}
+    
+    {if:hotel.obj.hotel.Ramowy program imprezy}
+    <h6>Ramowy program imprezy</h6>
+    <p>{hotel.obj.hotel.Ramowy program imprezy|nl2br|nl2br}</p>
+    {endif:hotel.obj.hotel.Ramowy program imprezy}
     
 </div>
 
