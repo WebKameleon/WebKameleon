@@ -39,7 +39,8 @@
 <div class="hotel-desc">
     {if:hotel.obj.city=Wyc. objazdowe}
     <h6>Cena zawiera</h6>
-    <p>{hotel.obj.hotel.Cena zawiera}</p>
+    {if:hotel.obj.hotel.Cena zawiera}<p>{hotel.obj.hotel.Cena zawiera}</p>{endif:hotel.obj.hotel.Cena zawiera}
+    {if:hotel.obj.hotel.W cenie}<p>{hotel.obj.hotel.W cenie}</p>{endif:hotel.obj.hotel.W cenie}
     {endif:hotel.obj.city=Wyc. objazdowe}
     
     {if:!hotel.obj.city=Wyc. objazdowe}
