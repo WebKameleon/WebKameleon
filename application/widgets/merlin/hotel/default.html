@@ -37,15 +37,16 @@
 
 {if:hotel.obj.info.photos.0}<div class="col-md-6 col-sm-6">{endif:obj.info.photos.0}
 <div class="hotel-desc">
-    {if:hotel.obj.city=Wyc. objazdowe}
+    <!-- {if:hotel.obj.city=Wyc. objazdowe}
     <h6>Cena zawiera</h6>
-    <p>{hotel.obj.hotel.Cena zawiera}</p>
+    {if:hotel.obj.hotel.Cena zawiera}<p>{hotel.obj.hotel.Cena zawiera}</p>{endif:hotel.obj.hotel.Cena zawiera}
+    {if:hotel.obj.hotel.W cenie}<p>{hotel.obj.hotel.W cenie}</p>{endif:hotel.obj.hotel.W cenie}
     {endif:hotel.obj.city=Wyc. objazdowe}
     
     {if:!hotel.obj.city=Wyc. objazdowe}
     <h6>Lokalizacja</h6>
     <p>{hotel.obj.hotel.Lokalizacja}</p>
-    {endif:!hotel.obj.city=Wyc. objazdowe}
+    {endif:!hotel.obj.city=Wyc. objazdowe} -->
 
 </div>
 {if:hotel.obj.info.photos.0}</div></div>{endif:obj.info.photos.0}
@@ -140,33 +141,33 @@
    <tbody>
     
     <tr>
-     <td style="vertical-align: bottom;">Cena/os:</td>
+     <td style="vertical-align: bottom;">Cena/os</td>
      <td class="big-price">{hotel.price} {hotel.operCurr}</td>
     </tr>
     
     <tr style="height:25px"></tr>
     
     <tr>
-     <td>Termin:</td>
+     <td>Termin</td>
      <td>{hotel.startDate.DDMMYYYY}</td>
     </tr>
     
     
    <tr>
-     <td>Ilość dni:</td>
+     <td>Ilość dni</td>
      <td>{hotel.trp.duration}&nbsp;dni</td>
    </tr>
    
     
    <tr>
-     <td>Wylot z:</td>
+     <td>Wylot z</td>
      <td>{hotel.trp.depName}, {hotel.trp.flightOp}</td>
    </tr>
    
    <tr style="height:25px"></tr>
    
     <tr>
-     <td>Pokój:</td>
+     <td>Pokój</td>
      <td>{hotel.obj.roomDesc}</td>
    </tr>
     
