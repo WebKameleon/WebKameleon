@@ -567,8 +567,13 @@ abstract class imageWidget extends Widget
     /**
      * @param array $links
      */
-    protected function checkLinks(array $links)
-    {   
+    protected function checkLinks(array $links=[])
+    {
+        if (!count($links)) {
+            $weblink=new weblinkModel();
+            if ($this->webtd['menu_id']) $links=$weblink->getAll($this->webtd['menu_id']);
+        }
+        
         foreach ($links as $link) {
             
             if (!isset($link['type']) || $link['type']!=$this->webtd['type']) {

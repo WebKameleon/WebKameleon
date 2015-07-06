@@ -208,9 +208,12 @@ class Tools
      */
     public static function check_image($filename, $srcDir, $dstDir, &$width, &$height, $mode = 0777, $scale = false, $crop = false)
     {
+        if (!$filename) return false;
         $src = $srcDir . DIRECTORY_SEPARATOR . $filename;
         $dst = $dstDir . DIRECTORY_SEPARATOR . $filename;
 
+        if (!file_exists($src)) return false;
+        
         self::check_if_exists(dirname($dst), $mode);
 
         $check = false;
