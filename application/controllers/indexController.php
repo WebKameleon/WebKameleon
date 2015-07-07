@@ -1198,7 +1198,7 @@ class indexController extends Controller
             } else $links[$i]['last_child']=false;
             
             if ($link['page_target'] && !$link['lang_target']) {
-                if ($link['page_target']==$page || in_array($link['page_target'],explode(':',$tree))) {
+                if ($link['page_target']==$page || ($link['page_target'] && in_array($link['page_target'],explode(':',$tree)))) {
                     $links[$i]['class']=$links[$i]['class']?$links[$i]['class'].' active':'active';
                     $links[$i]['active']=1;
                 } else $links[$i]['active']=0;
