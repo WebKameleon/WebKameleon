@@ -1,1 +1,8 @@
-{if:server.mourning}{include:_mourning.html}{endif:server.mourning}
+    {if:page.og_desc}
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{page.title}"/>
+    <meta property="og:site_name" content="{server.http_url}" />
+    <meta property="og:description" content="{page.og_desc}" />
+    {endif:page.og_desc}
+    {if:page.og_image}<meta property="og:image" content="{uimages}/{page.og_image}" />{endif:page.og_image}
+    {if:server.mourning}{include:_mourning.html}{endif:server.mourning}

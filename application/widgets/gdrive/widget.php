@@ -129,10 +129,13 @@ class gdriveWidget extends Widget
             
             if ($need_to_publish) {
             
-                $revisions=$service->revisions->list(array('fileId'=>$this->data['id']));
+                //$revisions=$service->revisions->list(array('fileId'=>$this->data['id']));
+                $revisions=$service->revisions->listRevisions($this->data['id']);
                 
-                foreach($revisions['items'] AS $item)
+                foreach($revisions->getItems() AS $item)
                 {
+                    $item=(array)$item;
+                    
                     $revision=$item;
                     
                     if ($item['published']) {
@@ -142,10 +145,11 @@ class gdriveWidget extends Widget
                 }
                 
                 if ($need_to_publish) {
-                    $revision['published'] = true;
-                    $revision['publishAuto'] = true;
-                    $revision['publishedOutsideDomain'] = true;
-                    $service->revisions->update($this->data['id'],$revision['id'],new Google_Revision($revision));
+                    $r=new Google_Service_Drive_Revision();
+                    $r->published=true;
+                    $r->publishAuto=true;
+                    $r->publishedOutsideDomain=true;
+                    $service->revisions->update($this->data['id'],$revision['id'],$r);
                 }
             }
             

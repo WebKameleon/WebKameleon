@@ -198,4 +198,5 @@ class Controller
         $config['style']=$style;
         return $config;
     }
+    
 }

@@ -274,9 +274,9 @@ class ftpController extends Controller
     
     
     protected function disconnect($id)
-    {        
-        if (Bootstrap::$main->getDebug()) return;
-
+    {
+        if (Bootstrap::$main->getDebug()>0) return;
+        //mydie(Bootstrap::$main->getDebug());
         
         ini_set('display_errors',false);
         ini_set('max_execution_time',0);
@@ -648,8 +648,9 @@ class ftpController extends Controller
 
                 
                 $updateTime=0;
-                $gso = new Google_StorageObject();
+                $gso = new Google_Service_Storage_StorageObject();
                 $gso->setName($remote);
+        
                 
 
                 
@@ -672,9 +673,12 @@ class ftpController extends Controller
                         if (!filesize($local)) $ct='text/plain';
                         break;
                 }
-                
-                $postbody = array('data' => $data, 'mimeType'=>$ct);
+                $gso->setContentType($ct);
 
+                $postbody = array('data' => $data,
+                                    'mimeType'=>$ct,
+                                    'uploadType'=>'media');
+                
                 try {
                     $o=$this->gcs_service->objects->get($this->gcs_bucket['name'],$remote);
                     $ts_remote=strtotime($o['updated']);
@@ -688,7 +692,13 @@ class ftpController extends Controller
                 if ($all || $ts_local>$ts_remote)
                 {
                     $this->debug("Cloud Storage: $local ($ct) -> $remote");
-                    $o=$this->gcs_service->objects->insert($this->gcs_bucket['name'],$gso,$postbody);
+                    
+                    try {
+                        $o=$this->gcs_service->objects->insert($this->gcs_bucket['name'],$gso,$postbody);
+                    } catch (Exception $e) {
+                        sleep(1);
+                        $o=$this->gcs_service->objects->insert($this->gcs_bucket['name'],$gso,$postbody);
+                    }
                 }
                 
                 //mydie($o,date('d-m-Y H:i',$updateTime));

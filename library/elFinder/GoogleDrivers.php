@@ -133,9 +133,17 @@ class elfinderGoogleDrive extends elfinderGoogle
 
     protected function init()
     {
-        $this->drive = new Google_DriveService($this->client);
+        $this->drive = Google::getDriveService($this->client); 
+        //$this->drive = new Google_DriveService($this->client);
     }
 
+    protected function obj2arr($file)
+    {
+        if (!is_array($file)) $file=json_decode(json_encode($file,JSON_NUMERIC_CHECK),true);
+
+        return $file;
+    }
+    
     /**
      * @return array
      */
@@ -175,7 +183,8 @@ class elfinderGoogleDrive extends elfinderGoogle
      */
     public function dirname($file)
     {
-        if ($file['parents']) {
+        $file=$this->obj2arr($file);
+        if (isset($file['parents']) && $file['parents']) {
             return $file['parents'][0]['id'];
         }
         return false;
@@ -187,6 +196,7 @@ class elfinderGoogleDrive extends elfinderGoogle
      */
     public function basename($file)
     {
+        $file=$this->obj2arr($file);
         $name = $file['title'];
         if (strpos($name, '.') === false && ($ext = elFinderVolumeGoogle::extensionDetect($file)) !== false) {
             $name .= '.' . $ext;
@@ -200,6 +210,8 @@ class elfinderGoogleDrive extends elfinderGoogle
      */
     public function stat($file)
     {
+        $file=$this->obj2arr($file);
+        
         if (isset($file['explicitlyTrashed']) && $file['explicitlyTrashed']) return false;
         
         $stat = array(

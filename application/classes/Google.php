@@ -3,7 +3,10 @@
  * @author Radosław Szczepaniak <radoslaw.szczepaniak@gammanet.pl>
  */
 
-require_once 'google-api-php-client/src/Google_Client.php';
+require_once 'google-api-php-client/src/Google/autoload.php';
+require_once 'google-api-php-client/src/Google/Client.php';
+//require_once 'google-api-php-client/src/Google_Client.php';
+
 
 /**
  * Class Google
@@ -154,7 +157,12 @@ class Google
 
         
         if ($force) {
-            $client->authenticate();
+            if (isset($_GET['code'])) $client->authenticate($_GET['code']);
+            else {
+                $auth_url = $client->createAuthUrl();
+                header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+                die();
+            }
             $current_scopes[$forscope] = $client->getAccessToken();
             
             if ($forscope && isset($options['scopes'][$forscope]) && strstr($options['scopes'][$forscope],' '))
@@ -280,10 +288,14 @@ class Google
 
     public function __callStatic($name, $args)
     {
+        
         if (preg_match('/^get([a-zA-Z0-9]+)Service$/', $name, $match)) {
-            $class = 'Google_' . $match[1] . 'Service';
+            $class = 'Google_Service_' . $match[1];
+            //$class = 'Google_'.$match[1].'Service';
+            
+            
             $userData = @$args[0];
-            require_once 'google-api-php-client/src/contrib/' . $class . '.php';
+            //require_once 'google-api-php-client/src/contrib/' . $class . '.php';
             return new $class($userData instanceof Google_Client ? $userData : self::getUserClient($userData,false,strtolower($match[1])));
         }
 

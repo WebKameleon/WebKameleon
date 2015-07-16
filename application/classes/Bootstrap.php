@@ -316,6 +316,7 @@ class Bootstrap
 
     protected function setDebug($debug)
     {
+	//mydie($debug);
         $this->session('debug', $debug);
     }
 

@@ -1527,7 +1527,7 @@ class indexController extends Controller
                     $dacl=$service->defaultObjectAccessControls->listDefaultObjectAccessControls($b['name']);
                     
                     $public_reader=false;
-                    
+                
                     foreach ($dacl['items'] AS $item)
                     {
                         if ($item['entity']=='allUsers') $public_reader=true;
@@ -1535,7 +1535,8 @@ class indexController extends Controller
                     
                     if (!$public_reader)
                     {
-                        $acl=new Google_ObjectAccessControl();
+                        //$acl=new Google_ObjectAccessControl();
+                        $acl=new Google_Service_Storage_ObjectAccessControl();
                         $acl->setEntity('allUsers');
                         $acl->setRole('READER');
                         $service->defaultObjectAccessControls->insert($b['name'],$acl);

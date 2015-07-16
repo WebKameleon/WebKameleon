@@ -648,8 +648,10 @@ class ajaxController extends Controller
             $accounts = $service->management_accounts->listManagementAccounts();
             foreach ($accounts['items'] as $account) {
                 $webproperties = $service->management_webproperties->listManagementWebproperties($account['id']);
-                foreach ($webproperties['items'] as $webproperty) {
-                    $analytics[] = array_intersect_key($webproperty, $keys);
+                
+                foreach ($webproperties->getitems() as $webproperty) {
+                    
+                    $analytics[] = array_intersect_key((array)$webproperty, $keys);
                 }
             }
         } catch (Google_ServiceException $e) {
@@ -1234,8 +1236,7 @@ class ajaxController extends Controller
 
     public function gdrive_files($query = null)
     {
-        if ($query == null)
-            $query = $this->_getParam('q');
+        if ($query == null) $query = $this->_getParam('q');
 
         $drive = Google::getDriveService();
 

@@ -4,3 +4,6 @@
 [submodule "library/Doctrine"]
 	path = library/Doctrine
 	url = https://github.com/GammanetPL/Doctrine.git
+[submodule "library/google-api-php-client"]
+	path = library/google-api-php-client
+	url = https://github.com/google/google-api-php-client

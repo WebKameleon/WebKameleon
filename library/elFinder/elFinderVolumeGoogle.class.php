@@ -3,8 +3,8 @@
  * @author Radosław Szczepaniak <radoslaw.szczepaniak@gammanet.pl>
  */
 
-require_once 'google-api-php-client/src/Google_Client.php';
-require_once 'google-api-php-client/src/contrib/Google_DriveService.php';
+//require_once 'google-api-php-client/src/Google_Client.php';
+//require_once 'google-api-php-client/src/contrib/Google_DriveService.php';
 
 require_once 'elFinder/GoogleDrivers.php';
 
