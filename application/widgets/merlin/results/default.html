@@ -7,9 +7,10 @@
     <div class="row header">
         <div class="col-md-2 col-sm-2">Termin</div>
         <div class="col-md-2 col-sm-2">Cena</div>
-        <div class="col-md-2 col-sm-2">Ilość dni</div>
-        <div class="col-md-2 col-sm-2">Lotnisko</div>
+        <div class="col-md-1 col-sm-1">Ilość dni</div>
+        <div class="col-md-1 col-sm-1">Lotnisko</div>
         <div class="col-md-2 col-sm-2">Pokój</div>
+        <div class="col-md-2 col-sm-2">Wyżywienie</div>
         <div class="col-md-2 col-sm-2">&nbsp;</div>
     </div>
     
@@ -25,18 +26,23 @@
         <p>{operPrice} {operCurr}</p>
     </div>
     
-    <div class="col-md-2 col-sm-2 date">        
+    <div class="col-md-1 col-sm-1 date">        
         <p>{trp.duration}&nbsp;dni</p>
     </div>    
         
-    <div class="col-md-2 col-sm-2">
-        <p>{trp.depName}, {trp.flightOp}</p>
+    <div class="col-md-1 col-sm-1">
+        <p>{trp.depName}{if:trp.flightOp}, {trp.flightOp}{endif:trp.flightOp}</p>
     </div>
+    
     
     <div class="col-md-2 col-sm-2">
         <p>{obj.roomDesc}</p>
     </div>
     
+    <div class="col-md-2 col-sm-2">
+        <p>{obj.serviceDesc}</p>
+    </div>
+
     <div class="col-md-2 col-sm-2">
         <a href="#" class="btn btn-info hotels-btn">Rezerwuj</a>
     </div>
@@ -84,6 +90,7 @@
         <div class="clearfix"></div>
         
         <p class="country">{obj.country}, {obj.city}</p>
+	<p class="">wyżywienie: {obj.serviceDesc}</p>
         <!--<p>{obj.roomDesc}</p>-->
         <!--<ul>
         {loop:obj.attributes}
