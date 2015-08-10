@@ -258,7 +258,7 @@ class Google
     }
 
     /**
-     * @param string|array|Google_DriveFile $file
+     * @param string|array|Google_Service_Drive_DriveFile $file
      * @param int|array $userData
      * @return string|bool
      */
@@ -268,7 +268,7 @@ class Google
 
         if (is_array($file) && isset($file['downloadUrl'])) {
             $downloadUrl = $file['downloadUrl'];
-        } else if ($file instanceof Google_DriveFile) {
+        } else if ($file instanceof Google_Service_Drive_DriveFile) {
             $downloadUrl = $file->getDownloadUrl();
         } else if (($URL = filter_var($file, FILTER_VALIDATE_URL)) !== false) {
             $downloadUrl = $URL;
@@ -278,8 +278,8 @@ class Google
         }
 
         if ($downloadUrl) {
-            return $client->getIo()->authenticatedRequest(
-                new Google_HttpRequest($downloadUrl)
+            return $client->getAuth()->authenticatedRequest(
+                new Google_Http_Request($downloadUrl)
             )->getResponseBody();
         }
 
@@ -307,7 +307,7 @@ class Google
 
     protected static function request($url,$method='GET',$data=null,$scope_required='',$return_kind='',$user=null, $headers=array()) {
         
-        $request = new Google_HttpRequest($url,$method,$headers,$data);
+        $request = new Google_Http_Request($url,$method,$headers,$data);
         
         $client = self::getUserClient($user,false,$scope_required);
         
@@ -315,7 +315,7 @@ class Google
         {
             Bootstrap::$main->redirect('scopes/'.$scope_required);
         }
-        $response = $client->getIo()->authenticatedRequest($request);
+        $response = $client->getAuth()->authenticatedRequest($request);
         
         $ret=$response->getResponseBody();
         

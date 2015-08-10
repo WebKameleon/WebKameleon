@@ -123,7 +123,7 @@ class wizardController extends Controller
         if ($this->_getParam('to') == 'drive') {
             $drive = Google::getDriveService();
 
-            $file = new Google_DriveFile;
+            $file = new Google_Service_Drive_DriveFile;
             $file->setTitle($session['server']['nazwa'] . '.wkz');
             $file->setMimeType('application/x-zip');
             ini_set('memory_limit', '2048M');

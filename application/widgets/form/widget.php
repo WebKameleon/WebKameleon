@@ -42,7 +42,7 @@ class formWidget extends Widget
 	    $server=Bootstrap::$main->session('server');
 	    $title=$server['nazwa_long'].' / '.$this->webpage['title'];
 	    
-	    $copiedFile = new Google_DriveFile();
+	    $copiedFile = new Google_Service_Drive_DriveFile();
 	    $copiedFile->setTitle($title);
 	    
 	    try {
