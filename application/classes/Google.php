@@ -159,6 +159,7 @@ class Google
         if ($force) {
             if (isset($_GET['code'])) $client->authenticate($_GET['code']);
             else {
+                $client->setAccessType('offline');
                 $auth_url = $client->createAuthUrl();
                 header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
                 die();
@@ -200,25 +201,25 @@ class Google
         
         if ($force && !isset($_GET['code'])) die();
         
-    
+        
         
         if ($client->isAccessTokenExpired()) {
             
-                       
             $token = json_decode($current_scopes[$forscope], true);
+        
             if (isset($token['refresh_token']))
             {
-		try {
+                try {
                     $client->refreshToken($token['refresh_token']);
-		} catch (Exception $e) {
+                } catch (Exception $e) {
                     Tools::log('tokens_refresh_error',array($user->email,$e));
                     
                     if ($current)
                     {
                         $current_scopes[$forscope]=null;
-			$user->access_token = json_encode($current_scopes);
-			$user->save();
-			Bootstrap::$main->redirect('auth/get_token/'.$forscope);
+                        $user->access_token = json_encode($current_scopes);
+                        $user->save();
+                        Bootstrap::$main->redirect('auth/get_token/'.$forscope);
                     }
                 }
                 $current_scopes[$forscope] = $client->getAccessToken();
@@ -229,8 +230,9 @@ class Google
                 
                 if ($current)
                 {
+                    
                     Tools::log('tokens_refresh_error',array($forscope,$user->data(),$current_scopes));
-                         
+                    
                     $current_scopes[$forscope]=null;
                     $user->access_token = json_encode($current_scopes);
                     $user->save();
