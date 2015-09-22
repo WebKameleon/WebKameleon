@@ -99,6 +99,7 @@ class wizardController extends Controller
 
     public function export($return=false)
     {
+        
         if ($this->id) {
             $path = FILES_PATH .'/'. $this->id;
             if (file_exists($path)) {
@@ -113,12 +114,15 @@ class wizardController extends Controller
         }
 
         $session = Bootstrap::$main->session();
+        
+        
 
         $result = array(
             'status' => $this->create_zip($filename) ? 1 : 0
         );
+        
 
-        if ($return) return $filename;
+        
         
         if ($this->_getParam('to') == 'drive') {
             $drive = Google::getDriveService();
@@ -150,6 +154,8 @@ class wizardController extends Controller
             $result['filename'] = basename($filename);
         }
 
+        if ($return) return $filename;
+        
         header('Content-type: application/json');
         die(json_encode($result));
     }
