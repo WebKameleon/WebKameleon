@@ -128,6 +128,7 @@ class newsletterWidget extends Widget
         $links=array();
         
         
+        //$this->data['a']=array();
         while (($pos=strpos(strtolower($plain),'<a '))!==false)
         {
             $plain=substr($plain,$pos+2);
@@ -148,8 +149,7 @@ class newsletterWidget extends Widget
             
         }
         
-        
-
+        //mydie($this->data);
         
         return parent::update();
     }

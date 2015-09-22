@@ -1547,6 +1547,7 @@ class ajaxController extends Controller
             
             }
             
+            
             if (isset($data['a']) && count($data['a']))
             {
                 $webpage=new webpageModel();
@@ -1576,22 +1577,25 @@ class ajaxController extends Controller
                             $href2=$url.Bootstrap::$main->kameleon->href('',$href2[1],$href2[0],'',PAGE_MODE_PURE);
                         }
                     
-                        $google_url = new Google_Url();
-                        $google_url->longUrl=$href2;
-                    
-                        $goo_href=$service->url->insert($google_url);
+                        if (!strstr($href2,'goo.gl')) {
+                            $google_url = new Google_Service_Urlshortener_Url();
+                            $google_url->longUrl=$href2;
                         
-                        if (isset($goo_href['id']))
-                        {
-                            $href2=$goo_href['id'];
-                            $data['a'][$href]=$href2;
+                          
+                            $goo_href=$service->url->insert($google_url);
+                            
+                        
+                            if (isset($goo_href['id']))
+                            {
+                                $href2=$goo_href['id'];
+                                $data['a'][$href]=$href2;
+                            }
                         }
                     } else {
                         $href2=$goo;
                     }
              
-             
-                    $msg=str_replace($href,$href2,$msg);
+                    $msg=str_replace('"'.$href.'"','"'.$href2.'"',$msg);
                     
                 }
                 

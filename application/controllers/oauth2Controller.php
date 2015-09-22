@@ -73,10 +73,10 @@ class oauth2Controller extends Controller
 
     public function test()
     {
-        $request = new Google_HttpRequest('https://spreadsheets.google.com/feeds/spreadsheets/private/full');
+        $request = new Google_Http_Request('https://spreadsheets.google.com/feeds/spreadsheets/private/full');
 
         $client = Google::getUserClient(null,false,'spreadsheets');
-        $response = $client->getIo()->authenticatedRequest($request);
+        $response = $client->getAuth()->authenticatedRequest($request);
 
         $xml = $response->getResponseBody();
 

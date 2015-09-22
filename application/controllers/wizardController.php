@@ -99,6 +99,7 @@ class wizardController extends Controller
 
     public function export($return=false)
     {
+        
         if ($this->id) {
             $path = FILES_PATH .'/'. $this->id;
             if (file_exists($path)) {
@@ -113,22 +114,27 @@ class wizardController extends Controller
         }
 
         $session = Bootstrap::$main->session();
+        
+        
 
         $result = array(
             'status' => $this->create_zip($filename) ? 1 : 0
         );
+        
 
-        if ($return) return $filename;
+        
         
         if ($this->_getParam('to') == 'drive') {
             $drive = Google::getDriveService();
 
-            $file = new Google_DriveFile;
+            $file = new Google_Service_Drive_DriveFile();
             $file->setTitle($session['server']['nazwa'] . '.wkz');
             $file->setMimeType('application/x-zip');
             ini_set('memory_limit', '2048M');
             @$drive->files->insert($file, array(
-                'data' => file_get_contents($filename)
+                'data' => file_get_contents($filename),
+                'mimeType'=>'application/x-zip',
+                'uploadType'=>'multipart'
             ));
             unlink($filename);
         } else if ($this->_getParam('to') == 'template') {
@@ -148,6 +154,8 @@ class wizardController extends Controller
             $result['filename'] = basename($filename);
         }
 
+        if ($return) return $filename;
+        
         header('Content-type: application/json');
         die(json_encode($result));
     }

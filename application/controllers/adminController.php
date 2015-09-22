@@ -29,10 +29,11 @@ class adminController extends Controller
     }
     
     
-    public function enter()
+    public function enter($id=0)
     {
+        if (!$id) $id=$this->id;
         
-        $s=new serverModel($this->id);
+        $s=new serverModel($id);
         $server=$s->data();
         
         $user=Bootstrap::$main->session('user');

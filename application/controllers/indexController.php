@@ -1544,8 +1544,8 @@ class indexController extends Controller
                     
                     if (!isset($b['website']))
                     {
-                        $gb=new Google_Bucket($b);
-                        $w=new Google_BucketWebsite();
+                        $gb=new Google_Service_Storage_Bucket($b);
+                        $w=new Google_Service_Storage_BucketWebsite();
                         
                         $w->setMainPageSuffix('index.html');
                         $w->setNotFoundPage('err404.html');

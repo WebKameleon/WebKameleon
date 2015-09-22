@@ -5,7 +5,6 @@ define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../library'));
 define('MEDIA_PATH', realpath(dirname(__FILE__) . '/../media'));
 
 
-
 set_include_path(implode(PATH_SEPARATOR, array(
     realpath(APPLICATION_PATH . '/../library'),
     realpath(APPLICATION_PATH . '/classes'),

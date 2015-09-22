@@ -422,6 +422,7 @@ class ftpController extends Controller
     protected function process($ftpids,$limit,$all,$deteach=true)
     {
         session_write_close();
+    
         if ($deteach) $this->disconnect(implode(',',$ftpids));
         
         foreach ($ftpids AS $id) {
@@ -469,13 +470,18 @@ class ftpController extends Controller
                 
                 $gcs_website = GN_Smekta::smektuj($server->gcs_website,get_defined_vars());
             
-                $client=Google::getUserClient(null,false,'gcs');
+                
+                $client=Google::getUserClient($server->creator,false,'gcs');
+                
                 $this->gcs_service = Google::getStorageService($client);                
             
                 try {
                     $this->gcs_bucket = $this->gcs_service->buckets->get($gcs_website);   
                 } catch (Exception $e) {
+                               
                     $this->gcs_bucket = null;
+                    $this->log($ftp,$e->getMessage(),Tools::translate('FAIL'),false);
+                    $this->debug($e->getMessage());
                 }
             
             }
@@ -598,6 +604,8 @@ class ftpController extends Controller
             
             $ts_local=filemtime($local);
         
+        
+
             if ($this->remote_ftp)
             {
                 if (!$all) {
@@ -628,6 +636,7 @@ class ftpController extends Controller
                 }
             }
             
+            
             if ($this->appengine_path)
             {
                 $appengine_local = $this->appengine_path.'/'.$remote; 
@@ -646,6 +655,7 @@ class ftpController extends Controller
             if ($this->gcs_bucket)
             {
 
+                
                 
                 $updateTime=0;
                 $gso = new Google_Service_Storage_StorageObject();
