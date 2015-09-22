@@ -120,7 +120,6 @@ class newsletterWidget extends Widget
             
             $this->data['imgs'][$img]=Gplus::upload_img("$uimages/$img");
             
-            
         }
         
         $plain=$this->webtd['plain'];
