@@ -2,3 +2,6 @@ application/configs/local.ini
 media
 files
 cache
+application/logs/
+public/info.php
+
