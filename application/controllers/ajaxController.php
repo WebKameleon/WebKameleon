@@ -1103,13 +1103,16 @@ class ajaxController extends Controller
 
         $listChannels = $service->channels->listChannels('snippet,contentDetails', $filters);
 
-        foreach ($listChannels['items'] as $channel) {
+        
+        
+        foreach ($listChannels->getItems() as $channel) {
+            
             $channels[] = array(
-                'id' => $channel['id'],
-                'title' => $channel['snippet']['title'],
-                'description' => $channel['snippet']['description'],
-                'tmb' => $channel['snippet']['thumbnails']['default']['url'],
-                'related_playlists' => $channel['contentDetails']['relatedPlaylists']
+                'id' => $channel->getId(),
+                'title' => $channel->getSnippet()->getTitle(),
+                'description' => $channel->getSnippet()->getDescription(),
+                'tmb' => $channel->getSnippet()->getThumbnails()->getDefault()->getUrl(),
+                'related_playlists' => $channel->getContentDetails()->getRelatedPlaylists()
             );
         }
 
@@ -1163,22 +1166,26 @@ class ajaxController extends Controller
     }
 
     /**
-     * @param array $video
+     * @param $video
      * @return array
      */
-    protected function youtube_video_data(array $video)
+    protected function youtube_video_data( $video)
     {
-        if ($video['kind'] == 'youtube#playlistItem') {
-            $video_id = $video['snippet']['resourceId']['videoId'];
+        $snippet=$video->getSnippet();
+        
+        if ($video->getKind() == 'youtube#playlistItem') {
+            $video_id = $snippet->getResourceId()->getVideoId();
         } else {
-            $video_id = $video['id'];
+            $video_id = $video->getId();
         }
 
+        $tmb=$snippet->getThumbnails();
+        
         return array(
             'id' => $video_id,
-            'title' => $video['snippet']['title'],
-            'description' => $video['snippet']['description'],
-            'tmb' => $video['snippet']['thumbnails']['default']['url']
+            'title' => $snippet->getTitle(),
+            'description' => $snippet->getDescription(),
+            'tmb' => is_object($tmb)? $tmb->getDefault()->getUrl():''
         );
     }
 
@@ -1196,7 +1203,8 @@ class ajaxController extends Controller
         $videos = array();
         $listPlaylistItems = $service->playlistItems->listPlaylistItems('snippet', array('playlistId' => $playlist_id, 'maxResults' => self::YOUTUBE_VIDEO_MAX_RESULTS));
 
-        foreach ($listPlaylistItems['items'] as $video) {
+        
+        foreach ($listPlaylistItems->getItems() as $video) {
             $videos[] = $this->youtube_video_data($video);
         }
 
@@ -1217,14 +1225,17 @@ class ajaxController extends Controller
         } else {
             $listVideos = $service->videos->listVideos('snippet', array('chart' => 'mostPopular', 'maxResults' => self::YOUTUBE_VIDEO_MAX_RESULTS));
 
-            foreach ($listVideos['items'] as $video) {
+           
+            foreach ($listVideos->getItems() as $video) {
+                
                 $videos[] = $this->youtube_video_data($video);
             }
         }
 
         if (isset($channels_list)) {
+                    
             foreach ($channels_list['channels'] as $channel) {
-                $videos = array_merge($videos, $this->youtube_playlist_items($channel['related_playlists']['uploads']));
+                $videos = array_merge($videos, $this->youtube_playlist_items($channel['related_playlists']->uploads));
             }
         }
 //        die('<pre>' . print_r($videos, 1) . PHP_EOL);
