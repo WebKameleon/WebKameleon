@@ -130,6 +130,14 @@ class wizardController extends Controller
             $file = new Google_Service_Drive_DriveFile();
             $file->setTitle($session['server']['nazwa'] . '.wkz');
             $file->setMimeType('application/x-zip');
+            
+            if ($this->_getParam('folderId'))
+            {
+                $parent = new Google_Service_Drive_ParentReference();
+                $parent->setId($this->_getParam('folderId'));
+                $file->setParents(array($parent));
+            }
+            
             ini_set('memory_limit', '2048M');
             @$drive->files->insert($file, array(
                 'data' => file_get_contents($filename),
