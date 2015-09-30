@@ -50,6 +50,7 @@ try {
     $bootstrap->session('user',$u);
     
     $_REQUEST['to']='drive';
+    if (isset($argv[1])) $_REQUEST['folderId']=$argv[1];
     
     $admin=new adminController();
     $wizard=new wizardController();
