@@ -73,7 +73,6 @@ try {
 
     }
     
-    mydie();
     $admin=new adminController();
     $wizard=new wizardController();
 
