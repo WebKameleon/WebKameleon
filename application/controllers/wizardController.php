@@ -121,8 +121,6 @@ class wizardController extends Controller
             'status' => $this->create_zip($filename) ? 1 : 0
         );
         
-
-        
         
         if ($this->_getParam('to') == 'drive') {
             $drive = Google::getDriveService();

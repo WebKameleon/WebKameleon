@@ -48,10 +48,32 @@ try {
     $u['admin']=true;
     
     $bootstrap->session('user',$u);
+    $bootstrap->config2array();
     
     $_REQUEST['to']='drive';
-    if (isset($argv[1])) $_REQUEST['folderId']=$argv[1];
+    if (isset($argv[1])) {
+        
+        $folder_mime = "application/vnd.google-apps.folder";
+        $folder_name = date('Y-m-d');
+        
+        $service = Google::getDriveService();
+        $folder = new Google_Service_Drive_DriveFile();
+        
+        $folder->setTitle($folder_name);
+        $folder->setMimeType($folder_mime);
+       
+        $parent = new Google_Service_Drive_ParentReference();
+        $parent->setId($argv[1]);
+        $folder->setParents(array($parent));       
+       
+       
+        $fld=$service->files->insert($folder);
+        
+        if (isset($fld['id'])) $_REQUEST['folderId']=$fld['id'];
+
+    }
     
+    mydie();
     $admin=new adminController();
     $wizard=new wizardController();
 
