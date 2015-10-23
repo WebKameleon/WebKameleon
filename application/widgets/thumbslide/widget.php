@@ -1,5 +1,7 @@
 <?php
 
+//TODO: https://github.com/tkahn/Smooth-Div-Scroll/
+
 class thumbslideWidget extends imageWidget
 {
     /**
