@@ -1,12 +1,44 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/{lang}_{lang|strtoupper}/sdk.js#xfbml=1&version=v2.5&appId=188523474628375";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
 {if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
 {with:facebookWidget}
-{if:pluginUrl}
-<iframe src="{pluginUrl}" width="{data.width}" height="{data.height}" frameborder="0" allowtransparency="true" scrolling="no" id="facebook_{sid}"></iframe>
-{endif:pluginUrl}
-{if:hprc}
-<script type="text/javascript">
-    document.getElementById('facebook_{sid}').width='100%';
-</script>
-{endif:hprc}
+
+{if:data.type=button}
+<div class="fb-like"
+     {if:data.width}{if:!hprc}data-width="{data.width}"{endif:!hprc}{endif:data.width}
+     data-href="{data.href}"
+     data-layout="{data.layout}"
+     data-action="like"
+     data-show-faces="{if:data.show_faces}true{endif:data.show_faces}{if:!data.show_faces}false{endif:!data.show_faces}"
+     data-share="true"></div>
+{endif:data.type=button}
+{if:data.type=box}
+
+<div class="fb-page"
+     data-href="{data.href}"
+     data-small-header="false"
+     {if:hprc}data-adapt-container-width="true"{endif:hprc}
+     data-hide-cover="{if:data.header}false{endif:data.header}{if:!data.header}true{endif:!data.header}"
+     data-show-facepile="{if:data.show_faces}true{endif:data.show_faces}{if:!data.show_faces}false{endif:!data.show_faces}"
+     data-show-posts="{if:data.stream}true{endif:data.stream}{if:!data.stream}false{endif:!data.stream}"><div class="fb-xfbml-parse-ignore"><blockquote cite="{data.href}"><a href="{data.href}">{data.href|basename}</a></blockquote></div></div>
+
+{endif:data.type=box}
+
+{if:data.type=comments}
+<div class="fb-comments"
+     {if:data.width}{if:!hprc}data-width="{data.width}"{endif:!hprc}{endif:data.width}
+     data-href="{data.href}" data-numposts="{data.num_posts}"></div>
+
+{endif:data.type=comments}
+
 {endwith:facebookWidget}
 {plain}

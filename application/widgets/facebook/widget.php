@@ -64,12 +64,6 @@ class facebookWidget extends Widget
             
         }
         
-        
-        
-        $params = array_intersect_key($this->data, array_flip($params));
-        
-        
-        $this->pluginUrl = 'http://www.facebook.com/plugins/' . $plugin . '.php?' . http_build_query($params);
-        
+                
     }
 }
