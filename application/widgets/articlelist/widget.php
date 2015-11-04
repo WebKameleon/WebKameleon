@@ -96,6 +96,7 @@ class articlelistWidget extends imageWidget
                 
                 $d=$this->data;
                 $this->checkThumb($td['bgimg']);
+                $this->checkImage($td['bgimg']);
                 $this->data=$d;
             }
             

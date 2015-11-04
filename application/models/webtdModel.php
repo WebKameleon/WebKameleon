@@ -79,7 +79,14 @@ class webtdModel extends webModel {
 		$sql = $this->conn->modifyLimitQuery($sql,$limit,$offset);
 
 		
+		
 		$data = $this->conn->fetchAll($sql,array($server,$lang,$ver,$server));
+		
+		if (is_array($data)) foreach ($data AS &$td)
+		{
+			$sql="SELECT category FROM webcat WHERE tdsid=".$td['sid'];
+			$td['cats']=$this->conn->fetchColumn($sql);		
+		}
 		
 		return $data;
 	}
