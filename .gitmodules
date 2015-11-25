@@ -1,9 +1,9 @@
 [submodule "library/GN"]
 	path = library/GN
-	url = https://github.com/GammanetPL/GN
+	url = https://github.com/WebKameleon/GN
 [submodule "library/Doctrine"]
 	path = library/Doctrine
-	url = https://github.com/GammanetPL/Doctrine.git
+	url = https://github.com/WebKameleon/Doctrine.git
 [submodule "library/google-api-php-client"]
 	path = library/google-api-php-client
 	url = https://github.com/google/google-api-php-client
