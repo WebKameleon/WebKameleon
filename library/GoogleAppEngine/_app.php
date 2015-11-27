@@ -124,16 +124,25 @@
     }
 
     if (isset($_only_functions)) return;
+
+    $_self=explode('?',$_SERVER['REQUEST_URI']);
+    $self=$_self[0];
+    if (!$self) $self='/';
+
+    $memcache = new Memcache;
+    $memcache_key = '_req_'.$self;
     
+    $page=$memcache->get($memcache_key);
+    if ($page) {
+        if ($page['f']=='r') die(___readfile($page['v']));
+        if ($page['f']=='s') die(___script($page['v']));
+    }
     
     $_app=unserialize(file_get_contents(__DIR__.'/_app.ser'));
     
     if (!is_array($_app['s'])) ___notfound();
     
     
-    $_self=explode('?',$_SERVER['REQUEST_URI']);
-    $self=$_self[0];
-    if (!$self) $self='/';
     
     $self_long='http://'.$_SERVER['HTTP_HOST'].$self;
     
@@ -159,11 +168,23 @@
         $self=$r['self'];
     }
     
+    $gcsroot='gs://'.$_app['b'];
+    
     for ($__i=0;$__i<2;$__i++) {
     
-        if (isset($_app['s']['static'][$self]) && file_exists($_app['s']['static'][$self])) die(___readfile($_app['s']['static'][$self]));
-        if (isset($_app['s']['script'][$self]) && file_exists($_app['s']['script'][$self])) die(___script($_app['s']['script'][$self]));
-
+        if (isset($_app['s']['static'][$self]) && file_exists($_app['s']['static'][$self])) {
+            $memcache->set($memcache_key,['f'=>'r','v'=>$_app['s']['static'][$self]]);
+            die(___readfile($_app['s']['static'][$self]));
+        }
+        if (isset($_app['s']['static'][$self]) && file_exists($gcsroot.'/'.$_app['s']['static'][$self])) {
+            $memcache->set($memcache_key,['f'=>'r','v'=>$gcsroot.'/'.$_app['s']['static'][$self]]);
+            die(___readfile($gcsroot.'/'.$_app['s']['static'][$self]));
+        }
+        if (isset($_app['s']['script'][$self]) && file_exists($_app['s']['script'][$self])) {
+            $memcache->set($memcache_key,['f'=>'s','v'=>$_app['s']['script'][$self]]);
+            die(___script($_app['s']['script'][$self]));
+        }
+        
         if ($_notfound)
         {
             $self=$_notfound;
@@ -176,5 +197,16 @@
         }
     }
 
+    $gcsfile=$gcsroot.$self;
+    if (file_exists($gcsfile)) {
+        $f=explode('.',strtolower($gcsfile));
+        $ext=end($f);
+        $mime=unserialize(file_get_contents(__DIR__.'/_mime.ser'));
+        $ct=isset($mime[$ext])?$mime[$ext]:"application/$ext";
+        Header("Content-type: $ct");
+        readfile($gcsfile);
+        die();
+    }
 
+    
     ___notfound();

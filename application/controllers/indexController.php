@@ -1396,7 +1396,7 @@ class indexController extends Controller
             
             
             $s->appengine_rewrite = implode("\n",$appengine_rewrite);
-            
+            $s->resitemap=1;
             
             $s->save();
             

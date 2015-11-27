@@ -314,9 +314,9 @@ class Bootstrap
         return $controller->postRender($ret);
     }
 
-    protected function setDebug($debug)
+    public function setDebug($debug)
     {
-	//mydie($debug);
+		//mydie($debug);
         $this->session('debug', $debug);
     }
 

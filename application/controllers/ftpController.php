@@ -3,10 +3,12 @@
 class ftpController extends Controller
 {
     protected $error;
-    protected $conn;
+    protected $conn=null;
     protected $ftp;
     private $statcache;
     private $appengine_path;
+    private $appengine_static_host=null;
+    private $appengine_need_transfer=false;
     private $remote_ftp;
     private $gcs_bucket;
     private $gcs_service;
@@ -275,7 +277,9 @@ class ftpController extends Controller
     
     protected function disconnect($id)
     {
-        if (Bootstrap::$main->getDebug()>0) return;
+        //Bootstrap::$main->setDebug(1); return;
+        //mydie(Bootstrap::$main->getDebug());
+        if (Bootstrap::$main->getDebug()>0) return false;
         //mydie(Bootstrap::$main->getDebug());
         
         ini_set('display_errors',false);
@@ -421,13 +425,15 @@ class ftpController extends Controller
     
     protected function process($ftpids,$limit,$all,$deteach=true)
     {
-        session_write_close();
-    
+
         if ($deteach) $this->disconnect(implode(',',$ftpids));
+        session_write_close();
         
         foreach ($ftpids AS $id) {
             $ftp=new ftpModel($id);
             $server=new serverModel($ftp->server);
+            
+            $resitemap=0;
             
             $data=$server->data();
             $server->d_xml($data);
@@ -441,13 +447,16 @@ class ftpController extends Controller
             $ftp->pid=getmypid();
             $ftp->save();
             
-            $this->remote_ftp = true;
+            $this->remote_ftp = false;
             $this->appengine_path = null;
 
             
             $this->ftp=$ftp;
             
-            if (!$this->connect_chdir($server->ftp_server,$server->ftp_user,$server->ftp_pass,$server->ftp_pasive,$server->ftp_dir,$ftp)) continue;
+            if (!$server->appengine_id && !$server->gcs_website) {
+                if ($this->connect_chdir($server->ftp_server,$server->ftp_user,$server->ftp_pass,$server->ftp_pasive,$server->ftp_dir,$ftp)) $this->remote_ftp=true;
+                else continue;
+            }
                
             if ($server->appengine_id) {
                 $this->appengine_path = FILES_PATH . '/appengine/'. $server->nazwa ;
@@ -457,22 +466,20 @@ class ftpController extends Controller
                     $this->appengine_path=null;
                     $server->appengine_id=null;
                 }
-            }
-            
-            if (count($ftp->getUnfinished($ftp->server))==1 && $this->appengine_path)
-            {
-                $lock=$this->appengine_path.'/.appengine_lock';
-                if (file_exists($lock)) unlink($lock);
+                
+                if ($server->gcs_website)
+                    $this->appengine_static_host='http://'.$server->gcs_website;
+                else
+                    $server->gcs_website=$server->appengine_id.'.appspot.com';
+ 
             }
             
             if ($server->gcs_website) {
                 $lang=$ftp->lang;
                 
                 $gcs_website = GN_Smekta::smektuj($server->gcs_website,get_defined_vars());
-            
-                
+
                 $client=Google::getUserClient($server->creator,false,'gcs');
-                
                 $this->gcs_service = Google::getStorageService($client);                
             
                 try {
@@ -487,6 +494,11 @@ class ftpController extends Controller
             }
             
             
+            if (count($ftp->getUnfinished($ftp->server))==1 && $this->appengine_path)
+            {
+                $lock=$this->appengine_path.'/.appengine_lock';
+                if (file_exists($lock)) unlink($lock);
+            }
             
             
             if (!strlen($limit) || $limit=='img') {
@@ -494,18 +506,19 @@ class ftpController extends Controller
                 $res=$this->transfer_images($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
                 $this->log($ftp,Tools::translate('Files report'),$result,false);
-                
-                $res=$this->transfer_uimages($all);
+
+                $res=$this->transfer_template($all,$server->social_template);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report'),$result,false);     
                 
                 $res=$this->transfer_media($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
                 $this->log($ftp,Tools::translate('Files report'),$result,false);
             
-                $res=$this->transfer_template($all,$server->social_template);
+                $res=$this->transfer_uimages($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);            
+                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                       
             
             }
             
@@ -540,13 +553,21 @@ class ftpController extends Controller
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
                 $this->log($ftp,Tools::translate('Files report'),$result,false);
                 
-                $this->transfer_sitemap();
+                $resitemap=$server->resitemap;
+                
+                if ($resitemap) {
+                    $this->transfer_sitemap();
+                    $server->resitemap=0;
+                    $server->save();
+                }
+                
+                
             }
             
             
             if ($server->appengine_id) {
                 $this->remote_ftp = false;
-                $md5=$this->appengine($server->appengine_id,$server->appengine_ver,$server->appengine_scripts,$server->appengine_cron,$server->appengine_md5,$server->appengine_rewrite,$server->creator,$ftp);
+                $md5=$this->appengine($server->appengine_id,$server->appengine_ver,$server->appengine_scripts,$server->appengine_cron,$server->appengine_md5,$server->appengine_rewrite,$server->creator,$ftp,$resitemap);
                 if ($md5)
                 {
                     $server->appengine_md5=$md5;
@@ -571,7 +592,7 @@ class ftpController extends Controller
         flush();
     }
     
-    protected function transfer($local,$remote,$all,$info='',$rename=array())
+    protected function transfer($local,$remote,$all,$info='',$rename=array(),$forceappengine=false)
     {
         if (!file_exists($local)) {
             $this->debug("Local file $local does not exist!");
@@ -597,7 +618,7 @@ class ftpController extends Controller
                 if ($file[0]=='.') {
                     continue;
                 }
-                $count+=$this->transfer($local.'/'.$file,$remote.'/'.$file,$all,$info,$rename);
+                $count+=$this->transfer($local.'/'.$file,$remote.'/'.$file,$all,$info,$rename,$forceappengine);
             }
         } else {
             $this->statdir(dirname($remote));
@@ -605,7 +626,6 @@ class ftpController extends Controller
             $ts_local=filemtime($local);
         
         
-
             if ($this->remote_ftp)
             {
                 if (!$all) {
@@ -637,7 +657,7 @@ class ftpController extends Controller
             }
             
             
-            if ($this->appengine_path)
+            if ($this->appengine_path && $forceappengine)
             {
                 $appengine_local = $this->appengine_path.'/'.$remote; 
                 if (!$all) {
@@ -649,20 +669,14 @@ class ftpController extends Controller
                     $this->debug("Appengine: $local -> $appengine_local");
                     if (!file_exists(dirname($appengine_local))) mkdir (dirname($appengine_local),0755,true);
                     copy($local,$appengine_local);
+                    $count++;
+                    $this->appengine_need_transfer=true;
                 }
-            }
-            
-            if ($this->gcs_bucket)
-            {
+            } elseif ($this->gcs_bucket) {
 
-                
-                
-                $updateTime=0;
+
                 $gso = new Google_Service_Storage_StorageObject();
                 $gso->setName($remote);
-        
-                
-
                 
                 $data=file_get_contents($local);
                 if (!filesize($local)) $data=' ';
@@ -690,24 +704,27 @@ class ftpController extends Controller
                                     'uploadType'=>'media');
                 
                 try {
-                    $o=$this->gcs_service->objects->get($this->gcs_bucket['name'],$remote);
-                    $ts_remote=strtotime($o['updated']);
+                    $o=$this->gcs_service->objects->get($this->gcs_bucket->name,$remote);
+                    $ts_remote=strtotime($o->updated);
                     
                 } catch (Exception $e) {
                     $ts_remote=0;
                     
                 }
-
                 
                 if ($all || $ts_local>$ts_remote)
                 {
                     $this->debug("Cloud Storage: $local ($ct) -> $remote");
                     
                     try {
-                        $o=$this->gcs_service->objects->insert($this->gcs_bucket['name'],$gso,$postbody);
+                        $o=$this->gcs_service->objects->insert($this->gcs_bucket->name,$gso,$postbody);
+                        $cmd=Tools::translate('Upload').' [GCS]: '.$remote.$info;
+                        $this->log($this->ftp,$cmd,'OK',false);
+                        $count++;
+                        
                     } catch (Exception $e) {
                         sleep(1);
-                        $o=$this->gcs_service->objects->insert($this->gcs_bucket['name'],$gso,$postbody);
+                        $o=$this->gcs_service->objects->insert($this->gcs_bucket->name,$gso,$postbody);
                     }
                 }
                 
@@ -729,8 +746,7 @@ class ftpController extends Controller
         $session=Bootstrap::$main->session();
         
         $path=$session['path'];
-        
-        
+
         if ($webpage->hidden) return;
         if ($webpage->noproof) return;
         
@@ -762,6 +778,14 @@ class ftpController extends Controller
         $template_dir=Bootstrap::$main->kameleon->relative_dir($file_name,$path['template']);
         Bootstrap::$main->session('template_dir',$template_dir);        
 
+        if ($this->appengine_static_host) {
+            if ($path['template']=='.') Bootstrap::$main->session('template_dir',$this->appengine_static_host); 
+            else Bootstrap::$main->session('template_dir',$this->appengine_static_host.'/'.$path['template']); 
+        
+            Bootstrap::$main->session('template_images',$this->appengine_static_host.'/'.$path['images']);
+            Bootstrap::$main->session('uimages',$this->appengine_static_host.'/'.$path['uimages']);
+            Bootstrap::$main->session('media',$this->appengine_static_host.'/'.$path['media']);        
+        }
         
         $content=$index->getPage(null,PAGE_MODE_PURE,$sid);
         
@@ -785,8 +809,10 @@ class ftpController extends Controller
             $webpage->nd_ftp=time();
             $webpage->save(false);
 
-            $this->transfer($tmp,$file_name,true,' ['.$webpage->id.']');
+            $ret=$this->transfer($tmp,$file_name,true,' ['.$webpage->id.']',array(),substr($file_name,-4)=='.php');
             unlink($tmp);
+            
+            return $ret;
         }
         
     }
@@ -803,17 +829,29 @@ class ftpController extends Controller
             $err=Tools::translate('FAIL');
             $cmd=Tools::translate('Remove file').': '.$wpt['file_name'];
             
-            if (@ftp_delete($this->conn,$wpt['file_name']))
+            $removed=false;
+            
+            if ($this->conn && @ftp_delete($this->conn,$wpt['file_name']))
             {
                 $this->debug($cmd);
                 $this->log($this->ftp,$cmd,'OK',false);
-                $webpagetrash->markAsTrashed($wpt['id']);
+                $removed=true;
+            }
+               
+            if ($this->appengine_path) {
+                @unlink($this->appengine_path.'/'.$wpt['file_name']);
                 
-                if ($this->appengine_path) @unlink($this->appengine_path.'/'.$wpt['file_name']);
+                $removed=true;
+            }
+            //TODO  GCS
+            
+            
+            
+            if ($removed) {
+                $webpagetrash->markAsTrashed($wpt['id']);
             }
             else
             {
-                //$this->log($this->ftp,$cmd,$err,false);
                 $webpagetrash->markAsTrashed($wpt['id'],'U');
             }
         }
@@ -840,16 +878,16 @@ class ftpController extends Controller
             {
                 $this->transfer(__DIR__.'/../widgets/'.$widget.'/include',
                                 $session['path']['include'].'/'.$dst,
-                                $all); 
+                                $all,'',array(),true); 
             }
         }
         
-        $res=$this->transfer($session['uincludes'],$session['path']['include'],$all);
+        $res=$this->transfer($session['uincludes'],$session['path']['include'],$all,'',array(),true);
         
         
         if ($res===false) return false;
         
-        $res+=$this->transfer(__DIR__.'/../../library/GN/Smekta.php',$session['path']['include'].'/_smekta.php',$all);
+        $res+=$this->transfer(__DIR__.'/../../library/GN/Smekta.php',$session['path']['include'].'/_smekta.php',$all,'',array(),true);
         
         return $res;
     }
@@ -1085,7 +1123,7 @@ class ftpController extends Controller
         unlink($tmp);
     }
     
-    protected function appengine($id,$ver,$scripts,$cron,$md5,$rewrite,$user,$ftp)
+    protected function appengine($id,$ver,$scripts,$cron,$md5,$rewrite,$user,$ftp,$resitemap)
     {
         $this->log($this->ftp,"Appengine transfer started",true);
         $session=Bootstrap::$main->session();
@@ -1095,7 +1133,7 @@ class ftpController extends Controller
         $static_dirs=array();
         $static_files=array();
         
-        
+        /*
         
         foreach($this->template_dirs() AS $dir)
         {
@@ -1108,7 +1146,10 @@ class ftpController extends Controller
         $static_dirs[$this->root_dir($session['path']['images'])]=1;
     
     
+    
         $static_files['sitemap.xml']=1;
+        
+        
     
         foreach (array_keys($static_dirs) AS $dir)
         {
@@ -1120,180 +1161,184 @@ class ftpController extends Controller
             $app.="- url: /$file\n  static_files: $file\n  upload: $file\n\n";
         }
 
+        */
     
         $webpage=new webpageModel();
         
         $notfound='';
         $pages=array();
-
-        $sids=$webpage->sidsForFtp('',true,$ftp->server,$session['langs_used'],$ftp->ver);
-        if (count($sids) > 500) GN_Smekta::set_debug_fun(null);
-        sort($sids);
-        foreach($sids AS $sid) {
-            $webpage->get($sid);
-            Bootstrap::$main->setPath($webpage->lang);
-            $file_name=$webpage->file_name();
-            if ($webpage->hidden) continue;
-            
-            $login = $webpage->appengine_login();
-            
-            if (!$notfound)
-            {
-                $notfound=$file_name;    
-                $notfound_login=$login;
-            }
-            
-            $basename=basename($file_name);
-            $dirname=dirname($file_name);
-            if ($dirname=='.') $dirname='/';
-            else $dirname='/'.$dirname;
-             
-            $scriptorstatic=substr($file_name,-4)=='.php'?'script':'static';
-            
-            if (substr($basename,0,5)=='index')
-            {
-                $pages[$login?:'free'][$scriptorstatic][$dirname] = $file_name;
-                if ($dirname!='/') $pages[$login?:'free'][$scriptorstatic][$dirname.'/'] = $file_name;
-            }
-    
-            $pages[$login?:'free'][$scriptorstatic]['/'.$file_name] = $file_name;
-
-        
-        }
-        
-        $rootlogin='free';
-        $app_json=array();
-        
-        for ($level=0;$level<10;$level++)
-        {
-            $dirs=array();
-            foreach($pages AS $login=>$types)
-            {
-                foreach($types AS $type=>$files)
-                {
-                    foreach($files AS $d=>$file)
-                    {
-                        $rd=$this->root_dir($d,$level)?:'/';
-                        
-                        if ($level>0)
-                        {
-                            $rdd=$this->root_dir($d,$level-1)?:'/';
-                            
-                            if (!in_array($rdd,$dirs_conflicted)) continue;
-                        }
-                        else
-                        {
-                            $app_json['s'][$type][$d]=$file;
-                        }
-                        
-                        $dirs[$rd][$login]=1;
-                    }
-                }
-            }
-            
-            $dirs_conflicted = array();
-            
-            foreach($dirs AS $dir=>$logins)
-            {
-                if (count($logins)==1)
-                {
-                    $login=current(array_keys($logins));
-                    
-                    if ($dir=='/')
-                    {
-                        $rootlogin=$login;
-                        continue;
-                    }
-                    
-                    $app.="- url: ".str_replace('.','\\.',$dir).".*\n";
-                    $app.="  script: _app.php\n";
-                    if ($login!='free') $app.="  login: ".$login."\n";
-                    $app.="\n";
-                }
-                else
-                {
-                    $dirs_conflicted[]=$dir;
-                }
-            }
-            
-            if (count($dirs_conflicted)==0) break;
-        }
-        
-        
-          
-        
-        if ($scripts) {
-            if (!is_array($scripts)) $scripts=explode("\n",$scripts);
-            foreach ($scripts AS $script)
-            {
-                if (!trim($script)) continue;
-                $script=explode(':',$script);
-                
-                //$res=$this->transfer($session['uincludes'],$session['path']['include'],$all);
-                if (!file_exists($session['uincludes'].'/'.$script[0])) continue;
-                $app.="- url: /".$session['path']['include'].'/'.$script[0]."\n";
-                $app.="  script: ".$session['path']['include'].'/'.$script[0]."\n";
-                if (isset($script[1]) && $script[1]) $app.="  login: ".$script[1]."\n";
-                $app.="\n";   
-            }
-        }
-        
-
-        $app.="- url: /.*\n";
-        $app.="  script: _app.php\n";
-        if ($rootlogin!='free') $app.="  login: ".$rootlogin."\n";
-        $app.="\n";
-        
-        
-        if ($rewrite)
-        {
-            foreach(explode("\n",$rewrite) AS $r)
-            {
-                $app_json['r'][]=explode('~',$r);
-            }           
-        }
-        
-        
-        $app_json=serialize($app_json);
-        
-        
-        
-        $cron=trim($cron);
-        
-        
-        
-        $calculate_md5=md5($app.$cron.$app_json);
-        
+        $calculate_md5=false;
         $tmp = sys_get_temp_dir ().'/'.md5(time().rand(1000,9999)).'.tmp';
         
-        if ($md5 != $calculate_md5) 
-        {
-            file_put_contents($tmp,$app);  
-            $this->transfer($tmp,'app.yaml',true);
+        if ($resitemap) {
 
-            file_put_contents($tmp,$app_json);  
-            $this->transfer($tmp,'_app.ser',true);
-            
-            if ($cron) {
+            $sids=$webpage->sidsForFtp('',true,$ftp->server,$session['langs_used'],$ftp->ver);
+            if (count($sids) > 500) GN_Smekta::set_debug_fun(null);
+            sort($sids);
+            foreach($sids AS $sid) {
+                $webpage->get($sid);
+                Bootstrap::$main->setPath($webpage->lang);
+                $file_name=$webpage->file_name();
+                if ($webpage->hidden) continue;
                 
-                $cron_yaml="cron:\n";
-                foreach(explode("\n",$cron) AS $c)
+                $login = $webpage->appengine_login();
+                
+                if (!$notfound)
                 {
-                    $c=explode('|',$c);
-                    $cron_yaml.="- description: ".$c[0]."\n  url: ".$c[1]."\n  schedule: ".$c[2]."\n\n";
+                    $notfound=$file_name;    
+                    $notfound_login=$login;
                 }
                 
-                file_put_contents($tmp,$cron_yaml);
-                $this->transfer($tmp,'cron.yaml',true);
-            }           
-        }
-        else
-        {
-            $calculate_md5=false;
+                $basename=basename($file_name);
+                $dirname=dirname($file_name);
+                if ($dirname=='.') $dirname='/';
+                else $dirname='/'.$dirname;
+                 
+                $scriptorstatic=substr($file_name,-4)=='.php'?'script':'static';
+                
+                if (substr($basename,0,5)=='index')
+                {
+                    $pages[$login?:'free'][$scriptorstatic][$dirname] = $file_name;
+                    if ($dirname!='/') $pages[$login?:'free'][$scriptorstatic][$dirname.'/'] = $file_name;
+                }
+        
+                $pages[$login?:'free'][$scriptorstatic]['/'.$file_name] = $file_name;
+    
+            
+            }
+            
+            $rootlogin='free';
+            $app_json=array();
+            
+            for ($level=0;$level<10;$level++)
+            {
+                $dirs=array();
+                foreach($pages AS $login=>$types)
+                {
+                    foreach($types AS $type=>$files)
+                    {
+                        foreach($files AS $d=>$file)
+                        {
+                            $rd=$this->root_dir($d,$level)?:'/';
+                            
+                            if ($level>0)
+                            {
+                                $rdd=$this->root_dir($d,$level-1)?:'/';
+                                
+                                if (!in_array($rdd,$dirs_conflicted)) continue;
+                            }
+                            else
+                            {
+                                $app_json['s'][$type][$d]=$file;
+                            }
+                            
+                            $dirs[$rd][$login]=1;
+                        }
+                    }
+                }
+                
+                $dirs_conflicted = array();
+                
+                foreach($dirs AS $dir=>$logins)
+                {
+                    if (count($logins)==1)
+                    {
+                        $login=current(array_keys($logins));
+                        
+                        if ($dir=='/')
+                        {
+                            $rootlogin=$login;
+                            continue;
+                        }
+                        
+                        $app.="- url: ".str_replace('.','\\.',$dir).".*\n";
+                        $app.="  script: _app.php\n";
+                        if ($login!='free') $app.="  login: ".$login."\n";
+                        $app.="\n";
+                    }
+                    else
+                    {
+                        $dirs_conflicted[]=$dir;
+                    }
+                }
+                
+                if (count($dirs_conflicted)==0) break;
+            }
+            
+            
+              
+            
+            if ($scripts) {
+                if (!is_array($scripts)) $scripts=explode("\n",$scripts);
+                foreach ($scripts AS $script)
+                {
+                    if (!trim($script)) continue;
+                    $script=explode(':',$script);
+                    
+                    //$res=$this->transfer($session['uincludes'],$session['path']['include'],$all);
+                    if (!file_exists($session['uincludes'].'/'.$script[0])) continue;
+                    $app.="- url: /".$session['path']['include'].'/'.$script[0]."\n";
+                    $app.="  script: ".$session['path']['include'].'/'.$script[0]."\n";
+                    if (isset($script[1]) && $script[1]) $app.="  login: ".$script[1]."\n";
+                    $app.="\n";   
+                }
+            }
+            
+    
+            $app.="- url: /.*\n";
+            $app.="  script: _app.php\n";
+            if ($rootlogin!='free') $app.="  login: ".$rootlogin."\n";
+            $app.="\n";
+            
+            
+            if ($rewrite)
+            {
+                foreach(explode("\n",$rewrite) AS $r)
+                {
+                    $app_json['r'][]=explode('~',$r);
+                }           
+            }
+            
+            $app_json['b']=$this->gcs_bucket->name;
+            
+            $app_json=serialize($app_json);
+        
+            $cron=trim($cron);
+                
+            $calculate_md5=md5($app.$cron.$app_json);
+            
+            
+            
+            if ($md5 != $calculate_md5) 
+            {
+                file_put_contents($tmp,$app);  
+                $this->transfer($tmp,'app.yaml',true,'',array(),true);
+    
+                file_put_contents($tmp,$app_json);  
+                $this->transfer($tmp,'_app.ser',true,'',array(),true);
+                
+                if ($cron) {
+                    
+                    $cron_yaml="cron:\n";
+                    foreach(explode("\n",$cron) AS $c)
+                    {
+                        $c=explode('|',$c);
+                        $cron_yaml.="- description: ".$c[0]."\n  url: ".$c[1]."\n  schedule: ".$c[2]."\n\n";
+                    }
+                    
+                    file_put_contents($tmp,$cron_yaml);
+                    $this->transfer($tmp,'cron.yaml',true,'',array(),true);
+                }           
+            }
+            else
+            {
+                $calculate_md5=false;
+            }
         }
         
-        $this->transfer(__DIR__.'/../../library/GoogleAppEnginePhp.php','_app.php',false);
-        
+        $this->transfer(__DIR__.'/../../library/GoogleAppEngine/_app.php','_app.php',false,'',array(),true);
+        $this->transfer(__DIR__.'/../../library/GoogleAppEngine/mime.ser','_mime.ser',false,'',array(),true);
+       
 
         
         $client=Google::getUserClient($user,false,'appengine');
@@ -1302,7 +1347,8 @@ class ftpController extends Controller
 
         $user=new userModel($user);        
         
-        $cmd=$appengine['sdk'].'/appcfg.py -e '.$user->email.' --oauth2 --oauth2_access_token='.$access_token.' update '.$this->appengine_path.' >'.$tmp.' 2>&1';
+        $cmd=$appengine['sdk'].'/appcfg.py -e '.$user->email.' --oauth2_access_token='.$access_token.' update '.$this->appengine_path.' >'.$tmp.' 2>&1';
+        
         
         $lock=$this->appengine_path.'/.appengine_lock';
         
@@ -1313,20 +1359,22 @@ class ftpController extends Controller
         }
         else
         {
-            
-            file_put_contents($lock,'a');
-            $this->debug("Run: $cmd");
+            if ($this->appengine_need_transfer) {
+                file_put_contents($lock,'a');
+                $this->debug("Run: $cmd");
+                    
+                system($cmd);
+                unlink($lock);
+                $result=file_get_contents($tmp);
                 
-            system($cmd);
-            unlink($lock);
-            $result=file_get_contents($tmp);
-            
-            $this->debug(nl2br($result));
-            
-            foreach(explode("\n",$result) AS $res)
-            {
-                if (trim($res)) $this->log($this->ftp,trim($res),"OK",false); 
-            }
+                $this->debug(nl2br($result));
+                
+                foreach(explode("\n",$result) AS $res)
+                {
+                    if (trim($res)) $this->log($this->ftp,trim($res),"OK",false); 
+                }
+            } 
+            $this->log($this->ftp,"Appengine transfer ended",true);
             
             
         }
@@ -1466,7 +1514,9 @@ class ftpController extends Controller
     }
     
     protected function chdir($dir,$mkdir=true)
-    {   
+    {
+        if (!$this->conn) return true;
+        
         if (!@ftp_chdir($this->conn,$dir) ) {
 
             if (!$mkdir) return false;
@@ -1483,6 +1533,7 @@ class ftpController extends Controller
     
     protected function statdir($dir)
     {
+        if (!$this->conn) return null;
         if (isset($this->statcache[$dir])) return $this->statcache[$dir];
         
         $pwd=ftp_pwd($this->conn);

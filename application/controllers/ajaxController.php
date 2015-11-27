@@ -1390,7 +1390,7 @@ class ajaxController extends Controller
     public function appengie_regex_test()
     {
         $_only_functions=true;
-        include_once (__DIR__.'/../../library/GoogleAppEnginePhp.php');
+        include_once (__DIR__.'/../../library/GoogleAppEngine/_app.php');
         
         $self_long=$_POST['url'];
         $self=preg_replace('~^http://~','',$self_long);

@@ -526,54 +526,68 @@ class webpageModel extends webModel
 
     public function save($default_update_key=true,$checkrights=true)
     {
-	if (!strlen($this->id)) return false;
-	
-	
-	
-	if ($this->id)
-	{
-	    if ($this->prev==0) $this->tree=':0:';
-	    else {
-		$trees=$this->trees($this->prev,$this->ver);
-		if (isset($trees['notype'])) {
-		    $this->tree=':'.implode(':',$trees['notype']).':'.$this->prev.':';
-		}
-	    }
-	}
-	
-	if ($checkrights && !$this->checkRight()) return false;
-	
-	
-	$filename='';
-
-	
-	if ($this->trash >0 || $this->hidden ) {
-		$filename=$this->file_name();
-	} elseif ( isset($this->data['file_name']) && isset($this->savedData['file_name']) && trim($this->data['file_name']) != trim($this->savedData['file_name'])) {
+		if (!strlen($this->id)) return false;
 		
-		$filename=$this->file_name();
-	}
-
-	if ($filename) {
-		$webpagetrash=new webpagetrashModel();
-		$webpagetrash->server=$this->server;
-		$webpagetrash->page_id=$this->id;
-		$webpagetrash->ver=$this->ver;
-		$webpagetrash->lang=$this->lang;
-		$webpagetrash->nd_issue=time();
-		$webpagetrash->file_name=$filename;
-		$webpagetrash->status='N';
-		$webpagetrash->save();
-	}
+		
+		
+		if ($this->id)
+		{
+			if ($this->prev==0) $this->tree=':0:';
+			else {
+			$trees=$this->trees($this->prev,$this->ver);
+			if (isset($trees['notype'])) {
+				$this->tree=':'.implode(':',$trees['notype']).':'.$this->prev.':';
+			}
+			}
+		}
+		
+		if ($checkrights && !$this->checkRight()) return false;
+		
+		
+		$filename='';
 	
-	if (!$this->mayProof() && $checkrights) {
-	    $user=Bootstrap::$main->session('user');
-	    $this->unproof_autor = $user['username'];
-	    $this->unproof_date=Bootstrap::$main->now;
-	    $this->noproof++;
-	}    
+		$resitemap=0;
+		foreach (array('file_name','trash','hidden','nositemap') AS $f) {
+			if (isset($this->data[$f]) && isset($this->savedData[$f]) && trim($this->data[$f]) != trim($this->savedData[$f]) ) {
+				$resitemap=1;
+				break;
+			}		
+		}
+		
+		if ($resitemap) {
+			$server=new serverModel($this->server);
+			$server->resitemap=$resitemap;
+			$server->save();
+		}
 	
-	return parent::save($default_update_key);
+		
+		if ($this->trash >0 || $this->hidden ) {
+			$filename=$this->file_name();
+		} elseif ( isset($this->data['file_name']) && isset($this->savedData['file_name']) && trim($this->data['file_name']) != trim($this->savedData['file_name'])) {
+			
+			$filename=$this->file_name();
+		}
+	
+		if ($filename) {
+			$webpagetrash=new webpagetrashModel();
+			$webpagetrash->server=$this->server;
+			$webpagetrash->page_id=$this->id;
+			$webpagetrash->ver=$this->ver;
+			$webpagetrash->lang=$this->lang;
+			$webpagetrash->nd_issue=time();
+			$webpagetrash->file_name=$filename;
+			$webpagetrash->status='N';
+			$webpagetrash->save();
+		}
+		
+		if (!$this->mayProof() && $checkrights) {
+			$user=Bootstrap::$main->session('user');
+			$this->unproof_autor = $user['username'];
+			$this->unproof_date=Bootstrap::$main->now;
+			$this->noproof++;
+		}    
+		
+		return parent::save($default_update_key);
     }
     
     public function next_page($id)
