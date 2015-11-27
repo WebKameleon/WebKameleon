@@ -1114,8 +1114,11 @@ class ftpController extends Controller
             $data['url']=$url;
             $data['priority']=$priority;
             
-            if ($webpage->og_image) $data['image']=$http_url.$session['path']['uimages'].'/'.$webpage->og_image;
-            
+            if ($webpage->og_image) {
+                $urlimg=$http_url;
+                if ($this->appengine_path && isset($this->gcs_bucket->name)) $urlimg='http://'.$this->gcs_bucket->name.'/';
+                $data['image']=$urlimg.$session['path']['uimages'].'/'.$webpage->og_image;
+            }
             
             $files[sprintf('%03d',100*$priority).$file_name]=$data;
 
