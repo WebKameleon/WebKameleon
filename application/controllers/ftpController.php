@@ -277,8 +277,8 @@ class ftpController extends Controller
     
     protected function disconnect($id)
     {
-        //Bootstrap::$main->setDebug(1); return;
-        //mydie(Bootstrap::$main->getDebug());
+        Bootstrap::$main->setDebug(1); return;
+        mydie(Bootstrap::$main->getDebug());
         if (Bootstrap::$main->getDebug()>0) return false;
         //mydie(Bootstrap::$main->getDebug());
         
@@ -823,7 +823,6 @@ class ftpController extends Controller
         $webpagetrash=new webpagetrashModel();
         $trash=$webpagetrash->getUnTrashed($server,$lang,$ver);
         
-
         foreach ($trash AS $wpt) {
 
             $err=Tools::translate('FAIL');
@@ -843,9 +842,17 @@ class ftpController extends Controller
                 
                 $removed=true;
             }
-            //TODO  GCS
             
+            if ($this->gcs_bucket) {
+                try {
+                    $o=$this->gcs_service->objects->get($this->gcs_bucket->name,$wpt['file_name']);
+                    if ($o->name) $this->gcs_service->objects->delete($this->gcs_bucket->name,$wpt['file_name']);
+                    $removed=true;
+                } catch (Exception $e) {
+                    $removed=false;
+                }
             
+            }
             
             if ($removed) {
                 $webpagetrash->markAsTrashed($wpt['id']);
@@ -1339,7 +1346,9 @@ class ftpController extends Controller
         $this->transfer(__DIR__.'/../../library/GoogleAppEngine/_app.php','_app.php',false,'',array(),true);
         $this->transfer(__DIR__.'/../../library/GoogleAppEngine/mime.ser','_mime.ser',false,'',array(),true);
        
-
+        $phpini=Bootstrap::$main->session('ufiles_path').'/../php.ini';
+        if (file_exists($phpini)) $this->transfer($phpini,'php.ini',false,'',array(),true);
+    
         
         $client=Google::getUserClient($user,false,'appengine');
         $access_token=json_decode($client->getAccessToken())->access_token;
