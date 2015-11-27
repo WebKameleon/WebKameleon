@@ -434,11 +434,8 @@ class Bootstrap
         if ($server) {
 
             if (!$this->session('ver')) $this->session('ver', $server['ver']);
-
             if (!$this->session('lang')) $this->session('lang', $this->session('ulang'));
-
             if (!$this->session('lang') || ($clear && !$dontchangelanguage) || !$this->session('template')) $this->session('lang', $server['lang']);
-
             $ver = $this->session('ver');
             $lang = $this->session('lang');
 
@@ -465,7 +462,7 @@ class Bootstrap
             }
 
             $this->session('template_images', $this->root . 'images');
-	    $this->session('template_dir', $this->root . 'template');
+			$this->session('template_dir', $this->root . 'template');
 
             if ($path = $this->session('template')) {
 
@@ -476,15 +473,15 @@ class Bootstrap
                 }
 
                 $this->config2array();
-		unset($this->config['db']);
+				unset($this->config['db']);
 		
 
                 if ($this->config['security']['allow_template_tokens'] && file_exists($path . '/' . $this->config['template']['token_class'] . '.php')) {
                     if (!class_exists($this->config['template']['token_class']))
-		    {
-			require_once $path . '/' . $this->config['template']['token_class'] . '.php';
-		    }
-		    if (class_exists($this->config['template']['token_class'])) {
+					{
+						require_once $path . '/' . $this->config['template']['token_class'] . '.php';
+					}
+					if (class_exists($this->config['template']['token_class'])) {
                         $tokenClassName = $this->config['template']['token_class'];
                     }
                 }
@@ -501,16 +498,16 @@ class Bootstrap
 
         if (isset($_SERVER['REQUEST_URI'])) $this->session('request_uri', $_SERVER['REQUEST_URI']);
     
-	if (!$this->session('langs_used') || !count($this->session('langs_used')) || $clear ) {
-	    $webpage = new webpageModel();
-	    $langs=$webpage->langs();
-	    
-	    foreach($langs AS $i=>$lang) if (!$lang) unset($langs[$i]);
-	    
-	    //if ($this->session('lang') && !in_array($this->session('lang'),$langs)) $langs[]=$this->session('lang');
-	    $this->session('langs_used',$langs);
-	    
-	}
+		if (!$this->session('langs_used') || !count($this->session('langs_used')) || $clear ) {
+			$webpage = new webpageModel();
+			$langs=$webpage->langs();
+			
+			foreach($langs AS $i=>$lang) if (!$lang) unset($langs[$i]);
+			
+			//if ($this->session('lang') && !in_array($this->session('lang'),$langs)) $langs[]=$this->session('lang');
+			$this->session('langs_used',$langs);
+			
+		}
 	
 
     }
@@ -532,19 +529,23 @@ class Bootstrap
     {
         $c = array();
 
+		$server=$this->session('server');
+		
 	
         foreach ($config?:$this->config AS $k => $v) {
             $k = str_replace('.', "']['", $k);
             $k = "\$c['" . $k . "']";
             eval($k . '=$v;');
         }
+		
+		if (isset($server['trust']) && $server['trust']) {
+			$c['security']['allow_td_module_execute'] = $c['security']['allow_template_tokens'] = true;
+		}
 	
-	if ($config) return $c;
+		if ($config) return $c;
 	
         $this->config = $c;
-
         $this->webtd_widgets();
-
         return $this->config;
     }
 
