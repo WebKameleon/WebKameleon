@@ -76,12 +76,13 @@ class wizardController extends Controller
             return false;
         }
 
-        if (isset($session['uimages_path']) && file_exists($session['uimages_path']) ) $zip->addDir($session['uimages_path'], 'uimages');
-        if (isset($session['ufiles_path']) && file_exists($session['ufiles_path']) ) $zip->addDir($session['ufiles_path'], 'ufiles');
-        if (isset($session['uincludes']) && file_exists($session['uincludes'])) $zip->addDir($session['uincludes'], 'include');
+        if (!isset($_REQUEST['noimages']) && isset($session['uimages_path']) && file_exists($session['uimages_path']) ) $zip->addDir($session['uimages_path'], 'uimages');
+        if (!isset($_REQUEST['nofiles']) && isset($session['ufiles_path']) && file_exists($session['ufiles_path']) ) $zip->addDir($session['ufiles_path'], 'ufiles');
+        if (!isset($_REQUEST['noinclude']) && isset($session['uincludes']) && file_exists($session['uincludes'])) $zip->addDir($session['uincludes'], 'include');
 
-        if ($session['template_media'])
-            $zip->addDir($session['template_path'], 'template');
+        if ($session['template_media']) {
+            if (!isset($_REQUEST['notemplate']) ) $zip->addDir($session['template_path'], 'template');
+        }
         else
             $zip->addFromString('template.txt', $session['server']['szablon']);
 
