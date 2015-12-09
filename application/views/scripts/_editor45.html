@@ -1,0 +1,192 @@
+<div id="km_wysiwyg">
+    <div id="km_wysiwyg_toolbar"></div>
+    <div id="km_wysiwyg_editor" class="km_tip" tip="3">
+        <textarea id="wysiwyg" name="td[plain]">{td.plain}</textarea>
+    </div>
+</div>
+<script type="text/javascript" src="{root}ckeditor45/ckeditor.js"></script>
+<script type="text/javascript">
+jQueryKam(function ($) {
+    var on_editor_ready = function (e) {
+        on_window_resize();
+
+        var editor = get_editor();
+
+        {if:!td.plain|stristr:<script}
+        editor.setData('{td.plain2}');
+        {endif:!td.plain|stristr:<script}
+        
+        $.getJSON(km_infos["ajax_link"] + "/clipboard", function (data) {
+            editor.config.km_clipboard = data.items;
+        });
+
+
+        $("<span></span>").addClass("cke_toolbar_separator").insertAfter(".cke_combo__fontsize");
+    }
+
+    var on_editor_resize = function (e) {
+
+    }
+
+    var on_window_resize = function (e) {
+        var CKE = get_editor(),
+            D   = 114;
+
+        var w = CKE.container.offsetWidth,
+                h = $(window).height() - D;
+
+        CKE.config.autoGrow_minHeight = CKE.config.autoGrow_maxHeight = h - D / 2;
+        CKE.resize(w, h);
+    }
+
+    var get_editor = function () {
+        return CKEDITOR.instances.wysiwyg;
+    }
+
+    var get_command = function (element) {
+        return $(element).attr("id").split("_").pop();
+    }
+
+
+    CKEDITOR.replace("wysiwyg", {
+        baseHref : KAM_ROOT,
+        width : getUrlVar("w") || "100%",
+        language : "{ulang?en}",
+        resize_dir : "horizontal",
+        contentsCss : {css_files},
+        sharedSpaces : {
+            top : document.getElementById('km_wysiwyg_toolbar')
+        },
+        extraPlugins : "mask,sharedspace,tabletools",
+        autoParagraph : false,
+        basicEntities : true,
+        scayt_autoStartup : false,
+        ignoreEmptyParagraph : false,
+        templates_replaceContent : false,
+        stylesSet : 'webkameleon_styles',
+        enterMode : CKEDITOR.ENTER_P,
+        allowedContent : true,
+
+        toolbar : [ [
+            "Undo", "Redo" ,
+            "-",
+            "Format", "Styles", "FontSize",
+            "-",
+            "Bold", "Italic", "Underline", "Strike",
+            "-",
+            "TextColor", "BGColor",
+            "-",
+            "Link", "Unlink", 
+            "-",
+            "NumberedList", "BulletedList",
+            "-",
+            "Outdent", "Indent",
+            "-",
+            "Blockquote",
+            "-",
+            "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock",
+            "-",
+            "Mask","Table",
+            "-",
+            "RemoveFormat", "Source"
+        ] ],
+        on : {
+            instanceReady : on_editor_ready,
+            resize : on_editor_resize
+        },
+
+        bodyClass : "kmw_article"
+    });
+
+    CKEDITOR.on("dialogDefinition", function (e) {
+        var dialogName = e.data.name;
+        var dialogDefinition = e.data.definition;
+
+        if (dialogName == "table") {
+            var info = dialogDefinition.getContents("info");
+            info.get("txtWidth")["default"] = "100%";
+
+            var advanced = dialogDefinition.getContents("advanced");
+            advanced.get("advCSSClasses")["default"] = "table";
+        }
+    });
+    
+     
+
+    $(window).resize(on_window_resize);
+
+    // formatowanie tekstu
+    $("a[id^='km_ddmenu_format']").on("click", function (e) {
+        var CKE = get_editor();
+        if (CKE.container.isVisible()) {
+            var tag   = $(this).attr("id").split("_").pop();
+            var style = new CKEDITOR.style(CKE.config["format_" + tag]);
+            var elem  = new CKEDITOR.dom.elementPath(CKE.getSelection().getStartElement());
+
+            CKE.fire("saveSnapshot");
+            style[style.checkActive(elem) ? "remove" : "apply"](CKE.document);
+            CKE.fire("saveSnapshot");
+        }
+    });
+
+    $(".sf-menu").on("show", function (e) {
+        var CKE = get_editor();
+        if (CKE.container.isVisible()) {
+            var selected_text = CKE.getSelection().getSelectedText();
+            // kopiuj, wytnij
+            $("#km_ddmenu_cut, #km_ddmenu_copy").parent()[selected_text ? "removeClass" : "addClass"]("sf-disable");
+
+            // dolny i gorny index
+            $("#km_ddmenu_subscript, #km_ddmenu_superscript").each(function () {
+                var command = get_command(this);
+                $(this).parent()[CKE.getCommand(command).state == 1 ? "addClass" : "removeClass"]("sf-active");
+            });
+
+            // usun odnosnik
+            $("#km_ddmenu_unlink").each(function () {
+                var command = get_command(this);
+                $(this).parent()[CKE.getCommand(command).state == 2 ? "removeClass" : "addClass"]("sf-disable");
+            });
+        }
+    });
+
+    // proste operacje CKEditorowe
+    $(".sf-menu").on("click", "li:not(.sf-disable) > a.cke_command", function (e) {
+        var CKE = get_editor();
+        if (CKE.container.isVisible()) {
+            var command = get_command(this);
+
+            
+            CKE.fire("saveSnapshot");
+            CKE.execCommand(command);
+            CKE.fire("saveSnapshot");
+        }
+    });
+
+    // galeria
+    $("body").on("gallery_file_selected", function (e, file) {
+        if (file.target_element) {
+            var URL    = file.url.replace(KAM_ROOT, ""),
+                targetet = file.target_element.split("|");
+
+            var element = CKEDITOR.dialog.getCurrent().getContentElement(target[0], target[1]);
+            if (element) {
+                element.setValue(URL);
+            }
+        }
+    });
+    
+    CKEDITOR.stylesSet.add( 'webkameleon_styles',
+    [
+        {loop:config_inline.style} 
+        { name : '{name}', element : 'span', attributes : { 'class' : '{class}' } },
+        {endloop:config_inline.style}
+    ]);    
+    
+    
+});
+
+
+
+</script>
+

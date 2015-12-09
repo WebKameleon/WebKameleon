@@ -785,6 +785,8 @@ class ftpController extends Controller
             Bootstrap::$main->session('template_images',$this->appengine_static_host.'/'.$path['images']);
             Bootstrap::$main->session('uimages',$this->appengine_static_host.'/'.$path['uimages']);
             Bootstrap::$main->session('media',$this->appengine_static_host.'/'.$path['media']);        
+            Bootstrap::$main->session('ufiles',$this->appengine_static_host.'/'.$path['ufiles']);        
+        
         }
         
         $content=$index->getPage(null,PAGE_MODE_PURE,$sid);

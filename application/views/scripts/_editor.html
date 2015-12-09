@@ -56,6 +56,9 @@ jQueryKam(function ($) {
         return $(element).attr("id").split("_").pop();
     }
 
+
+
+    
     CKEDITOR.replace("wysiwyg", {
         baseHref : KAM_ROOT,
         width : getUrlVar("w") || "100%",
@@ -63,7 +66,7 @@ jQueryKam(function ($) {
         resize_dir : "horizontal",
         contentsCss : {css_files},
         sharedSpaces : {
-            top : "km_wysiwyg_toolbar"
+            top : 'km_wysiwyg_toolbar'
         },
         extraPlugins : "mask",
         autoParagraph : false,
@@ -179,7 +182,7 @@ jQueryKam(function ($) {
     $("body").on("gallery_file_selected", function (e, file) {
         if (file.target_element) {
             var URL    = file.url.replace(KAM_ROOT, ""),
-                target = file.target_element.split("|");
+                targetet = file.target_element.split("|");
 
             var element = CKEDITOR.dialog.getCurrent().getContentElement(target[0], target[1]);
             if (element) {
@@ -194,6 +197,7 @@ jQueryKam(function ($) {
         { name : '{name}', element : 'span', attributes : { 'class' : '{class}' } },
         {endloop:config_inline.style}
     ]);    
+    
     
     
 });
