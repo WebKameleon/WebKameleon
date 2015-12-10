@@ -160,10 +160,14 @@ class Google
             if (isset($_GET['code'])) $client->authenticate($_GET['code']);
             else {
                 $client->setAccessType('offline');
+                $client->setApprovalPrompt('force');
+                
                 $auth_url = $client->createAuthUrl();
+                
                 header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
                 die();
             }
+            
             $current_scopes[$forscope] = $client->getAccessToken();
             
             if ($forscope && isset($options['scopes'][$forscope]) && strstr($options['scopes'][$forscope],' '))

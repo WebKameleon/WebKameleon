@@ -278,8 +278,9 @@ class ftpController extends Controller
     
     protected function disconnect($id)
     {
-        //Bootstrap::$main->setDebug(1); return;
         //mydie(Bootstrap::$main->getDebug());
+        //Bootstrap::$main->setDebug(1); return;
+        
         if (Bootstrap::$main->getDebug()>0) return false;
         //mydie(Bootstrap::$main->getDebug());
         
