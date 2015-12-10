@@ -1322,9 +1322,23 @@ class ftpController extends Controller
             $cron=trim($cron);
             
             
-            $moreapp=Bootstrap::$main->session('ufiles_path').'/../app.yaml';
-            if (file_exists($moreapp)) $app.="\n\n". file_get_contents($moreapp);
-            
+            $template_appengine=Bootstrap::$main->session('template_path').'/appengine';
+            if (file_exists($template_appengine)) {
+                $dir=scandir($template_appengine);
+                foreach($dir AS $file) {
+                    if ($file[0]=='.') {
+                        continue;
+                    }
+                    
+                    if ($file=='app.yaml') {
+                        $app.="\n\n". file_get_contents("$template_appengine/$file");
+                    } else {
+                        $this->transfer("$template_appengine/$file",$file,false,'',array(),true);                        
+                    }
+                }
+    
+            }
+                        
             $calculate_md5=md5($app.$cron.$app_json);
             
             
@@ -1358,9 +1372,8 @@ class ftpController extends Controller
         $this->transfer(__DIR__.'/../../library/GoogleAppEngine/_app.php','_app.php',false,'',array(),true);
         $this->transfer(__DIR__.'/../../library/GoogleAppEngine/mime.ser','_mime.ser',false,'',array(),true);
        
-        $phpini=Bootstrap::$main->session('ufiles_path').'/../php.ini';
-        if (file_exists($phpini)) $this->transfer($phpini,'php.ini',false,'',array(),true);
-    
+
+        
         
         $client=Google::getUserClient($user,false,'appengine');
         $access_token=json_decode($client->getAccessToken())->access_token;
