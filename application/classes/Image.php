@@ -49,8 +49,6 @@ class Image
     {
         
         if (!$this->source) return false;
-        
-        
         $ext=end(explode('.',strtolower($dst)));
         
         
@@ -58,26 +56,32 @@ class Image
         if ($dst_h && !$dst_w) $dst_w = round(($dst_h*$this->src_w)/$this->src_h);
         
         if (!$dst_w || !$dst_h) return false;
+        
+        
     
         if ($crop) {
     
             $t = $this->image_crop_calc($this->src_w, $this->src_h, $dst_w, $dst_h);
-    
             $thumb = $this->createimage($ext, $dst_w, $dst_h);
-            
             imagecopyresampled($thumb, $this->source, 0, 0, $t['x'], $t['y'], $dst_w, $dst_h, $t['w'], $t['h']);
         } else {
             if ($scale) {
                 $t = $this->image_scale_calc($this->src_w, $this->src_h, $dst_w, $dst_h);
                 $thumb = $this->createimage($ext, $t['x'], $t['y']);
                 imagecopyresampled($thumb, $this->source, 0, 0, 0, 0, $t['x'], $t['y'], $this->src_w, $this->src_h);
+                $dst_w=$t['x'];
+                $dst_h=$t['y'];
             } else {
                 $thumb = $this->createimage($ext, $dst_w, $dst_h);
                 imagecopyresampled($thumb, $this->source, 0, 0, 0, 0, $dst_w, $dst_h, $this->src_w, $this->src_h);
             }
         }
         
-    
+        if (file_exists($dst)) {
+            if (($imagesize = getimagesize($dst)) !== false) {
+                if ($imagesize[0]==$dst_w && $imagesize[1]==$dst_h) return $dst;
+            }
+        }
     
     
         switch ($ext) {

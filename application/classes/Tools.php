@@ -218,10 +218,13 @@ class Tools
 
         $check = false;
 
+        
+        
+        
         if (!file_exists($dst)) {
             $check = true;
         } else {
-            if (filemtime($src) > filemtime($dst)) {
+            if (filemtime($src) > filemtime($src)) {
                 $check = true;
             } elseif (($imagesize = getimagesize($dst)) !== false) {
                 
@@ -232,12 +235,12 @@ class Tools
         }
         
         
+        
 
         if ($check) {
             $image=new Image($src);
             $img = $image->min($dst, $width, $height, $scale, $crop);
             if ($img) list ($width, $height) = getimagesize($img);
-            
         }
         
 
