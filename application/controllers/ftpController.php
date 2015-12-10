@@ -1301,10 +1301,7 @@ class ftpController extends Controller
             }
             
     
-            $app.="- url: /.*\n";
-            $app.="  script: _app.php\n";
-            if ($rootlogin!='free') $app.="  login: ".$rootlogin."\n";
-            $app.="\n";
+
             
             
             if ($rewrite)
@@ -1338,7 +1335,14 @@ class ftpController extends Controller
                 }
     
             }
-                        
+
+            $app.="\n\n- url: /.*\n";
+            $app.="  script: _app.php\n";
+            if ($rootlogin!='free') $app.="  login: ".$rootlogin."\n";
+            $app.="\n";
+
+
+
             $calculate_md5=md5($app.$cron.$app_json);
             
             
