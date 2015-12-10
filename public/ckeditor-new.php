@@ -78,6 +78,9 @@
 		Przegrać plugins/mask
 	</li>
 	<li>
+		Przegrać plugins/link
+	</li>	
+	<li>
 		Pobrać i doinstalować sharedspace do plugins (extraPlugins)
 	</li>
 	<li>
