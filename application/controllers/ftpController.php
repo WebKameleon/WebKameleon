@@ -12,6 +12,7 @@ class ftpController extends Controller
     private $remote_ftp;
     private $gcs_bucket;
     private $gcs_service;
+    private $gcs_data;
     
     
     
@@ -422,6 +423,20 @@ class ftpController extends Controller
         return true;
     }
     
+    protected function gcs_init()
+    {
+        $client=Google::getUserClient($this->gcs_data['creator'],false,'gcs');
+        $this->gcs_service = Google::getStorageService($client);                
+    
+        try {
+            $this->gcs_bucket = $this->gcs_service->buckets->get($this->gcs_data['website']);   
+        } catch (Exception $e) {
+            $this->gcs_bucket = null;
+            $this->log($this->ftp,$e->getMessage(),Tools::translate('FAIL'),false);
+            $this->debug($e->getMessage());
+        }        
+    }
+    
     
     protected function process($ftpids,$limit,$all,$deteach=true)
     {
@@ -476,21 +491,12 @@ class ftpController extends Controller
             
             if ($server->gcs_website) {
                 $lang=$ftp->lang;
-                
-                $gcs_website = GN_Smekta::smektuj($server->gcs_website,get_defined_vars());
 
-                $client=Google::getUserClient($server->creator,false,'gcs');
-                $this->gcs_service = Google::getStorageService($client);                
-            
-                try {
-                    $this->gcs_bucket = $this->gcs_service->buckets->get($gcs_website);   
-                } catch (Exception $e) {
-                               
-                    $this->gcs_bucket = null;
-                    $this->log($ftp,$e->getMessage(),Tools::translate('FAIL'),false);
-                    $this->debug($e->getMessage());
-                }
-            
+                $gcs_website = GN_Smekta::smektuj($server->gcs_website,get_defined_vars());
+                
+                $this->gcs_data['creator']=$server->creator;
+                $this->gcs_data['website']=$gcs_website;
+                $this->gcs_init();
             }
             
             
@@ -727,6 +733,7 @@ class ftpController extends Controller
                         
                     } catch (Exception $e) {
                         sleep(1);
+                        $this->gcs_init();
                         $o=$this->gcs_service->objects->insert($this->gcs_bucket->name,$gso,$postbody);
                     }
                     
