@@ -70,7 +70,7 @@ class gallery2Widget extends imageWidget
     public function checkThumb($filename)
     {
         $h=$this->data['thumb_height'];
-        $w=0;
+        $w=isset($this->data['thumb_width'])?$this->data['thumb_width']+0:0;
         return Tools::check_image($filename, $this->getUimagesPath(), $this->getThumbsPath(), $w, $h, 0777, true);
     }
 
