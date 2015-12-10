@@ -505,19 +505,19 @@ class ftpController extends Controller
                 $this->debug("Start transfering images");
                 $res=$this->transfer_images($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
 
                 $res=$this->transfer_template($all,$server->social_template);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);     
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);     
                 
                 $res=$this->transfer_media($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
             
                 $res=$this->transfer_uimages($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
                        
             
             }
@@ -526,7 +526,7 @@ class ftpController extends Controller
                 $this->debug("Start transfering includes");
                 $res=$this->transfer_includes($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
             }            
             
             
@@ -535,11 +535,11 @@ class ftpController extends Controller
                 
                 $res=$this->transfer_ufiles($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
 
                 $res=$this->transfer_root($all);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('root files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
 
                 
             }
@@ -551,7 +551,7 @@ class ftpController extends Controller
                 $this->debug("Start transfering pages <b>$limit</b>");
                 $res=$this->transfer_pages($limit,$all,$ftp->server,$ftp->lang,$ftp->ver);
                 $result = ($res===false) ? Tools::translate('FAIL') : $res.' '.Tools::translate('files');
-                $this->log($ftp,Tools::translate('Files report'),$result,false);
+                $this->log($ftp,Tools::translate('Files report').' '.$res,$result,false);
                 
                 $resitemap=$server->resitemap;
                 
@@ -650,6 +650,8 @@ class ftpController extends Controller
                         }
                     }
                     
+                    if (!$all) $cmd.=' ['.Kameleon::datetime($ts_local).' > '.Kameleon::datetime($ts_remote).']';
+                    
                     $this->debug("Transfer $local &nbsp; &raquo; &nbsp; $remote$info <b>$res</b>");
                     $this->log($this->ftp,$cmd,$res,false);                    
                     
@@ -719,6 +721,7 @@ class ftpController extends Controller
                     try {
                         $o=$this->gcs_service->objects->insert($this->gcs_bucket->name,$gso,$postbody);
                         $cmd=Tools::translate('Upload').' [GCS]: '.$remote.$info;
+                        if (!$all) $cmd.=' ['.Kameleon::datetime($ts_local).' > '.Kameleon::datetime($ts_remote).']';
                         $this->log($this->ftp,$cmd,'OK',false);
                         $count++;
                         
@@ -726,6 +729,7 @@ class ftpController extends Controller
                         sleep(1);
                         $o=$this->gcs_service->objects->insert($this->gcs_bucket->name,$gso,$postbody);
                     }
+                    
                 }
                 
                 //mydie($o,date('d-m-Y H:i',$updateTime));
@@ -1316,9 +1320,12 @@ class ftpController extends Controller
             $app_json=serialize($app_json);
         
             $cron=trim($cron);
-                
-            $calculate_md5=md5($app.$cron.$app_json);
             
+            
+            $moreapp=Bootstrap::$main->session('ufiles_path').'/../app.yaml';
+            if (file_exists($moreapp)) $app.="\n\n". file_get_contents($moreapp);
+            
+            $calculate_md5=md5($app.$cron.$app_json);
             
             
             if ($md5 != $calculate_md5) 

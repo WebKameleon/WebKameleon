@@ -53,6 +53,7 @@
     
     function ___readfile($_file)
     {
+        if (substr($_file,-3)=='.js') Header('Content-type: text/javascript');
         $__d=___check_index($_file);
         readfile($_file);
         echo $__d;
