@@ -25,7 +25,19 @@ tr = function (txt) {
 }
 
 
-function confirmDelete(){
+function confirmDelete(a) {
+    
+    if (typeof(a)!='undefined') {
+        KamConfirm(tr('Are you sure')+'?',function() {
+            var href=jQueryKam(a).prop('href');
+            if (href.indexOf('?')>0) href+'&';
+            else href+='?';
+            href+='r='+Math.random();
+            location.href=href;
+        }, null,jQueryKam(a).text());
+        return false;
+    }
+
     return confirm(tr('Are you sure')+'?');
 }
 
@@ -102,7 +114,8 @@ km_paste_bymulti = function (page, what, ret) {
             });
         } else {
             jQueryKam("#km_pastediv").hide();
-            alert(data.nothing);
+            //alert(data.nothing);
+            KamDialog(dta.nothing)
         }
     });
 }
@@ -419,7 +432,8 @@ function copyToClib(id,what)
     jQueryKam.getJSON(km_infos["ajax_link"]+'/copy', { id: id, what: what  }, function (data) {
         km_preloader_hide();
         if (data.status == '1') {
-            alert(data.info);
+            //alert(data.info);
+            KamDialog(data.info);
             jQueryKam(".km_iconi_paste").removeClass("km_icon_disabled");
         } else {
             KamDialog(tr("Save error"));
@@ -562,8 +576,10 @@ function getReturnUrl()
     return Base64.encode(document.location.href);
 }
 
-function KamDialog(html, title, options)
+function KamDialog(html, title, options,okCallback)
 {
+
+    
     if (options==null)
     {
         options = {
@@ -571,6 +587,9 @@ function KamDialog(html, title, options)
                     {
                         text: tr("OK"),
                         click: function () {
+                            if (okCallback) {
+                                okCallback(jQueryKam(this));
+                            }
                             jQueryKam(this).dialog("close");
                         }
                     }]

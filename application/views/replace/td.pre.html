@@ -7,7 +7,7 @@
         <ul class="notranslate"{if:widget} title="{widget_name}"{endif:widget}>
             {if:!readonly}
             <li class="km_r">
-                <a class="km_icon_easy km_icontd_delete" href="{root}edit/remove/{sid}?page={page.id}" onclick="return confirmDelete()" title="{translate.Delete}">{translate.Delete}</a>
+                <a class="km_icon_easy km_icontd_delete" href="{root}edit/remove/{sid}?page={page.id}" onclick="return confirmDelete(this)" title="{translate.Delete}">{translate.Delete}</a>
             </li>
             <li>
                 <a class="km_icon_easy km_icontd_dragdrop km_dragicon hidden-xs" title="{translate.Drag and drop}">{translate.Drag and drop}</a>

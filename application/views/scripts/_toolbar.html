@@ -17,7 +17,7 @@
 			{if:page}
 
 			{if:page.id}
-			<li class="{page-not-found}"><a class="km_icon_easy km_iconi_delete" href="{root}index/remove/{page.id}" onclick="return confirmDelete()" title="{translate.Delete page}">{translate.Delete page}</a></li>
+			<li class="{page-not-found}"><a class="km_icon_easy km_iconi_delete" href="{root}index/remove/{page.id}" onclick="return confirmDelete(this)" title="{translate.Delete page}">{translate.Delete page}</a></li>
 			{endif:page.id}
 			{if:!page.id}
 			<li class="{page-not-found}"><a class="km_icon_easy km_iconi_delete km_icon_disabled" href="#" title="{translate.Delete page}">{translate.Delete page}</a></li>
