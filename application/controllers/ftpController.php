@@ -631,6 +631,16 @@ class ftpController extends Controller
             $this->statdir(dirname($remote));
             
             $ts_local=filemtime($local);
+            
+            $local_compare_file=false;
+            $touch_time=time();
+            if (!$all) {
+                $md5=md5($local);
+                $local_compare_file=FILES_PATH . '/ftp_ts/'.$md5[0].'/'.$md5[1].'/'.$md5[2].'/'.$md5;
+                if (!file_exists(dirname($local_compare_file))) mkdir(dirname($local_compare_file),0755,true);
+                $ts_remote_cache=file_exists($local_compare_file)?filemtime($local_compare_file):0;
+                if ($ts_remote_cache>$ts_local) return 0;
+            }
         
         
             if ($this->remote_ftp)
@@ -654,14 +664,18 @@ class ftpController extends Controller
                         {
                             $count++;
                             $res='OK';
+                            if ($local_compare_file) touch($local_compare_file,$touch_time);
                         }
                     }
+                    else 
                     
                     if (!$all) $cmd.=' ['.Kameleon::datetime($ts_local).' > '.Kameleon::datetime($ts_remote).']';
                     
                     $this->debug("Transfer $local &nbsp; &raquo; &nbsp; $remote$info <b>$res</b>");
                     $this->log($this->ftp,$cmd,$res,false);                    
                     
+                } else {
+                    if ($local_compare_file) touch($local_compare_file,$touch_time);
                 }
             }
             
@@ -680,7 +694,9 @@ class ftpController extends Controller
                     copy($local,$appengine_local);
                     $count++;
                     $this->appengine_need_transfer=true;
+                    
                 }
+                if ($local_compare_file) touch($local_compare_file,$touch_time);
             } elseif ($this->gcs_bucket) {
 
 
@@ -731,13 +747,17 @@ class ftpController extends Controller
                         if (!$all) $cmd.=' ['.Kameleon::datetime($ts_local).' > '.Kameleon::datetime($ts_remote).']';
                         $this->log($this->ftp,$cmd,'OK',false);
                         $count++;
+                        if ($local_compare_file) touch($local_compare_file,$touch_time);
                         
                     } catch (Exception $e) {
+                        $this->log($this->ftp,$e->getMessage(),Tools::translate('FAIL'),false);
                         sleep(1);
                         $this->gcs_init();
                         $o=$this->gcs_service->objects->insert($this->gcs_bucket->name,$gso,$postbody);
                     }
                     
+                } else {
+                    if ($local_compare_file) touch($local_compare_file,$touch_time);
                 }
                 
                 //mydie($o,date('d-m-Y H:i',$updateTime));
