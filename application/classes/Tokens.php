@@ -100,6 +100,7 @@ class Tokens
             $param = "more=" . urlencode($this->webtd['more_link']);
             $param .= "&more_link=" . urlencode($this->webtd['more_link']);
             $param .= "&page=" . $this->webpage['id'];
+            $param .= "&lang=" . $this->webpage['lang'];
             $param .= "&cos=" . $this->webtd['cos'];
             $param .= "&next=" . urlencode($this->webtd['next_link']);
             $param .= "&next_link=" . urlencode($this->webtd['next_link']);

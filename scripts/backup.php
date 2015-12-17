@@ -77,7 +77,10 @@ try {
 
    
     $sql="SELECT * FROM servers WHERE id>0 AND (nd_expire=0 OR nd_expire IS NULL OR nd_expire > ".time().")";
-    if (isset($argv[2]) && strlen($argv[2])>1) $sql="SELECT * FROM servers WHERE nazwa='".$argv[2]."'";
+    if (isset($argv[2]) && strlen($argv[2])>1) {
+        $names=explode(',',$argv[2]);
+        $sql="SELECT * FROM servers WHERE nazwa IN ('".implode("','",$names)."')";
+    }
     $servers=$conn->fetchAll($sql);
     
     
