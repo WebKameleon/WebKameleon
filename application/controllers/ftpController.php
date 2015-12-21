@@ -307,12 +307,12 @@ class ftpController extends Controller
         $cotrzebawyswietlic='';
         if (ini_get('output_buffering') == 1)
         {
-                ob_implicit_flush();
+                @ob_implicit_flush();
                 while (ob_get_level())
                 {
                         $cotrzebawyswietlic.=ob_get_contents();
                         
-                        ob_end_clean();
+                        @ob_end_clean();
                         echo '('.strlen($cotrzebawyswietlic).')';
                 }
         }
@@ -322,8 +322,8 @@ class ftpController extends Controller
         {
                 for ($i=0; $i<3*ini_get('output_buffering')*1; $i++) 
                 {
-                        echo "\n";
-                        ob_end_flush();
+                    echo "\n";
+                    @ob_end_flush();
                 }
                 $cotrzebawyswietlic='cos';
         }
@@ -338,17 +338,17 @@ class ftpController extends Controller
                 {
                         echo "\n";
                         flush();
-                        ob_flush();
+                        @ob_flush();
                 }
         }
         
-        ob_end_clean();
+        @ob_end_clean();
 
         for ($i=0; $i<4096; $i++) 
         {
                 echo "\n";
                 flush();
-                ob_flush();
+                @ob_flush();
         }	
         session_write_close();     
         
