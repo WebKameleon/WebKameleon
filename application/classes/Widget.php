@@ -567,7 +567,7 @@ abstract class imageWidget extends Widget
     /**
      * @param array $links
      */
-    protected function checkLinks(array $links=[])
+    protected function checkLinks(array $links=array())
     {
         if (!count($links)) {
             $weblink=new weblinkModel();

@@ -5,10 +5,10 @@ class ftpModel extends Model {
     public function getLast($server,$list_of__comma_sep_ids='',$size=15) {
         $sql="SELECT * FROM ftp WHERE server=? ORDER BY id DESC";
         $sql = $this->conn->modifyLimitQuery($sql,$size);
-        $result=$this->conn->fetchAll($sql,array($server))?:[];
+        $result=$this->conn->fetchAll($sql,array($server))?:array();
         
         $sql="SELECT * FROM ftp WHERE server=? AND t_begin>0 AND t_end IS NULL ORDER BY id DESC";
-        $result2=$this->conn->fetchAll($sql,array($server))?:[];
+        $result2=$this->conn->fetchAll($sql,array($server))?:array();
         
         
         foreach ($result2 AS $r2) {
