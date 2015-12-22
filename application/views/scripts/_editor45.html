@@ -16,6 +16,7 @@ jQueryKam(function ($) {
         editor.setData('{td.plain2}');
         {endif:!td.plain|stristr:<script}
         
+        
         $.getJSON(km_infos["ajax_link"] + "/clipboard", function (data) {
             editor.config.km_clipboard = data.items;
         });

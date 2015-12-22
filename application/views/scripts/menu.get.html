@@ -35,7 +35,7 @@
 			<select id="menu_list">
 				<option value="">{translate.Select menu} </option>
 				{loop:menu.list}
-				<option value="{menu_id}" {if:menu.id=$menu_id}selected{endif:menu.id=$menu_id}>{name} [{menu_id}]</option>
+				<option value="{menu_id}" {if:menu.id=$menu_id}selected{endif:menu.id=$menu_id}>[{menu_id}] {name}</option>
 				{endloop:menu.list}
 			</select>
 			{endif:!menu_may_copy}
