@@ -699,14 +699,18 @@ class ftpController extends Controller
                 if ($local_compare_file) touch($local_compare_file,$touch_time);
             } elseif ($this->gcs_bucket) {
 
-
+                $gs_config=Bootstrap::$main->getConfig('gs')?:array();
+                
+                
+                $gs_gzip=isset($gs_config['gzip'])?explode(',',$gs_config['gzip']):[];
                 $gso = new Google_Service_Storage_StorageObject();
                 $gso->setName($remote);
                 
+                
                 $data=file_get_contents($local);
                 if (!filesize($local)) $data=' ';
-
-                switch ( strtolower(end(explode('.',$remote))) )
+                $ext=strtolower(end(explode('.',$remote)));
+                switch ( $ext )
                 {
                     case 'css':
                         $ct='text/css';
@@ -723,6 +727,10 @@ class ftpController extends Controller
                         break;
                 }
                 $gso->setContentType($ct);
+                if (in_array($ext,$gs_gzip)) {
+                    $gso->setContentEncoding('gzip');
+                    $data=gzencode($data);
+                }
 
                 $postbody = array('data' => $data,
                                     'mimeType'=>$ct,
