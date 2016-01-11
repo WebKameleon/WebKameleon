@@ -731,6 +731,7 @@ class ftpController extends Controller
                     $gso->setContentEncoding('gzip');
                     $data=gzencode($data);
                 }
+                $gso->setCacheControl('public,max-age=7200');
 
                 $postbody = array('data' => $data,
                                     'mimeType'=>$ct,
