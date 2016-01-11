@@ -54,6 +54,7 @@
     function ___readfile($_file)
     {
         if (substr($_file,-3)=='.js') Header('Content-type: text/javascript');
+        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + (60 * 60)));
         $__d=___check_index($_file);
         readfile($_file);
         echo $__d;

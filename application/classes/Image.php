@@ -83,11 +83,14 @@ class Image
             }
         }
     
+        $img_config=Bootstrap::$main->getConfig('img');
+        $q=isset($img_config['jpeg']['quality'])?$img_config['jpeg']['quality']:80;
+    
     
         switch ($ext) {
             case 'jpg':
             case 'jpeg':
-                imagejpeg($thumb, $dst, 80);
+                imagejpeg($thumb, $dst, $q);
                 break;
     
             case 'png':
