@@ -87,6 +87,7 @@ class Image
         $q=isset($img_config['jpeg']['quality'])?$img_config['jpeg']['quality']:80;
     
     
+        
         switch ($ext) {
             case 'jpg':
             case 'jpeg':
@@ -95,6 +96,15 @@ class Image
     
             case 'png':
                 imagepng($thumb, $dst);
+                if (isset($img_config['png2jpeg']) && $img_config['png2jpeg']) {
+                    $tmp=sys_get_temp_dir().'/'.md5($dst);
+                    imagejpeg($thumb, $tmp, $q);
+                    if (filesize($tmp)<filesize($dst)) {
+                        rename($tmp,$dst);
+                    } else {
+                        unlink($tmp);
+                    }
+                }
                 break;
     
             case 'gif':
