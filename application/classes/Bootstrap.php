@@ -396,14 +396,15 @@ class Bootstrap
     public function getConfig($what = null)
     {
         if ($what && isset($this->config[$what])) return $this->config[$what];
-	if ($what) {
-	    $config=$this->config;
-	    foreach (explode('.',$what) AS $w)
-	    {
-		if (isset($config[$w])) $config=$config[$w];
-	    }
-	    return $config;
-	}
+		if ($what) {
+			$config=$this->config;
+			
+			foreach (explode('.',$what) AS $w)
+			{
+				if (isset($config[$w])) $config=$config[$w];
+			}
+			return $config;
+		}
 
         return $this->config;
     }

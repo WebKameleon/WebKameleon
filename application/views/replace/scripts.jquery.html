@@ -1,25 +1,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        var jQueryKam = $.noConflict({noConflictParam});
-            
-        jQueryKam(function ($) {
-            if ($("[fancybox]").length) {
-                if (typeof $.fancybox == "undefined") {
-                    $("<link />").attr({
-                        "type" : "type/css",
-                        "rel"  : "stylesheet",
-                        "href" : "{template_images}/widgets/common/fancybox2/jquery.fancybox.css"
-                    }).appendTo("head");
-                    $.getScript("{template_images}/widgets/common/fancybox2/jquery.fancybox.pack.js", function () {
-                        $("[fancybox]").fancybox();
-                    });
-                } else {
-                    $("[fancybox]").fancybox();
-                }
-            }
-        });
-        //{tokens.jQueryKamLoaded}
-    </script>
+    {if:!noConflictParam}
+        {define:noConflictParam=false}
+        {define:mode=5}
+    {endif:!noConflictParam}
+    <script>var noConflictParam={noConflictParam}; var noConflictPath='{template_images}';</script>
+    <script type="text/javascript"{if:!mode} src="{template_dir}/jquery-noconflict.js"{endif:!mode}>{if:mode}{include:scripts.jquery-noconflict.js}{endif:mode}</script>
     
     

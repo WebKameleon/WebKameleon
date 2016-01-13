@@ -582,10 +582,9 @@ class Tokens
 
     public function code_change($html,$style=null)
     {
-
         if (!$style) return $html;
 
-        return Html::$style($html); 
+        return Html::$style($html,$this->webpage['id']); 
     }
     
     public function jQueryKamLoaded ()

@@ -11,15 +11,6 @@
 <iframe class="kmw_form_iframe" name="kmw_form" width="{data.width}"></iframe>
 
 <script>
-    jQueryKam('.ss-required-asterisk').each(function () {
-        jQueryKam(this).attr('title',jQueryKam(this).prev().attr("aria-label"));
-    });
-    
-    jQueryKam('.kmw_form #ss-submit').val('{data.send}');
-    
-    jQueryKam('.kmw_form form').attr('target','kmw_form').on('submit',function() {
-        jQueryKam('.kmw_form_iframe').fadeIn();
-        jQueryKam('.kmw_form').fadeOut();
-    });
+var kmw_form_submit='{data.send}';
 </script>
 {endwith:formWidget}

@@ -387,3 +387,12 @@ $.simplyScroll.fn.extend({
 });
 		  
 })(jQueryKam,window);
+
+
+jQueryKam(function($) {
+	for (i=0;i<kmw_thmbslideArray.length;i++) {
+		$("#kmw_thumbslide_"+kmw_thmbslideArray[i].sid).simplyScroll({frameRate: kmw_thmbslideArray[i].speed});
+	}
+	    
+	    
+});

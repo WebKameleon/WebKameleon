@@ -38,7 +38,7 @@ class slideshowWidget extends imageWidget
 
         $this->loadCSS('jquery.bxslider.css');
         $this->loadJS('jquery.bxslider.min.js');
-
+        $this->loadJS('slideshow.js');
         parent::run();
     }
 

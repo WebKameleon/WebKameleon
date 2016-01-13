@@ -24,8 +24,11 @@ class searchWidget extends Widget
     
     public function run()
     {
-
-        $this->loadJS('//www.google.com/jsapi');
+        $page=$this->webpage['id'];
+        if (!isset($_SERVER['search_widget'][$page])) $this->data['load_script']=1;
+        $_SERVER['search_widget'][$page]=true;
+        
+        //$this->loadJS('//www.google.com/jsapi');
         parent::run();
     }
     

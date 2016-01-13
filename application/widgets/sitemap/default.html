@@ -5,11 +5,11 @@
     {ul}
 </div>
 <script type="text/javascript">
-jQueryKam(function ($) {
-    $("#sitemap_{sid}").on("click", ".sitemap_box_plus, .sitemap_box_minus", function (e) {
-        $(this).toggleClass("sitemap_box_plus sitemap_box_minus").siblings("ul").slideToggle();
-    });
-});
+
+var kmw_sitemapArray;
+if(typeof(kmw_sitemapArray)=='undefined') kmw_sitemapArray=[];
+kmw_sitemapArray[kmw_sitemapArray.length]= {sid:{sid}};      
+    
 </script>
 {endwith:sitemapWidget}
 {plain}

@@ -3,9 +3,19 @@
 {if:data.file}
 <div id="flash{webtd.sid}"></div>
 <script type="text/javascript">
-swfobject.embedSWF("{uimages}/{data.file}", "flash{webtd.sid}", "{data.width}", "{data.height}", "9", "{widget_images}/expressInstall.swf", {}, {
-    flashvars : "{data.vars}"
-});
+    var flash_fun_{webtd.sid} = function() {
+        
+        if (typeof(swfobject)=='undefined') {
+            setTimeout(flash_fun_{webtd.sid},100);
+            return;
+        }
+        
+        swfobject.embedSWF("{uimages}/{data.file}", "flash{webtd.sid}", "{data.width}", "{data.height}", "9", "{widget_images}/expressInstall.swf", {}, {
+            flashvars : "{data.vars}"
+        });
+    }
+    setTimeout(flash_fun_{webtd.sid},100);
+    
 </script>
 {endif:data.file}
 {plain}

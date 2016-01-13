@@ -79,6 +79,7 @@ class galleryWidget extends imageWidget
 
         $this->loadCSS('jquery.ad-gallery.css');
         $this->loadJS('jquery.ad-gallery.js');
+        $this->loadJS('ad-gallery.js');
 
         Bootstrap::$main->tokens->loadJQuery = true;
 

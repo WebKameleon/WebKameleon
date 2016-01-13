@@ -24,54 +24,54 @@ class formWidget extends Widget
     
     public function edit()
     {
-	$this->check_scope('drive',$_GET['page']);
+		$this->check_scope('drive',$_GET['page']);
 	
-	parent::edit();
-	
-	
-	if (!isset($this->data['form']) || !$this->webtd['nd_update'])
-	{
-	    $form=Bootstrap::$main->getConfig('webtd');
-	    $form=$form['form'];
-
-	    $lang=$this->webtd['lang'];
-	    
-	    $formId=isset($form[$lang])?$form[$lang]:$form['en'];
-	    
-	    
-	    $server=Bootstrap::$main->session('server');
-	    $title=$server['nazwa_long'].' / '.$this->webpage['title'];
-	    
-	    $copiedFile = new Google_Service_Drive_DriveFile();
-	    $copiedFile->setTitle($title);
-	    
-	    try {
-		$this->data['form'] = $this->service->files->copy($formId, $copiedFile);
-	    } catch (Exception $e) {
-		$this->data['error'] = $e->getMessage();
-	    }
-	    
-	}
+		parent::edit();
 	
 	
-	if (isset($this->data['form']) && !isset($this->data['error']))
-	{
-	    
-	    try {
-		$file=$this->service->files->get($this->data['form']['id']);            
+		if (!isset($this->data['form']) || !$this->webtd['nd_update'])
+		{
+			$form=Bootstrap::$main->getConfig('webtd');
+			$form=$form['form'];
+	
+			$lang=$this->webtd['lang'];
+			
+			$formId=isset($form[$lang])?$form[$lang]:$form['en'];
+			
+			
+			$server=Bootstrap::$main->session('server');
+			$title=$server['nazwa_long'].' / '.$this->webpage['title'];
+			
+			$copiedFile = new Google_Service_Drive_DriveFile();
+			$copiedFile->setTitle($title);
+			
+			try {
+			$this->data['form'] = $this->service->files->copy($formId, $copiedFile);
+			} catch (Exception $e) {
+			$this->data['error'] = $e->getMessage();
+			}
+			
+		}
+	
+	
+		if (isset($this->data['form']) && !isset($this->data['error']))
+		{
+			
+			try {
+			$file=$this->service->files->get($this->data['form']['id']);            
+			
+			$url=$file['alternateLink'];
+				$_url=explode('?',$url);
+			$this->data['url']=preg_replace('~/edit$~','/viewform',$_url[0]);
+			$this->data['form']=$file;
+			
+			} catch (Exception $e) {
+			$this->data['error'] = $e->getMessage();
+			}  
+	   
+		}
 		
-		$url=$file['alternateLink'];
-	        $_url=explode('?',$url);
-		$this->data['url']=preg_replace('~/edit$~','/viewform',$_url[0]);
-		$this->data['form']=$file;
-	    
-	    } catch (Exception $e) {
-		$this->data['error'] = $e->getMessage();
-	    }  
-   
-	}
-	
-	$this->save();
+		$this->save();
 	
     }    
 
@@ -79,6 +79,7 @@ class formWidget extends Widget
     {
 
         Bootstrap::$main->tokens->loadJQuery = true;
+		$this->loadJS('form.js');
 
         parent::run();
 

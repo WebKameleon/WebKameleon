@@ -56,9 +56,9 @@
     </ul>
 </div>
 <script type="text/javascript">
-jQueryKam(function ($) {
-    $("#bxslider{webtd.sid}").bxSlider({js_options});
-});
+    var kmw_slideshowArray;
+    if(typeof(kmw_slideshowArray)=='undefined') kmw_slideshowArray=[];
+    kmw_slideshowArray[kmw_slideshowArray.length]= {sid:{sid},opt:{js_options}};  
 </script>
 {endif:webtd.menu}
 {endwith:slideshowWidget}

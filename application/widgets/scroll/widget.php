@@ -30,6 +30,7 @@ class scrollWidget extends imageWidget
     public function run()
     {
         $this->loadJS('jquery.jcarousellite.min.js');
+        $this->loadJS('scroll.js');
 
         Bootstrap::$main->tokens->loadJQuery = true;
 

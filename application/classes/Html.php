@@ -12,7 +12,7 @@ class Html
         return $args[0];
     }
     
-    public static function beautify($html)
+    public static function beautify($html,$page=0)
     {
         $html=preg_replace('~\n\s*\n+~', "\n", $html);
 
@@ -180,7 +180,7 @@ class Html
         
     }
     
-    public static function strip($html)
+    public static function strip($html,$page=0)
     {
         $html=preg_replace('~>\s+<~', '><', $html);
         $html=self::_tag_replace($html,'script');
@@ -248,6 +248,69 @@ class Html
         }
         
 
+        
+        return $html;
+    }
+    
+    
+    public static function deffer_jscss($html,$page=0) {
+        $exclude=explode(',',Bootstrap::$main->getConfig('default.ftp.deffer_exclude'));
+        if (in_array($page,$exclude)) return $html;
+        
+        $links=array();
+        $script='';
+        if(preg_match_all('~<link [^>]+>~i',$html,$links)) {
+            
+            $script='function add_css_file(node,defer) { if (!defer) {var head = document.getElementsByTagName("head")[0];head.parentNode.insertBefore(node, head);} else { window.addEventListener("load", function() {document.getElementsByTagName("body")[0].appendChild(node);} ); };};';
+            $script.=' var defer_width=document.getElementsByTagName("body")[0].offsetWidth; var defer_css=function() { ';
+            foreach($links[0] AS $i=>$link) {
+                if (strlen($link)<10 || strstr($link,'shortcut icon')) {
+                    unset($links[0][$i]);
+                } else {
+                    $html=str_replace($link,'',$html);
+                    $link=str_replace("'",'"',$link);
+                    $script.="";
+                    $linka=array();
+                    if (preg_match_all('~ ([^ =]+)="([^"]+)"~',$link,$linka))
+                    {
+                        $script.='var node=document.createElement("link");';
+                        $defer='false';
+                        for ($i=0;$i<count($linka[1]);$i++) {
+                            if ($linka[1][$i]=='defer') {
+                                if ($linka[2][$i]) $defer='true';
+                                continue;
+                            }
+                            $script.='node.'.$linka[1][$i].'="'.$linka[2][$i].'";';
+                        }
+                        //$script.='head.appendChild(node);';
+                        $script.='add_css_file(node,'.$defer.');';
+                    }
+                    
+                }
+            }
+            $script.='};';
+            
+            //$script.='var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;';
+            $script.='if (defer_width>470) defer_css(); else { window.addEventListener("load", function() {setTimeout(defer_css,0);});};';
+
+            
+            //mydie(htmlspecialchars($script));
+        }
+        
+        $scripts=array();
+            
+        if (preg_match_all('~<script([^>]*)>(.*?)</script>~si',$html,$scripts)) {
+            for ($i=0;$i<count($scripts[0]);$i++) {
+                if (!trim($scripts[2][$i])) {
+                    $html=str_replace($scripts[0][$i],'<script defer="defer"'.substr($scripts[0][$i],7),$html);
+                }
+            }
+        }
+        
+        
+        //if ($script) $html=str_replace('</head>',"<script>$script</script>\n</head>",$html);
+        if ($script) $html=str_replace('<body>',"<body>\n<script>$script</script>\n",$html);
+        
         
         return $html;
     }

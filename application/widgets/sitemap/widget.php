@@ -23,6 +23,7 @@ class sitemapWidget extends Widget
         $this->ul = $this->ul($this->sitemap);
 
         Bootstrap::$main->tokens->loadJQuery = true;
+        $this->loadJS('sitemap.js');
 
         parent::run();
     }

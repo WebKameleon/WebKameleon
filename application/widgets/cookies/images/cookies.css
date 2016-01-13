@@ -14,7 +14,15 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
     color: #131313;
     font-size: 12px;
+    
 }
+
+.kmw_cookies_mobile {
+    white-space:nowrap;
+    overflow:hidden;
+    padding-top: 3px !important;
+}
+
 
 .kmw_cookies a {
     color: #5677fc;

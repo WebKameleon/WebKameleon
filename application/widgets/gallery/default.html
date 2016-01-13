@@ -39,31 +39,14 @@
     </div>
 </div>
 <script type="text/javascript">
-jQueryKam(function ($) {
-    var gallery = $("#ad-gallery{webtd.sid}").on("click", ".ad-image", function (e) {
-        var index = 0;
-        var images = $("#ad-gallery{webtd.sid} .ad-thumb-list a").each(function (k) {
-            if ($(this).hasClass("ad-active")) {
-                index = k;
-            }
-        });
-        
-        $.fancybox.open(images, {
-            index : index,
-            nextEffect : "fade",
-            prevEffect : "fade",
-            nextSpeed : 500,
-            prevSpeed : 500,
-            afterClose : function () {
-                gallery.showImage(this.index);
-            }
-        });
-        
-    }).adGallery($.extend({js_options}, {
-        update_window_hash : false,
-        loader_image : "{widget_images}/loader.gif"
-    }))[0];
-});
+var kmw_adGaleryArray;
+
+if(typeof(kmw_adGaleryArray)=='undefined') kmw_adGaleryArray=[];
+ 
+kmw_adGaleryArray[kmw_adGaleryArray.length]={sid:'{webtd.sid}',img: '{widget_images}', opt: {js_options}};
+    
+
+
 </script>
 {endif:webtd.menu}
 {endwith:galleryWidget}

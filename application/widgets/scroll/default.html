@@ -17,12 +17,11 @@
     </ul>
 </div>
 <script type="text/javascript">
-jQueryKam(function ($) {
-    $("#jcarousel{sid}").jCarouselLite($.extend({
-        btnPrev : "#jcarousel-navi{sid} .jcarousel-navi-prev",
-        btnNext : "#jcarousel-navi{sid} .jcarousel-navi-next"
-    }, {js_options}));
-});
+    
+    var kmw_scrollArray;
+    if(typeof(kmw_scrollArray)=='undefined') kmw_scrollArray=[];
+    kmw_scrollArray[kmw_scrollArray.length]= {sid:{sid},opt:{js_options}};  
+    
 </script>
 {endif:webtd.menu}
 {endwith:scrollWidget}

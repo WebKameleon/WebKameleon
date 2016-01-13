@@ -52,7 +52,8 @@ class breadcrumbsWidget extends Widget
         $result[count($result) - 1]['first'] = true;
 
         $this->breadcrumbs = $result;
-
+        
+        $this->loadJS('breadcrumbs.js');
         Bootstrap::$main->tokens->loadJQuery = true;
     }
 

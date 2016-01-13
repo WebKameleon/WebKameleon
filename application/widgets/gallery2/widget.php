@@ -81,6 +81,7 @@ class gallery2Widget extends imageWidget
 
         Bootstrap::$main->tokens->loadJQuery = true;
 
+        $this->loadJS('gallery2.js');
         parent::run();
         
         $links=array();

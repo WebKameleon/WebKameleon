@@ -731,7 +731,7 @@ class ftpController extends Controller
                     $gso->setContentEncoding('gzip');
                     $data=gzencode($data);
                 }
-                $gso->setCacheControl('public,max-age=7200');
+                $gso->setCacheControl('public,max-age='.(7*24*3600));
 
                 $postbody = array('data' => $data,
                                     'mimeType'=>$ct,
@@ -1054,15 +1054,19 @@ class ftpController extends Controller
         
         $dirs=$this->template_dirs();
         $sum=0;
+    
         foreach($dirs AS $dir) {
             $sum+=$this->transfer($session['template_path'].'/'.$dir,$dir,$all);
         }
+        $sum+=$this->transfer(APPLICATION_PATH.'/views/replace/scripts.jquery-noconflict.js','jquery-noconflict.js',$all);
         if (count($dirs) && $isTemplate)
         {
             $dir=dirname($session['template_path'].'/'.$dirs[0]);
             if (file_exists($dir.'/.thumbnail.jpg')) $sum+=$this->transfer($dir.'/.thumbnail.jpg','.thumbnail.jpg',$all);
             if (file_exists($dir.'/.thumbnail.png')) $sum+=$this->transfer($dir.'/.thumbnail.png','.thumbnail.png',$all);
         }
+        
+        
         
         return $sum;
         

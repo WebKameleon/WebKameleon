@@ -17,10 +17,11 @@
                {endif:mode=(2,3)}><img src="{thumbsUrl}/{img}" {if:alt}title="{alt}" alt="{alt}"{endif:alt} width="{w}" height="{data.thumb_height}" /></a></li>
             {endloop:webtd.menu}    
 </ul><script type="text/javascript">
-jQueryKam(function($) {
-	    $("#kmw_thumbslide_{webtd.sid}").simplyScroll({frameRate: {data.animation_speed}});
-	    
-});
+
+var kmw_thmbslideArray;
+if(typeof(kmw_thmbslideArray)=='undefined') kmw_thmbslideArray=[]; 
+kmw_thmbslideArray[kmw_thmbslideArray.length]= {sid:{sid},speed:{data.animation_speed}};  
+
 </script>
 {endif:webtd.menu}
 {endwith:thumbslideWidget}

@@ -35,8 +35,6 @@ class bgslideWidget extends imageWidget
     protected function checkLinks(array $links)
     {
         return parent::checkLinks($links);
-        
-        //mydie('www');
     }
     
     
@@ -44,7 +42,8 @@ class bgslideWidget extends imageWidget
     {
 
         Bootstrap::$main->tokens->loadJQuery = true;
-
+        $this->loadJS('bgslide.js');
+        
         parent::run();
         
         $this->data['first']=isset(self::$first[$this->webpage['sid']])?0:1;
