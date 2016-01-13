@@ -4,7 +4,7 @@
 <ul class="kmw_langs">
     {loop:all_languages}
     {if:data.autodetect}{if:!__loop__=$lang}<script>kmw_langs['{__loop__}']='{tokens|page_href:$__loop__\:$page_target}';</script>{endif:!__loop__=$lang}{endif:data.autodetect}
-    <li class="{if:__loop__=$lang}active{endif:__loop__=$lang}"><a href="{tokens|page_href:$__loop__\:$page_target}" title="{loop}" class="flag-{__loop__}"></a></li>
+    <li class="{if:__loop__=$lang}active{endif:__loop__=$lang}"><a href="{tokens|page_href:$__loop__\:$page_target}{if:mode=(2,3)}&referer={webpage.prev}{endif:mode=(2,3)}" title="{loop}" class="flag-{__loop__}"></a></li>
     {endloop:all_languages}
 </ul>
 {if:data.autodetect}<script>

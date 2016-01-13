@@ -299,9 +299,9 @@ class indexController extends Controller
         $weblink = new weblinkModel();
         $webtd = new webtdModel();
 
-	$servers = Bootstrap::$main->session('servers');
+        $servers = Bootstrap::$main->session('servers');
 	
-	$server['pages'] = $servers[$server['id']]['pages'];        
+        $server['pages'] = $servers[$server['id']]['pages'];        
         
         
         if ($server['pages']) {
@@ -313,6 +313,7 @@ class indexController extends Controller
 
         $referer = $this->_hasParam('referer') ? $this->_getParam('referer') : (is_null($page) ? $this->id : ($page > 0 ? 0 : -1));
         $referer_page = empty($referer) ? null : $webpage->getOne($referer);
+        
         
 
         if (is_null($page)) {
@@ -328,7 +329,7 @@ class indexController extends Controller
         }
 
         $pages=array();
-        if (isset($_GET['ref_menu'])) {
+        if (isset($_GET['ref_menu']) && $_GET['ref_menu']) {
             $menu = explode(':', $_GET['ref_menu']);
             $links = $weblink->getAll($menu[0]);
             
@@ -353,6 +354,7 @@ class indexController extends Controller
             }
         }
 
+        
         if (count($pages))
         {
             krsort($pages);
