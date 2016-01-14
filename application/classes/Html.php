@@ -291,7 +291,7 @@ class Html
             $script.='};';
             
             //$script.='var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;';
-            $script.='if (defer_width>470) defer_css(); else { window.addEventListener("load", function() {setTimeout(defer_css,0);});};';
+            $script.='if (defer_width>500) defer_css(); else { window.addEventListener("load", function() {setTimeout(defer_css,10);});};';
 
             
             //mydie(htmlspecialchars($script));
@@ -310,6 +310,8 @@ class Html
         
         //if ($script) $html=str_replace('</head>',"<script>$script</script>\n</head>",$html);
         if ($script) $html=str_replace('<body>',"<body>\n<script>$script</script>\n",$html);
+
+	$html=preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $html);
         
         
         return $html;
