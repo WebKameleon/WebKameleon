@@ -309,7 +309,7 @@ class Html
         
         
         //if ($script) $html=str_replace('</head>',"<script>$script</script>\n</head>",$html);
-        if ($script) $html=str_replace('<body>',"<body>\n<script>$script</script>\n",$html);
+        if ($script) $html=preg_replace('~(<body[^>]*>)~i',"\\1\n<script>$script</script>\n",$html);
 
 	$html=preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $html);
         

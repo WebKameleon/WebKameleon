@@ -599,7 +599,7 @@ class ftpController extends Controller
         flush();
     }
     
-    protected function transfer($local,$remote,$all,$info='',$rename=array(),$forceappengine=false)
+    protected function transfer($local,$remote,$all,$info='',$rename=array(),$forceappengine=false,$local_prefix='')
     {
         if (!file_exists($local)) {
             $this->debug("Local file $local does not exist!");
@@ -625,7 +625,7 @@ class ftpController extends Controller
                 if ($file[0]=='.') {
                     continue;
                 }
-                $count+=$this->transfer($local.'/'.$file,$remote.'/'.$file,$all,$info,$rename,$forceappengine);
+                $count+=$this->transfer($local.'/'.$file,$remote.'/'.$file,$all,$info,$rename,$forceappengine,$local_prefix);
             }
         } else {
             $this->statdir(dirname($remote));
@@ -635,7 +635,7 @@ class ftpController extends Controller
             $local_compare_file=false;
             $touch_time=time();
             if (!$all) {
-                $md5=md5($local);
+                $md5=md5($local_prefix.$local);
                 $local_compare_file=FILES_PATH . '/ftp_ts/'.$md5[0].'/'.$md5[1].'/'.$md5[2].'/'.$md5;
                 if (!file_exists(dirname($local_compare_file))) mkdir(dirname($local_compare_file),0755,true);
                 $ts_remote_cache=file_exists($local_compare_file)?filemtime($local_compare_file):0;
@@ -958,7 +958,7 @@ class ftpController extends Controller
                 $img=$w->default_images_path();
                 
                 if (file_exists($img)) {
-                    $res = $this->transfer($img, $session['path']['images'].'/'.$w->default_images_dest(), $all);
+                    $res = $this->transfer($img, $session['path']['images'].'/'.$w->default_images_dest(), $all,'',array(),false,$session['server']['id']);
                     if ($res) $c += $res;
                 }
             
@@ -966,10 +966,10 @@ class ftpController extends Controller
         }
         
 
-        $this->transfer(WIDGETS_PATH . '/common/images', $session['path']['images'] . '/widgets/common', $all);
+        $this->transfer(WIDGETS_PATH . '/common/images', $session['path']['images'] . '/widgets/common', $all,'',array(),false,$session['server']['id']);
 
         if (file_exists($session['template'] . '/images')) {
-            $res = $this->transfer($session['template'] . '/images', $session['path']['images'], $all);
+            $res = $this->transfer($session['template'] . '/images', $session['path']['images'], $all,'',array(),false,'templateimages/');
             if ($res === false) return false;
             $c += $res;
         }
@@ -1058,7 +1058,7 @@ class ftpController extends Controller
         foreach($dirs AS $dir) {
             $sum+=$this->transfer($session['template_path'].'/'.$dir,$dir,$all);
         }
-        $sum+=$this->transfer(APPLICATION_PATH.'/views/replace/scripts.jquery-noconflict.js','jquery-noconflict.js',$all);
+        $sum+=$this->transfer(APPLICATION_PATH.'/views/replace/scripts.jquery-noconflict.js','jquery-noconflict.js',$all,'',array(),false,$session['server']['id']);
         if (count($dirs) && $isTemplate)
         {
             $dir=dirname($session['template_path'].'/'.$dirs[0]);
