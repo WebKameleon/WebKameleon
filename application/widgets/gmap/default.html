@@ -21,6 +21,12 @@
 <script type='text/javascript'>
 
 var kmw_gmap_{sid}_start = function () {
+    
+    if (typeof(wkw_gmap_add)=='undefined') {
+        setTimeout(kmw_gmap_{sid}_start,100);
+        return;
+    }
+    
     wkw_gmap_add('kmw_gmap_{sid}','{gmapWidget.data.type}',
                  {gmapWidget.data.lat},{gmapWidget.data.lng},
                  {gmapWidget.data.zoom},!!{gmapWidget.data.marker},'{gmapWidget.data.title}'
