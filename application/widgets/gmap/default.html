@@ -37,13 +37,13 @@ var kmw_gmap_{sid}_start = function () {
                  }{endif:img});
 }
 
-(function () {
-    if (window.addEventListener) {
-        window.addEventListener('load', kmw_gmap_{sid}_start, false);
-    } else if (window.attachEvent) {
-        window.attachEvent('onload', kmw_gmap_{sid}_start);
-    }
-})();
+
+if (window.addEventListener) {
+    window.addEventListener('load', kmw_gmap_{sid}_start, false);
+} else if (window.attachEvent) {
+    window.attachEvent('onload', kmw_gmap_{sid}_start);
+}
+
 </script>
 {endif:!gmapWidget.data.link}
 
