@@ -1,6 +1,4 @@
 <?php
-
-
 define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../library'));
 

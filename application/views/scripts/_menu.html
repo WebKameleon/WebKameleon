@@ -48,7 +48,7 @@
 								{endif:!scope}
 								
 								{if:scope}
-								<a href="{root}scopes/{scope}?setreferpage={page.id}" class="km_insert_scope" onclick="return true">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a>
+								<a href="{root}scopes/{scope}?setreferpage={page.id}" class="km_insert_scope" onclick="return true" target="_top">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a>
 								{endif:scope}								
 								
 								{if:children}
@@ -57,7 +57,7 @@
 									<li><a rel="{__loop__}" class="km_insert_type">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a></li>
 									{endif:!scope}
 									{if:scope}
-									<li><a href="{root}scopes/{scope}?setreferpage={page.id}" class="km_insert_scope" onclick="return true">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a></li>
+									<li><a href="{root}scopes/{scope}?setreferpage={page.id}" class="km_insert_scope" onclick="return true" target="_top">{name|tokens.trans}{if:admin_only} <span class="kmw_insert_special">admin</span>{endif:admin_only}{if:new} <span class="kmw_insert_special">{translate.New}</span>{endif:new}</a></li>
 									{endif:scope}										
 									
 									{endloop:children}</ul>

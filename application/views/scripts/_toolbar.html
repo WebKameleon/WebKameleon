@@ -95,7 +95,7 @@
 				{endif:currentUser|hasAccess:mail}
 			
 				{if:!currentUser|hasAccess:mail}
-				<a class="btn btn-default" style="color:#000;background-color: #F1F1F1; border: 1px solid #DADADA; background-image:none;" onclick="location.href='{root}scopes/mail?setreferpage={page.id}'">{translate.Share}</a>
+				<a class="btn btn-default" style="color:#000;background-color: #F1F1F1; border: 1px solid #DADADA; background-image:none;" onclick="location.href='{root}scopes/mail?setreferpage={page.id}'" target="_top">{translate.Share}</a>
 				{endif:!currentUser|hasAccess:mail}		
 				{if:server.ftp}
 				<a title="{translate.FTP}" class="btn btn-primary km_tip" tip="5" style="color:#fff;margin-left:10px; background-color: #4D90FE; border: 1px solid #3079ED; background-image:none;" href="{root}ftp/get?setreferpage={page.id}">{translate.FTP}</a>
@@ -113,7 +113,7 @@
 					<a id="km_setup_export_drive" href="{root}wizard/export?to=drive">
 					{endif:currentUser|hasAccess:drive}
 					{if:!currentUser|hasAccess:drive}
-					<a href="{root}scopes/drive?setreferpage={page.id}">
+					<a href="{root}scopes/drive?setreferpage={page.id}" target="_top">
 					{endif:!currentUser|hasAccess:drive}
 					{translate.Export to Google drive}</a>
 					</li>

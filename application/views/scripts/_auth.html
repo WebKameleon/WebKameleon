@@ -13,7 +13,7 @@
      <span class="km_profileb_email">{auth.email}</span>
      <ul>
       <li><a href="{root}user/profile?return_url={_SERVER.REQUEST_URI|base64_encode}" class="km_profileb_logout">{translate.Profile}</a></li>
-      <li><a href="{root}scopes{if:page.id}?setreferpage={page.id}{endif:page.id}" class="km_profileb_logout">{translate.Security}</a></li>                        
+      <li><a href="{root}scopes{if:page.id}?setreferpage={page.id}{endif:page.id}" class="km_profileb_logout" target="_top">{translate.Security}</a></li>                        
       <li><a href="{root}logout" class="km_profileb_logout">{translate.Logout}</a></li>
      </ul>
     </div>

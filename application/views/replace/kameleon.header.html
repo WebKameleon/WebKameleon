@@ -15,6 +15,8 @@
 
     var km_droplist = [];
     km_droplist["active"] = "";
+    
+    {if:config.global.domain}document.domain='{config.global.domain}';{endif:config.global.domain}
 </script>
 
 {include:scripts.kameleon.html}
