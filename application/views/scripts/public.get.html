@@ -10,8 +10,9 @@
     function a_go(a)
     {
         aaa=a;
-        setTimeout(aaa_go,200);
+        //setTimeout(aaa_go,200);
         km_preloader_show();
+	return true;
         return false;
     }
     
@@ -33,7 +34,7 @@
    </div>
    
    <div class="col-md-6">
-    <a class="btn btn-primary wk-btn-login" href="{root}auth" onClick="return a_go(this)">{translate.Log in}</a>
+    <a class="btn btn-primary wk-btn-login" href="{root}auth" target="_top" onClick="return a_go(this)">{translate.Log in}</a>
    </div>
  </div>
 
@@ -53,7 +54,7 @@
     <h1>{translate.Welcome!}</h1>
     <div class="a">{translate.To create new service, click create service button}</div>
     <div class="b">
-        <a class="btn btn-danger wk-btn-create" href="{root}wizard/create{if:return_url}?return_url={return_url|base64_encode}{endif:return_url}" onclick="return a_go(this)">{translate.Create service}</a>
+        <a class="btn btn-danger wk-btn-create" href="{root}wizard/create{if:return_url}?return_url={return_url|base64_encode}{endif:return_url}" onclick="return a_go(this)" target="_top">{translate.Create service}</a>
     </div>
     <div class="c">{translate.Google account required}</div>
     <div class="d">
