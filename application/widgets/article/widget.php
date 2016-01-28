@@ -44,7 +44,7 @@ class articleWidget extends imageWidget
 
     public function init()
     {
-	$this->crop=true;
+		$this->crop=true;
         
         if (isset($this->webtd['bgimg']) && $this->webtd['bgimg'] ) {
             require_once __DIR__ . '/../common/widget.php';

@@ -1,7 +1,5 @@
 <?php
-/**
- * @author Robson <robert@gammanet.pl>
- */
+
 
 class gallery2Widget extends imageWidget
 {
@@ -14,11 +12,13 @@ class gallery2Widget extends imageWidget
         'width', 'height', 'thumb_opacity', 'animation_speed', 'effect'
     );
 
+    
     /**
      * @param array $links
      */
     protected function checkLinks(array $links)
     {
+        
         parent::checkLinks($links);
 
         $max_height = 0;
@@ -71,7 +71,9 @@ class gallery2Widget extends imageWidget
     {
         $h=$this->data['thumb_height'];
         $w=isset($this->data['thumb_width'])?$this->data['thumb_width']+0:0;
-        return Tools::check_image($filename, $this->getUimagesPath(), $this->getThumbsPath(), $w, $h, 0777, true);
+        
+        
+        return Tools::check_image($filename, $this->getUimagesPath(), $this->getThumbsPath(), $w, $h, 0777, true,$w*$h);
     }
 
     public function run()
