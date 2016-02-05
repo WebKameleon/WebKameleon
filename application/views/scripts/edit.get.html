@@ -9,6 +9,9 @@
         <div class="title km_tip" tip="2">
             <div class="webtd_notitle">[ {translate.No title} ]</div>
             <input class="webtd_title" type="text" name="td[title]" value="{td.title}" />
+            {if:td.trailer}
+            <textarea title="{translate.Trailer}" class="webtd_trailer" name="td[trailer]">{td.trailer}</textarea>
+            {endif:td.trailer}
         </div>
         <div class="km_ddmenu">
             <ul class="sf-menu">
@@ -177,13 +180,14 @@
         {endif:config.webtd.show.itemtype}        
         
         
-
+        {if:!td.trailer}
         <div class="edit_box">
             <div class="label">{translate.Trailer}</div>
             <div class="value">
                 <textarea  name="td[trailer]" style="width:50%; height:100px">{td.trailer}</textarea>
             </div>
         </div>
+        {endif:!td.trailer}
         
         {if:config.webtd.show.attachment}
         <div class="edit_box">
@@ -207,7 +211,7 @@
     <div class="km_zakladka km_zakladka_appearance_settings">
         {if:config.webtd.show.bgimg}
         <div class="edit_box">
-            <div class="label">{translate.Background image}</div>
+            <div class="label">{translate.Title image}</div>
             <div class="value">
                 <input type="text" name="td[bgimg]" value="{td.bgimg}" size="60" files="1" id="bgimg" />
             </div>
@@ -308,7 +312,7 @@
 
         {if:config.webtd.show.img}
         <div class="edit_box">
-            <div class="label">{translate.Title image}</div>
+            <div class="label">{translate.Background image}</div>
             <div class="value">
                 <input type="text" name="td[img]" value="{td.img}" size="60" files="1" />
             </div>

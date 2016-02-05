@@ -216,7 +216,7 @@ abstract class Widget
             }
         }
         
-        //mydie($this->data);
+    
         
         if ($this->defaults) {
             foreach ($this->defaults as $k => $v) {
@@ -594,6 +594,7 @@ abstract class imageWidget extends Widget
      */
     public function checkImage($filename)
     {
+        if (!$filename) return false;
         return Tools::check_image($filename, $this->getUimagesPath(), $this->getImagesPath(), $this->data['width'], $this->data['height'], 0777, $this->scale, $this->crop);
     }
 

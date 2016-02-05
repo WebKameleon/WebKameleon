@@ -6,6 +6,7 @@ class articleWidget extends imageWidget
      * @var string
      */
     public $name = 'article';
+	protected $fancybox;
 
     /**
      * @return string
@@ -15,42 +16,40 @@ class articleWidget extends imageWidget
         return $this->getGfxUrl() . '/' . $this->thumbDir;
     }
 
-    public function update()
-    {
-        if (isset($this->webtd['bgimg'])) {
-
-            $this->checkThumb($this->webtd['bgimg']);
-            $this->checkImage($this->webtd['bgimg']);
-            
-        }
-
-        $this->data['__saved__'] = 1;
-    }
 
     public function run()
     {
+		parent::run();
+		
         if (isset($this->webtd['bgimg']) && $this->webtd['bgimg'] ) {
-            Bootstrap::$main->tokens->loadJQuery = true;
-
+            
+			$this->checkImage($this->webtd['bgimg']);
             $this->checkThumb($this->webtd['bgimg']);
-            $this->checkImage($this->webtd['bgimg']);	    
+			
+			if ($this->fancybox) Bootstrap::$main->tokens->loadJQuery = true; 
 	    
         }
-	if (isset($this->webtd['attachment']) && $this->webtd['attachment'] ) {
-	    $this->attachment_class=strtolower(end(explode('.',$this->webtd['attachment'])));
-	}
-        parent::run();
+		
+		$this->normalImgUrl=parent::getImagesUrl();
+		
+		if (isset($this->webtd['attachment']) && $this->webtd['attachment'] ) {
+			$this->attachment_class=strtolower(end(explode('.',$this->webtd['attachment'])));
+		}
+        
     }
 
     public function init()
     {
+		parent::init();
+		
 		$this->crop=true;
-        
-        if (isset($this->webtd['bgimg']) && $this->webtd['bgimg'] ) {
+
+		$this->fancybox=Bootstrap::$main->getConfig('widgets.article.fancybox');
+		
+        if ($this->fancybox && isset($this->webtd['bgimg']) && $this->webtd['bgimg'] ) {
             require_once __DIR__ . '/../common/widget.php';
             commonWidget::loadFancybox();
         }
         
-        parent::init();
     }
 }

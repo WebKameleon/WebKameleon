@@ -120,12 +120,23 @@ body {
     z-index       : 1;
     position      : absolute;
     width         : 100%;
+	border: 1 sold black;
 }
 
 .webtd_title:focus {
     /*border-bottom : 1px dotted #000;*/
     text-decoration : underline;
 }
+
+.webtd_trailer {
+	position: absolute;
+	top: 5px;
+	right: 0;
+	width: 300px;
+	height: 53px;
+	font-style: italic;
+}
+
 
 .webtd_widgetname {
     height    : 32px;

@@ -423,14 +423,19 @@ class Kameleon
      */
     public function get_html_from_xml(array $def)
     {
+        
+        
         if (!isset($def['values'])) {
-            $html = '<input type="text"';
+            $ta = isset($def['type']) && $def['type']=='textarea';
+            
+            $html = $ta? '<textarea':'<input type="text"';
             $html .= ' name="d_xml[' . $def['name'] . ']"';
-            $html .= ' value="' . $def['value'] . '"';
             if (isset($def['style'])) {
                 $html .= ' style="' . $def['style'] . '"';
             }
-            $html .= ' />';
+            $html .= $ta ? '>'.$def['value'] :' value="' . $def['value'] . '"';
+            
+            $html .= $ta ? '</textarea>' : ' />';
 
             return $html;
         }
