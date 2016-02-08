@@ -1314,6 +1314,7 @@ body {
 
 #km_server_link label, #km_server_link div {
     padding : 3px 6px;
+    line-height: 1.5;
 }
 
 .km_server_link_active {
@@ -2577,7 +2578,7 @@ body {
     background-color : #dadada;
 }
 
-a.button {
+.km_toolbar a.button {
     text-align            : center;
     cursor                : pointer;
     display               : block;
@@ -2598,7 +2599,7 @@ a.button {
     background-repeat     : repeat-x
 }
 
-a.button:hover {
+.km_toolbar a.button:hover {
     background-color    : #dc4a38;
     background-image    : url('img/btn_bg_hover.png');
     background-position : top left;
@@ -2685,6 +2686,11 @@ a.button:hover {
     margin-bottom : 0px !important;
     display       : inline-block !important;
 	background-color: transparent;
+    height: auto !important;
+    line-height: 1;
+    font-size:14px;
+    color: #000;
+    font-weight: 400;
 }
 
 .km_iconi_enter {
@@ -3454,6 +3460,12 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
 .sf-menu a {
     display  : block;
     position : relative;
+    border-bottom: 0px;
+}
+
+.sf-menu a:hover {
+    color: #000;
+    text-decoration: underline;
 }
 
 .sf-menu ul ul {
@@ -3549,6 +3561,7 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
 
 .sf-menu > li > a.sf-with-ul {
     padding-right : 15px;
+    line-height: 1;
 }
 
 .sf-menu > li > a.sf-with-ul:after {
@@ -3569,6 +3582,7 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
     padding-left        : 25px;
     color               : #000;
     font-size           : 12px;
+    border-bottom: 0px;
 }
 
 .sf-disable a {
@@ -4408,6 +4422,7 @@ div.jPicker table.jPicker td {
     box-sizing         : content-box;
     -moz-box-sizing    : content-box;
     -webkit-box-sizing : content-box;
+    line-height: 1;
 }
 
 
@@ -4961,4 +4976,21 @@ color: #222 !important;
 .km_newtd a.click_to_edit {
 	font-size:14px;
 }	
+}
+
+
+.km_logo {
+    border-bottom: 0px !important;
+}
+
+.wk-container.wk-bg-grey .row {
+    padding: 0px 0px 0px 0px;
+}
+
+.wk-container.wk-bg-grey {
+    line-height: 1;
+}
+
+.km_toolbar a {
+    border-bottom: 0px;
 }
