@@ -500,18 +500,18 @@ class webpageModel extends webModel
     }
     
     public function filenameCount($file_name,$except=0) {
-	return $this->conn->fetchOne("SELECT count(*) FROM webpage WHERE server=? AND ver=? AND lang=? AND file_name=? AND id<>?", array($this->server,$this->ver,$this->lang, $file_name,$except));
+		return $this->conn->fetchOne("SELECT count(*) FROM webpage WHERE server=? AND ver=? AND lang=? AND file_name=? AND id<>?", array($this->server,$this->ver,$this->lang, $file_name,$except));
     }
     
     
     public function langs() {
-	$sql="SELECT lang FROM webpage WHERE server=? AND id=0 AND trash=0 GROUP BY lang";
-	$langs = $this->conn->fetchAll($sql, array($this->server));
-	
-	$ret=array();
-	if (is_array($langs)) foreach($langs AS $lang) $ret[]=$lang['lang'];
-	
-	return $ret;
+		$sql="SELECT lang FROM webpage WHERE server=? AND id=0 AND trash=0 GROUP BY lang";
+		$langs = $this->conn->fetchAll($sql, array($this->server));
+		
+		$ret=array();
+		if (is_array($langs)) foreach($langs AS $lang) $ret[]=$lang['lang'];
+		
+		return $ret;
     }
     
     public function untrash($id=null) {
@@ -549,6 +549,8 @@ class webpageModel extends webModel
 		$resitemap=0;
 		foreach (array('file_name','trash','hidden','nositemap') AS $f) {
 			if (isset($this->data[$f]) && isset($this->savedData[$f]) && trim($this->data[$f]) != trim($this->savedData[$f]) ) {
+				
+				//mydie($this->data);
 				$resitemap=1;
 				break;
 			}		

@@ -601,6 +601,7 @@ class ftpController extends Controller
     
     protected function transfer($local,$remote,$all,$info='',$rename=array(),$forceappengine=false,$local_prefix='')
     {
+        
         if (!file_exists($local)) {
             $this->debug("Local file $local does not exist!");
             return false;
@@ -695,6 +696,9 @@ class ftpController extends Controller
                     $count++;
                     $this->appengine_need_transfer=true;
                     
+                    $cmd=Tools::translate('Upload').' [Appengine]: '.$appengine_local.$info;    
+                    $this->log($this->ftp,$cmd,'OK',false);
+                        
                 }
                 if ($local_compare_file) touch($local_compare_file,$touch_time);
             } elseif ($this->gcs_bucket) {
@@ -1226,6 +1230,7 @@ class ftpController extends Controller
         $pages=array();
         $calculate_md5=false;
         $tmp = sys_get_temp_dir ().'/'.md5(time().rand(1000,9999)).'.tmp';
+        
         
         if ($resitemap) {
 
