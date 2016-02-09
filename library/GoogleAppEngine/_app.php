@@ -187,7 +187,7 @@
             die(___script($_app['s']['script'][$self]));
         }
         
-        if ($_notfound)
+        if (isset($_notfound) && $_notfound)
         {
             $self=$_notfound;
             if (substr($self,0,7)=='http://')
