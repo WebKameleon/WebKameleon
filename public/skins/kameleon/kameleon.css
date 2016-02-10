@@ -170,11 +170,17 @@ body {
 #km_share_name {
     width   : 300px;
     padding : 6px 3px;
+    height: auto !important;
+    border: 1 solid #999;
+    font-size: 12px;
+    color: #000;
 }
 
 .km_share_form label {
     width   : 120px;
     display : inline-block;
+    color: #000;
+    font-size: 12px;
 }
 
 .km_share_button button, .km_share_button button:hover {
@@ -328,16 +334,19 @@ body {
 
 #km_share_list .km_share_name {
     margin-right : 5px;
+    font-size: 12px;
 }
 
 #km_share_list .km_share_email {
     color : #666666;
+    font-size: 12px;
 }
 
 #km_share_list .km_share_role {
     float        : left;
     width        : 150px;
     margin-right : 5px;
+    font-size: 12px;
 }
 
 #km_share_list .km_share_delete {
@@ -3815,14 +3824,37 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
 #km_setup_properties_dialog ul li {
     margin  : 0;
     padding : 10px 5px;
+    font-size: 12px;
 }
 
 #km_setup_properties_dialog ul li label {
-    width : 100px;
+    width : 150px;
+    color: #000;
+    font-size: 12px;
+    display: inline-block;
+}
+
+#km_setup_properties_dialog ul li input {
+    height: auto !important;
+    border-color: #999;
+    width: auto !important;
+    font-size: 12px;
+    color: #000;
+    display: inline-block;
 }
 
 #km_setup_properties_dialog ul li input, #km_setup_properties_dialog ul li select {
     margin-bottom : 0;
+    height: auto !important;
+    border-color: #999;
+    width: auto !important;
+    border-color: #999;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.ui-button-text-only .ui-button-text {
+    font-size: 14px;
 }
 
 .km_dialog li > * {
