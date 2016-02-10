@@ -451,7 +451,7 @@ class Tools
                     }
                 }
 
-                if (!isset($ret['uimages'])) mkdir($path, 0755, true);
+                if (!isset($ret['uimages'])) @mkdir($path, 0755, true);
             }
 
             if (!isset($ret['uimages'])) {
@@ -473,7 +473,7 @@ class Tools
         $path = MEDIA_PATH . '/ufiles/' . $ufiles;
 
         if (!file_exists($path)) $path = MEDIA_PATH . '/' . $server_name . '/files';
-        if (!file_exists($path)) mkdir($path, 0755, true);
+        if (!file_exists($path)) @mkdir($path, 0755, true);
 
         $ret['ufiles'] = Bootstrap::$main->getRoot() . 'ufiles/' . $ufiles;
         $ret['ufiles_path'] = $path;
