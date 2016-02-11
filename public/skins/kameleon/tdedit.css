@@ -131,10 +131,14 @@ body {
 .webtd_trailer {
 	position: absolute;
 	top: 5px;
-	right: 0;
-	width: 300px;
+	right: -100px;
+	width: 350px;
 	height: 53px;
 	font-style: italic;
+    color: #606060;
+    padding: 3px;
+    resize: none;
+    font-size: 12px;
 }
 
 
