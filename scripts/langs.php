@@ -46,8 +46,6 @@ try {
     $email=current(explode(',',$email));
     
     $bootstrap->session('user',$user->getByEmail($email));
-    
-	function mydie($a)	{ die('Kluski:'.print_r($a,1)."\n");}
 	
     $ws=Spreadsheet::listWorksheets($config['oauth2.langs']);
 
