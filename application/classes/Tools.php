@@ -451,7 +451,7 @@ class Tools
                     }
                 }
 
-                if (!isset($ret['uimages'])) mkdir($path, 0755, true);
+                if (!isset($ret['uimages'])) @mkdir($path, 0755, true);
             }
 
             if (!isset($ret['uimages'])) {
@@ -473,7 +473,7 @@ class Tools
         $path = MEDIA_PATH . '/ufiles/' . $ufiles;
 
         if (!file_exists($path)) $path = MEDIA_PATH . '/' . $server_name . '/files';
-        if (!file_exists($path)) mkdir($path, 0755, true);
+        if (!file_exists($path)) @mkdir($path, 0755, true);
 
         $ret['ufiles'] = Bootstrap::$main->getRoot() . 'ufiles/' . $ufiles;
         $ret['ufiles_path'] = $path;
@@ -645,13 +645,13 @@ class Tools
     
     public static function ranges($range)
     {
-	$range=str_replace(',',';',$range);
-	$ranges=explode(";",$range);
-	$result=array();
+        $range=str_replace(',',';',$range);
+        $ranges=explode(";",$range);
+        $result=array();
         
         for ($i=0;$i<count($ranges);$i++)
-	{
-	    $oddo=explode("-",$ranges[$i]);        
+        {
+            $oddo=explode("-",$ranges[$i]);        
         
             if (isset($oddo[1]) && $oddo[0]+0<$oddo[1]+0)
             {
@@ -662,6 +662,37 @@ class Tools
         }
         
         return $result;
+        
+    }
+    
+    public static function nohtml($str,$tags_allowed=array()) {
+        foreach ($tags_allowed AS $t)
+        {
+            $tag=md5('<'.$t);
+            $notag=md5('>'.$t);
+            $endtag=md5('</'.$t);
+            $str=preg_replace('~<'.$t.'([^>]*)>~i',"$tag~\\1~$notag",$str);
+            $str=preg_replace('~</'.$t.'>~i',$endtag,$str);
+        }
+        
+        
+        $str=preg_replace('/<[^>]*>/','',$str);
+        $str=preg_replace('/<[^>]*$/','',$str);
+        //$str=preg_replace('/&[^;]+;/',' ',$str);
+
+
+        foreach ($tags_allowed AS $t)
+        {
+            $tag=md5('<'.$t);
+            $notag=md5('>'.$t);
+            $endtag=md5('</'.$t);
+            $str=str_replace($tag.'~',"<$t ",$str);
+            $str=str_replace('~'.$notag,'>',$str);
+            $str=str_replace($endtag,'</'.$t.'>',$str);
+            
+        }
+        
+        return $str;
         
     }
 

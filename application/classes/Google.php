@@ -319,7 +319,7 @@ class Google
         
         if ($client->isAccessTokenExpired())
         {
-            Bootstrap::$main->redirect('scopes/'.$scope_required);
+            //Bootstrap::$main->redirect('scopes/'.$scope_required);
         }
         $response = $client->getAuth()->authenticatedRequest($request);
         

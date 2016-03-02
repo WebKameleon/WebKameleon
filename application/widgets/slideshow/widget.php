@@ -50,5 +50,13 @@ class slideshowWidget extends imageWidget
         
     }
 
+    public function update()
+    {
+        if ($this->data['width'] && $this->data['height']) {
+            $this->crop=true;
+        }
+        
+        return parent::update();
+    }
 
 }

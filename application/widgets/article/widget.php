@@ -26,7 +26,22 @@ class articleWidget extends imageWidget
 			$this->checkImage($this->webtd['bgimg']);
             $this->checkThumb($this->webtd['bgimg']);
 			
-			if ($this->fancybox) Bootstrap::$main->tokens->loadJQuery = true; 
+			if ($this->fancybox) Bootstrap::$main->tokens->loadJQuery = true;
+			
+			if (strlen($this->webtd['plain']) && $this->webtd['page_id']==$this->webpage['id']) {
+				$webpage=new webpageModel($this->webpage['sid']);
+				if (!$webpage->og_image) $webpage->og_image=$this->webtd['bgimg'];
+				if (!$webpage->og_desc) {
+					$desc=$this->webtd['plain'];
+					$pos=strpos(strtolower($desc),'</p>');
+					if (!$pos) $pos=strpos(strtolower($desc),'<br');
+					if (!$pos) $pos=strpos(strtolower($desc),'</div');
+					if ($pos) $desc=substr($desc,0,$pos);
+					$webpage->og_desc=Tools::nohtml($desc);
+				}
+				$webpage->save();
+				
+			}
 	    
         }
 		
@@ -35,6 +50,7 @@ class articleWidget extends imageWidget
 		if (isset($this->webtd['attachment']) && $this->webtd['attachment'] ) {
 			$this->attachment_class=strtolower(end(explode('.',$this->webtd['attachment'])));
 		}
+		
         
     }
 

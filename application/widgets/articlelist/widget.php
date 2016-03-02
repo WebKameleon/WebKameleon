@@ -67,7 +67,7 @@ class articlelistWidget extends imageWidget
             $max_update=max($max_update,$td['nd_update']);
             if (trim($td['trailer'])) $td['plain']=$td['trailer'];
             
-            $td['plain']=$this->nohtml($td['plain'],array('a','br'));
+            $td['plain']=Tools::nohtml($td['plain'],array('a','br'));
             
             if ($this->data['chr'] && $this->strlen($td['plain']) > $this->data['chr'])
             {
@@ -128,43 +128,10 @@ class articlelistWidget extends imageWidget
         }
     }
     
-    
-    
-    
-    
-    protected function nohtml($str,$tags_allowed=array())
-    {
-        foreach ($tags_allowed AS $t)
-        {
-            $tag=md5('<'.$t);
-            $notag=md5('>'.$t);
-            $endtag=md5('</'.$t);
-            $str=preg_replace('~<'.$t.'([^>]*)>~i',"$tag~\\1~$notag",$str);
-            $str=preg_replace('~</'.$t.'>~i',$endtag,$str);
-        }
-        
-        
-        $str=preg_replace('/<[^>]*>/','',$str);
-        $str=preg_replace('/<[^>]*$/','',$str);
-        //$str=preg_replace('/&[^;]+;/',' ',$str);
-
-
-        foreach ($tags_allowed AS $t)
-        {
-            $tag=md5('<'.$t);
-            $notag=md5('>'.$t);
-            $endtag=md5('</'.$t);
-            $str=str_replace($tag.'~',"<$t ",$str);
-            $str=str_replace('~'.$notag,'>',$str);
-            $str=str_replace($endtag,'</'.$t.'>',$str);
-            
-        }
-        
-        return $str;
-    }
+ 
     
     protected function strlen($str)
     {
-        return mb_strlen($this->nohtml($str),'utf8');
+        return mb_strlen(Tools::nohtml($str),'utf8');
     }
 }

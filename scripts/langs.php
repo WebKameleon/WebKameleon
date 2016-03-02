@@ -46,9 +46,8 @@ try {
     $email=current(explode(',',$email));
     
     $bootstrap->session('user',$user->getByEmail($email));
-    
+	
     $ws=Spreadsheet::listWorksheets($config['oauth2.langs']);
-    
 
     $langs=array();
     foreach($ws AS $k=>$w)
@@ -77,7 +76,7 @@ try {
     
     foreach($langs AS $lang=>$words)
     {
-	file_put_contents(__DIR__.'/../application/lang/'.$lang.'.ser',serialize($words));
+		file_put_contents(__DIR__.'/../application/lang/'.$lang.'.ser',serialize($words));
     }
 
     
