@@ -32,6 +32,11 @@ class thumbslideWidget extends imageWidget
         require_once __DIR__ . '/../common/widget.php';
         commonWidget::loadFancybox();
 
+
+        $this->loadJS('jquery.mousewheel.js');
+        $this->loadJS('jquery.kinetic.js');
+        $this->loadJS('jquery.smoothDivScroll-1.3.js');
+        
         $this->loadJS('thumbslide.js');
 
         Bootstrap::$main->tokens->loadJQuery = true;

@@ -5,18 +5,14 @@
 #kmw_thumbslide_{webtd.sid} {
 	width: 100%;
 	height: {data.thumb_height|+1}px;
+	position: relative;
 }
 </style>
-<ul id="kmw_thumbslide_{webtd.sid}">
+<div class="kmw_thumbslide" id="kmw_thumbslide_{webtd.sid}" style="display: none">
             {loop:webtd.menu}
-            <li><a {if:mode=(0,1)}
-               {if:href}href="{href}"{if:target} target="{target}"{endif:target}{endif:href}
-               {if:!href}href="{imagesUrl}/{img}" fancybox="1"{endif:!href}
-               {endif:mode=(0,1)}{if:mode=(2,3)}
-               href="{imagesUrl}/{img}" fancybox="1"
-               {endif:mode=(2,3)}><img src="{thumbsUrl}/{img}" {if:alt}title="{alt}" alt="{alt}"{endif:alt} width="{w}" height="{data.thumb_height}" /></a></li>
+            <img src="{thumbsUrl}/{img}" {if:alt}title="{alt}" alt="{alt}"{endif:alt} width="{w}" height="{data.thumb_height}" />
             {endloop:webtd.menu}    
-</ul><script type="text/javascript">
+</div><script type="text/javascript">
 
 var kmw_thmbslideArray;
 if(typeof(kmw_thmbslideArray)=='undefined') kmw_thmbslideArray=[]; 
