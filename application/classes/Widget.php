@@ -173,6 +173,10 @@ abstract class Widget
     public function run()
     {
         $this->loadCSS($this->name . '.css');
+        if ($this->webtd['menu_id'] && isset($this->data['menu_id']) && $this->data['menu_id']!=$this->webtd['menu_id']) {
+            $this->data['menu_id']=$this->webtd['menu_id'];
+            $this->save();
+        }
     }
 
     public function edit()
