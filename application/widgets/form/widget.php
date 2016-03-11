@@ -58,7 +58,11 @@ class formWidget extends Widget
 		{
 			
 			try {
-			$file=$this->service->files->get($this->data['form']['id']);            
+				$id='';
+				if (is_array($this->data['form'])) $id=$this->data['form']['id'];
+				if (is_object($this->data['form'])) $id=$this->data['form']->id;
+			
+			$file=$this->service->files->get($id);            
 			
 			$url=$file['alternateLink'];
 				$_url=explode('?',$url);
@@ -86,7 +90,11 @@ class formWidget extends Widget
 	if (isset($this->data['form']))
 	{
 	    try {
-		$file=$this->service->files->get($this->data['form']['id']);            
+		$id='';
+		if (is_array($this->data['form'])) $id=$this->data['form']['id'];
+		if (is_object($this->data['form'])) $id=$this->data['form']->id;
+
+		$file=$this->service->files->get($id);            
 		
 		
 		$url=$file['alternateLink'];
