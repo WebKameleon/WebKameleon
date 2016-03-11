@@ -534,10 +534,10 @@ class webpageModel extends webModel
 		{
 			if ($this->prev==0) $this->tree=':0:';
 			else {
-			$trees=$this->trees($this->prev,$this->ver);
-			if (isset($trees['notype'])) {
-				$this->tree=':'.implode(':',$trees['notype']).':'.$this->prev.':';
-			}
+				$trees=$this->trees($this->prev,$this->ver);
+				if (isset($trees['notype'])) {
+					$this->tree=':'.implode(':',$trees['notype']).':'.$this->prev.':';
+				}
 			}
 		}
 		
@@ -548,12 +548,16 @@ class webpageModel extends webModel
 	
 		$resitemap=0;
 		foreach (array('file_name','trash','hidden','nositemap') AS $f) {
-			if (isset($this->data[$f]) && isset($this->savedData[$f]) && trim($this->data[$f]) != trim($this->savedData[$f]) ) {
+			if (in_array($f,array_keys($this->data))  && in_array($f,array_keys($this->savedData)) && trim($this->data[$f]) != trim($this->savedData[$f]) ) {
 				
 				//mydie($this->data);
 				$resitemap=1;
 				break;
 			}		
+		}
+		
+		if (!$this->sid) {
+			$resitemap=1;
 		}
 		
 		if ($resitemap) {

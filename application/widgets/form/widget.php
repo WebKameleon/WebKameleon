@@ -46,13 +46,17 @@ class formWidget extends Widget
 			$copiedFile->setTitle($title);
 			
 			try {
-			$this->data['form'] = $this->service->files->copy($formId, $copiedFile);
+				$this->data['form'] = $this->service->files->copy($formId, $copiedFile);
 			} catch (Exception $e) {
-			$this->data['error'] = $e->getMessage();
+				$this->data['error'] = $e->getMessage();
 			}
 			
 		}
 	
+		if (isset($this->data['form']) && is_object($this->data['form']) )
+		{
+			$this->data['form'] = (Array)$this->data['form'];
+		}
 	
 		if (isset($this->data['form']) && !isset($this->data['error']))
 		{
@@ -62,15 +66,15 @@ class formWidget extends Widget
 				if (is_array($this->data['form'])) $id=$this->data['form']['id'];
 				if (is_object($this->data['form'])) $id=$this->data['form']->id;
 			
-			$file=$this->service->files->get($id);            
+				$file=(Array)$this->service->files->get($id);            
 			
-			$url=$file['alternateLink'];
+				$url=$file['alternateLink'];
 				$_url=explode('?',$url);
-			$this->data['url']=preg_replace('~/edit$~','/viewform',$_url[0]);
-			$this->data['form']=$file;
+				$this->data['url']=preg_replace('~/edit$~','/viewform',$_url[0]);
+				$this->data['form']=$file;
 			
 			} catch (Exception $e) {
-			$this->data['error'] = $e->getMessage();
+				$this->data['error'] = $e->getMessage();
 			}  
 	   
 		}
@@ -87,55 +91,54 @@ class formWidget extends Widget
 
         parent::run();
 
-	if (isset($this->data['form']))
-	{
-	    try {
-		$id='';
-		if (is_array($this->data['form'])) $id=$this->data['form']['id'];
-		if (is_object($this->data['form'])) $id=$this->data['form']->id;
-
-		$file=$this->service->files->get($id);            
-		
-		
-		$url=$file['alternateLink'];
-	        $_url=explode('?',$url);
-		$url=preg_replace('~/edit$~','/viewform',$_url[0]);
-		
-		$lastMod=strtotime($file['modifiedDate']);
-		
-		if (!isset($this->data['lastFetch']) || $this->data['lastFetch'] < $lastMod)
+		if (isset($this->data['form']))
 		{
-		    $this->data['lastFetch']=Bootstrap::$main->now;
-		    $this->data['html']=file_get_contents($url);
-		
-		    $this->save();
-		
+			try {
+			$id='';
+			if (is_array($this->data['form'])) $id=$this->data['form']['id'];
+			if (is_object($this->data['form'])) $id=$this->data['form']->id;
+	
+			$file=(Array)$this->service->files->get($id);            
+			
+			
+			$url=$file['alternateLink'];
+			$_url=explode('?',$url);
+			$url=preg_replace('~/edit$~','/viewform',$_url[0]);
+			
+			$lastMod=strtotime($file['modifiedDate']);
+			
+			if (!isset($this->data['lastFetch']) || $this->data['lastFetch'] < $lastMod)
+			{
+				$this->data['lastFetch']=Bootstrap::$main->now;
+				$this->data['html']=file_get_contents($url);
+				$this->save();
+			
+			}
+			//mydie($file,$lastMod);
+			
+			} catch (Exception $e) {
+				$this->data['error'] = $e->getMessage();
+			}
+	    
+	    
+			if (isset($this->data['html']) && $this->data['html'])
+			{
+				$forms=array();
+				$html=$this->data['html'];
+				while(true)
+				{
+					$pos=strpos(strtolower($html),'<form');
+					if (!$pos) break;
+					$html=substr($html,$pos);
+					$pos=strpos(strtolower($html),'</form>');
+					$forms[]=substr($html,0,$pos+7);
+					$html=substr($html,$pos+8);
+					
+				}
+				$this->data['form_html']=$forms[0];
+			}
+			
 		}
-		//mydie($file,$lastMod);
-	    
-	    } catch (Exception $e) {
-		$this->data['error'] = $e->getMessage();
-	    }
-	    
-	    
-	    if (isset($this->data['html']) && $this->data['html'])
-	    {
-		$forms=array();
-		$html=$this->data['html'];
-		while(true)
-		{
-		    $pos=strpos(strtolower($html),'<form');
-		    if (!$pos) break;
-		    $html=substr($html,$pos);
-		    $pos=strpos(strtolower($html),'</form>');
-		    $forms[]=substr($html,0,$pos+7);
-		    $html=substr($html,$pos+8);
-		    
-		}
-		$this->data['form_html']=$forms[0];
-	    }
-   	    
-	}
 
     }
 
