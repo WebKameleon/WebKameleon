@@ -95,7 +95,9 @@ div.scrollableArea
 }
 
 
-
+div.scrollableArea img:not([rel=""]) {
+	cursor: pointer;
+}
 
 
 

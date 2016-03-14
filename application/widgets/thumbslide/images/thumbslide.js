@@ -10,6 +10,9 @@ jQueryKam(function($) {
 		}).fadeIn(500);
 		
 	}
-	    
+	
+	$('.scrollableArea img[rel!=""]').click(function() {
+		location.href=$(this).attr('rel');
+	});
 	    
 });

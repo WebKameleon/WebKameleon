@@ -10,8 +10,8 @@
 </style>
 <div class="kmw_thumbslide" id="kmw_thumbslide_{webtd.sid}" style="display: none">
             {loop:webtd.menu}
-            <img src="{thumbsUrl}/{img}" {if:alt}title="{alt}" alt="{alt}"{endif:alt} width="{w}" height="{data.thumb_height}" />
-            {endloop:webtd.menu}    
+            <img rel="{href}" src="{thumbsUrl}/{img}" {if:alt}title="{alt}" alt="{alt}"{endif:alt} width="{w}" height="{data.thumb_height}" />
+			{endloop:webtd.menu}    
 </div><script type="text/javascript">
 
 var kmw_thmbslideArray;
