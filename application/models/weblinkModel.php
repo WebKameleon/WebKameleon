@@ -57,17 +57,16 @@ class weblinkModel extends webModel
      * @param string $name
      * @return array
      */
-    public function add_link($menu_id, $name, $alt)
+    public function add_link($menu_id, $name, $alt, $page_target=null)
     {
-	$type=null;
+		$type=null;
         $links = $this->getAll($menu_id);
         if (!empty($links)) {
             $lastLink = end($links);
-
             $name = $lastLink['name'];
-	    $type = $lastLink['type'];
+			$type = $lastLink['type'];
             $pri = $lastLink['pri'] + 1;
-	    $d_xml=$lastLink['d_xml'];
+			$d_xml=$lastLink['d_xml'];
         } else {
             $pri = 1;
         }
@@ -78,9 +77,10 @@ class weblinkModel extends webModel
         $link->pri = $pri;
         $link->name = $name;
         $link->alt = $alt;
-	$link->d_xml = $d_xml;
+		$link->d_xml = $d_xml;
+		$link->page_target = $page_target;
 	
-	if ($type) $link->type = $type;
+		if ($type) $link->type = $type;
 	
 	
         return $link->save();
