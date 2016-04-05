@@ -73,7 +73,7 @@ class gcalWidget extends Widget
         
         foreach($items AS $i=>$v)
         {
-            if ($v->accessRole!='reader')
+            if (true || $v->accessRole!='reader')
             {
                 $ret[]=(array)$v;
     
