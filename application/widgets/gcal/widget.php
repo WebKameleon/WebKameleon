@@ -31,6 +31,7 @@ class gcalWidget extends Widget
     {
         $this->check_scope('calendar',$_GET['page']);   
         $this->calendars_list = $this->getCalendarsList();
+        
     }
 
     /**
@@ -40,6 +41,7 @@ class gcalWidget extends Widget
     public function getCalendarUrl()
     {
         $data = $this->data;
+        
         $URL = 'https://www.google.com/calendar/embed?';
         if (isset($data['calendar'])) {
             foreach ($data['calendar'] as $gcal) {
@@ -48,8 +50,11 @@ class gcalWidget extends Widget
             unset($data['calendar']);
         }
         foreach ($data as $k => $v) {
-            if ($v === '')
+            if ($v === '') unset($data[$k]);
+            if ($k=='date') {
                 unset($data[$k]);
+                $data['dates']=str_replace('-','',$v).'/'.str_replace('-','',$v);
+            }
         }
         $URL .= http_build_query($data);
         return $URL;
@@ -62,32 +67,22 @@ class gcalWidget extends Widget
     {
         $calendarsList = $this->getCalendarService()->calendarList->listCalendarList();
         
-        $items=$calendarsList['items'];
+        $items=$calendarsList->getItems();
         
-
+        $ret=[];
         
         foreach($items AS $i=>$v)
         {
-            if ($v['accessRole']=='reader')
+            if ($v->accessRole!='reader')
             {
-                unset($items[$i]);
-                continue;
+                $ret[]=(array)$v;
+    
             }
-            /*
-            try {
-                $acl=$this->getCalendarService()->acl->get($v['id'],'default');
-            
-                echo $v['id']."<br>";
-            }
-            catch (Exception $e)
-            {
-                
-            }
-            */
+
             
         }
         
-        return $items;
+        return $ret;
     }
 
     /**

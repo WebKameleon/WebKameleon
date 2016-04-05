@@ -98,6 +98,15 @@
                 <input type="text" class="gcal_option" id="gcal_bgcolor" name="gcal[bgcolor]" value="{data.bgcolor}" rel="bgcolor" colorpicker />
             </div>
         </div>
+
+
+        <div class="edit_box">
+            <div class="label">{translate.Start date}</div>
+            <div class="value">
+                <input type="text" class="gcal_option" id="gcal_date" name="gcal[date]" value="{data.date}" rel="dates" datepicker="1" />
+            </div>
+        </div>
+
     </div>
 
     <div class="edit_box_right">
@@ -135,7 +144,13 @@
                 }
 
                 if ($(this).is(":text") && val) {
+                    if (rel=='dates') {
+                        val=val.replace(/\-/g,'');
+                        val=val+'/'+val;
+                    }
                     params[rel] = val;
+                    
+    
                 }
 
                 if ($(this).is("select")) {
@@ -172,7 +187,7 @@
 
             return false;
         }
-
+        $("#gcal_date").on("change", km_gcal_update_preview);
         $("input[name], select[name]").on("change", km_gcal_update_preview);
         km_gcal_update_preview();
     });
