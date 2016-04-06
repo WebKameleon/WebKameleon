@@ -53,7 +53,7 @@ class gcalWidget extends Widget
             if ($v === '') unset($data[$k]);
             if ($k=='date') {
                 unset($data[$k]);
-                $data['dates']=str_replace('-','',$v).'/'.str_replace('-','',$v);
+                if($v) $data['dates']=str_replace('-','',$v).'/'.str_replace('-','',$v);
             }
         }
         $URL .= http_build_query($data);
