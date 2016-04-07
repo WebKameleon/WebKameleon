@@ -36,6 +36,22 @@
         </div>        
         
     </div>
+    
+    
+    <div class="edit_box">
+        <div class="label">{translate.Copy to}</div>
+        <div class="value">
+            <ul>
+            {loop:cp_languages}
+            <li>
+                <input id="cp_langs_input_{code}" type="checkbox" name="langs[cp_languages][{code}]" value="1" {if:checked}checked{endif:checked} />
+                <label for="cp_langs_input_{code}"><span class="flag flag-{code}"></span> {name}</label>
+            </li>
+            {endloop:cp_languages}
+            </ul>
+        </div>
+    </div>
+    
 </form>
 
 <script type="text/javascript">

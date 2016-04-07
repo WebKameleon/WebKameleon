@@ -341,7 +341,7 @@ class webpageModel extends webModel
             return;
         }
 
-	if (isset($this->file_name_cache[$wp['sid']])) return $this->file_name_cache[$wp['sid']];
+		if (isset($wp['sid'])) if (isset($this->file_name_cache[$wp['sid']])) return $this->file_name_cache[$wp['sid']];
 	
         $path = Bootstrap::$main->session('path');
 	
@@ -349,7 +349,7 @@ class webpageModel extends webModel
         if (!$file_name) $file_name = $path['pages'] . '/' . $wp['id'] . '.html';
         $file_name = $path['pageprefix'] . $file_name;
 
-	$this->file_name_cache[$wp['sid']]=$file_name;
+		if (isset($wp['sid'])) $this->file_name_cache[$wp['sid']]=$file_name;
         return $file_name;
     }
 

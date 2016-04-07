@@ -35,7 +35,7 @@ class weblinkModel extends webModel
      */
     public function getMenuList()
     {
-        return $this->conn->fetchAll("SELECT DISTINCT(menu_id), name FROM " . $this->getTable() . " WHERE server = ? AND lang = ? AND ver = ? AND trash=0 ORDER BY menu_id", array(
+        return $this->conn->fetchAll("SELECT DISTINCT(menu_id), name FROM " . $this->getTable() . " WHERE server = ? AND lang = ? AND ver = ? AND trash=0 AND menu_id>0 ORDER BY menu_id", array(
             $this->server, $this->lang, $this->ver
         ));
     }

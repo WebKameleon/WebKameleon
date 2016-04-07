@@ -211,6 +211,7 @@ class editController extends Controller
 
         $weblink = new weblinkModel;
         $ret['menu_list'] = $weblink->getMenuList();
+      
         $ret['tokens'] = Bootstrap::$main->tokens;
         //$ret['user_classes'] = $webtd->getUserClasses();
         $ret['d_xml'] = Bootstrap::$main->kameleon->get_user_variables('webtd', $td);
@@ -273,9 +274,12 @@ class editController extends Controller
     public function set_level()
     {
         $webtd = new webtdModel($this->id);
-        $webtd->level = $this->_getParam('level');
-        $webtd->pri=$webtd->next_pri();
-        if ($this->_getParam('level')+0>0) $webtd->save();
+        if ($this->_getParam('level')+0>0) {
+            
+            $webtd->level = $this->_getParam('level');
+            $webtd->pri=$webtd->next_pri();
+            $webtd->save();
+        }
         
         $this->redirectBack('kameleon_td'.$webtd->sid);
     }
