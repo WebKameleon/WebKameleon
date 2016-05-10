@@ -29,10 +29,8 @@
 
 			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_iconi_explorer" href="{root}tree/explorer{if:page.id}?node={page.id}{endif:page.id}" title="{translate.Explorer}">{translate.Explorer}</a></li>
 	 
-			{if:user.admin}
 			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_page_visible km_iconi_{if:page.hidden}in{endif:page.hidden}visible" onclick="km_page_visible('{page.sid}')" title="{if:page.hidden}{translate.Page invisible}{endif:page.hidden}{if:!page.hidden}{translate.Page visible}{endif:!page.hidden}">{if:page.hidden}{translate.Page invisible}{endif:page.hidden}{if:!page.hidden}{translate.Page visible}{endif:!page.hidden}</a></li>
 			<li class="hidden-xs hidden-sm {page-not-found}"><a class="km_icon_easy km_page_sitemap_visible km_iconi_{if:page.nositemap}n{endif:page.nositemap}sm" onclick="km_page_sitemap('{page.sid}')" title="{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}">{if:page.nositemap}{translate.Page invisible in sitemap}{endif:page.nositemap}{if:!page.nositemap}{translate.Page visible in sitemap}{endif:!page.nositemap}</a></li>
-			{endif:user.admin}
 	<!--		
 			{if:page.id}
 			<li class=""><a class="km_icon_easy km_iconi_prev km_toolbar_toggle" href="{root}index/get/{page.prev}" title="{translate.Goto previous page}">{translate.Goto previous page}</a></li>
