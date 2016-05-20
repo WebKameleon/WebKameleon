@@ -706,7 +706,7 @@ class ftpController extends Controller
                 $gs_config=Bootstrap::$main->getConfig('gs')?:array();
                 
                 
-                $gs_gzip=isset($gs_config['gzip'])?explode(',',$gs_config['gzip']):[];
+                $gs_gzip=isset($gs_config['gzip'])?explode(',',$gs_config['gzip']):array();
                 $gso = new Google_Service_Storage_StorageObject();
                 $gso->setName($remote);
                 
