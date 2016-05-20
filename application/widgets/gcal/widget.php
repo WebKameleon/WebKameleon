@@ -69,7 +69,7 @@ class gcalWidget extends Widget
         
         $items=$calendarsList->getItems();
         
-        $ret=[];
+        $ret=array();
         
         foreach($items AS $i=>$v)
         {
