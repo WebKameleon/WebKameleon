@@ -180,7 +180,7 @@ class editController extends Controller
         
         $td['plain'] = str_replace(UFILES_TOKEN, substr(Bootstrap::$main->session('ufiles'), strlen($root)), $td['plain']);
         $td['plain'] = str_replace(UIMAGES_TOKEN, substr(Bootstrap::$main->session('uimages'), strlen($root)), $td['plain']);
-        //$td['plain'] = str_replace('textarea', 'safetextarea', $td['plain']);
+        $td['plain'] = str_replace('textarea', 'safetextarea', $td['plain']);
         
         $td['plain2'] = str_replace(array('\\',"'","\n","\r"), array('\\\\',"\'",'\\n',''), $td['plain']);
         
