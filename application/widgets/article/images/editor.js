@@ -19,5 +19,11 @@ jQueryKam(function ($) {
             $("<img />").attr("src", km_infos["uimages"] + "/" + this.value).prependTo(photo);
         }
     }).trigger("change");
+    
+    
+    $('.webtd_trailer').click(function(){
+        $(this).resizable();
+        $(this).addClass('edit').children().addClass('edit');
+    });
 
 });

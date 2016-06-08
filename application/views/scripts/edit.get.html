@@ -10,7 +10,10 @@
             <div class="webtd_notitle">[ {translate.No title} ]</div>
             <input class="webtd_title" type="text" name="td[title]" value="{td.title}" />
             {if:td.trailer}
-            <textarea title="{translate.Trailer}" class="webtd_trailer" name="td[trailer]">{td.trailer}</textarea>
+            <div class="webtd_trailer">
+                <textarea title="{translate.Trailer}" name="td[trailer]">{td.trailer}</textarea>
+                <span>{td.trailer}</span>
+            </div>
             {endif:td.trailer}
         </div>
         <div class="km_ddmenu">

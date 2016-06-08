@@ -129,18 +129,47 @@ body {
 }
 
 .webtd_trailer {
-	position: absolute;
-	top: 5px;
-	right: -100px;
-	width: 350px;
+	position: absolute !important;
+	top: 10px;
+	right: 0;
+    margin-right: -200px;
+	width: 250px;
 	height: 53px;
+    z-index: 10000;
+
+}
+
+.webtd_trailer.edit {
+    width: 400px;
+}
+
+.webtd_trailer textarea {
+    width: 100%;
+    height: 100%;
 	font-style: italic;
     color: #606060;
     padding: 3px;
-    resize: none;
-    font-size: 12px;
+    font-size: 16px;
+    display: none;
 }
 
+.webtd_trailer textarea.edit {
+    display: block;
+}
+
+.webtd_trailer span {
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	font-style: italic;
+    color: #606060;
+    padding: 3px;
+}
+
+.webtd_trailer span.edit {
+    display: none;
+}
 
 .webtd_widgetname {
     height    : 32px;
