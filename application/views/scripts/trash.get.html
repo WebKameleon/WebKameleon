@@ -30,15 +30,15 @@
             {if:_table=webpage}
             <td>{translate.Page}</td>
             <td>{title}</td>
-            <td>{title_short}</td>
+            <td>{title_short} [{id}]</td>
             {endif:_table=webpage}
             {if:_table=webtd}
-            <td>{translate.Module}</td>
+            <td>{translate.Module} [{page_id}]</td>
             <td>{title}</td>
-            <td>{widget?}</td>
+            <td>{widget?}{if:html} ({html}){endif:html}</td>
             {endif:_table=webtd}
             <td>{lang|kameleon.trans}</td>
-            <td>{trash|kameleon.datetime}</td>
+            <td title="{if:autor_update}{autor_update|kameleon.fullname}{endif:autor_update}">{trash|kameleon.datetime}</td>
             <td>
                 <a class="km_icon km_icontd_delete" href="{root}trash/remove/{_table}:{sid}" title="{translate.Delete link}" confirm="1">{translate.Delete link}</a>
                 <a class="km_icon km_icontd_visible km_icontd_visible_on" href="{root}trash/untrash/{_table}:{sid}" title="{translate.Restore}">{translate.Restore}</a>
