@@ -136,8 +136,10 @@
     
     $page=$memcache->get($memcache_key);
     if ($page) {
-        if ($page['f']=='r') die(___readfile($page['v']));
-        if ($page['f']=='s') die(___script($page['v']));
+        if (file_exists($page['v'])) {
+            if ($page['f']=='r') die(___readfile($page['v']));
+            if ($page['f']=='s') die(___script($page['v']));
+        }
     }
     
     $_app=unserialize(file_get_contents(__DIR__.'/_app.ser'));
