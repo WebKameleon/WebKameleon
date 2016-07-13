@@ -323,7 +323,7 @@ class Html
         if (preg_match_all('~<script([^>]*)>(.*?)</script>~si',$html,$scripts)) {
             for ($i=0;$i<count($scripts[0]);$i++) {
                 if (!trim($scripts[2][$i])) {
-                    if (!strstr($scripts[1][$i],'defer="false"'))
+                    if (!strstr($scripts[1][$i],'defer'))
                         $html=str_replace($scripts[0][$i],'<script defer="defer"'.substr($scripts[0][$i],7),$html);
                     else {
                         $nodefer=str_replace('defer="false"','',$scripts[0][$i]);

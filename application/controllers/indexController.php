@@ -916,7 +916,7 @@ class indexController extends Controller
     
         
     
-        if ($include_php && (substr($webpage->file_name,-5)=='.html' || substr($webpage->file_name,-4)=='.htm') )
+        if ($include_php && Bootstrap::$main->now-$webpage->nd_update>0 && (substr($webpage->file_name,-5)=='.html' || substr($webpage->file_name,-4)=='.htm') )
         {
             $webpage->file_name=preg_replace('/.htm[l]*$/','.php',$webpage->file_name);
             $webpage->save();

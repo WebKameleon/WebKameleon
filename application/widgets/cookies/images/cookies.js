@@ -23,7 +23,7 @@ function kmw_cookies(mode)
         c.fadeIn();
     }
     
-    if ($( window ).width()<475) jQueryKam('.kmw_cookies').click(function() {$(this).removeClass('kmw_cookies_mobile');}).addClass('kmw_cookies_mobile');
+    if (jQueryKam( window ).width()<475) jQueryKam('.kmw_cookies').click(function() {jQueryKam(this).removeClass('kmw_cookies_mobile');}).addClass('kmw_cookies_mobile');
     
 }
 
