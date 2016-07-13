@@ -261,57 +261,83 @@ class Html
         $script='';
         if(preg_match_all('~<link [^>]+>~i',$html,$links)) {
             
-            $script='function add_css_file(node,defer) { if (!defer) {var head = document.getElementsByTagName("head")[0];head.parentNode.insertBefore(node, head);} else { window.addEventListener("load", function() {document.getElementsByTagName("body")[0].appendChild(node);} ); };};';
-            $script.=' var defer_width=document.getElementsByTagName("body")[0].offsetWidth; var defer_css=function() { ';
+            $script='function add_css_file(node,defer,meta) { ';
+            $script.='if (!defer) { ';
+               $script.='var head = document.getElementsByTagName("head")[0];';
+               //$script.='head.parentNode.insertBefore(node, head);';
+               $script.='head.insertBefore(node,meta);';
+               //$script.='document.getElementsByTagName("head")[0].appendChild(node);';
+            $script.='} else {';
+            $script.='window.addEventListener("load", function() {';
+                $script.='document.getElementsByTagName("body")[0].appendChild(node);} ); };};';
+                
+            //$script.=' var defer_width=document.getElementsByTagName("body")[0].offsetWidth;';
+            $script.=' var defer_css=function() { ';
+            $script.='var metas = document.getElementsByTagName("meta"); ';
+            $script.='for (var i=0;i<metas.length;i++) if (metas[i].name=="defer_css") {var meta=metas[i]; break;}';
+       
+            $firsthit='<meta name="defer_css" content="true"/>';
+            $csss=array();
             foreach($links[0] AS $i=>$link) {
                 if (strlen($link)<10 || strstr($link,'shortcut icon')) {
                     unset($links[0][$i]);
                 } else {
-                    $html=str_replace($link,'',$html);
+                    $html=str_replace($link,$firsthit,$html);
+                    $firsthit='';
                     $link=str_replace("'",'"',$link);
                     $script.="";
                     $linka=array();
                     if (preg_match_all('~ ([^ =]+)="([^"]+)"~',$link,$linka))
                     {
-                        $script.='var node=document.createElement("link");';
+                        
+                        $_script='var node=document.createElement("link");';
                         $defer='false';
                         for ($i=0;$i<count($linka[1]);$i++) {
                             if ($linka[1][$i]=='defer') {
                                 if ($linka[2][$i]) $defer='true';
                                 continue;
                             }
-                            $script.='node.'.$linka[1][$i].'="'.$linka[2][$i].'";';
+                            $_script.='node.'.$linka[1][$i].'="'.$linka[2][$i].'";';
                         }
                         //$script.='head.appendChild(node);';
-                        $script.='add_css_file(node,'.$defer.');';
+                        $_script.='add_css_file(node,'.$defer.',meta);';
+                        $csss[]=$_script;
                     }
                     
                 }
             }
+            
+            //for($i=count($csss)-1;$i>=0;$i--) $script.=$csss[$i];
+            for($i=0; $i<count($csss);$i++) $script.=$csss[$i];
+            
             $script.='};';
             
             //$script.='var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;';
-            $script.='if (defer_width>500) defer_css(); else { window.addEventListener("load", function() {setTimeout(defer_css,10);});};';
-
+            //$script.='console.log(defer_width);if (defer_width>500) defer_css(); else { window.addEventListener("load", function() {setTimeout(defer_css,10);});};';
+            $script.='defer_css();';
             
-            //mydie(htmlspecialchars($script));
-        }
+       }
         
         $scripts=array();
             
         if (preg_match_all('~<script([^>]*)>(.*?)</script>~si',$html,$scripts)) {
             for ($i=0;$i<count($scripts[0]);$i++) {
                 if (!trim($scripts[2][$i])) {
-                    $html=str_replace($scripts[0][$i],'<script defer="defer"'.substr($scripts[0][$i],7),$html);
+                    if (!strstr($scripts[1][$i],'defer="false"'))
+                        $html=str_replace($scripts[0][$i],'<script defer="defer"'.substr($scripts[0][$i],7),$html);
+                    else {
+                        $nodefer=str_replace('defer="false"','',$scripts[0][$i]);
+                        $html=str_replace($scripts[0][$i],$nodefer,$html);
+                    }
                 }
             }
         }
         
         
-        //if ($script) $html=str_replace('</head>',"<script>$script</script>\n</head>",$html);
-        if ($script) $html=preg_replace('~(<body[^>]*>)~i',"\\1\n<script>$script</script>\n",$html);
+        if ($script) $html=str_replace('</head>',"<script>$script</script>\n</head>",$html);
+        //if ($script) $html=preg_replace('~(<body[^>]*>)~i',"\\1\n<script>$script</script>\n",$html);
 
-	$html=preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $html);
+    $html=preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $html);
         
         
         return $html;
