@@ -116,8 +116,8 @@ class langsWidget extends Widget
                     }
                     
 
-                    
-                    if ($td['nd_update'] > $related_td['nd_update']) {
+                    //drugi warunek: poprawka na życzenie Michała
+                    if ($td['nd_update'] > $related_td['nd_update'] && $td['nd_create'] > $this->webtd['nd_create']) {
                         
                         if ($related_td['hidden']) {
                             
