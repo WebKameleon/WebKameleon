@@ -239,6 +239,8 @@ class weblinkModel extends webModel
 	if (count($page_target)>1) {
 	    $this->page_target=$page_target[1];
 	    $this->lang_target=$page_target[0];
+	} else {
+		$this->lang_target=null;
 	}
 	
 	if (!$this->checkRight()) return false;
