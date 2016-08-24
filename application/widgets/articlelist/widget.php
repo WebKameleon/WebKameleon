@@ -28,8 +28,8 @@ class articlelistWidget extends imageWidget
     
     public function update()
     {
-        if ($this->data['since']) $this->data['since']=0+strtotime($this->data['since']);
-        if ($this->data['till']) $this->data['till']=0+strtotime($this->data['till']);
+        if ($this->data['since']) $this->data['since']=0+Bootstrap::$main->kameleon->strtotime($this->data['since']);
+        if ($this->data['till']) $this->data['till']=0+Bootstrap::$main->kameleon->strtotime($this->data['till']);
         return parent::update();
     }
     

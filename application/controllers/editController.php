@@ -71,21 +71,24 @@ class editController extends Controller
                     $_POST['td']['menu_id'] = $weblink->get_new_menu_id();
                 }                
                 
-                if (isset($_POST['td']['valid_from']))
-                    $webtd->nd_valid_from = strtotime($_POST['td']['valid_from']);
-
-                if (isset($_POST['td']['valid_to']))
-                    $webtd->nd_valid_to = strtotime($_POST['td']['valid_to']);
+                if (isset($_POST['td']['valid_from']) && strlen(trim($_POST['td']['valid_from'])))
+                    $webtd->nd_valid_from = Bootstrap::$main->kameleon->strtotime($_POST['td']['valid_from']);
+                else
+                    $webtd->nd_valid_from = null;
                     
+                if (isset($_POST['td']['valid_to']) && strlen(trim($_POST['td']['valid_to'])))
+                    $webtd->nd_valid_to = Bootstrap::$main->kameleon->strtotime($_POST['td']['valid_to']);
+                else
+                    $webtd->nd_valid_to = null;
 
                 if (isset($_POST['td']['custom_date']) && $_POST['td']['custom_date'])
-                    $webtd->nd_custom_date = strtotime($_POST['td']['custom_date']);
+                    $webtd->nd_custom_date = Bootstrap::$main->kameleon->strtotime($_POST['td']['custom_date']);
                 else
                     $webtd->nd_custom_date = Bootstrap::$main->now;
                     
 
                 if (isset($_POST['td']['custom_date_end']) && $_POST['td']['custom_date_end'])
-                    $webtd->nd_custom_date_end = strtotime($_POST['td']['custom_date_end']);
+                    $webtd->nd_custom_date_end = Bootstrap::$main->kameleon->strtotime($_POST['td']['custom_date_end']);
                 else
                     $webtd->nd_custom_date_end = 0;
                     

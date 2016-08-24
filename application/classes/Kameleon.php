@@ -176,6 +176,10 @@ class Kameleon
 
         return @date($format, $time + Bootstrap::$main->session('time_delta'));
     }
+    
+    public function strtotime($str) {
+        return strtotime($str) - Bootstrap::$main->session('time_delta');
+    }
 
     public function fullname($user)
     {
