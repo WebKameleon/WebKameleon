@@ -1,17 +1,18 @@
 jQueryKam(function ($) {
     
-    
     for (i=0;i<kmw_adGaleryArray.length;i++) {
         
     
         
         var gallery = $("#ad-gallery"+kmw_adGaleryArray[i].sid).on("click", ".ad-image", function (e) {
             var index = 0;
-            var images = $("#ad-gallery"+kmw_adGaleryArray[i].sid+" .ad-thumb-list a").each(function (k) {
+            var images = $(this).closest('.ad-gallery').find(".ad-thumb-list a").each(function (k) {
                 if ($(this).hasClass("ad-active")) {
                     index = k;
                 }
+                $(this).attr('href',$(this).attr('more'));
             });
+        
             
             $.fancybox.open(images, {
                 index : index,
