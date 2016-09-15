@@ -23,10 +23,18 @@ class Image
 
                 case 'png':
                     $this->source = imagecreatefrompng($img);
+                    $background = imagecolorallocate($this->source, 0, 0, 0);
+                    imagecolortransparent($this->source, $background);
+                    imagealphablending($this->source, false);
+                    imagesavealpha($this->source, true);
                     break;
 
                 case 'gif':
                     $this->source = imagecreatefromgif($img);
+                    $background = imagecolorallocate($this->source, 0, 0, 0);
+                    imagecolortransparent($this->source, $background);
+                    imagealphablending($this->source, false);
+                    imagesavealpha($this->source, true);
                     break;
                 
                 default:
@@ -86,7 +94,7 @@ class Image
         $img_config=Bootstrap::$main->getConfig('img');
         $q=isset($img_config['jpeg']['quality'])?$img_config['jpeg']['quality']:80;
     
-    
+        
         
         switch ($ext) {
             case 'jpg':
@@ -96,6 +104,7 @@ class Image
     
             case 'png':
                 imagepng($thumb, $dst);
+        
                 if (isset($img_config['png2jpeg']) && $img_config['png2jpeg']) {
                     $tmp=sys_get_temp_dir().'/'.md5($dst);
                     imagejpeg($thumb, $tmp, $q);
@@ -111,6 +120,11 @@ class Image
                 imagegif($thumb, $dst);
                 break;
         }
+        
+        
+        
+        //imagepng($this->source, $dst);
+        //$dst2=str_replace('Ala','Ela',$dst); rename($dst,$dst2); die('<img src="http://piotr.webkameleon.com/kameleon/public/uimages/49/1/widgets/gallery2/gfx/icon/usg/Ela.png?a='.time().'"/>');
         
         return $dst;        
         
@@ -165,10 +179,26 @@ class Image
             case 'png':
             case 'gif':
                 $newImg=imagecreatetruecolor($w,$h);                   
+                
+
+                
+                //$transparent = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
+                //imagefilledrectangle($newImg, 0, 0, $w, $h, $transparent);
+                
+                $background = imagecolorallocate($newImg, 0, 0, 0);
+                imagecolortransparent($newImg, $background);
+                
                 imagealphablending($newImg, false);
-                imagesavealpha($newImg,true);
-                $transparent = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
-                imagefilledrectangle($newImg, 0, 0, $w, $h, $transparent); 
+                imagesavealpha($newImg,true); 
+                
+                /*
+                
+                imagecolortransparent($newImg, imagecolorallocatealpha($newImg, 0, 0, 0, 127));
+                imagealphablending($newImg, false);
+                imagesavealpha($newImg, true);
+                
+                */
+                
                 return $newImg;
                 
                 //return imagecreate($w,$h);
