@@ -790,6 +790,8 @@ class indexController extends Controller
                         if ($level_i++ == 0) $td['first_child'] = 1;
                         if ($level_i == $level_count) $td['last_child'] = 1;
                         
+                        
+                        
                         $td['default_level'] = ($td['page_id']>=0 && $td['level']==$default_body_level);
                         
                         $html_path=$template_path.'/html';
@@ -871,6 +873,8 @@ class indexController extends Controller
                         
                         if ($td['ob'] & 1 ) $td['ob_start']=true;
                         if ($td['ob'] & 2 ) $td['ob_end']=true;
+                        
+                        $td['__index__']=$level_i;
                         
                         Bootstrap::$main->tokens->webtd=$td;
                         

@@ -64,8 +64,10 @@ class articlelistWidget extends imageWidget
         
         foreach ($tds AS $i=>$td)
         {
+            $td['plain_orig']=$td['plain'];
             $max_update=max($max_update,$td['nd_update']);
             if (trim($td['trailer'])) $td['plain']=$td['trailer'];
+            
             
             $td['plain']=Tools::nohtml($td['plain'],array('a','br'));
             

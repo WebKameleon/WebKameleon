@@ -3438,18 +3438,18 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
 }
 
 /*** ESSENTIAL STYLES ***/
-.sf-menu, .sf-menu * {
+.km_ddmenu .sf-menu,.km_ddmenu .sf-menu * {
     margin     : 0;
     padding    : 0;
     list-style : none;
 }
 
-.sf-menu li {
+.km_ddmenu .sf-menu li {
     position : relative;
 
 }
 
-.sf-menu ul {
+.km_ddmenu .sf-menu ul {
     position : absolute;
     display  : none;
     top      : 100%;
@@ -3457,76 +3457,76 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
     z-index  : 9999;
 }
 
-.sf-menu > li {
+.km_ddmenu .sf-menu > li {
     float : left;
 }
 
-.sf-menu li:hover > ul,
-.sf-menu li.sfHover > ul {
+.km_ddmenu .sf-menu li:hover > ul,
+.km_ddmenu .sf-menu li.sfHover > ul {
     display : block;
 }
 
-.sf-menu a {
+.km_ddmenu .sf-menu a {
     display  : block;
     position : relative;
     border-bottom: 0px;
 }
 
-.sf-menu a:hover {
+.km_ddmenu .sf-menu a:hover {
     color: #000;
     text-decoration: underline;
 }
 
-.sf-menu ul ul {
+.km_ddmenu .sf-menu ul ul {
     top  : 0;
     left : 100%;
 }
 
 /*** DEMO SKIN ***/
-.sf-menu {
+.km_ddmenu .sf-menu {
     float : left;
 }
 
-.sf-menu ul {
+.km_ddmenu .sf-menu ul {
     box-shadow : 2px 2px 6px rgba(0, 0, 0, .2);
     min-width  : 12em;
 }
 
-.sf-menu a {
+.km_ddmenu .sf-menu a {
     padding         : 10px 15px;
     text-decoration : none;
     zoom            : 1; /* IE7 */
 }
 
-.sf-menu li {
+.km_ddmenu .sf-menu li {
     background         : #f1f1f1;
     white-space        : nowrap;
     -webkit-transition : background .2s;
     transition         : background .2s;
 }
 
-.sf-menu ul li {
+.km_ddmenu .sf-menu ul li {
     background : #fff;
 }
 
-.sf-menu ul ul li {
+.km_ddmenu .sf-menu ul ul li {
     background : #fff;
 }
 
-.sf-menu li:hover,
-.sf-menu li.sfHover {
+.km_ddmenu .sf-menu li:hover,
+.km_ddmenu .sf-menu li.sfHover {
     background         : #ccc;
     -webkit-transition : none;
     transition         : none;
 }
 
 /*** arrows (for all except IE7) **/
-.sf-arrows .sf-with-ul {
+.km_ddmenu .sf-arrows.km_ddmenu .sf-with-ul {
     padding-right : 30px;
 }
 
 /* styling for both css and generated arrows */
-.sf-arrows .sf-with-ul:after {
+.km_ddmenu .sf-arrows.km_ddmenu .sf-with-ul:after {
     content          : '';
     position         : absolute;
     top              : 50%;
@@ -3539,53 +3539,59 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
     border-top-color : rgba(255, 255, 255, .5);
 }
 
-.sf-arrows > li > .sf-with-ul:focus:after,
-.sf-arrows > li:hover > .sf-with-ul:after,
-.sf-arrows > .sfHover > .sf-with-ul:after {
+.km_ddmenu .sf-arrows > li >.km_ddmenu .sf-with-ul:focus:after,
+.km_ddmenu .sf-arrows > li:hover >.km_ddmenu .sf-with-ul:after,
+.km_ddmenu .sf-arrows > .sfHover >.km_ddmenu .sf-with-ul:after {
     border-top-color : white; /* IE8 fallback colour */
 }
 
 /* styling for right-facing arrows */
-.sf-arrows ul .sf-with-ul:after {
+.km_ddmenu .sf-arrows ul.km_ddmenu .sf-with-ul:after {
     margin-top        : -5px;
     margin-right      : -3px;
     border-color      : transparent;
     border-left-color : #000;
 }
 
-.sf-arrows ul li > .sf-with-ul:focus:after,
-.sf-arrows ul li:hover > .sf-with-ul:after,
-.sf-arrows ul .sfHover > .sf-with-ul:after {
+.km_ddmenu .sf-arrows ul li >.km_ddmenu .sf-with-ul:focus:after,
+.km_ddmenu .sf-arrows ul li:hover >.km_ddmenu .sf-with-ul:after,
+.km_ddmenu .sf-arrows ul .sfHover >.km_ddmenu .sf-with-ul:after {
     border-left-color : white;
 }
 
-.sf-menu a, .sf-menu a:hover {
+.km_ddmenu .sf-menu a,.km_ddmenu .sf-menu a:hover {
     color  : #000;
     cursor : pointer;
 }
 
-.sf-menu > li {
+.km_ddmenu .sf-menu > li {
 
 }
 
-.sf-menu > li > a.sf-with-ul {
+.km_ddmenu .sf-menu > li > a{
+    font-size: 12px;
+}
+
+
+
+.km_ddmenu .sf-menu > li > a.sf-with-ul {
     padding-right : 15px;
     line-height: 1;
 }
 
-.sf-menu > li > a.sf-with-ul:after {
+.km_ddmenu .sf-menu > li > a.sf-with-ul:after {
     border : 0;
 }
 
-.sf-menu ul {
+.km_ddmenu .sf-menu ul {
     border : 1px solid #ccc;
 }
 
-.sf-menu ul li {
+.km_ddmenu .sf-menu ul li {
     padding : 0 0 0 10px;
 }
 
-.sf-menu ul a {
+.km_ddmenu .sf-menu ul a {
     background-repeat   : no-repeat;
     background-position : 0 50%;
     padding-left        : 25px;
@@ -3594,16 +3600,16 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
     border-bottom: 0px;
 }
 
-.sf-disable a {
+.km_ddmenu .sf-disable a {
     opacity : .5;
 
 }
 
-.sf-menu .sf-no-icons > li > a {
+.km_ddmenu .sf-menu.km_ddmenu .sf-no-icons > li > a {
     padding-left : 0;
 }
 
-.sf-menu .sf-sep {
+.km_ddmenu .sf-menu.km_ddmenu .sf-sep {
     border           : 0;
     padding          : 0;
     margin           : 0;
@@ -4835,6 +4841,8 @@ color: #222 !important;
 .km_share_button .btn {
 	-webkit-border-radius: 4px 4px 4px 4px !important;
 	border-radius: 4px 4px 4px 4px !important;
+    margin-top: 0 !important;
+    padding: 6px 12px !important;
 }
 
 
@@ -5025,4 +5033,13 @@ color: #222 !important;
 
 .km_toolbar a {
     border-bottom: 0px;
+}
+
+
+
+.wk-bg-grey .col-md-6,
+.wk-bg-grey .col-md-12,
+.wk-bg-grey .col-xs-12,
+.km_toolbar .col-md-12{
+    margin-top: 0 !important;
 }
