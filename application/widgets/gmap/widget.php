@@ -14,9 +14,10 @@ class gmapWidget extends Widget
 
     public function run()
     {
-        $this->loadJS('//maps.google.com/maps/api/js?sensor=false');
-        $this->loadJS('gmap.js');
-
+        if (!$this->data['link']) {
+            $this->loadJS('//maps.google.com/maps/api/js');
+            $this->loadJS('gmap.js');
+        }
         parent::run();
     }
     

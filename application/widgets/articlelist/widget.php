@@ -61,6 +61,7 @@ class articlelistWidget extends imageWidget
         $index=new indexController();
         
         $max_update=0;
+        $counter_i=0;
         
         foreach ($tds AS $i=>$td)
         {
@@ -108,6 +109,12 @@ class articlelistWidget extends imageWidget
             }
             
             if (isset($this->data['text']) && $this->data['text'] && !strlen(trim($td['plain']))) unset($tds[$i]);
+        
+            $tds[$i]['first_child']=0;
+            $tds[$i]['last_child']=0;
+            
+            if ($counter_i++ == 0) $tds[$i]['first_child'] = 1;
+            if ($counter_i == count($tds)) $tds[$i]['last_child'] = 1;
         }
         
         if ($this->webtd['size'] && count($tds)>$this->webtd['size'])

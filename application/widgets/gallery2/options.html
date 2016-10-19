@@ -1,13 +1,3 @@
-<div class="edit_box">
-    <div class="label">{translate.Animation effect}</div>
-    <div class="value">
-        <select name="{name}[effect]">
-			<option value="fade" {if:data.effect=fade}selected{endif:data.effect=fade}>{translate.Fade}</option>
-			<option value="elastic" {if:data.effect=elastic}selected{endif:data.effect=elastic}>{translate.Elastic}</option>
-			<option value="none" {if:data.effect=none}selected{endif:data.effect=none}>{translate.None}</option>
-        </select>
-    </div>
-</div>
 
 <div class="edit_box">
     <div class="label">{translate.Maximum image width}</div>
@@ -32,18 +22,15 @@
 </div>
 
 <div class="edit_box">
-    <div class="label">{translate.Slideshow autostart}</div>
-    <div class="value">
-        <input type="hidden" name="{name}[slideshow_autostart]" value="0" />
-        <input type="checkbox" name="{name}[slideshow_autostart]" value="1" {if:data.slideshow_autostart}checked{endif:data.slideshow_autostart} />
-    </div>
-</div>
-
-<div class="edit_box">
-    <div class="label">{translate.Animation speed}</div>
-    <div class="value">
-        <input type="text" name="{name}[animation_speed]" value="{data.animation_speed}" size="4" /> ms
-    </div>
+	<div class="label">{translate.Class name}</div>
+	<div class="value">
+		<select name="td[class]">
+			<option value="">{translate.Choose}</option>
+			{loop:config.style}
+			<option {if:td.class=$class}selected=""{endif:td.class=$class} value="{class}">{name}</option>
+			{endloop:config.style}
+		</select>
+	</div>
 </div>
 
 <script type="text/javascript">

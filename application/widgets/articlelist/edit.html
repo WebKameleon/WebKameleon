@@ -93,6 +93,19 @@
         </div>
     </div>    
     
+    
+    <div class="edit_box">
+        <div class="label">{translate.Class name}</div>
+        <div class="value">
+            <select name="td[class]">
+                <option value="">{translate.Choose}</option>
+                {loop:config.style}
+                <option {if:td.class=$class}selected=""{endif:td.class=$class} value="{class}">{name}</option>
+                {endloop:config.style}
+            </select>
+        </div>
+    </div>
+    
  
 </form>
 

@@ -3482,6 +3482,14 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
     left : 100%;
 }
 
+.km_ddmenu .sf-menu ul ul > li >a {
+    background-color: #fff;
+}
+
+.km_ddmenu .sf-menu ul ul > li >a:hover {
+    background-color: #fff;
+}
+
 /*** DEMO SKIN ***/
 .km_ddmenu .sf-menu {
     float : left;
@@ -4411,7 +4419,7 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
 .edit_box .value input[type="email"]
 .edit_box .value textarea,
 .km_dialog_input {
-    border  : 1px solid #c0c0c0;
+    border  : 1px solid #c0c0c0 !important;
     padding : 3px;
     margin  : 0;
 	margin-right: 5px;
