@@ -593,4 +593,34 @@ class Tokens
         $this->jQueryKamLoaded=true;
         return $ret;
     }
+    
+    protected $inherited_pageclass_cache;
+    
+    public function inherited_pageclass()
+    {
+        $wp=$this->webpage;
+        if (isset($this->inherited_pageclass_cache[$wp['id']])) return $this->inherited_pageclass_cache[$wp['id']];
+        
+        if ($wp['class'])
+        {
+            $this->inherited_pageclass_cache[$wp['id']]=$wp['class'];
+            return $wp['class'];
+        }
+        $webpage=new webpageModel();
+
+        while (true)
+        {
+            if (!$wp['id']) return;
+            $wp=$webpage->getOne($wp['prev']);
+            if ($wp['class'])
+            {
+                $this->inherited_pageclass_cache[$wp['id']]=$wp['class'];
+                return $wp['class'];
+            }
+        }
+        
+    }
+
+    
+    
 }
