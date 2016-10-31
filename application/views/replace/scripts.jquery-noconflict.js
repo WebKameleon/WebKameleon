@@ -3,12 +3,15 @@
             
         jQueryKam(function ($) {
             if ($("[fancybox]").length) {
+                $.ajaxSetup({
+                    cache: true
+                }); 
                 if (typeof $.fancybox == "undefined") {
-                    $("<link />").attr({
-                        "type" : "type/css",
-                        "rel"  : "stylesheet",
-                        "href" : noConflictPath+"/widgets/common/fancybox2/jquery.fancybox.css"
-                    }).appendTo("head");
+                    
+                    var href=noConflictPath+"/widgets/common/fancybox2/jquery.fancybox.css";
+                    var css='<link rel="stylesheet" type="text/css" href="'+href+'"/>';
+                    $('head').append(css);
+                   
                     $.getScript(noConflictPath+"/widgets/common/fancybox2/jquery.fancybox.pack.js", function () {
                         $("[fancybox]").fancybox();
                     });
