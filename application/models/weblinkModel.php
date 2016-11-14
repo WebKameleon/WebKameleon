@@ -11,21 +11,21 @@ class weblinkModel extends webModel
      */
     public function getAll($menu_id=0,$mode=-1,$type=-1,$lang='',$ver=0,$server=0) {
     
-	if ($mode==-1) $mode=Bootstrap::$main->session('editmode');
-    
-	$hidden = ($mode<=PAGE_MODE_PREVIEW) ? ' AND (hidden=0 OR hidden IS NULL)':'';
-	
-	$menu_id+=0;
-	$type+=0;
-	
-	if (!$lang) $lang=$this->lang;
-	if (!$ver) $ver=$this->ver;
-	if (!$server) $server=$this->server;
-	
-	
-	$sql="SELECT * FROM " . $this->getTable() . " WHERE server = ? AND lang = ? AND ver = ? AND trash=0 $hidden";
-	if ($menu_id) $sql.=" AND menu_id = $menu_id";
-	if ($type!=-1) $sql.=" AND type = $type";
+		if ($mode==-1) $mode=Bootstrap::$main->session('editmode');
+		
+		$hidden = ($mode<=PAGE_MODE_PREVIEW) ? ' AND (hidden=0 OR hidden IS NULL)':'';
+		
+		$menu_id+=0;
+		$type+=0;
+		
+		if (!$lang) $lang=$this->lang;
+		if (!$ver) $ver=$this->ver;
+		if (!$server) $server=$this->server;
+		
+		
+		$sql="SELECT * FROM " . $this->getTable() . " WHERE server = ? AND lang = ? AND ver = ? AND trash=0 $hidden";
+		if ($menu_id) $sql.=" AND menu_id = $menu_id";
+		if ($type!=-1) $sql.=" AND type = $type";
 	
         return $this->conn->fetchAll($sql." ORDER BY menu_id,pri", array($server, $lang, $ver));
     }

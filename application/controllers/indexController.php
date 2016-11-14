@@ -1251,6 +1251,9 @@ class indexController extends Controller
                             
             }
             
+            foreach (['alt','alt_title','description','titlea','titleb','titlec'] AS $f)
+                $links[$i][$f]=str_replace('"','&quot;',$link[$f]);
+            
             
         }
                        
