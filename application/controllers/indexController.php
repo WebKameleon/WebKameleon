@@ -768,6 +768,26 @@ class indexController extends Controller
 
         foreach (array('header','body','footer') AS $pagepart_no=>$pagepart) {
             if (isset($levels[$pagepart])) {
+             
+             
+                $next_td=null;
+                $next_lev=null;
+                foreach($levels[$pagepart] AS $levelname=>$level) {
+                    
+                    if (is_array($level)) foreach ($level AS $ti=>$td) {
+                        if ($td['hidden']) continue;
+                        
+                        if (!is_null($next_td)) {
+                            $levels[$pagepart][$next_lev][$next_td]['next_td_title']=$td['title'];
+                            $levels[$pagepart][$next_lev][$next_td]['next_td_sid']=$td['sid'];
+                        } 
+                        $next_td=$ti;
+                        $next_lev=$levelname;
+                        
+                    }
+                }
+                
+                
                 
                 foreach($levels[$pagepart] AS $levelname=>$level) {
                     $levelno=str_replace('level','',$levelname);
@@ -778,8 +798,7 @@ class indexController extends Controller
                     
                     $level_count = count($level);
                     $level_i = 0;
-                    
-                    
+                
                     
                     if (is_array($level)) foreach ($level AS $td) {
                         $type=$td['type']+0;
@@ -880,6 +899,7 @@ class indexController extends Controller
                         
                         $td=array_merge($ret['data'],$td);
                         $td['page']=$wp;
+                
                         
                         $html.=$td['tokens']->ob(
                                 GN_Smekta::smektuj(

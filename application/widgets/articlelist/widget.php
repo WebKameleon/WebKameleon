@@ -30,6 +30,10 @@ class articlelistWidget extends imageWidget
     {
         if ($this->data['since']) $this->data['since']=0+Bootstrap::$main->kameleon->strtotime($this->data['since']);
         if ($this->data['till']) $this->data['till']=0+Bootstrap::$main->kameleon->strtotime($this->data['till']);
+        
+        $cnf=Bootstrap::$main->getConfig('widgets.articlelist');
+        foreach(array('thumb_width','thumb_height','width','height') AS $f) $this->data[$f]=$cnf[$f];
+        
         return parent::update();
     }
     
@@ -37,6 +41,8 @@ class articlelistWidget extends imageWidget
     {
 
         parent::run();
+        
+        //mydie($this->data);
 
         if (!isset($this->data['category']) || !is_array($this->data['category']) || !count($this->data['category']) ) return;
         

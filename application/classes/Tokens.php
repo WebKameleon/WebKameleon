@@ -622,5 +622,22 @@ class Tokens
     }
 
     
+    protected $favicon_cache='_';
+    public function favicon() {
+        
+        if ($this->favicon_cache!='_') return $this->favicon_cache;
+        
+        if (file_exists(Bootstrap::$main->session('uimages_path').'/favicon.ico')) {
+            $this->favicon_cache='favicon.ico';
+            return $this->favicon_cache;
+        }
+        if (file_exists(Bootstrap::$main->session('uimages_path').'/favicon.png')) {
+            $this->favicon_cache='favicon.png';
+            return $this->favicon_cache;
+        }
+    
+        $this->favicon_cache='';
+        return $this->favicon_cache;
+    }
     
 }
