@@ -51,6 +51,17 @@ class articleWidget extends imageWidget
 			$this->attachment_class=strtolower(end(explode('.',$this->webtd['attachment'])));
 		}
 		
+		if(!$this->webtd['nd_update'] && $this->webtd['page_id']>0 && $this->webtd['page_id']==$this->webpage['id'] && $this->webtd['title']!=$this->webpage['title']) {
+			
+			$webtd=new webtdModel($this->webtd['sid']);
+			$tds=$webtd->getAll([$this->webtd['page_id']]);
+			if (count($tds)==1) {
+				$webtd->title=$this->webpage['title'];
+				$webtd->save();
+			}
+		
+		}
+		
         
     }
 
