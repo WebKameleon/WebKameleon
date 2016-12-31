@@ -4517,8 +4517,8 @@ div.jPicker table.jPicker td {
     font-size : 14px;
 }
 
-.km_dialog.ui-dialog .ui-widget-content {
-	/*padding: .3em 1em .4em;*/
+.km_dialog.ui-dialog {
+	z-index: 2000;
 }
 
 .km_dialog.ui-dialog .ui-widget-content .km_dialog_content {
