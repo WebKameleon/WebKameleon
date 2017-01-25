@@ -73,6 +73,7 @@ class webtdModel extends webModel {
 		
 		$sql="SELECT * FROM webtd WHERE server=? AND lang=? AND ver=?
 			AND sid IN (SELECT tdsid FROM webcat WHERE server=? AND category IN ('".implode("','",$cats)."'))
+			AND page_id IN (SELECT id FROM webpage WHERE id=webtd.page_id AND server=? AND lang=? AND ver=? AND nd_ftp>0)
 			AND trash=0 $arch $and
 			ORDER BY $sortby";
 		
@@ -80,7 +81,7 @@ class webtdModel extends webModel {
 
 		
 		
-		$data = $this->conn->fetchAll($sql,array($server,$lang,$ver,$server));
+		$data = $this->conn->fetchAll($sql,array($server,$lang,$ver,$server,$server,$lang,$ver));
 		
 		if (is_array($data)) foreach ($data AS &$td)
 		{
