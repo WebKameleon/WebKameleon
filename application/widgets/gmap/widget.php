@@ -15,7 +15,9 @@ class gmapWidget extends Widget
     public function run()
     {
         if (!$this->data['link']) {
-            $this->loadJS('//maps.google.com/maps/api/js');
+		$api='//maps.google.com/maps/api/js';
+		if (isset($this->data['key']) && strlen(trim($this->data['key'])) ) $api.='?key='.$this->data['key'];
+            $this->loadJS($api);
             $this->loadJS('gmap.js');
         }
         parent::run();
