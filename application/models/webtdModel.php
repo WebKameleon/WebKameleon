@@ -70,10 +70,11 @@ class webtdModel extends webModel {
 		if ($bgimg_only) $and.=" AND bgimg<>''";
 		if ($since) $and.=" AND nd_custom_date>=$since";
 		if ($till) $and.=" AND nd_custom_date<=$till";
+		$nd_ftp = $mode ? '':' AND nd_ftp>0';
 		
 		$sql="SELECT * FROM webtd WHERE server=? AND lang=? AND ver=?
 			AND sid IN (SELECT tdsid FROM webcat WHERE server=? AND category IN ('".implode("','",$cats)."'))
-			AND page_id IN (SELECT id FROM webpage WHERE id=webtd.page_id AND server=? AND lang=? AND ver=? AND nd_ftp>0)
+			AND page_id IN (SELECT id FROM webpage WHERE id=webtd.page_id AND server=? AND lang=? AND ver=? $nd_ftp)
 			AND trash=0 $arch $and
 			ORDER BY $sortby";
 		
