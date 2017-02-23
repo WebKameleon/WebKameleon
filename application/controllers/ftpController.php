@@ -292,7 +292,7 @@ class ftpController extends Controller
 
         $reload = '<html>
                     <head>
-                        <title>Publication</title>
+                        <title>Proces...</title>
                     </head>
                     <body>
                         <script language="javascript">
