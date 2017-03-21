@@ -1,0 +1,28 @@
+{with:videoWidget}
+
+<form id="{name}_form" method="post" validate="1">
+    {include:_widget.header.html}
+    <h1>{translate.Video}</h1>
+    <div class="edit_box">
+        <div class="label">{translate.MP4}</div>
+        <div class="value">
+            <input type="text" name="{name}[mp4]" value="{data.mp4}" class="km_wide" files="1"/>
+        </div>
+    </div>
+    <div class="edit_box">
+        <div class="label">{translate.OGG}</div>
+        <div class="value">
+            <input type="text" name="{name}[ogg]" value="{data.ogg}" class="km_wide" files="1"/>
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+function SaveChanges()
+{
+    jQueryKam("#{name}_form").submit();
+    return false;
+}
+</script>
+{endwith:videoWidget}

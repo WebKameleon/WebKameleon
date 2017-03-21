@@ -1,0 +1,7 @@
+{if:title}<{tokens.h1} class="widget_h">{title}</{tokens.h1}>{endif:title}
+{with:videoWidget}
+<video autoplay="" class="bkgv" loop="" video-list="">
+	<source src="{uimages}/{data.mp4}" type="video/mp4; codecs=avc1.42E01E,mp4a.40.2" />
+	<source src="{uimages}/{data.ogg}" type="video/ogg" />
+</video>
+{endwith:videoWidget}
