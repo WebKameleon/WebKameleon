@@ -93,6 +93,21 @@
         </div>
     </div>    
     
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show only past articles}</div>
+        <div class="value">
+            <input type="hidden" name="{name}[past]" value="0" />
+            <input type="checkbox" name="{name}[past]" value="1" {if:data.past}checked{endif:data.past} />
+        </div>
+    </div>    
+
+    <div class="edit_box facebook_type_box">
+        <div class="label">{translate.Show only future articles}</div>
+        <div class="value">
+            <input type="hidden" name="{name}[future]" value="0" />
+            <input type="checkbox" name="{name}[future]" value="1" {if:data.future}checked{endif:data.future} />
+        </div>
+    </div>    
     
     <div class="edit_box">
         <div class="label">{translate.Class name}</div>

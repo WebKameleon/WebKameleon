@@ -20,5 +20,7 @@ jQueryKam(function($){
         kmw_articlelist_nav(jQueryKam('.kmw_articlelist_nav').attr('rel'),jQueryKam(this).attr('rel'));  
     });
 
+	
+
 
 })
