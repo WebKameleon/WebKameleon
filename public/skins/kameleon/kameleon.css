@@ -4266,6 +4266,14 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
     cursor       : default;
 }
 
+#km_files_breadcrums span.adddir {
+    margin       : 0 5px 0 8px;
+    width        : 10px;
+    height       : 10px;
+    display      : inline-block;
+    cursor       : pointer;
+}
+
 #km_files_breadcrums span {
     color  : #999;
     cursor : pointer;

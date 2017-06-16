@@ -92,6 +92,7 @@ jQueryKam(function ($) {
             $.each(data.breadcrumbs, function (k, file) {
                 km_breadcrumbs_add(file, k + 1 == data.breadcrumbs.length);
             });
+            
             km_layout_check();
         }, "json");
     }
@@ -104,6 +105,8 @@ jQueryKam(function ($) {
         span.appendTo("#km_files_breadcrums");
         if (is_last == false) {
             $("<span></span>").addClass("separator").appendTo("#km_files_breadcrums");
+        } else {
+            $('<span title="{translate.New folder}">+</span>').addClass("adddir").appendTo("#km_files_breadcrums");
         }
     }
 
@@ -144,9 +147,20 @@ jQueryKam(function ($) {
                 $("<img/>").attr("src", file.url).appendTo(td_2);
             });
         }
-        $("<tr></tr>").data("file", file).append(
+        var active=file.checked?' class="active"':'';
+        $('<tr'+active+'></tr>').data("file", file).append(
             td_1, td_2, td_3, td_4
         ).appendTo("#km_files_list table tbody");
+    
+        if (file.checked) {
+            if (frameElement) {
+                parent.jQueryKam("body").trigger("picker_file_selected", file);
+            } else {
+                $("body").trigger("picker_file_selected", file);
+            }             
+        }
+   
+    
     }
 
     var km_pick_check = function () {
@@ -191,6 +205,7 @@ jQueryKam(function ($) {
     }
 
     var km_files_pick = function (files) {
+        
         if (files.length) {
             if (frameElement) {
                 parent.jQueryKam("body").trigger("picker_files", [ files ]);
@@ -221,12 +236,27 @@ jQueryKam(function ($) {
 
     $("#km_files_breadcrums").on("click", "span", function (e) {
         var file = $(this).data("file");
+        
         if (file) {
             km_files_list(file.path);
+        } else if($(this).hasClass('adddir')) {
+            
+            KamPrompt('{translate.Name of the folder}','{translate.New folder}',function(dir){
+                var data={
+                    newdir: dir,
+                    type : type,
+                    dir : last_dir
+                };
+                $.post(KAM_ROOT + "files/add",data,function(){
+                    km_files_list(last_dir);
+                });
+                
+            });
+            
         }
         return false;
     });
-
+    
     $("#km_files_list tbody").on("click", "tr", function (e) {
         var file = $(this).data("file");
         if (file.mime == "directory") {
@@ -335,6 +365,8 @@ jQueryKam(function ($) {
             km_preloader_show(progress + "%");
         }
     });
+    
+    
 
     KamCookie("km_files_" + type, function (dir) {
         km_files_list(dir || getUrlVar("dir", ""));

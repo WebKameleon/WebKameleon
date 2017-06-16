@@ -147,6 +147,30 @@ class filesController extends Controller
         )));
     }
 
+    public function add() {
+        
+        $this->setup();
+        $status=0;
+    
+        
+        $dir=Bootstrap::$main->kameleon->str_to_url(trim($this->_getParam('newdir')));
+        
+        if (strlen($dir)) {
+            $full_dir=$this->rootPath.$this->get_dir().'/'.$dir;
+            
+            if (!file_exists($full_dir)) {
+                mkdir($full_dir,0755);
+                $status=1;
+              
+            }
+        }
+
+        
+        die(json_encode(array(
+            'status' => $status
+        )));
+    }
+    
     public function handle()
     {
         $this->setup();
