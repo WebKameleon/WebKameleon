@@ -151,6 +151,7 @@ class filesController extends Controller
         
         $this->setup();
         $status=0;
+        $nd='';
     
         
         $dir=Bootstrap::$main->kameleon->str_to_url(trim($this->_getParam('newdir')));
@@ -161,13 +162,14 @@ class filesController extends Controller
             if (!file_exists($full_dir)) {
                 mkdir($full_dir,0755);
                 $status=1;
-              
+                $nd=base64_encode($this->get_dir().'/'.$dir);
             }
         }
 
         
         die(json_encode(array(
-            'status' => $status
+            'status' => $status,
+            'dir' => $nd
         )));
     }
     

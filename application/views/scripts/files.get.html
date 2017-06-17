@@ -247,9 +247,13 @@ jQueryKam(function ($) {
                     type : type,
                     dir : last_dir
                 };
-                $.post(KAM_ROOT + "files/add",data,function(){
-                    km_files_list(last_dir);
-                });
+                $.post(KAM_ROOT + "files/add",data,function(nd){
+                    
+                    if (typeof(nd.status)=='undefined' || typeof(nd.dir)=='undefined' || nd.status!=1) {
+                        return;
+                    }
+                    km_files_list(nd.dir);
+                },'json');
                 
             });
             
