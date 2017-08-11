@@ -137,7 +137,7 @@ class wizardController extends Controller
                 $file->setParents(array($parent));
             }
             
-            ini_set('memory_limit', '2048M');
+            ini_set('memory_limit', '4096M');
             @$drive->files->insert($file, array(
                 'data' => file_get_contents($filename),
                 'mimeType'=>'application/x-zip',
