@@ -4,6 +4,10 @@ define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 define('LIBRARY_PATH', realpath(dirname(__FILE__) . '/../library'));
 define('MEDIA_PATH', realpath(dirname(__FILE__) . '/../media'));
 
+
+ini_set('display_errors',1);
+error_reporting(255);
+
 function mydie($txt,$title='Info')
 {
     echo "$title:\n";
@@ -42,7 +46,7 @@ try {
     
     
     $user=new userModel();
-    $admin=explode(',',$config['global.admin']);
+    $admin=explode(',',$config['global.backup']);
     
     $u=$user->getByEmail($admin[0]);
     $u['admin']=true;
@@ -78,8 +82,13 @@ try {
    
     $sql="SELECT * FROM servers WHERE id>0 AND (nd_expire=0 OR nd_expire IS NULL OR nd_expire > ".time().")";
     if (isset($argv[2]) && strlen($argv[2])>1) {
+	$in="nazwa IN";
+	if ($argv[2][0]=='~') {
+		$argv[2]=substr($argv[2],1);
+		$in="id>0 AND (nd_expire=0 OR nd_expire IS NULL OR nd_expire > ".time().") AND nazwa NOT IN";	
+	}
         $names=explode(',',$argv[2]);
-        $sql="SELECT * FROM servers WHERE nazwa IN ('".implode("','",$names)."')";
+        $sql="SELECT * FROM servers WHERE $in ('".implode("','",$names)."')";
     }
     $servers=$conn->fetchAll($sql);
     
@@ -90,7 +99,9 @@ try {
         if ($argv[$i]=='noinclude') $_REQUEST['noinclude']=1;
         if ($argv[$i]=='notemplate') $_REQUEST['notemplate']=1;
     }
+
     
+	$i=1;
     foreach($servers AS $s)
     {
         $s['owner']=1;
@@ -99,11 +110,11 @@ try {
 
         $admin->enter($s['id']);
         $wizard->export(true);
-        echo $s['nazwa']."\n";
+        echo ($i++).'. '.$s['nazwa']."\n";
         //break;
     }
     
-    
+	echo "ok\n";    
     
     
     $conn->close();
