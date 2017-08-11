@@ -124,6 +124,13 @@ class wizardController extends Controller
         
         
         if ($this->_getParam('to') == 'drive') {
+            $token=json_decode(json_decode(Bootstrap::$main->session('user')['access_token'])->drive);
+            
+            $token=GoogleDrive::setToken($token);
+            GoogleDrive::uploadFile($session['server']['nazwa'] . '.wkz','application/x-zip',$filename,$this->_getParam('folderId')?:null);
+            unlink($filename);
+            
+            /*
             $drive = Google::getDriveService();
 
             $file = new Google_Service_Drive_DriveFile();
@@ -144,6 +151,7 @@ class wizardController extends Controller
                 'uploadType'=>'multipart'
             ));
             unlink($filename);
+            */
         } else if ($this->_getParam('to') == 'template') {
 	    /*
             $newfilename = MEDIA_PATH . '/templates/' . $session['server']['nazwa'] . '/' . $session['server']['ver'] . '/' . $session['server']['nazwa'] . '.wkz';
