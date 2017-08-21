@@ -78,4 +78,12 @@ class webcatModel extends Model {
         
         return $this->conn->exec($sql,array($server,$server));
     }
+
+    public function catsOnPage($server,$lang,$ver,$lang,$page) {
+        
+        $sql="SELECT category FROM webcat WHERE server=? AND tdsid IN";
+        $sql.=" (SELECT sid FROM webtd WHERE server=? AND lang=? AND ver=? AND page_id=? AND trash=0)";
+        
+        return $this->conn->fetchColumn($sql,array($server,$server,$lang,$ver,$page));
+    }
 }
