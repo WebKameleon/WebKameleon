@@ -463,7 +463,7 @@ class Bootstrap
             }
 
             $this->session('template_images', $this->root . 'images');
-			$this->session('template_dir', $this->root . 'template');
+		$this->session('template_dir', $this->root . 'template');
 
             if ($path = $this->session('template')) {
 
@@ -474,7 +474,7 @@ class Bootstrap
                 }
 
                 $this->config2array();
-				unset($this->config['db']);
+		unset($this->config['db']);
 		
 
                 if ($this->config['security']['allow_template_tokens'] && file_exists($path . '/' . $this->config['template']['token_class'] . '.php')) {
