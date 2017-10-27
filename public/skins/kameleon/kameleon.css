@@ -4251,7 +4251,11 @@ ul.km_sf-menu li li li:hover ul, ul.km_sf-menu li li li.sfHover ul {
 }
 
 #km_files_breadcrums {
-    float : left
+    float : left;
+    width: 90%;
+    height: 40px;
+    overflow: auto;
+    white-space: nowrap;
 }
 
 #km_files_breadcrums span.separator {
