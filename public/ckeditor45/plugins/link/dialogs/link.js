@@ -773,24 +773,53 @@ CKEDITOR.dialog.add('link', function (editor) {
                                      + '</div>'
                             },
                             {
-                                type : "text",
-                                id : "linkVariables",
-                                label : linkLang.variables,
-                                setup : function (data)
-                                {
-                                    if (data.link) {
-                                        this.setValue(data.link.variables);
+                                id: "linkOptionsMore",
+                                type: "hbox",
+                                widths: [ '75%', '25%' ],
+                                children : [
+                                    {
+                                        type : "text",
+                                        id : "linkVariables",
+                                        title: tr('Additional link variables'),
+                                        label : linkLang.variables,
+                                        setup : function (data)
+                                        {
+                                            if (data.link) {
+                                                this.setValue(data.link.variables);
+                                            }
+                                        },
+                                        commit : function (data)
+                                        {
+                                            if (data.link == null) {
+                                                data.link = {};
+                                            }
+        
+                                            data.link.variables = this.getValue();
+                                        }
+                                    },
+                                    {
+                                        type : "text",
+                                        id : "pageDirect",
+                                        label : linkLang.direct,
+                                        title: tr('Link to page number'),
+                                        setup : function (data)
+                                        {
+                                            if (data.link) {
+                                                this.setValue(data.link.direct);
+                                            }
+                                        },
+                                        commit : function (data)
+                                        {
+                                            if (data.link == null) {
+                                                data.link = {};
+                                            }
+        
+                                            data.link.direct = this.getValue();
+                                        }
                                     }
-                                },
-                                commit : function (data)
-                                {
-                                    if (data.link == null) {
-                                        data.link = {};
-                                    }
-
-                                    data.link.variables = this.getValue();
-                                }
+                                ]
                             }
+
                         ]
                     },
                     {
@@ -1256,6 +1285,9 @@ CKEDITOR.dialog.add('link', function (editor) {
             switch (data.type || 'url') {
                 case "link" :
                     var link = linkID;
+                    if (link==null) link='0';
+                    if (data.link.direct.trim().length > 0)
+                        link = data.link.direct.trim();
                     if (data.link.variables.length > 0)
                         link += "," + data.link.variables;
                     attributes[ 'data-cke-saved-href' ] = "kameleon:link(" + link + ")";
