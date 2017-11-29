@@ -176,6 +176,7 @@ abstract class Widget
         if ($this->webtd['menu_id'] && isset($this->data['menu_id']) && $this->data['menu_id']!=$this->webtd['menu_id']) {
             $this->data['menu_id']=$this->webtd['menu_id'];
             $this->save();
+            
         }
     }
 
