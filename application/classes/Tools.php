@@ -666,6 +666,17 @@ class Tools
     }
     
     public static function nohtml($str,$tags_allowed=array()) {
+
+
+
+	while ($p=strpos(strtolower($str),'<script')) {
+		$end=strpos(substr(strtolower($str),$p),'</script');
+		if (!$end) break;
+		$str2=substr($str,0,$p);
+		$str2.=substr($str,strlen($str2)+$end+9);
+		$str=$str2;
+	}	
+
         foreach ($tags_allowed AS $t)
         {
             $tag=md5('<'.$t);
