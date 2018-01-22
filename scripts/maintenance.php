@@ -83,6 +83,9 @@ try {
     $sql="DELETE FROM authstate WHERE nd_complete>=nd_create AND nd_create<".$epoch2;
     $conn->execute($sql);
     
+    $sql="DELETE FROM webcat WHERE tdsid NOT IN (SELECT sid FROM webtd)";
+    $conn->execute($sql);
+    
     $sql="UPDATE servers SET id=-1*id, nd_trash=$now WHERE nd_expire>0 AND id>0 AND nd_expire<".$epoch;
     $conn->execute($sql);
 
