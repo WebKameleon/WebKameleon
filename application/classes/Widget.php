@@ -173,11 +173,12 @@ abstract class Widget
     public function run()
     {
         $this->loadCSS($this->name . '.css');
+        
         if ($this->webtd['menu_id'] && isset($this->data['menu_id']) && $this->data['menu_id']!=$this->webtd['menu_id']) {
-            $this->data['menu_id']=$this->webtd['menu_id'];
-            $this->update();
-            //$this->save();
             
+            $this->data['menu_id']=$this->webtd['menu_id'];
+            $this->update(false);
+            $this->save();
         }
     }
 
@@ -548,6 +549,7 @@ abstract class imageWidget extends Widget
             $links[$link['sid']] = $this->_weblink->data();
         }
 
+        
         if ($clean && $this->webtd['menu_id']) {
             foreach ($this->webtd['menu'] as $link) {
                 if (!array_key_exists($link['sid'], $links)) {
