@@ -90,7 +90,8 @@
             {if:__count__ftp}
             {if:session.server.http_url}        
             <li style="float: right; margin: 10px 10px 0 0" tip="7" class="km_tip">
-                <a href="{session.server.http_url}{if:path.pageprefix}/{path.pageprefix}{endif:path.pageprefix}{if:page.file_name}{if:!path.pageprefix}/{endif:!path.pageprefix}{page.file_name}{endif:page.file_name}" target="_blank" title="{translate.Destination URL}">{session.server.http_url}{if:path.pageprefix}/{path.pageprefix}{endif:path.pageprefix}{if:page.file_name}{if:!path.pageprefix}/{endif:!path.pageprefix}{page.file_name}{endif:page.file_name}</a>
+                <a href="{session.server.http_url}{if:path.pageprefix}/{path.pageprefix}{endif:path.pageprefix}{if:page.file_name}{if:!path.pageprefix}/{endif:!path.pageprefix}{page.file_name}{endif:page.file_name}"
+				   target="_blank" title="{translate.Destination URL}">{session.server.http_url}{if:path.pageprefix}/{path.pageprefix}{endif:path.pageprefix}{if:page.file_name}{if:!path.pageprefix}/{endif:!path.pageprefix}{page.file_name|tokens.shorten_url}{endif:page.file_name}</a>
             </li>
             {endif:session.server.http_url}
             {endif:__count__ftp}

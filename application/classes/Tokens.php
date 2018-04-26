@@ -67,6 +67,12 @@ class Tokens
     {
         return array();
     }
+    
+    public function shorten_url($url) {
+        $theschold=40;
+        if (strlen($url)<=$theschold) return $url;
+        return '(...)'.substr($url,strlen($url)-$theschold);
+    }
 
     protected function include_path()
     {
