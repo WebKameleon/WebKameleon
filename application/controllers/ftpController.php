@@ -484,7 +484,7 @@ class ftpController extends Controller
                 }
                 
                 if ($server->gcs_website)
-                    $this->appengine_static_host='http://'.$server->gcs_website;
+                    $this->appengine_static_host='//'.$server->gcs_website;
                 else
                     $server->gcs_website=$server->appengine_id.'.appspot.com';
  
@@ -1167,7 +1167,7 @@ class ftpController extends Controller
             
             if ($webpage->og_image) {
                 $urlimg=$http_url;
-                if ($this->appengine_path && isset($this->gcs_bucket->name)) $urlimg='http://'.$this->gcs_bucket->name.'/';
+                if ($this->appengine_path && isset($this->gcs_bucket->name)) $urlimg='//'.$this->gcs_bucket->name.'/';
                 $data['image']=$urlimg.$session['path']['uimages'].'/'.$webpage->og_image;
             }
             
