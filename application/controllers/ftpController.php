@@ -484,7 +484,9 @@ class ftpController extends Controller
                 }
                 
                 if ($server->gcs_website)
-                    $this->appengine_static_host='//'.$server->gcs_website;
+		{
+                   	$this->appengine_static_host='//'.$server->gcs_website;
+		}
                 else
                     $server->gcs_website=$server->appengine_id.'.appspot.com';
  
