@@ -576,7 +576,7 @@ class ftpController extends Controller
             
             if ($server->appengine_id) {
                 $this->remote_ftp = false;
-                $md5=$this->appengine($server->appengine_id,$server->appengine_ver,$server->appengine_scripts,$server->appengine_cron,$server->appengine_md5,$server->appengine_rewrite,$server->creator,$ftp,$resitemap);
+                $md5=$this->appengine($server->appengine_id,$server->appengine_ver,$server->appengine_scripts,$server->appengine_cron,$server->appengine_md5,$server->appengine_rewrite,$server->creator,$ftp,$resitemap,$server->appengine_pre);
                 if ($md5)
                 {
                     $server->appengine_md5=$md5;
@@ -1186,7 +1186,7 @@ class ftpController extends Controller
         unlink($tmp);
     }
     
-    protected function appengine($id,$ver,$scripts,$cron,$md5,$rewrite,$user,$ftp,$resitemap)
+    protected function appengine($id,$ver,$scripts,$cron,$md5,$rewrite,$user,$ftp,$resitemap,$pre)
     {
         $this->log($this->ftp,"Appengine transfer started",true);
         $session=Bootstrap::$main->session();
@@ -1196,35 +1196,7 @@ class ftpController extends Controller
         $static_dirs=array();
         $static_files=array();
         
-        /*
         
-        foreach($this->template_dirs() AS $dir)
-        {
-            if (is_dir($session['template_path'].'/'.$this->root_dir($dir))) $static_dirs[$this->root_dir($dir)]=1;
-            else $static_files[$this->root_dir($dir)]=1;
-        }
-        
-        $static_dirs[$this->root_dir($session['path']['ufiles'])]=1;
-        $static_dirs[$this->root_dir($session['path']['uimages'])]=1;
-        $static_dirs[$this->root_dir($session['path']['images'])]=1;
-    
-    
-    
-        $static_files['sitemap.xml']=1;
-        
-        
-    
-        foreach (array_keys($static_dirs) AS $dir)
-        {
-            $app.="- url: /$dir\n  static_dir: $dir\n\n";
-        }
-
-        foreach (array_keys($static_files) AS $file)
-        {
-            $app.="- url: /$file\n  static_files: $file\n  upload: $file\n\n";
-        }
-
-        */
     
         $webpage=new webpageModel();
         
@@ -1361,6 +1333,8 @@ class ftpController extends Controller
             }
             
             $app_json['b']=$this->gcs_bucket->name;
+            
+            if ($pre) $app_json['p']=$session['path']['include'].'/'.$pre;
             
             $app_json=serialize($app_json);
         

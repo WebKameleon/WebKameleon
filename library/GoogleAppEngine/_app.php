@@ -146,7 +146,7 @@
     
     if (!is_array($_app['s'])) ___notfound();
     
-    
+    if (isset($_app['p'])) include($_app['p']);
     
     $self_long='http://'.$_SERVER['HTTP_HOST'].$self;
     

@@ -1384,6 +1384,7 @@ class indexController extends Controller
             
             $s->appengine_id= $_POST['appengine']['appengine_id'];
             $s->appengine_ver= $_POST['appengine']['appengine_ver'];
+            $s->appengine_pre= $_POST['appengine']['appengine_pre'];
             
             $appengine_scripts=array();
             foreach($_POST['appengine']['appengine_scripts'] AS $script)
