@@ -136,6 +136,7 @@
     
     $page=$memcache->get($memcache_key);
     if ($page) {
+        if ($page['p']) include($page['p']);
         if (file_exists($page['v'])) {
             if ($page['f']=='r') die(___readfile($page['v']));
             if ($page['f']=='s') die(___script($page['v']));
@@ -177,15 +178,15 @@
     for ($__i=0;$__i<2;$__i++) {
     
         if (isset($_app['s']['static'][$self]) && file_exists($_app['s']['static'][$self])) {
-            $memcache->set($memcache_key,['f'=>'r','v'=>$_app['s']['static'][$self]]);
+            $memcache->set($memcache_key,['p'=>isset($_app['p'])?$_app['p']:false,'f'=>'r','v'=>$_app['s']['static'][$self]]);
             die(___readfile($_app['s']['static'][$self]));
         }
         if (isset($_app['s']['static'][$self]) && file_exists($gcsroot.'/'.$_app['s']['static'][$self])) {
-            $memcache->set($memcache_key,['f'=>'r','v'=>$gcsroot.'/'.$_app['s']['static'][$self]]);
+            $memcache->set($memcache_key,['p'=>isset($_app['p'])?$_app['p']:false,'f'=>'r','v'=>$gcsroot.'/'.$_app['s']['static'][$self]]);
             die(___readfile($gcsroot.'/'.$_app['s']['static'][$self]));
         }
         if (isset($_app['s']['script'][$self]) && file_exists($_app['s']['script'][$self])) {
-            $memcache->set($memcache_key,['f'=>'s','v'=>$_app['s']['script'][$self]]);
+            $memcache->set($memcache_key,['p'=>isset($_app['p'])?$_app['p']:false,'f'=>'s','v'=>$_app['s']['script'][$self]]);
             die(___script($_app['s']['script'][$self]));
         }
         
