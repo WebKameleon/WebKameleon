@@ -1191,7 +1191,8 @@ class ftpController extends Controller
         $this->log($this->ftp,"Appengine transfer started",true);
         $session=Bootstrap::$main->session();
         
-        $app="application: $id\nversion: $ver\nruntime: php55\napi_version: 1\n\nhandlers:\n";
+        //$app="application: $id\nversion: $ver\nruntime: php55\napi_version: 1\n\nhandlers:\n";
+        $app="runtime: php55\napi_version: 1\n\nhandlers:\n";
     
         $static_dirs=array();
         $static_files=array();
@@ -1407,8 +1408,10 @@ class ftpController extends Controller
 
         $user=new userModel($user);        
         
-        $cmd=$appengine['sdk'].'/appcfg.py -e '.$user->email.' --oauth2_access_token='.$access_token.' update '.$this->appengine_path.' >'.$tmp.' 2>&1';
-        
+        //$cmd=$appengine['sdk'].'/appcfg.py -e '.$user->email.' --oauth2_access_token='.$access_token.' update '.$this->appengine_path.' >'.$tmp.' 2>&1';
+        $cmd='cd '.$this->appengine_path.'; gcloud app deploy -q app.yaml';
+	if ($cron) $cmd.=' cron.yaml';
+	$cmd.=' --project '.$id.' >'.$tmp.' 2>&1';
         
         $lock=$this->appengine_path.'/.appengine_lock';
         
@@ -1422,6 +1425,7 @@ class ftpController extends Controller
             if ($this->appengine_need_transfer) {
                 file_put_contents($lock,'a');
                 $this->debug("Run: $cmd");
+		$this->log($this->ftp,"Run: $cmd",true);
                     
                 system($cmd);
                 unlink($lock);
