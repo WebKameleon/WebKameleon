@@ -53,11 +53,11 @@ class youtubeWidget extends Widget
         }
 
         if ($this->data['playlist_id']) {
-            return 'http://www.youtube.com/embed/videoseries?list=' . $this->data['playlist_id'] . '&rel=0';
+            return 'https://www.youtube.com/embed/videoseries?list=' . $this->data['playlist_id'] . '&rel=0';
         }
 
         if ($this->data['video_id']) {
-            return 'http://www.youtube.com/embed/' . $this->data['video_id'] . '?rel=0';
+            return 'https://www.youtube.com/embed/' . $this->data['video_id'] . '?rel=0';
         }
 
 //        if ($this->data['playlist_id'] && ($video_id = $this->parseVideoId($this->data['playlist_id'])) !== false) {
