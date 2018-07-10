@@ -111,5 +111,10 @@ class gallery2Widget extends imageWidget
             $this->save();
         }
         
+        if (isset($this->webtd['menu']) && count($this->webtd['menu'])) foreach($this->webtd['menu'] AS $i=>$m) {
+            if (!file_exists( $this->getImagesPath().DIRECTORY_SEPARATOR.$m['img']))
+                unset($this->webtd['menu'][$i]);
+        }
+        
     }
 }
