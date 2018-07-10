@@ -24,6 +24,7 @@ class gallery2Widget extends imageWidget
         $max_height = 0;
 
         foreach ($links as $link) {
+            if (!$link['img']) continue;
             list ( , $height) = getimagesize($this->getImagesPath() . DIRECTORY_SEPARATOR . $link['img']);
             $max_height = max($max_height, $height);
         }
@@ -84,6 +85,7 @@ class gallery2Widget extends imageWidget
         Bootstrap::$main->tokens->loadJQuery = true;
 
         $this->loadJS('gallery2.js');
+        
         parent::run();
         
         $links=array();

@@ -174,8 +174,23 @@ abstract class Widget
     {
         $this->loadCSS($this->name . '.css');
         
+        if (isset($this->data['images']) && $this->webtd['menu_id']) {
+            $images = json_decode($this->data['images'], true);
+        
+            $weblink=new weblinkModel();
+            $links=$weblink->getAll($this->webtd['menu_id']);
+        
+            if (count($links)==count($images)) {
+                foreach($images AS $i=>$image) {
+                    $images[$i]['sid'] = $links[$i]['sid'];
+                }
+                $this->data['images'] = json_encode($images);
+            }
+        
+        }
+        
+        
         if ($this->webtd['menu_id'] && isset($this->data['menu_id']) && $this->data['menu_id']!=$this->webtd['menu_id']) {
-            
             $this->data['menu_id']=$this->webtd['menu_id'];
             $this->update(false);
             $this->save();
@@ -492,6 +507,7 @@ abstract class imageWidget extends Widget
             }
         }
         
+             
         $title='';
         if (strlen($this->webtd['page_id']))
         {
@@ -511,6 +527,8 @@ abstract class imageWidget extends Widget
 
         $data1=$this->data;
         
+        
+       
         
         $pri = 1;
         $links = array();
