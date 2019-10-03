@@ -14,10 +14,24 @@
     cursor : pointer;
 }
 
-.article_photo span.ui-icon {
+.article_photo .ui-icon {
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+}
+
+
+.article_photo .ui-icon-closethick {
     position : absolute;
     top      : 0;
     right    : 0;
+    display  : none;
+}
+
+.article_photo .ui-icon-info {
+    position : absolute;
+    bottom  : 0;
+    right    :0;
     display  : none;
 }
 

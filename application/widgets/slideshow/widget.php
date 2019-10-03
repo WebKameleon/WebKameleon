@@ -48,6 +48,7 @@ class slideshowWidget extends imageWidget
         if ($this->webtd['menu_id'] && $this->webtd['menu_id'] != $this->data['menu_id']) $this->data['menu_id']=$this->webtd['menu_id'];
         parent::init();
         
+        $this->data['show'] = Bootstrap::$main->getConfig('widgets')['slideshow']['show'];
     }
 
     public function update()

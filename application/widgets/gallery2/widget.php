@@ -117,4 +117,10 @@ class gallery2Widget extends imageWidget
         }
         
     }
+    
+    public function init()
+    {
+        parent::init();   
+        $this->data['show'] = Bootstrap::$main->getConfig('widgets')['gallery2']['show'];
+    }
 }
