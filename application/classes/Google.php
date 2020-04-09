@@ -32,7 +32,7 @@ class Google
         $client->setApplicationName($options['application_name']);
         $client->setClientId($options['client_id']);
         $client->setClientSecret($options['client_secret']);
-        if (isset($_SERVER['HTTP_HOST'])) $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . Bootstrap::$main->getRoot() . 'auth/get_token');
+        if (isset($_SERVER['HTTP_HOST'])) $client->setRedirectUri('https://' . $_SERVER['HTTP_HOST'] . Bootstrap::$main->getRoot() . 'auth/get_token');
         
         //$client->setScopes($scopes);
 

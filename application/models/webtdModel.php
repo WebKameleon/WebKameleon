@@ -214,18 +214,18 @@ class webtdModel extends webModel {
             $level = $config['default']['level']['footer'];
         else
             $level = $config['default']['level']['body'];
-
-	if ($page_id>0)
-	{
-		$webpage=new webpageModel();
-		$wp=$webpage->getOne($page_id,true);
 	
-		if (isset($config['webpage']['type'][$wp['type']]['level']) && $config['webpage']['type'][$wp['type']]['level'])
+		if ($page_id>0)
 		{
-			$level=$config['webpage']['type'][$wp['type']]['level'];
+			$webpage=new webpageModel();
+			$wp=$webpage->getOne($page_id,true);
+		
+			if (isset($config['webpage']['type'][$wp['type']]['level']) && $config['webpage']['type'][$wp['type']]['level'])
+			{
+				$level=$config['webpage']['type'][$wp['type']]['level'];
+			}
+	
 		}
-
-	}
 	
         $model = new webtdModel();
         $model->page_id = $page_id;
@@ -248,6 +248,18 @@ class webtdModel extends webModel {
 
             if (isset($options['add_title']) && $options['add_title']) {
                 $model->title = Tools::translate('New').' '.Tools::translate($options['name']);
+            }
+			
+			if (isset($options['html']) && $options['html']) {
+                $model->html = $options['html'];
+            }
+			
+			if (isset($options['staticinclude']) && $options['staticinclude']) {
+                $model->staticinclude = $options['staticinclude'];
+            }
+			
+			if (isset($options['obtd']) && $options['obtd']) {
+                $model->obtd = $options['obtd'];
             }
         }
 

@@ -854,11 +854,16 @@ class indexController extends Controller
 
                         if ($wp['nd_ftp'] && $td['nd_update'] > $wp['nd_ftp'] ) $td['need_ftp']=1;
 
+                        
+                        
                         if ($td['widget'] && Widget::exists($td['widget'])) {
                             $widget = Widget::factoryWebtd($td,$wp['id']);
                             $widget->webpage = &$wp;
                             $widget->mode = $mode;
                             $widget->run();
+                            
+                        
+                            
                             
                             if (isset($config['webtd']['type'][$type])) $td['widget_name']=Tools::translate($config['webtd']['type'][$type]['name']);
                             else {
@@ -871,15 +876,16 @@ class indexController extends Controller
                                     }
                                 }
                             }
-
-                            if (isset($config['webtd']['type'][$type]['filename']) && file_exists($html_path.'/'.$config['webtd']['type'][$type]['filename']) ) {
+                            
+                            // false, bo to widget
+                            if (false && isset($config['webtd']['type'][$type]['filename']) && file_exists($html_path.'/'.$config['webtd']['type'][$type]['filename']) ) {
                                 $template_td=$config['webtd']['type'][$type]['filename'];
                             } else {
                                 $templ_td = $widget->default_html($html_path);
                                 $template_td=basename($templ_td);
-                                $html_path=dirname($templ_td);
-                                
+                                $html_path=dirname($templ_td);                
                             }
+                            
                             $td[get_class($widget)] = $widget->toArray();
                         } else {
                             $template_td = isset($config['webtd']['type'][$type]['filename']) ? $config['webtd']['type'][$type]['filename'] : (file_exists($html_path.'/td.'.$type.'.html') ? 'td.'.$type.'.html' : 'td.0.html');                    

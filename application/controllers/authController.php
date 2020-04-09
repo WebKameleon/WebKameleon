@@ -21,8 +21,8 @@ class authController extends Controller
             }
         }
         
-        $uri = 'http://' . $_SERVER['HTTP_HOST'] . Bootstrap::$main->getRoot() . 'auth/get_token';
-        $realm = 'http://' . $_SERVER['HTTP_HOST'] . Bootstrap::$main->getRoot() . 'auth';
+        $uri = 'https://' . $_SERVER['HTTP_HOST'] . Bootstrap::$main->getRoot() . 'auth/get_token';
+        $realm = 'https://' . $_SERVER['HTTP_HOST'] . Bootstrap::$main->getRoot() . 'auth';
         
 
         $prompt = $this->_getParam('prompt')?:'none'; 

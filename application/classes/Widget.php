@@ -423,6 +423,7 @@ abstract class Widget
     {
         $name=str_replace('/','_',$this->name);
         $file=$html_path.'/widget_' . $name . '.html';
+        
         if (file_exists($file)) return $file;
         
         return WIDGETS_PATH.'/'.$this->name.'/default.html';
