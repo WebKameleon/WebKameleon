@@ -46,7 +46,13 @@ class webcatModel extends Model {
         $sql="SELECT 1 FROM webcat WHERE server=? AND tdsid=? AND category=?";
         return $this->conn->fetchOne($sql,array($server,$sid,$cat));
     }
-
+    
+    
+    public function cats($sid)
+    {
+        $sql="SELECT * FROM webcat WHERE tdsid=?";
+        return $this->conn->fetchAll($sql,array($sid));
+    }
     
     
     public function add($server,$sid,$cat)

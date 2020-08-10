@@ -62,7 +62,10 @@ class articleWidget extends imageWidget
 		
 		}
 		
-        
+		$cat=new webcatModel();
+		$this->cats = $cat->cats($this->webtd['sid']);
+		if (count($this->cats)==0)
+			$this->cats=0;
     }
 
     public function init()

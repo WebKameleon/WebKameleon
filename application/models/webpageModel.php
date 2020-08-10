@@ -39,20 +39,20 @@ class webpageModel extends webModel
     
     protected function nextcycle($sid)
     {
-	if (in_array($sid,$this->nextcycle)) return true;
-	$webpage=new self($sid);
-	if (!$webpage->next) return false;
-	$this->nextcycle[]=$sid;
+		if (in_array($sid,$this->nextcycle)) return true;
+		$webpage=new self($sid);
+		if (!$webpage->next) return false;
+		$this->nextcycle[]=$sid;
 	
         $sql = "SELECT * FROM " . $this->getTable() . " WHERE id = ? AND server = ? AND lang = ? AND ver = ? AND trash=0 ORDER BY ver DESC";
         $sql = $this->conn->modifyLimitQuery($sql, 1);
 
-	$data = $this->conn->fetchRow($sql, array($webpage->next, $this->server, $this->lang, $this->ver));
+		$data = $this->conn->fetchRow($sql, array($webpage->next, $this->server, $this->lang, $this->ver));
 	
-	if (!$data) return false;
-	if (!is_array($data)) return false;
-	
-	return $this->nextcycle($data['sid']);
+		if (!$data) return false;
+		if (!is_array($data)) return false;
+		
+		return $this->nextcycle($data['sid']);
     }
     
     public function getOne($page, $onlythisver = false)
@@ -61,19 +61,19 @@ class webpageModel extends webModel
         $sql = "SELECT * FROM " . $this->getTable() . " WHERE id = ? AND server = ? AND lang = ? AND ver $v ? AND trash=0 ORDER BY ver DESC";
         $sql = $this->conn->modifyLimitQuery($sql, 1);
 
-	$this->nextcycle=array();
+		$this->nextcycle=array();
         $data = $this->conn->fetchRow($sql, array($page, $this->server, $this->lang, $this->ver));
 
         if ($data)
-	{
-	    $this->load($data);
-	    if ($this->next && $this->nextcycle($this->sid))
-	    {
-		$this->next=null;
-		$data['next']=null;
-		$this->save();
-	    }
-	}
+		{
+			$this->load($data);
+			if ($this->next && $this->nextcycle($this->sid))
+			{
+			$this->next=null;
+			$data['next']=null;
+			$this->save();
+			}
+		}
 	
         return $data;
     }
@@ -647,6 +647,6 @@ class webpageModel extends webModel
     public function types()
     { 
 	
-	return $this->conn->fetchAll("SELECT type,count(*) AS count FROM webpage WHERE server=? AND ver=? GROUP by type ORDER BY type", array($this->server,$this->ver));
+		return $this->conn->fetchAll("SELECT type,count(*) AS count FROM webpage WHERE server=? AND ver=? GROUP by type ORDER BY type", array($this->server,$this->ver));
     }
 }

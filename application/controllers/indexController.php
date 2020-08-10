@@ -338,7 +338,7 @@ class indexController extends Controller
                     
                     $wp = $webpage->getOne($link['page_target']);
                     
-                    $pages[$wp['nd_update']?:$wp['nd_create']] = array('prev'=>$wp['prev'],'type'=>$wp['type']);
+                    $pages[$wp['nd_update']?:$wp['nd_create']] = array('prev'=>$wp['prev'],'type'=>$wp['type'], 'background'=>$wp['background']);
 
                 }
                 if ($link['pri'] == $menu[1]) {
@@ -350,7 +350,7 @@ class indexController extends Controller
             $children=$webpage->getChildren($referer);
             
             foreach($children AS $wp) {
-                $pages[$wp['nd_update']?:$wp['nd_create']] = array('prev'=>$wp['prev'],'type'=>$wp['type']);
+                $pages[$wp['nd_update']?:$wp['nd_create']] = array('prev'=>$wp['prev'],'type'=>$wp['type'], 'background'=>$wp['background']);
             }
         }
 
@@ -360,7 +360,8 @@ class indexController extends Controller
             krsort($pages);
             $ak=array_keys($pages);
             $new_webpage->prev = $pages[$ak[0]]['prev'];
-            $new_webpage->type = $pages[$ak[0]]['type']; 
+            $new_webpage->type = $pages[$ak[0]]['type'];
+            $new_webpage->background = $pages[$ak[0]]['background'];
         }
         
         if ($this->_hasParam('title'))
@@ -370,6 +371,7 @@ class indexController extends Controller
             if (strlen($referer)) {
                 $new_webpage->prev = $referer_page?$referer:0;
                 $new_webpage->type = $referer_page?$referer_page['type']:0;
+                $new_webpage->background = $referer_page?$referer_page['background']:'';
             }
         }
 
@@ -824,8 +826,8 @@ class indexController extends Controller
                         
                         if ($td['lost']) $td['pri']=$lostpri++;
 
-                        $td['more_link']=$td['more']?Bootstrap::$main->kameleon->href('','',$td['more'],$page,$mode) : Bootstrap::$main->kameleon->href('','',$page,$page,$mode); 
-                        $td['next_link']=$td['next']?Bootstrap::$main->kameleon->href('','',$td['next'],$page,$mode) : Bootstrap::$main->kameleon->href('','',$page,$page,$mode);
+                        $td['more_link']=$td['more']||$td['more']==0?Bootstrap::$main->kameleon->href('','',$td['more'],$page,$mode) : Bootstrap::$main->kameleon->href('','',$page,$page,$mode); 
+                        $td['next_link']=$td['next']||$td['next']==0?Bootstrap::$main->kameleon->href('','',$td['next'],$page,$mode) : Bootstrap::$main->kameleon->href('','',$page,$page,$mode);
                         $td['self_link']=Bootstrap::$main->kameleon->href('','',$page,$page,$mode);
                                                
                         $td=$this->_process_td($td,$mode,$page,$tree,$this->google_translate_from);
@@ -1537,7 +1539,6 @@ class indexController extends Controller
                 if (!$bucket) continue;
                 
                 if (isset($buckets[$bucket])) continue;   
-           
                 $b=null;
                 try {
                     $b = $service->buckets->get($bucket);   

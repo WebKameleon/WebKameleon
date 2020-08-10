@@ -429,8 +429,9 @@ class ftpController extends Controller
         $client=Google::getUserClient($this->gcs_data['creator'],false,'gcs');
         $this->gcs_service = Google::getStorageService($client);                
     
+        
         try {
-            $this->gcs_bucket = $this->gcs_service->buckets->get($this->gcs_data['website']);   
+            $this->gcs_bucket = $this->gcs_service->buckets->get($this->gcs_data['website']);
         } catch (Exception $e) {
             $this->gcs_bucket = null;
             $this->log($this->ftp,$e->getMessage(),Tools::translate('FAIL'),false);
@@ -441,7 +442,6 @@ class ftpController extends Controller
     
     protected function process($ftpids,$limit,$all,$deteach=true)
     {
-
         if ($deteach) $this->disconnect(implode(',',$ftpids));
         session_write_close();
         
