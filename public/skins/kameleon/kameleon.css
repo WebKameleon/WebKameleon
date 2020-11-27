@@ -5063,3 +5063,10 @@ color: #222 !important;
 .km_toolbar .col-md-12{
     margin-top: 0 !important;
 }
+
+.td-float-left {
+	float: left;
+}
+.td-float-right {
+	float: right;
+}

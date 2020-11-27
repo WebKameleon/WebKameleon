@@ -212,8 +212,11 @@ class webtdModel extends webModel {
             $level = $config['default']['level']['header'];
         elseif ($page_id == $session['server']['footer'])
             $level = $config['default']['level']['footer'];
-        else
+        else {
             $level = $config['default']['level']['body'];
+			if (isset($config['webtd']['type'][$type]['level']))
+				$level=$config['webtd']['type'][$type]['level'];
+        }
 	
 		if ($page_id>0)
 		{

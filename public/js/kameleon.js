@@ -853,10 +853,12 @@ jQueryKam(function ($) {
         var elem = dragbox.find(".km_tdin").children().first();
 
         if (elem.css("float") === "left" || elem.css("float") === "right") {
+	    dragbox.addClass('td-float-'+elem.css("float"));
+	    /*
             dragbox.css({
                 float : elem.css("float")
-                /*width : elem.width() RP*/
             });
+	    */
         }
     });
 
